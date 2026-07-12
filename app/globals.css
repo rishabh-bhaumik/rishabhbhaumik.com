@@ -1,26 +1,171 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Surfaces */
+  --color-bg: #0d0d0f;
+  --color-surface: #1c1c1c;
+  --color-surface-2: #262c38;
+  --color-surface-3: #333a47;
+  --color-border: #ffffff14;
+
+  /* Text */
+  --color-ink: #ffffff;
+  --color-muted: #a7adb8;
+  --color-faint: #a3a3a3;
+
+  /* Brand (violet) */
+  --color-brand: #4100cf;
+  --color-brand-bold: #2c0091;
+  --color-brand-subtle: #e8e2ff;
+
+  /* Status */
+  --color-status-online: #34d399;
+  --color-status-away: #fbbf24;
+  --color-status-offline: #6b7280;
+
+  /* Fonts — everything is Arial (a CSS default; no web fonts loaded). */
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: Arial, Helvetica, sans-serif;
+  --font-display: Arial, Helvetica, sans-serif;
+
+  /* Layout */
+  --content-max: 832px; /* Home work column */
+  --reading-max: 700px; /* narrow reading column: About text, Saathi, gate, footer */
+  --shell-max: 1200px; /* Play gallery */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Base element styling lives in @layer base so Tailwind utilities (which sit in
+   the utilities layer) always win. Tailwind's preflight already zeroes margins
+   and sets border-box, so no manual reset is needed. */
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    min-height: 100svh;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    background-color: var(--color-bg);
+    color: var(--color-ink);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Display face = Arial (upright). Kept as a hook so display headings can share
+   one place to change later. */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+::selection {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+/* Focus visibility for keyboard nav */
+:focus-visible {
+  outline: 2px solid var(--color-brand-subtle);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes ticker-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes ticker-right {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+/* Anek Variable — self-hosted, one @font-face per script */
+@font-face {
+  font-family: "Anek Tamil";
+  src: url("/media/Anek Font Selection/Anek_Tamil/AnekTamil-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Kannada";
+  src: url("/media/Anek Font Selection/Anek_Kannada/AnekKannada-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Gujarati";
+  src: url("/media/Anek Font Selection/Anek_Gujarati/AnekGujarati-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Bangla";
+  src: url("/media/Anek Font Selection/Anek_Bangla/AnekBangla-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Latin";
+  src: url("/media/Anek Font Selection/Anek_Latin/AnekLatin-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Devanagari";
+  src: url("/media/Anek Font Selection/Anek_Devanagari/AnekDevanagari-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Odia";
+  src: url("/media/Anek Font Selection/Anek_Odia/AnekOdia-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Gurmukhi";
+  src: url("/media/Anek Font Selection/Anek_Gurmukhi/AnekGurmukhi-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Malayalam";
+  src: url("/media/Anek Font Selection/Anek_Malayalam/AnekMalayalam-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Telugu";
+  src: url("/media/Anek Font Selection/Anek_Telugu/AnekTelugu-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-display: swap;
 }
