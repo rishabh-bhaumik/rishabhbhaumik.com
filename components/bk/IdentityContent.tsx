@@ -431,6 +431,10 @@ function TypeLine({
         if (!isActive) return;
         const p = pRef.current;
         if (!p) return;
+        // Re-measure every move: the layout FLIP spring is still resettling
+        // the line's width from 16→32 px for a few hundred ms after activation,
+        // so cached span centers are stale and the falloff misses on the far side.
+        measure();
         paint(e.clientX - p.getBoundingClientRect().left);
       }}
     >
@@ -1190,8 +1194,13 @@ export default function IdentityContent() {
               id="section-work-5"
               className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
             >
-              <Shell manual width={1032} gap={5}>
-                <VariableWidthType />
+              <Shell manual width={1032} gap={6} className="py-16 sm:py-24">
+                {/* Typeface stack owns the upper portion — flex-1 makes it
+                    fill the remaining height so the composition never looks
+                    crammed against the metadata below. */}
+                <div className="flex flex-1 items-center justify-center">
+                  <VariableWidthType />
+                </div>
                 <StaggerItem>
                   <Tag>solutions</Tag>
                 </StaggerItem>
