@@ -7,9 +7,8 @@ Source: `components/bk/IdentityContent.tsx` (`SCRIPTS`, `toGraphemes`,
 ## Where it renders
 
 `section-work-5` of `/bimakavach-identity` — the last panel in the horizontal
-carousel, titled "A Typeface for All India." It sits above the `H`/`Body` copy
-about the brand's Anek Variable typeface choice, rendered by
-`VariableWidthType` inside a `Shell manual` block:
+carousel, titled "A Typeface for All India" — renders `VariableWidthType`
+inside a `Shell manual` block:
 
 ```tsx
 <Shell manual width={1032} gap={5}>
@@ -20,16 +19,17 @@ about the brand's Anek Variable typeface choice, rendered by
 </Shell>
 ```
 
-`VariableWidthType` renders ten lines, one per script, all reading the same
-message — "Welcome, emerging India!" — translated. `SCRIPTS` is the literal
-source of truth:
+`VariableWidthType` renders ten lines, one per script, all reading "Welcome,
+emerging India!" translated. `SCRIPTS` is the source of truth (Tamil,
+Kannada, Gujarati, Bangla, Latin, Devanagari, Odia, Gurmukhi, Malayalam,
+Telugu — each in its own self-hosted Anek variable font):
 
 ```tsx
 const SCRIPTS = [
   { text: "வருக, வளர்ந்து வரும் இந்தியா!", lang: "ta", font: "Anek Tamil" },
   { text: "ಉದಯೋನ್ಮುಖ ಭಾರತಕ್ಕೆ ಸ್ವಾಗತ!", lang: "kn", font: "Anek Kannada" },
   { text: "સ્વાગત છે, ઉભરતા ભારત!", lang: "gu", font: "Anek Gujarati" },
-  { text: "স্বাগতম, উদীয়মান ভারত!", lang: "bn", font: "Anek Bangla" },
+  { text: "স্বাগতம, উদীয়মান ভারত!", lang: "bn", font: "Anek Bangla" },
   { text: "Welcome, Emerging India!", lang: "en", font: "Anek Latin" },
   { text: "उभरते भारत का स्वागत है!", lang: "hi", font: "Anek Devanagari" },
   { text: "ସ୍ୱାଗତ, ଉଦୀୟମାନ ଭାରତ!", lang: "or", font: "Anek Odia" },
@@ -39,40 +39,138 @@ const SCRIPTS = [
 ] as const;
 ```
 
-Ten scripts: Tamil, Kannada, Gujarati, Bangla, Latin, Devanagari, Odia,
-Gurmukhi, Malayalam, Telugu — each set in its own self-hosted Anek variable
-font. Alignment alternates in `VariableWidthType`: left for the first four,
-centered for the Latin line (index 4), right for the rest —
-`i < 4 ? "text-left" : i === 4 ? "text-center" : "text-right"`.
+## The interaction model: one active line at a time
 
-## The effect it emulates
+Full redesign of the hover behavior (per Figma 8341-5696), not a tweak. The
+old version had all ten lines at a uniform 29px / 20% opacity; hovering one
+brightened only that line in place, and nothing else moved.
 
-The reference is inikaj.com's "Text Magnifier" component (a Framer University
-build). Two independent effects run on the same line at once, both driven off
-`pointerenter` / `pointermove` / `pointerleave`: **font activation** — at rest
-every line sits at 20% opacity so ten scripts don't visually compete; the
-hovered line jumps to 100%, others stay dim (a single `opacity` transition on
-the `<p>`, driven by `active` state) — and **per-glyph proximity** —
-independent of opacity, every glyph's `wght`/`wdth` axes track distance from
-the cursor, thickest/widest right under the pointer, tapering off linearly
-away from it.
-
-## Grapheme spans, not per-character
-
-Wrapping each JS string index (`text[i]`) in its own `<span>` breaks Indic
-scripts: a Tamil consonant-vowel ligature or a Devanagari half-form is
-composed of multiple code units that must stay adjacent, unstyled-between,
-for the font's shaping engine to render the correct glyph — and it gets
-specifically fragile once each span carries its own
-`font-variation-settings`, which forces a shaping boundary at every split.
-
-`toGraphemes` instead splits with `Intl.Segmenter` at `granularity:
-"grapheme"` — returning Unicode grapheme clusters, the atomic "user
-perceived characters" Tamil ligatures and Devanagari conjuncts are built
-from — falling back to `Array.from(text)` if `Intl.Segmenter` is missing:
+The new model has exactly **one line active at all times**, including before
+any hover: the active line renders at 32px in `#FFFFFF` and is the only one
+receiving cursor-proximity glyph modulation; the other nine sit at 16px in
+`#A7ADB8`. Hovering any line makes it the new active line — the previously
+active line springs back to rest size/color, and because the whole stack is
+wrapped in `motion.div layout`, the vertical composition reflows with a FLIP
+animation instead of jump-cutting: growing/shrinking rows push their
+neighbors, so the stack visibly "breathes" as attention moves between lines.
+Before any hover, Latin (`en`) is active by default.
 
 ```tsx
-/** Split into grapheme clusters so Indic conjuncts stay intact per span. */
+const SIZE_ACTIVE_PX = 32;
+const SIZE_REST_PX = 16;
+const COLOR_ACTIVE = "#FFFFFF";
+const COLOR_REST = "#A7ADB8";
+```
+
+The swap uses a custom spring rather than Framer Motion's default — tuned
+per Figma's note that it should feel "smoother and more responsive," with no
+perceptible lag:
+
+```tsx
+const SWAP_SPRING = { type: "spring" as const, stiffness: 380, damping: 32, mass: 0.9 };
+```
+
+## `active` lives in the parent, not each line
+
+`VariableWidthType` owns one piece of state — which script is active —
+rather than each line tracking its own hover flag. That's what makes
+"exactly one active line" enforceable: activating one is, by construction,
+deactivating whatever was active before.
+
+```tsx
+const [active, setActive] = useState<string>("en"); // Figma: Latin is default
+```
+
+`TypeLine` has no internal `active` state anymore. It's a controlled
+component driven by `isActive` + `onActivate` from the parent:
+
+```tsx
+function TypeLine({
+  text,
+  lang,
+  font,
+  isActive,
+  onActivate,
+}: {
+  text: string;
+  lang: string;
+  font: string;
+  isActive: boolean;
+  onActivate: () => void;
+}) {
+```
+
+Each line sits inside the `motion.div` that owns the size/layout animation;
+`onActivate` flips the parent's `active` state:
+
+```tsx
+{SCRIPTS.map((script) => {
+  const isActive = script.lang === active;
+  return (
+    <StaggerItem key={script.lang} className="w-full">
+      <motion.div
+        layout={reduce ? false : true}
+        transition={reduce ? { duration: 0 } : SWAP_SPRING}
+        style={{
+          fontSize: isActive ? SIZE_ACTIVE_PX : SIZE_REST_PX,
+          width: "100%",
+        }}
+      >
+        <TypeLine
+          text={script.text}
+          lang={script.lang}
+          font={script.font}
+          isActive={isActive}
+          onActivate={() => setActive(script.lang)}
+        />
+      </motion.div>
+    </StaggerItem>
+  );
+})}
+```
+
+`onPointerEnter` calls `onActivate()` then `measure()`, so cached glyph
+centers are fresh for the newly-active line.
+
+## Resetting glyphs when a line goes inactive
+
+`isActive` is now owned externally, so a line can be deactivated by
+something other than its own pointer leaving it — another line becoming
+active. `TypeLine` handles that in a `useEffect`: when `isActive` flips to
+`false`, it calls `paint(null)`, resetting every glyph back to `REST`.
+Without this, a deactivated line would freeze mid-bulge from the last cursor
+position instead of relaxing back to rest. `onPointerMove` also early-outs
+when the line isn't active, so a stray pointer event over a resting (16px)
+line can't paint proximity values into spans that shouldn't receive them:
+
+```tsx
+useEffect(() => {
+  if (!isActive) paint(null);
+  else measure();
+}, [isActive, measure, paint]);
+
+// ...
+
+onPointerMove={(e) => {
+  if (!isActive) return;
+  const p = pRef.current;
+  if (!p) return;
+  paint(e.clientX - p.getBoundingClientRect().left);
+}}
+```
+
+## Grapheme spans, not per-character — unchanged
+
+Wrapping each JS string index in its own `<span>` breaks Indic scripts: a
+Tamil ligature or Devanagari half-form is composed of multiple code units
+that must stay adjacent for the shaping engine to render the correct glyph —
+especially fragile once each span carries its own
+`font-variation-settings`, which forces a shaping boundary at every split.
+
+`toGraphemes` splits with `Intl.Segmenter` at `granularity: "grapheme"`,
+falling back to `Array.from(text)`:
+
+```tsx
 function toGraphemes(text: string): string[] {
   const Seg = (
     Intl as unknown as { Segmenter?: typeof Intl.Segmenter }
@@ -85,14 +183,14 @@ function toGraphemes(text: string): string[] {
 }
 ```
 
-Each grapheme cluster gets exactly one `<span>`, so the proximity effect can
-animate per-cluster without ever styling into the middle of a ligature.
+Each grapheme cluster gets exactly one `<span>`, so the proximity effect on
+the active line can animate per-cluster without ever styling into the
+middle of a ligature.
 
-## Proximity math
+## Proximity math on the active line — unchanged
 
-The falloff is **linear**, not Gaussian — matching inikaj's actual algorithm
-(`clamp(1 - dist/radius, 0)`), not the smoother bell curve you might guess
-from the visual:
+Falloff is still **linear**, not Gaussian — `clamp(1 - dist/radius, 0)` —
+and it only ever runs on whichever line is currently active:
 
 ```tsx
 const REST = "'wght' 500, 'wdth' 100"; // resting / dimmed line
@@ -103,13 +201,8 @@ const WDTH_REST = 100;
 const WDTH_PEAK = 125;
 ```
 
-`RADIUS` is 82px — glyphs farther than that from the cursor sit exactly at
-rest (Anek's full range is wght 100–800 / wdth 75–125; these rest/peak values
-pick a comfortable mid-weight rather than the font's thin extreme). The paint
-function:
-
 ```tsx
-const paint = (cursorX: number | null) => {
+const paint = useCallback((cursorX: number | null) => {
   spansRef.current.forEach((sp, i) => {
     if (!sp) return;
     if (cursorX == null) {
@@ -122,59 +215,49 @@ const paint = (cursorX: number | null) => {
     const wdth = Math.round(WDTH_REST + g * (WDTH_PEAK - WDTH_REST));
     sp.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}`;
   });
-};
+}, []);
 ```
 
-`g` is the falloff gain: 1 directly under the cursor, linearly down to 0 at
-`RADIUS` px, clamped at 0 beyond that. `wght`/`wdth` interpolate from `REST`
-to `PEAK` by `g` and round to whole units before being written into
-`font-variation-settings`, avoiding sub-pixel-value churn every mousemove.
+`g` is 1 directly under the cursor, linearly down to 0 at `RADIUS` px,
+clamped beyond that. `paint(null)` is now also the reset path used on
+deactivation, not just the initial/`pointerleave` state.
 
-## Measurement
+`measure()` — unchanged — still runs once per `pointerenter`, caching each
+grapheme span's horizontal center relative to the line's own left edge, so
+`onPointerMove` never forces a `getBoundingClientRect()` per glyph per frame.
 
-`measure()` runs once per `pointerenter`, not on every `pointermove` — it
-caches each grapheme span's horizontal center relative to the line's own left
-edge:
+## The `layout` swap animation
+
+The size/position change when activation moves between lines is driven by
+Framer Motion's `layout` prop, not a manual height/transform tween — set
+alongside the `fontSize` toggle shown above:
 
 ```tsx
-const measure = () => {
-  const p = pRef.current;
-  if (!p) return;
-  const base = p.getBoundingClientRect().left;
-  centersRef.current = spansRef.current.map((sp) => {
-    if (!sp) return 0;
-    const r = sp.getBoundingClientRect();
-    return r.left + r.width / 2 - base;
-  });
-};
+<motion.div
+  layout={reduce ? false : true}
+  transition={reduce ? { duration: 0 } : SWAP_SPRING}
 ```
 
-Caching on enter avoids forcing a synchronous layout read on every mouse
-event — a `getBoundingClientRect()` call per glyph per frame would be real
-layout thrash across ten multi-script lines. `pointermove` only converts the
-cursor to line-relative coordinates via the same subtraction and paints
-against the cached centers:
+When `fontSize` changes, the `motion.div`'s box height changes; Framer
+Motion's FLIP machinery (`layout`) measures the before/after position of
+every sibling `motion.div` in the stack and animates each from old to new
+position using `SWAP_SPRING`. That's what makes the container feel like one
+breathing composition rather than a single line growing in place — the
+whole vertical stack redistributes as the active row expands and the
+previous one contracts. `useReducedMotion()` gates this entirely: with
+reduced motion on, `layout` is `false` (no measuring or animating of
+position/size) and `transition` collapses to `{ duration: 0 }` — size and
+color still change, but the swap is instant instead of springing.
 
-```tsx
-onPointerMove={(e) => {
-  const p = pRef.current;
-  if (!p) return;
-  paint(e.clientX - p.getBoundingClientRect().left);
-}}
-```
+## Auto-fit scaling — unchanged, now reruns on activation change
 
-Each span declares its own transition so weight/width changes animate rather
-than snap: `transition: font-variation-settings 0.2s ${EASE_OUT}` — fast
-enough to feel responsive while smoothing frame-to-frame `g` jumps.
-
-## Auto-fit scaling
-
-Per-glyph `<span>` wrapping loses the inter-cluster kerning/shaping a single
-unwrapped text run gets, so a fully-wrapped line renders slightly wider than
-the same text set normally — enough that the longest scripts (Telugu, Tamil)
-can overflow their 1032px shell. `VariableWidthType` compensates with a
-`ResizeObserver` that measures natural width and shrinks the whole block via
-`transform: scale()`:
+Per-glyph `<span>` wrapping loses inter-cluster kerning, so a fully-wrapped
+line renders wider than normally-set text — enough that the longest scripts
+(Telugu, Tamil) can overflow the 1032px shell, especially now that the
+active line renders at 32px. `VariableWidthType` still shrinks the whole
+block via `ResizeObserver` + `transform: scale()`, but the effect now
+depends on `active`, so it re-measures every time a different (larger) line
+becomes active:
 
 ```tsx
 useEffect(() => {
@@ -196,37 +279,20 @@ useEffect(() => {
     fit,
   );
   return () => ro.disconnect();
-}, []);
+}, [active]);
 ```
-
-It measures each `<p>`'s own `scrollWidth` (not the wrapper's — lines are
-fixed-width blocks whose text can overflow internally) against the available
-`clientWidth`, only ever shrinking, and re-measures on resize and again after
-`document.fonts.ready` since the Anek TTFs load asynchronously.
-
-This transform-based scale does not perturb the proximity math: glyph rects
-and the pointer's `clientX` are both read in the same post-transform viewport-
-pixel coordinate space, so scaling the block down scales the glyph rects and
-apparent cursor position identically. `measure()` re-runs on the next
-`pointerenter` after any resize, so cached centers are never stale for the
-scale in effect.
 
 ## How to add another script
 
+Unchanged.
+
 1. Drop the variable TTF into `public/media/Anek Font Selection/Anek_<Script>/`.
 2. Add an `@font-face` block in `app/globals.css` — same `font-weight: 100
-   800` range, `font-display: swap`:
-   ```css
-   @font-face {
-     font-family: "Anek <Script>";
-     src: url("/media/Anek Font Selection/Anek_<Script>/Anek<Script>-VariableFont_wdth,wght.ttf") format("truetype");
-     font-weight: 100 800;
-     font-display: swap;
-   }
-   ```
+   800` range, `font-display: swap`.
 3. Append `{ text, lang, font }` to `SCRIPTS` in `IdentityContent.tsx` —
    `lang` as the correct BCP-47 subtag, `font` matching step 2 exactly.
 
-No other changes are required — `TypeLine`, the grapheme splitting, the
-proximity math, and the auto-fit scaler all operate generically over whatever
-lines `SCRIPTS` contains.
+`TypeLine`, the grapheme splitting, the proximity math, and the auto-fit
+scaler all operate generically over whatever lines `SCRIPTS` contains. New
+scripts join the swap composition at rest size (16px, `COLOR_REST`) until
+hovered, same as the existing nine.

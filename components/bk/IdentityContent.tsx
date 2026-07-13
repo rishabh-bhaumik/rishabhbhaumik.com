@@ -345,20 +345,41 @@ const WDTH_PEAK = 125;
  * it lights to 100% and each glyph's width + weight tracks the cursor —
  * thickest/widest under the pointer, tapering away (inikaj.com-style).
  */
-function TypeLine({ text, lang, font, align }: {
+/** Font-size + colour targets (per Figma 8341-5696): one line is always
+ *  "active" (bigger, brighter), all others sit muted at half size. */
+const SIZE_ACTIVE_PX = 32;
+const SIZE_REST_PX = 16;
+const COLOR_ACTIVE = "#FFFFFF";
+const COLOR_REST = "#A7ADB8";
+/** Custom spring for the swap (Figma: "smoother and more responsive, should
+ *  not feel like there's a 'lag'"). Snappy stiffness, low mass. */
+const SWAP_SPRING = { type: "spring" as const, stiffness: 380, damping: 32, mass: 0.9 };
+
+/**
+ * One typeface line inside the swap-composition. Its size / colour is driven
+ * by `isActive` (owned by the parent). When active, per-glyph cursor-proximity
+ * modulation runs on `pointermove`; when inactive, all spans reset to REST.
+ */
+function TypeLine({
+  text,
+  lang,
+  font,
+  isActive,
+  onActivate,
+}: {
   text: string;
   lang: string;
   font: string;
-  align: string;
+  isActive: boolean;
+  onActivate: () => void;
 }) {
   const pRef = useRef<HTMLParagraphElement>(null);
   const spansRef = useRef<(HTMLSpanElement | null)[]>([]);
   const centersRef = useRef<number[]>([]);
-  const [active, setActive] = useState(false);
 
   const graphemes = useMemo(() => toGraphemes(text), [text]);
 
-  const measure = () => {
+  const measure = useCallback(() => {
     const p = pRef.current;
     if (!p) return;
     const base = p.getBoundingClientRect().left;
@@ -367,9 +388,9 @@ function TypeLine({ text, lang, font, align }: {
       const r = sp.getBoundingClientRect();
       return r.left + r.width / 2 - base;
     });
-  };
+  }, []);
 
-  const paint = (cursorX: number | null) => {
+  const paint = useCallback((cursorX: number | null) => {
     spansRef.current.forEach((sp, i) => {
       if (!sp) return;
       if (cursorX == null) {
@@ -382,31 +403,35 @@ function TypeLine({ text, lang, font, align }: {
       const wdth = Math.round(WDTH_REST + g * (WDTH_PEAK - WDTH_REST));
       sp.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}`;
     });
-  };
+  }, []);
+
+  // When a line loses its "active" role, reset every glyph back to REST so it
+  // doesn't freeze mid-bulge from the last cursor position.
+  useEffect(() => {
+    if (!isActive) paint(null);
+    else measure();
+  }, [isActive, measure, paint]);
 
   return (
     <p
       ref={pRef}
       lang={lang}
-      className={`cursor-default text-[29px] leading-[48px] tracking-[-0.29px] text-white ${align}`}
+      className="cursor-default text-center leading-[1.35] tracking-[-0.29px]"
       style={{
         fontFamily: `"${font}", sans-serif`,
         fontOpticalSizing: "auto",
-        opacity: active ? 1 : 0.2,
-        transition: "opacity 0.45s ease",
+        color: isActive ? COLOR_ACTIVE : COLOR_REST,
+        transition: "color 0.35s ease",
       }}
       onPointerEnter={() => {
+        onActivate();
         measure();
-        setActive(true);
       }}
       onPointerMove={(e) => {
+        if (!isActive) return;
         const p = pRef.current;
         if (!p) return;
         paint(e.clientX - p.getBoundingClientRect().left);
-      }}
-      onPointerLeave={() => {
-        setActive(false);
-        paint(null);
       }}
     >
       {graphemes.map((g, i) => (
@@ -429,20 +454,27 @@ function TypeLine({ text, lang, font, align }: {
   );
 }
 
+/**
+ * Ten scripts stacked centered. Exactly one is always "active" — bigger and
+ * brighter, receiving cursor-proximity glyph modulation. Default active is
+ * Latin (index 4). Hovering another line makes IT the new active; the
+ * previously-active line springs back to muted size / colour, and the whole
+ * composition breathes via Framer Motion `layout` FLIP.
+ */
 function VariableWidthType() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [active, setActive] = useState<string>("en"); // Figma: Latin is default
+  const reduce = useReducedMotion();
 
-  // Per-glyph spans lose inter-cluster kerning and run slightly wider than the
-  // shell for the longest scripts. Scale the whole block down to fit (transforms
-  // don't affect the cursor-proximity math — glyph rects and pointer scale alike).
+  // Per-glyph spans lose inter-cluster kerning and can run wider than the
+  // shell at the 32 px active size; the active line drives overflow, so
+  // re-measure whenever the active line changes.
   useEffect(() => {
     const el = wrapRef.current;
     const parent = el?.parentElement;
     if (!el || !parent) return;
     const fit = () => {
-      // The lines are fixed-width blocks whose text overflows internally, so
-      // measure each <p>'s own content width (scrollWidth), not the wrapper's.
       let natural = 0;
       el.querySelectorAll("p").forEach((p) => {
         natural = Math.max(natural, p.scrollWidth);
@@ -457,28 +489,37 @@ function VariableWidthType() {
       fit,
     );
     return () => ro.disconnect();
-  }, []);
+  }, [active]);
 
   return (
     <div
       ref={wrapRef}
-      className="flex w-full flex-col gap-1"
+      className="flex w-full flex-col items-center justify-center"
       style={{
         transform: scale < 1 ? `scale(${scale})` : undefined,
         transformOrigin: "center",
       }}
     >
-      {SCRIPTS.map((script, i) => {
-        const align =
-          i < 4 ? "text-left" : i === 4 ? "text-center" : "text-right";
+      {SCRIPTS.map((script) => {
+        const isActive = script.lang === active;
         return (
-          <StaggerItem key={script.lang}>
-            <TypeLine
-              text={script.text}
-              lang={script.lang}
-              font={script.font}
-              align={align}
-            />
+          <StaggerItem key={script.lang} className="w-full">
+            <motion.div
+              layout={reduce ? false : true}
+              transition={reduce ? { duration: 0 } : SWAP_SPRING}
+              style={{
+                fontSize: isActive ? SIZE_ACTIVE_PX : SIZE_REST_PX,
+                width: "100%",
+              }}
+            >
+              <TypeLine
+                text={script.text}
+                lang={script.lang}
+                font={script.font}
+                isActive={isActive}
+                onActivate={() => setActive(script.lang)}
+              />
+            </motion.div>
           </StaggerItem>
         );
       })}
