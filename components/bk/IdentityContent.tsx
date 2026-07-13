@@ -498,7 +498,7 @@ function VariableWidthType() {
   return (
     <div
       ref={wrapRef}
-      className="flex w-full flex-col items-center justify-center"
+      className="flex h-full w-full flex-col items-center justify-around"
       style={{
         transform: scale < 1 ? `scale(${scale})` : undefined,
         transformOrigin: "center",
@@ -1195,10 +1195,11 @@ export default function IdentityContent() {
               className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
             >
               <Shell manual width={1032} gap={6} className="py-16 sm:py-24">
-                {/* Typeface stack owns the upper portion — flex-1 makes it
-                    fill the remaining height so the composition never looks
-                    crammed against the metadata below. */}
-                <div className="flex flex-1 items-center justify-center">
+                {/* Typeface stack owns the upper portion — flex-1 lets it
+                    fill the remaining height. No items-center on the wrapper
+                    so the child can stretch to full height and space its 10
+                    lines out with justify-around. */}
+                <div className="flex flex-1 justify-center">
                   <VariableWidthType />
                 </div>
                 <StaggerItem>
