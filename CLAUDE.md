@@ -14,7 +14,7 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 ## Design tokens (`app/globals.css` `@theme`)
 
-- Surfaces: `--color-bg #0d0d0f`, `--color-surface #1c1c1c`, `--color-surface-2 #262c38`, `--color-surface-3 #333a47`, `--color-border #ffffff14`
+- Surfaces: `--color-bg #000000`, `--color-surface #1c1c1c`, `--color-surface-2 #262c38`, `--color-surface-3 #333a47`, `--color-border #ffffff14`
 - Text: `--color-ink #fff`, `--color-muted #a7adb8`, `--color-faint #a3a3a3`
 - Brand: `--color-brand #4100cf`, `--color-brand-bold #2c0091`, `--color-brand-subtle #e8e2ff`
 - Status: online `#34d399`, away `#fbbf24`, offline `#6b7280`
