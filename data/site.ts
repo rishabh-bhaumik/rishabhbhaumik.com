@@ -9,11 +9,18 @@ export const SITE = {
   role: "Product & Visual Designer. Chasing.",
   domain: "rishabhbhaumik.com",
   builtWith: "Figma & Claude Code",
+  /** Home hero headline. */
+  greeting: "Hello, World!",
+  /** Home hero pill above the headline. */
+  version: "shipped '96 • v30.6",
+  /** Home hero looping background video (the "orbitting" piece, also in PLAY). */
+  heroVideo:
+    "https://player.vimeo.com/video/780357035?h=430b68184b&background=1",
 } as const;
 
 /** `current` = the pathname for which this item is the active page (current item). */
 export const NAV: { label: string; href: string; current?: string }[] = [
-  { label: "work", href: "/#work", current: "/" },
+  { label: "work", href: "/work", current: "/work" },
   { label: "play", href: "/play", current: "/play" },
   { label: "about", href: "/about", current: "/about" },
 ];
@@ -122,15 +129,6 @@ export const PROJECTS: Project[] = [
     mediaWidth: "64%",
   },
 ];
-
-/** Floating "last played" widget. Swap for a live API later. */
-export const NOW_PLAYING = {
-  when: "7d ago",
-  title: "Gold",
-  artist: "Rishabh Bhaumik",
-  href: "#",
-  art: "/media/now-playing.jpg",
-};
 
 export interface SocialLink {
   handle: string;

@@ -19,7 +19,7 @@ export default function ViewToggle({
   const { play } = useSfx();
 
   return (
-    <div className={`hidden min-w-[700px] items-center sm:flex ${view === "list" ? "justify-center" : "justify-end"}`}>
+    <div className="hidden items-center justify-end sm:flex sm:min-w-[700px]">
       <div data-no-click-sfx className="flex items-center gap-1 rounded-full bg-surface p-1 ring-1 ring-border">
         <ViewButton
           active={view === "grid"}

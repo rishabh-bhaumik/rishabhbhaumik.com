@@ -1,7 +1,8 @@
 # Rishabh Bhaumik — Portfolio
 
-Personal portfolio: a dark, editorial, violet-accented site with a home work
-gallery, an About page, a Play gallery, and two password-gated case studies.
+Personal portfolio: a dark, editorial, violet-accented site with a hero-only
+home, a dedicated work gallery, an About page, a Play gallery, and two
+password-gated case studies.
 
 ## Stack
 
@@ -28,18 +29,18 @@ npm run lint     # eslint
 ```
 app/
   layout.tsx                    root layout — SfxProvider, sound FX, SmoothScroll
-  page.tsx                      home: Header, Hero, WorkGallery, Footer, NowPlaying
+  page.tsx                      home: Header, Hero, Footer
   globals.css                   Tailwind v4 @theme tokens, base styles, Anek @font-face
   about/page.tsx                /about
+  work/page.tsx                 /work — Header, WorkGallery, Footer
   play/page.tsx                 /play
   bima-saathi/page.tsx          /bima-saathi          (password-gated case study)
   bimakavach-identity/page.tsx  /bimakavach-identity  (password-gated case study)
 components/
   Header.tsx, Footer.tsx, Hero.tsx        top-level chrome
-  WorkGallery.tsx, ProjectCard.tsx         home project grid/list + view toggle
+  WorkGallery.tsx, ProjectCard.tsx         work gallery grid/list + view toggle
   ViewToggle.tsx                           shared grid/list switch (work + play)
   LocalClock.tsx, CompanyChip.tsx          header clock/availability, bio chips
-  NowPlaying.tsx                           floating "last played" widget
   Reveal.tsx, SmoothScroll.tsx             scroll-reveal wrapper, Lenis mount
   PasswordGate.tsx, PasswordInput.tsx      soft client-side gate for case studies
   ClickSFX.tsx, SoundToggle.tsx, PageRevealSFX.tsx   interaction sound effects
@@ -49,7 +50,7 @@ components/
   saathi/      SaathiContent.tsx, SaathiHero.tsx, SectionNav.tsx
   bk/          IdentityContent.tsx, AsciiDither.tsx
 data/
-  site.ts      all copy, nav, companies, projects, footer links, now-playing, play items
+  site.ts      all copy, nav, companies, projects, footer links, play items
 lib/
   availability.ts   weekly online-hours schedule + status resolver
   motion.ts         shared Framer Motion easing + variants
@@ -67,7 +68,7 @@ teaser, not real security).
 ## Content
 
 Nearly everything editable — copy, nav links, the companies in the bio,
-projects, footer links, the now-playing widget, and the Play items — lives in
+projects, footer links, and the Play items — lives in
 `data/site.ts`. Swap values there; components read from it and don't need to
 change.
 

@@ -1,14 +1,14 @@
 # Architecture
 
-Source: `app/layout.tsx`, `app/page.tsx`, `app/{about,play,bima-saathi,
+Source: `app/layout.tsx`, `app/page.tsx`, `app/{about,work,play,bima-saathi,
 bimakavach-identity}/page.tsx`, `data/site.ts`, `lib/{availability.ts,
 motion.ts,sfx.tsx}`, `app/globals.css`, and the `components/` tree.
 
 ## Pitch
 
-This is a single-domain personal portfolio: a home surface (hero + work
-gallery), an about page, a play gallery of video/audio work with oEmbed-
-fetched thumbnails, and two password-gated case studies. The visual language
+This is a single-domain personal portfolio: a hero-only home surface, a
+dedicated work gallery, an about page, a play gallery of video/audio work
+with oEmbed-fetched thumbnails, and two password-gated case studies. The visual language
 is dark, editorial, violet — one `@theme` token layer in `app/globals.css`
 drives every surface, text, and brand color across the site. Motion is
 deliberately luxurious: Lenis-smoothed scroll, Framer Motion reveals with
@@ -22,9 +22,10 @@ runs on Arial.
 
 | Route | Renders | Gated |
 |---|---|---|
-| `/` | `app/page.tsx` — `Header`, `Hero`, `WorkGallery` (fed `PROJECTS` from `data/site.ts`), `Footer`, `NowPlaying` | No |
+| `/` | `app/page.tsx` — `Header`, `Hero` (looping Vimeo showreel background, version pill, headline, bio with company chips), `Footer` | No |
+| `/work` | `app/work/page.tsx` — `Header`, `WorkGallery` (fed `PROJECTS` from `data/site.ts`), `Footer` | No |
 | `/about` | `app/about/page.tsx` → `components/about/AboutContent.tsx` (full-bleed video hero + `PhotoCarousel`) | No |
-| `/play` | `app/play/page.tsx` — `Header`, `PlaySection` (→ `PlayGallery`/`PlayCard`, fed `PLAY` from `data/site.ts` + oEmbed thumbnails via `lib/play.ts`), `Footer`, `NowPlaying` | No |
+| `/play` | `app/play/page.tsx` — `Header`, `PlaySection` (→ `PlayGallery`/`PlayCard`, fed `PLAY` from `data/site.ts` + oEmbed thumbnails via `lib/play.ts`), `Footer` | No |
 | `/bima-saathi` | `app/bima-saathi/page.tsx` → `PasswordGate` wrapping `components/saathi/SaathiContent.tsx`; `metadata.robots = { index: false }` | Yes — soft client-side password gate |
 | `/bimakavach-identity` | `app/bimakavach-identity/page.tsx` → `PasswordGate` wrapping `components/bk/IdentityContent.tsx`; `metadata.robots = { index: false }` | Yes — soft client-side password gate |
 
@@ -39,8 +40,7 @@ control (see `docs/password-gate.md`).
 `data/site.ts` is the single source of truth for editable copy: `SITE`
 (name/role/domain), `NAV` (header links + "current route" matching), `BIO` +
 `Company`/chip metadata (the inline company chips in the Home bio), `PROJECTS`
-(Home work gallery cards), `NOW_PLAYING` (the floating now-playing widget),
-`FOOTER` (blurb + social links), and `PLAY` (the Play gallery's Vimeo/
+(Work gallery cards), `FOOTER` (blurb + social links), and `PLAY` (the Play gallery's Vimeo/
 SoundCloud items). Components pull from this file rather than hardcoding
 strings, so most copy edits touch only `data/site.ts`.
 
@@ -70,9 +70,9 @@ The token layer is a Tailwind v4 CSS-first `@theme` block in
 - **Fonts** — `--font-sans`/`--font-mono`/`--font-display`, all currently
   Arial/Helvetica (no webfont is loaded site-wide; see the typography-hover
   doc for the one section that self-hosts variable fonts instead)
-- **Size caps** — `--content-max` (832px, Home work column),
-  `--reading-max` (700px, About/Saathi/gate/footer), `--shell-max` (1200px,
-  header/Play gallery)
+- **Size caps** — `--content-max` (832px, Home hero column / Work gallery
+  column), `--reading-max` (700px, About/Saathi/gate/footer), `--shell-max`
+  (1200px, header/Play gallery)
 
 Tailwind v4 gotcha, called out directly in `app/globals.css`'s own comment:
 custom base-element CSS (the `html`/`body` rules) must go inside `@layer
@@ -120,11 +120,12 @@ session (`sessionStorage` guarded) on first load.
 - `PasswordInput` — the password field the gate renders
 
 **Home** (`app/page.tsx`)
-- `Hero` — role headline + bio with inline company chips
-- `ProjectCard` — one Home work-gallery card (grid/list aware)
+- `Hero` — looping Vimeo showreel background (`SITE.heroVideo`), version pill (`SITE.version`), headline (`SITE.greeting`), and bio with inline company chips
 - `CompanyChip` — inline brand chip + link used inside the bio text
-- `NowPlaying` — fixed-position "last played" widget (`data/site.ts`'s `NOW_PLAYING`)
-- `WorkGallery` — grid/list toggle + `AnimatePresence`/`LayoutGroup` wrapper around `ProjectCard`s
+
+**Work** (`app/work/page.tsx`)
+- `WorkGallery` — grid/list toggle + `AnimatePresence`/`LayoutGroup` wrapper around `ProjectCard`s (fed `PROJECTS` from `data/site.ts`)
+- `ProjectCard` — one work-gallery card (grid/list aware)
 
 **Play** (`app/play/page.tsx`)
 - `components/play/PlaySection` — page-level wrapper that resolves oEmbed thumbnails and renders `PlayGallery`

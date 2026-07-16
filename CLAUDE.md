@@ -19,11 +19,12 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - Brand: `--color-brand #4100cf`, `--color-brand-bold #2c0091`, `--color-brand-subtle #e8e2ff`
 - Status: online `#34d399`, away `#fbbf24`, offline `#6b7280`
 - Fonts: `--font-sans`/`--font-mono`/`--font-display` all resolve to Arial
-- Layout widths: `--reading-max` (700px — About, Saathi, footer, gate), `--content-max` (832px — home work column), `--shell-max` (1200px — header, Play gallery)
+- Layout widths: `--reading-max` (700px — About, Saathi, footer, gate), `--content-max` (832px — home hero column / work gallery column), `--shell-max` (1200px — header, Play gallery)
 
 ## Routes
 
-- `/` — home (Header, Hero, WorkGallery, Footer, NowPlaying)
+- `/` — home (Header, Hero, Footer)
+- `/work` — work gallery (Header, WorkGallery, Footer)
 - `/about` — `AboutContent`
 - `/play` — Play gallery (Vimeo/SoundCloud embeds via oEmbed)
 - `/bima-saathi` — password-gated, vertical-scroll case study
@@ -33,7 +34,7 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 - **Custom base CSS must go in `@layer base`.** Unlayered rules beat Tailwind
   utilities in v4 — an unlayered rule can silently override a utility class.
-- All editable copy/links/companies/projects/now-playing live in
+- All editable copy/links/companies/projects live in
   `data/site.ts`. Prefer editing that file over hardcoding strings in components.
 - Path alias `@/*` → repo root (see `tsconfig.json`).
 - Honor `prefers-reduced-motion` in any new animation — check

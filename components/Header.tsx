@@ -30,7 +30,7 @@ export default function Header() {
       <motion.div
         initial="hidden"
         animate="show"
-        className="mx-auto flex h-16 w-full min-w-[700px] max-w-[var(--shell-max)] items-center justify-between px-4 sm:px-6"
+        className="mx-auto flex h-16 w-full max-w-[var(--shell-max)] items-center justify-between px-4 sm:min-w-[700px] sm:px-6"
       >
         {/* Left — desktop nav / mobile menu toggle */}
         <nav aria-label="Primary" className="hidden items-center gap-1 sm:flex">

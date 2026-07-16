@@ -85,35 +85,33 @@ export default function PhotoCarousel() {
       </div>
 
       {/* Content + carousel control */}
-      <div className="mt-5 flex items-start justify-between gap-6">
-        <p className="max-w-[480px] text-[14px] leading-relaxed text-muted">
-          {photo.content}
-        </p>
-        <div className="flex shrink-0 items-center gap-2 pt-1">
-          <button
-            type="button"
-            onClick={prev}
-            disabled={total < 2}
-            aria-label="Previous photo"
-            data-no-click-sfx
-            className="grid size-8 place-items-center rounded-full text-[#575757] transition-colors hover:text-ink disabled:opacity-40 disabled:hover:text-[#575757]"
-          >
-            <ChevronLeft className="size-5" strokeWidth={1.5} />
-          </button>
-          <span className="font-mono text-[14px] tabular-nums text-[#575757]">
-            {pad(i + 1)} / {pad(total)}
-          </span>
-          <button
-            type="button"
-            onClick={next}
-            disabled={total < 2}
-            aria-label="Next photo"
-            data-no-click-sfx
-            className="grid size-8 place-items-center rounded-full text-[#575757] transition-colors hover:text-ink disabled:opacity-40 disabled:hover:text-[#575757]"
-          >
-            <ChevronRight className="size-5" strokeWidth={1.5} />
-          </button>
-        </div>
+      <p className="mx-auto mt-6 max-w-[480px] text-center text-[14px] leading-relaxed text-muted">
+        {photo.content}
+      </p>
+      <div className="mx-auto mt-4 flex items-center justify-center gap-2">
+        <button
+          type="button"
+          onClick={prev}
+          disabled={total < 2}
+          aria-label="Previous photo"
+          data-no-click-sfx
+          className="grid size-8 place-items-center rounded-full text-[#575757] transition-colors hover:text-ink disabled:opacity-40 disabled:hover:text-[#575757]"
+        >
+          <ChevronLeft className="size-5" strokeWidth={1.5} />
+        </button>
+        <span className="font-mono text-[14px] tabular-nums text-[#575757]">
+          {pad(i + 1)} / {pad(total)}
+        </span>
+        <button
+          type="button"
+          onClick={next}
+          disabled={total < 2}
+          aria-label="Next photo"
+          data-no-click-sfx
+          className="grid size-8 place-items-center rounded-full text-[#575757] transition-colors hover:text-ink disabled:opacity-40 disabled:hover:text-[#575757]"
+        >
+          <ChevronRight className="size-5" strokeWidth={1.5} />
+        </button>
       </div>
     </div>
   );
