@@ -85,10 +85,26 @@ export default function PhotoCarousel() {
       </div>
 
       {/* Content + carousel control. Copy flushes left on mobile to line up with
-          the rest of the page; the centered stack is a desktop composition. */}
-      <p className="mx-auto mt-6 max-w-[480px] text-left text-[14px] leading-relaxed text-muted sm:text-center">
-        {photo.content}
-      </p>
+          the rest of the page; the centered stack is a desktop composition.
+
+          Every copy occupies the same grid cell, so the block always reserves
+          the height of the longest one and the controls below hold their
+          position as you page through. Inactive copies keep their space via
+          `invisible` (visibility: hidden), which also drops them from the
+          accessibility tree. */}
+      <div className="mx-auto mt-6 grid max-w-[480px]">
+        {PHOTOS.map((p, n) => (
+          <p
+            key={p.src}
+            aria-hidden={n !== i}
+            className={`col-start-1 row-start-1 text-left text-[14px] leading-relaxed text-muted sm:text-center ${
+              n === i ? "" : "invisible"
+            }`}
+          >
+            {p.content}
+          </p>
+        ))}
+      </div>
       <div className="mx-auto mt-4 flex items-center justify-center gap-2">
         <button
           type="button"
