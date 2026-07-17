@@ -91,7 +91,7 @@ export default function AboutContent() {
 
         {/* Curiosity — heading (right) + paragraph (left) + full-bleed media */}
         <section className="mt-28 flex flex-col gap-10">
-          <Reveal className="flex w-full flex-col gap-6 px-10">
+          <Reveal className="flex w-full flex-col gap-6 px-4 sm:px-10">
             <div className="flex justify-end">
               <div className="flex w-full max-w-[581px] flex-col gap-4">
                 <span className="w-fit rounded-full bg-surface px-3 py-2 font-mono text-[12px] tracking-wide text-faint ring-1 ring-border">

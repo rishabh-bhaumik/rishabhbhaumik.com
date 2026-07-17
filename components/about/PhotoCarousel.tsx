@@ -79,13 +79,14 @@ export default function PhotoCarousel() {
           />
         )}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 to-transparent" />
-        <p className="absolute inset-x-0 bottom-5 px-8 text-center font-mono text-[13px] leading-snug text-[#a7adb8]">
+        <p className="absolute inset-x-0 bottom-5 px-4 text-left font-mono text-[13px] leading-snug text-[#a7adb8] sm:px-8 sm:text-center">
           {photo.caption}
         </p>
       </div>
 
-      {/* Content + carousel control */}
-      <p className="mx-auto mt-6 max-w-[480px] text-center text-[14px] leading-relaxed text-muted">
+      {/* Content + carousel control. Copy flushes left on mobile to line up with
+          the rest of the page; the centered stack is a desktop composition. */}
+      <p className="mx-auto mt-6 max-w-[480px] text-left text-[14px] leading-relaxed text-muted sm:text-center">
         {photo.content}
       </p>
       <div className="mx-auto mt-4 flex items-center justify-center gap-2">
