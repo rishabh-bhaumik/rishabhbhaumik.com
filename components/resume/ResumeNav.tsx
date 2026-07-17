@@ -33,7 +33,9 @@ export default function ResumeNav() {
     // "overview" straight to "about" and it would never light up.
     const LINE = 140;
     const spy = () => {
-      let current = CHAPTERS[0].id;
+      // Annotated: CHAPTERS is `as const`, so this would otherwise narrow to
+      // the literal "overview" and reject every other id.
+      let current: string = CHAPTERS[0].id;
       for (const c of CHAPTERS) {
         const el = document.getElementById(c.id);
         if (el && el.getBoundingClientRect().top <= LINE) current = c.id;
