@@ -49,14 +49,16 @@ function Frags({ parts }: { parts: Frag[] }) {
  * the content on mobile, so every row on the page shares one grid.
  */
 function Section({
+  id,
   label,
   children,
 }: {
+  id: string;
   label: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-border py-10 sm:py-14">
+    <section id={id} className="scroll-mt-24 border-t border-border py-10 sm:py-14">
       <div className="flex flex-col gap-6 sm:flex-row sm:gap-10">
         <Reveal className="sm:w-[132px] sm:shrink-0">
           <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
@@ -73,7 +75,7 @@ export default function ResumeContent() {
   return (
     <article className="mx-auto w-full max-w-[var(--reading-max)] px-4 pb-24 pt-10 sm:px-6 sm:pt-16">
       {/* Masthead */}
-      <header className="flex flex-col gap-4 pb-10 sm:flex-row sm:items-start sm:justify-between">
+      <header id="overview" className="flex flex-col gap-4 pb-10 sm:flex-row sm:items-start sm:justify-between">
         <Reveal>
           <h1 className="font-display text-[clamp(1.75rem,5vw,2rem)] leading-tight text-ink">
             {RESUME_HEADER.name}
@@ -105,7 +107,7 @@ export default function ResumeContent() {
         </Reveal>
       </header>
 
-      <Section label="About">
+      <Section id="about" label="About">
         <div className="flex flex-col gap-4">
           {RESUME_ABOUT.map((para, i) => (
             <Reveal key={i} delay={i * STEP}>
@@ -117,7 +119,7 @@ export default function ResumeContent() {
         </div>
       </Section>
 
-      <Section label="Contact">
+      <Section id="contact" label="Contact">
         <dl className="flex flex-col gap-3">
           {RESUME_CONTACT.map((row, i) => (
             <Reveal key={row.label} delay={i * STEP}>
@@ -143,7 +145,7 @@ export default function ResumeContent() {
         </dl>
       </Section>
 
-      <Section label="Experience">
+      <Section id="experience" label="Experience">
         {RESUME_EXPERIENCE.map((job, i) => (
           <Reveal key={i}>
             <div className="flex flex-col gap-1">
@@ -172,7 +174,7 @@ export default function ResumeContent() {
         ))}
       </Section>
 
-      <Section label="Education">
+      <Section id="education" label="Education">
         {RESUME_EDUCATION.map((ed, i) => (
           <Reveal key={i} delay={i * STEP}>
             <div className="flex flex-col gap-1">
@@ -188,7 +190,7 @@ export default function ResumeContent() {
         ))}
       </Section>
 
-      <Section label="Certifications">
+      <Section id="certifications" label="Certifications">
         {RESUME_CREDENTIALS.map((c, i) => (
           <Reveal key={i} delay={i * STEP}>
             <div className="flex flex-col gap-1">
