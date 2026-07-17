@@ -12,23 +12,34 @@ import {
 /** Seconds between staggered items within a section. */
 const STEP = 0.06;
 
-/** Renders a rich-text fragment list — plain strings with inline links. */
+/**
+ * Renders a fragment list. The design lifts key phrases to white against the
+ * muted body copy; linked fragments additionally get an underline.
+ */
 function Frags({ parts }: { parts: Frag[] }) {
   return (
     <>
-      {parts.map((p, i) =>
-        typeof p === "string" ? (
-          p
-        ) : (
-          <a
-            key={i}
-            href={p.href}
-            className="text-ink underline decoration-border underline-offset-4 transition-colors hover:decoration-ink"
-          >
+      {parts.map((p, i) => {
+        if (typeof p === "string") return p;
+        if (p.href) {
+          return (
+            <a
+              key={i}
+              href={p.href}
+              className="text-ink underline decoration-border underline-offset-4 transition-colors hover:decoration-ink"
+            >
+              {p.text}
+            </a>
+          );
+        }
+        return p.em ? (
+          <span key={i} className="text-ink">
             {p.text}
-          </a>
-        ),
-      )}
+          </span>
+        ) : (
+          p.text
+        );
+      })}
     </>
   );
 }
@@ -98,7 +109,9 @@ export default function ResumeContent() {
         <div className="flex flex-col gap-4">
           {RESUME_ABOUT.map((para, i) => (
             <Reveal key={i} delay={i * STEP}>
-              <p className="text-[15px] leading-relaxed text-muted">{para}</p>
+              <p className="text-[15px] leading-relaxed text-muted">
+                <Frags parts={para} />
+              </p>
             </Reveal>
           ))}
         </div>
@@ -139,9 +152,7 @@ export default function ResumeContent() {
                 <span className="text-muted"> · {job.company}</span>
               </h3>
               <p className="font-mono text-[11px] tracking-wide text-faint">
-                {job.dates}
-                {job.meta ? ` · ${job.meta}` : ""}
-                {job.lead ? ` · ${job.lead}` : ""}
+                {[job.dates, job.meta, job.location].filter(Boolean).join(" · ")}
               </p>
               <ul className="mt-3 flex flex-col gap-2">
                 {job.bullets.map((b, j) => (
@@ -165,30 +176,32 @@ export default function ResumeContent() {
         {RESUME_EDUCATION.map((ed, i) => (
           <Reveal key={i} delay={i * STEP}>
             <div className="flex flex-col gap-1">
-              <h3 className="text-[16px] text-ink">{ed.title}</h3>
-              <p className="text-[15px] text-muted">{ed.org}</p>
+              <h3 className="text-[16px] text-ink">
+                {ed.title}
+                <span className="text-muted"> · {ed.org}</span>
+              </h3>
               <p className="font-mono text-[11px] tracking-wide text-faint">
-                {ed.dates}
-                {ed.meta ? ` · ${ed.meta}` : ""}
+                {[ed.dates, ed.location].filter(Boolean).join(" · ")}
               </p>
             </div>
           </Reveal>
         ))}
       </Section>
 
-      <Section label="Credentials">
-        <dl className="flex flex-col gap-4">
-          {RESUME_CREDENTIALS.map((row, i) => (
-            <Reveal key={row.label} delay={i * STEP}>
-              <div className="flex flex-col gap-1">
-                <dt className="text-[13px] text-faint">{row.label}</dt>
-                <dd className="text-[15px] leading-relaxed text-muted">
-                  <Frags parts={row.items} />
-                </dd>
-              </div>
-            </Reveal>
-          ))}
-        </dl>
+      <Section label="Certifications">
+        {RESUME_CREDENTIALS.map((c, i) => (
+          <Reveal key={i} delay={i * STEP}>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-[16px] text-ink">
+                {c.title}
+                <span className="text-muted"> · {c.org}</span>
+              </h3>
+              <p className="font-mono text-[11px] tracking-wide text-faint">
+                {c.dates}
+              </p>
+            </div>
+          </Reveal>
+        ))}
       </Section>
     </article>
   );

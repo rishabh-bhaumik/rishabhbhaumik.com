@@ -55,6 +55,18 @@
   }
 }
 
+/* Scroll reveals leave anything not yet scrolled into view at opacity 0. When
+   printing there is no scrolling, so those elements would come out blank —
+   which matters most on /resume. Force the end state. !important is required
+   to beat the inline styles Framer Motion writes. */
+@media print {
+  * {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
 /* Lenis smooth scroll */
 html.lenis,
 html.lenis body {
