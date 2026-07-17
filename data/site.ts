@@ -102,8 +102,8 @@ export const PROJECTS: Project[] = [
     description:
       "Nunc blandit sed purus commodo purus. Mattis bibendum augue urna dictumst tempor tincidunt. Mauris vestibulum nec enim posuere ornare.",
     href: "#",
-    media: "/media/card-design-system.png",
-    mediaWidth: "70%",
+    media: "/media/work/design.system.png",
+    cover: true,
   },
   {
     slug: "bima-saathi",
@@ -112,7 +112,7 @@ export const PROJECTS: Project[] = [
     description:
       "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
     href: "/bima-saathi",
-    media: "/media/work/bima-saathi.png",
+    media: "/media/work/bima.saathi.png",
     cover: true,
   },
   {
@@ -122,8 +122,8 @@ export const PROJECTS: Project[] = [
     description:
       "Creating the foundations for India's first centralized Commercial Insurance Management Software.",
     href: "#",
-    media: "/media/card-dashboard.png",
-    mediaWidth: "88%",
+    media: "/media/work/bima.kendra.png",
+    cover: true,
   },
   {
     slug: "bimakavach-identity",
@@ -132,8 +132,8 @@ export const PROJECTS: Project[] = [
     description:
       "Building the idea of BimaKavach as an intelligence company that is rooted in India's rich history of Ornamentation, Beauty and Aesthetic Identity.",
     href: "/bimakavach-identity",
-    media: "/media/card-brand.png",
-    mediaWidth: "64%",
+    media: "/media/work/bimakavach.branding.png",
+    cover: true,
   },
 ];
 
