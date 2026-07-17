@@ -20,6 +20,7 @@ export const SITE = {
 
 /** `current` = the pathname for which this item is the active page (current item). */
 export const NAV: { label: string; href: string; current?: string }[] = [
+  { label: "home", href: "/", current: "/" },
   { label: "work", href: "/work", current: "/work" },
   { label: "play", href: "/play", current: "/play" },
   { label: "about", href: "/about", current: "/about" },

@@ -33,7 +33,7 @@ export default function Header() {
         className="mx-auto flex h-16 w-full max-w-[var(--shell-max)] items-center justify-between px-4 sm:min-w-[700px] sm:px-6"
       >
         {/* Left — desktop nav / mobile menu toggle */}
-        <nav aria-label="Primary" className="hidden items-center gap-1 sm:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-6 sm:flex">
           {NAV.map((item, i) => {
             const isCurrent = !!item.current && pathname === item.current;
             return (
@@ -45,9 +45,9 @@ export default function Header() {
                 <Link
                   href={item.href}
                   aria-current={isCurrent ? "page" : undefined}
-                  className={`rounded-full px-3 py-1.5 text-[14px] tracking-[0.02em] transition-colors ${
+                  className={`block py-1 text-[14px] lowercase tracking-[0.02em] transition-colors ${
                     isCurrent
-                      ? "text-ink underline decoration-white/40 underline-offset-[6px]"
+                      ? "border-b border-nav-current text-nav-current shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
                       : "text-faint hover:text-ink focus-visible:text-ink"
                   }`}
                 >
@@ -123,9 +123,9 @@ export default function Header() {
                       href={item.href}
                       onClick={() => setOpen(false)}
                       aria-current={isCurrent ? "page" : undefined}
-                      className={`block py-3 text-[16px] transition-colors ${
+                      className={`inline-block py-3 text-[16px] lowercase transition-colors ${
                         isCurrent
-                          ? "text-ink underline decoration-white/40 underline-offset-[6px]"
+                          ? "border-b border-nav-current text-nav-current"
                           : "text-faint hover:text-ink"
                       }`}
                     >

@@ -12,6 +12,8 @@
   --color-ink: #ffffff;
   --color-muted: #a7adb8;
   --color-faint: #a3a3a3;
+  /* Nav "current item": text + bottom stroke of the page you are already on. */
+  --color-nav-current: #363636;
 
   /* Brand (violet) */
   --color-brand: #4100cf;
