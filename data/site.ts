@@ -86,6 +86,12 @@ export interface Project {
   media?: string;
   /** Width of the centered media as a % of the card (tunes each mockup). */
   mediaWidth?: string;
+  /**
+   * Full-bleed cover art on a dark card instead of a mockup centered on the
+   * violet gradient. The media fills the frame and a bottom scrim lifts on
+   * hover (Figma 7834-22472). Ignores `mediaWidth`.
+   */
+  cover?: boolean;
 }
 
 export const PROJECTS: Project[] = [
@@ -106,8 +112,8 @@ export const PROJECTS: Project[] = [
     description:
       "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
     href: "/bima-saathi",
-    media: "/media/card-app.png",
-    mediaWidth: "26%",
+    media: "/media/work/bima-saathi.png",
+    cover: true,
   },
   {
     slug: "bima-kendra",
