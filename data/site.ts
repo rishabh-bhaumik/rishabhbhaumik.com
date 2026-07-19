@@ -96,16 +96,6 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    slug: "peetal",
-    title: "Peetal",
-    tag: "shipped 2024",
-    description:
-      "Nunc blandit sed purus commodo purus. Mattis bibendum augue urna dictumst tempor tincidunt. Mauris vestibulum nec enim posuere ornare.",
-    href: "#",
-    media: "/media/work/design.system.png",
-    cover: true,
-  },
-  {
     slug: "bima-saathi",
     title: "bima saathi",
     tag: "shipped 2026",
@@ -113,6 +103,16 @@ export const PROJECTS: Project[] = [
       "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
     href: "/bima-saathi",
     media: "/media/work/bima.saathi.png",
+    cover: true,
+  },
+  {
+    slug: "bimakavach-identity",
+    title: "BimaKavach Identity",
+    tag: "shipped 2026",
+    description:
+      "Building the idea of BimaKavach as an intelligence company that is rooted in India's rich history of Ornamentation, Beauty and Aesthetic Identity.",
+    href: "/bimakavach-identity",
+    media: "/media/work/bimakavach.branding.png",
     cover: true,
   },
   {
@@ -126,13 +126,13 @@ export const PROJECTS: Project[] = [
     cover: true,
   },
   {
-    slug: "bimakavach-identity",
-    title: "BimaKavach Identity",
-    tag: "shipped 2026",
+    slug: "peetal",
+    title: "Peetal",
+    tag: "shipped 2024",
     description:
-      "Building the idea of BimaKavach as an intelligence company that is rooted in India's rich history of Ornamentation, Beauty and Aesthetic Identity.",
-    href: "/bimakavach-identity",
-    media: "/media/work/bimakavach.branding.png",
+      "Nunc blandit sed purus commodo purus. Mattis bibendum augue urna dictumst tempor tincidunt. Mauris vestibulum nec enim posuere ornare.",
+    href: "#",
+    media: "/media/work/design.system.png",
     cover: true,
   },
 ];

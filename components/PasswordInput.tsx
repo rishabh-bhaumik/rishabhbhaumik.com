@@ -24,17 +24,17 @@ export default function PasswordInput({
     let idx = Math.floor(Math.random() * ENTRY_SOUNDS.length);
     if (idx === lastSfx.current) idx = (idx + 1) % ENTRY_SOUNDS.length;
     lastSfx.current = idx;
-    play(ENTRY_SOUNDS[idx], 0.4);
+    play(ENTRY_SOUNDS[idx], 0);
   }, [play]);
 
   const submit = () => {
     if (!revealed) return;
     const ok = onSubmit(value);
     if (ok) {
-      play("/media/pw-success.wav", 0.5);
+      play("/media/pw-success.wav", 0);
     } else {
       setError(true);
-      play("/media/pw-error.wav", 0.5);
+      play("/media/pw-error.wav", 0);
     }
   };
 

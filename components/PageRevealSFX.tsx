@@ -8,7 +8,7 @@ export default function PageRevealSFX() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     sessionStorage.setItem("page-reveal-played", "1");
     const audio = new Audio("/media/page-reveal.wav");
-    audio.volume = 0.5;
+    audio.volume = 0.35;
     audio.play().catch(() => {});
   }, []);
 
