@@ -202,9 +202,13 @@ export const RESUME_EXPERIENCE: ExperienceItem[] = [
     location: "Bengaluru and Kolkata, India",
     bullets: [
       [
-        "Tasked with ",
-        { text: "leading of Performance Marketing", em: true },
-        " for the 'Early Learning' Category consisting of 2 Products.",
+        { text: "Conversion-focused campaigns", em: true },
+        " for fintech and e-commerce clients including HDFC Securities, QueMath, and Stockal.",
+      ],
+      [
+        "Earlier: directed ",
+        { text: "India’s first VEVO music video out of Kolkata", em: true },
+        " and tour documentaries for Grammy Award-winning percussionist Pandit Tanmay Bose, building the storytelling and motion design instincts that now inform product animation.",
       ],
     ],
   },
