@@ -219,8 +219,8 @@ export const RESUME_EDUCATION: EducationItem[] = [
     dates: "2015 - 2018",
     title: "Masters in Mass Communication & Videography",
     org: "St. Xavier’s College",
-    // NOTE: source reads "Kolklata" — left verbatim.
-    location: "Kolklata, WB, India",
+    // Source reads "Kolklata" — a typo, corrected here.
+    location: "Kolkata, WB, India",
   },
 ];
 
