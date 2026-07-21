@@ -1,6 +1,6 @@
 /**
- * Resume content, transcribed from the Figma "resume" frame (node 8407:5605)
- * via get_design_context. Swap copy / links here without touching components —
+ * Resume content, transcribed verbatim from the Figma "resume" frame
+ * (node 8407:5605). Swap copy / links here without touching components —
  * mirrors the data/site.ts pattern.
  *
  * The design sets key phrases in white against muted body text. That is the
@@ -17,9 +17,9 @@ export interface ContactRow {
 }
 
 export interface ExperienceItem {
-  /** Left rail, e.g. "Jan '26 - Present" */
+  /** Left rail, e.g. "Jan ‘26 - Present" */
   dates: string;
-  /** Left rail secondary — duration, e.g. "(7 Months)". */
+  /** Left rail secondary — duration, e.g. "(6 Months)". */
   meta?: string;
   title: string;
   company: string;
@@ -45,8 +45,8 @@ export const RESUME_HEADER = {
   name: "Rishabh Bhaumik",
   // Source reads "Vidusal" — an obvious typo, corrected here.
   subtitle: "Product & Visual Designer • Bengaluru, KA",
-  // TODO: real PDF
-  pdfHref: "#",
+  pdfHref:
+    "https://drive.google.com/file/d/1Va0F1SL-W1ohgZKdOHr8TEM6MafNWeA8/view?usp=sharing",
 };
 
 /** One entry per paragraph. */
@@ -65,13 +65,11 @@ export const RESUME_ABOUT: Frag[][] = [
     "What sets me apart is my ability to bring nuanced perspectives to the table, while balancing customer goals, business requirements, and technical limitations. Collaborating with exceptional Individuals in Engineering, Marketing, Performance, Content, Sales and Directors, I create user-centered, functional, and aesthetically appealing products.",
   ],
   [
+    // NOTE: source reads "tacking" (for "tackling") — left verbatim.
     "I excel at understanding the core of a business, product and service and translating it into impactful visuals. I love coming up with ideas that come from left-field thinking due to my past in film, theatre, and performance art. With obsessive attention to detail and a passion for re-inventing the wheel, I enjoy tacking complex challenges and managing the steps between thoughts and action.",
   ],
 ];
 
-// NOTE: Twitter / Dribbble / Behance / Vimeo all read "harshitbeni" in the
-// design, and Behance duplicates the Twitter URL. Transcribed verbatim —
-// these look like leftover template copy and probably want real handles.
 export const RESUME_CONTACT: ContactRow[] = [
   {
     label: "Email",
@@ -84,7 +82,11 @@ export const RESUME_CONTACT: ContactRow[] = [
     value: "linkedin.com/in/rishabh-bhaumik",
     href: "https://linkedin.com/in/rishabh-bhaumik",
   },
-  { label: "Twitter", value: "x.com/harshitbeni", href: "https://x.com/harshitbeni" },
+  {
+    label: "Twitter",
+    value: "x.com/RishabhBhaumik",
+    href: "https://x.com/RishabhBhaumik",
+  },
   {
     label: "Instagram",
     value: "instagram.com/rishabhbhaumik",
@@ -92,223 +94,117 @@ export const RESUME_CONTACT: ContactRow[] = [
   },
   {
     label: "Dribbble",
-    value: "dribbble.com/harshitbeni",
-    href: "https://dribbble.com/harshitbeni",
+    value: "dribbble.com/rishabhbhaumik",
+    href: "https://dribbble.com/rishabhbhaumik",
   },
-  { label: "Behance", value: "x.com/harshitbeni", href: "https://x.com/harshitbeni" },
+  {
+    label: "Behance",
+    value: "www.behance.net/rishabhbhaumik",
+    href: "https://www.behance.net/rishabhbhaumik",
+  },
   {
     label: "Vimeo",
-    value: "vimeo.com/harshitbeni",
-    href: "https://vimeo.com/harshitbeni",
+    value: "vimeo.com/rishabhbhaumik",
+    href: "https://vimeo.com/rishabhbhaumik",
   },
 ];
 
 export const RESUME_EXPERIENCE: ExperienceItem[] = [
   {
-    dates: "Jan '26 - Present",
-    meta: "(7 Months)",
+    dates: "Jan ‘26 - Present",
+    meta: "(6 Months)",
     title: "Product & Brand Designer",
     company: "BimaKavach",
     location: "Bengaluru, Ka",
     bullets: [
       [
-        { text: "Led end-to-end design of core B2B privacy platform", em: true },
-        " features used by enterprise engineering teams.",
+        { text: "1,000 agents onboarded onto Bima Saathi,", em: true },
+        " a field-agent mobile app I designed end-to-end (onboarding, quote builder, policy tracker), turning a paper-based sales force into a self-serve digital channel generating measurable quarterly revenue.",
       ],
       [
-        "Drove a mobile app scanning feature that ",
-        { text: "generated 300k of revenue", em: true },
-        " within one quarter from enterprise customers.",
-      ],
-      [
-        "Built and scaled a ",
-        { text: "design system", em: true },
-        " covering typography, color, components, and motion tokens, improving product and visual design consistency across web and mobile while ",
-        { text: "reducing design handoff time by over 30%", em: true },
-        ".",
-      ],
-      [
-        "Collaborated with engineering and PM across 3 timezones to ship complex ",
-        { text: "data-heavy interfaces", em: true },
-        " such as tables, bulk actions, and third-party integrations.",
-      ],
-      [
-        "Assisted the design team with the revamp of the marketing website, including branding, illustrations, and web design.",
+        { text: "55-day full rebrand", em: true },
+        " across 12 touchpoints (web, app, marketing, merchandise, HR/admin), led end-to-end from user research and moodboarding through developer handoff.",
       ],
     ],
   },
   {
-    dates: "Jan '25 - Jan '26",
-    meta: "(10 Months)",
+    dates: "Jan ‘25 - Dec ‘25",
+    meta: "(11 Months)",
     title: "Product Designer",
     company: "BimaKavach",
     location: "Bengaluru, Ka",
     bullets: [
       [
-        "Ensured ",
-        { text: "Future Proofing of Brand", em: true },
-        ", using Anek Variable, a multi-lingual variable typeface that has hints of Indian Devnagari & Dravidian Scripts.",
+        { text: "60% lift in CTA conversion", em: true },
+        " on the Quote Generation page by running A/B tests on layout variants, conducting competitive analysis across 8 insurance platforms, and redesigning the page hierarchy using analytics that pinpointed where users dropped off.",
       ],
       [
-        "Led the ",
-        { text: "transition of Blog Hosting", em: true },
-        " from Ghost to Wordpress, adding new robust features like Curation Posts, Author Profiles, Category Tags, Dark Mode and Auto-Transcription Support.",
+        { text: "70% reduction in localization effort", em: true },
+        " (estimated) by transitioning the product to Anek Variable, a multi-lingual typeface supporting Devanagari and Dravidian scripts, and embedding typographic foundations into the design system to scale across regions.",
       ],
       [
-        "Built ",
-        { text: "Research-led User Experience Design", em: true },
-        " for the optimization of the Quote Generation Page, ",
-        { text: "increasing CTA Clicks by 60%", em: true },
-        ".",
+        { text: "5x daily blog output, 45% faster turnaround", em: true },
+        " by leading the platform migration from Ghost to WordPress, designing the category architecture, author profiles, curation posts, and dark mode, all informed by content analytics showing reader drop-off patterns.",
       ],
     ],
   },
   {
-    dates: "March '23 - Jan '25",
-    meta: "1 Year 11 Months",
+    dates: "March ‘23 - Dec ‘24",
+    meta: "1 Year 9 Months",
     title: "Senior Designer",
     company: "BimaKavach",
     location: "Bengaluru, Ka",
     bullets: [
       [
-        "Led ",
-        { text: "end-to-end website design", em: true },
-        " and ",
-        { text: "reimagined the entire product", em: true },
-        ".",
+        { text: "0.4% churn, 85% retention on active policies", em: true },
+        " after I redesigned the core dashboard, running usability tests with 20+ customers, mapping user journeys end-to-end, and iterating on data visualizations that surfaced renewal timelines and coverage gaps.",
       ],
       [
-        "Designed a dynamic and versatile ",
-        { text: "Dashboard", em: true },
-        ", resulting in reduction of active ",
-        { text: "churn to under 0.4%", em: true },
-        " while also achieving ",
-        { text: "85% Policy Retention", em: true },
-        ".",
-      ],
-      ["Designed intuitive user experience for purchase and onboarding journeys."],
-      [
-        "Built PeetalDSL, a ",
-        { text: "Design System Library", em: true },
-        " in order to scale GUI Designs across all digital touch-points.",
+        { text: "3-platform design system", em: true },
+        " (Peetal) built from scratch covering web, app, and POS, defining component architecture, Figma variables, auto-layout structures, and documentation that cut design-to-dev handoff time by an estimated 40% and ensured consistency across every digital touchpoint.",
       ],
       [
-        "Optimized Communication Design for Blog Pages, ",
-        { text: "reducing TAT by 45%", em: true },
-        " and ",
-        { text: "increasing Daily Blog output by 5x", em: true },
-        ".",
+        { text: "7-step flow simplified to 4", em: true },
+        " for the purchase and onboarding journey, based on user research sessions with SME owners, reducing form abandonment and shortening time-to-first-policy.",
       ],
       [
-        "Completed the entire assembly of a ",
-        { text: "Brand Film in 4 working days", em: true },
-        ", directing A-Roll shoot setups while creating Motion Graphic Assets for Chapter Cards, Title Card & Start/End Card.",
+        { text: "Full website redesign", em: true },
+        " shipped end-to-end, from wireframes and prototyping through developer handoff and QA, resulting in a responsive product that aligned brand perception with the actual product experience.",
       ],
     ],
   },
   {
-    dates: "August '21 - March '23",
-    meta: "1 Year 8 Months",
-    title: "Senior Marketing Graphic Designer",
+    dates: "Jul 2020 - Mar 2023",
+    meta: "(2 years 8 months)",
+    title: "Designer, Growth & Brand",
     company: "Vedantu",
     location: "Bengaluru, India",
     bullets: [
       [
-        "Worked with the ",
-        { text: "larger Brand Design Team", em: true },
-        " in branding and communication design for the main brand as well as sub-technologies.",
+        { text: "High-converting landing pages", em: true },
+        " designed on Unbounce for offline centre registration, building marketing funnels that became a repeatable growth playbook across 4 products in the Early Learning category.",
       ],
       [
-        "Led ",
-        { text: "Landing Page Design", em: true },
-        " for Offline Centre Registration with Unbounce, resulting in ",
-        { text: "creating new marketing funnels", em: true },
-        ".",
+        { text: "4-product brand system", em: true },
+        " owned across the Early Learning vertical, covering all communication, campaign, and marketing design, establishing templates the broader brand team adopted as standards.",
       ],
       [
-        "In-charge of all ",
-        { text: "Communication, Marketing & Brand Design", em: true },
-        " for the 'Early Learning' Category, consisting of 4 products.",
-      ],
-      [
-        "Created a",
-        { text: " Brand films", em: true },
-        " for Vedantu's ",
-        { text: "Real Achievers Series.", em: true },
+        { text: "Performance marketing creatives", em: true },
+        " designed for 2 products, producing ad variants and landing pages that fed directly into growth experimentation cycles alongside the product and growth teams.",
       ],
     ],
   },
   {
-    dates: "July '20 - July '21",
-    meta: "(1 Year)",
-    title: "Marketing Graphic Designer",
-    company: "Vedantu",
-    location: "Bengaluru, India",
+    dates: "Jul 2018 - Apr 2020",
+    meta: "(1 year 9 months)",
+    title: "Creative & Motion Designer",
+    company: "Nymbl Digital / Freelance",
+    location: "Bengaluru and Kolkata, India",
     bullets: [
       [
         "Tasked with ",
         { text: "leading of Performance Marketing", em: true },
         " for the 'Early Learning' Category consisting of 2 Products.",
-      ],
-    ],
-  },
-  {
-    dates: "January '20 - April '20",
-    meta: "4 Months",
-    title: "Creative Graphic and Motion Designer",
-    company: "Nymbl Digital",
-    location: "Bengaluru, India",
-    bullets: [
-      [
-        "Created ",
-        { text: "Social Media Communication", em: true },
-        " for Clients like HDFC Securities, QueMath, and Stockal.",
-      ],
-      [
-        "Led the",
-        { text: " Creation Landing Pages", em: true },
-        " for Clients like Annuvit.",
-      ],
-    ],
-  },
-  {
-    dates: "March '19 - November '19",
-    meta: "8 Months",
-    title: "In House Video Editor, Colorist, Motion Graphics Artist",
-    company: "145 East",
-    location: "Kolkata, WB",
-    bullets: [
-      [
-        "Engaged in",
-        { text: " building and scaling video content", em: true },
-        " of the 145's Clothing Line via it's social media channels.",
-      ],
-      [
-        "Worked on making ",
-        { text: "Brand Films", em: true },
-        " and Social Media Content for clients like Kompanero.",
-      ],
-      // NOTE: these last two bullets read as leftover template copy from a
-      // fintech/trading resume — they do not match this video/motion role.
-      // Transcribed verbatim from the design; likely want replacing.
-      ["(intraday,positional, holding) while maintaining clarity and speed."],
-      [
-        "Conducted user research and competitor analysis to identify workflow gaps and inform product direction.",
-      ],
-    ],
-  },
-  {
-    // NOTE: overlaps the Vedantu dates above — presumably concurrent freelance work.
-    dates: "2020 - 2021",
-    title: "Video Editor, Creative Direction, Motion Design",
-    company: "Freelance",
-    location: "Kolkata, WB",
-    bullets: [
-      [
-        "Made Music Videos for Toronto & Kolkata based artist ZNA, becoming the 1st Creative Director to have a VEVO Music Video based out of Calcutta.",
-      ],
-      [
-        "Made Tour Videos & Documentaries for multiple Grammy Award winning Indian Percussionist, Pandit Tanmay Bose.",
       ],
     ],
   },
@@ -318,7 +214,7 @@ export const RESUME_EDUCATION: EducationItem[] = [
   {
     dates: "2015 - 2018",
     title: "Masters in Mass Communication & Videography",
-    org: "St. Xavier's College",
+    org: "St. Xavier’s College",
     // NOTE: source reads "Kolklata" — left verbatim.
     location: "Kolklata, WB, India",
   },
@@ -326,12 +222,12 @@ export const RESUME_EDUCATION: EducationItem[] = [
 
 export const RESUME_CREDENTIALS: CredentialItem[] = [
   {
-    dates: "2023",
+    dates: "2022",
     title: "UX Design Fundamentals",
     org: "California Institute of the Arts",
   },
   {
-    dates: "2023",
+    dates: "2022",
     title: "Visual Elements of User Interface Design",
     org: "California Institute of the Arts",
   },

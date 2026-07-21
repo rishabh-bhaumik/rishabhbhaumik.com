@@ -85,6 +85,8 @@ export default function ResumeContent() {
         <Reveal delay={STEP} className="sm:shrink-0">
           <a
             href={RESUME_HEADER.pdfHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex w-fit items-center gap-2 rounded-full bg-surface px-4 py-2 font-mono text-[11px] tracking-wide text-faint ring-1 ring-border transition-colors hover:text-ink"
           >
             <svg
