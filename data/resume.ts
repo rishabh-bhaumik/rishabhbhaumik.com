@@ -217,7 +217,7 @@ export const RESUME_EXPERIENCE: ExperienceItem[] = [
 export const RESUME_EDUCATION: EducationItem[] = [
   {
     dates: "2015 - 2018",
-    title: "Masters in Mass Communication & Videography",
+    title: "Bachelor’s in Mass Communication & Videography",
     org: "St. Xavier’s College",
     // Source reads "Kolklata" — a typo, corrected here.
     location: "Kolkata, WB, India",
