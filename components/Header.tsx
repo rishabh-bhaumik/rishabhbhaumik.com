@@ -22,6 +22,9 @@ const headerItem = {
   }),
 };
 
+/** A nav item that is shown but not yet a link. */
+const DISABLED = "cursor-not-allowed select-none text-faint/40";
+
 const LEFT = NAV.filter((item) => item.side === "left");
 
 export default function Header() {
@@ -30,22 +33,34 @@ export default function Header() {
 
   /** One half of the wide nav. `from` continues the entrance stagger across the header. */
   const navSet = (side: "left" | "right", from: number, place: string) => (
-    <nav aria-label={side === "left" ? "Primary" : "Secondary"} className={`hidden items-center gap-6 sm:flex ${place}`}>
+    <nav
+      aria-label={side === "left" ? "Primary" : "Secondary"}
+      className={`hidden items-center gap-6 sm:flex ${place}`}
+    >
       {NAV.filter((item) => item.side === side).map((item, i) => {
         const isCurrent = !!item.current && pathname === item.current;
         return (
           <m.div key={item.label} variants={headerItem} custom={from + i}>
-            <Link
-              href={item.href}
-              aria-current={isCurrent ? "page" : undefined}
-              className={`block py-1 text-14 lowercase tracking-[0.02em] transition-colors ${
-                isCurrent
-                  ? "border-b border-nav-current text-nav-current shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
-                  : "text-faint hover:text-ink focus-visible:text-ink"
-              }`}
-            >
-              {item.label}
-            </Link>
+            {item.disabled ? (
+              <span
+                aria-disabled="true"
+                className={`block py-1 text-14 lowercase tracking-[0.02em] ${DISABLED}`}
+              >
+                {item.label}
+              </span>
+            ) : (
+              <Link
+                href={item.href}
+                aria-current={isCurrent ? "page" : undefined}
+                className={`block py-1 text-14 lowercase tracking-[0.02em] transition-colors ${
+                  isCurrent
+                    ? "border-b border-nav-current text-nav-current shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
+                    : "text-faint hover:text-ink focus-visible:text-ink"
+                }`}
+              >
+                {item.label}
+              </Link>
+            )}
           </m.div>
         );
       })}
@@ -79,7 +94,11 @@ export default function Header() {
         </m.button>
 
         {/* Centre — name, logo and local time in a row (the logo flips on hover) */}
-        <m.div variants={headerItem} custom={LEFT.length} className="justify-self-center">
+        <m.div
+          variants={headerItem}
+          custom={LEFT.length}
+          className="justify-self-center"
+        >
           <Link
             href="/"
             aria-label={`${SITE.name} — home`}
@@ -113,18 +132,27 @@ export default function Header() {
                 const isCurrent = !!item.current && pathname === item.current;
                 return (
                   <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      aria-current={isCurrent ? "page" : undefined}
-                      className={`inline-block py-3 text-16 lowercase transition-colors ${
-                        isCurrent
-                          ? "border-b border-nav-current text-nav-current"
-                          : "text-faint hover:text-ink"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
+                    {item.disabled ? (
+                      <span
+                        aria-disabled="true"
+                        className={`inline-block py-3 text-16 lowercase ${DISABLED}`}
+                      >
+                        {item.label}
+                      </span>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={() => setOpen(false)}
+                        aria-current={isCurrent ? "page" : undefined}
+                        className={`inline-block py-3 text-16 lowercase transition-colors ${
+                          isCurrent
+                            ? "border-b border-nav-current text-nav-current"
+                            : "text-faint hover:text-ink"
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 );
               })}

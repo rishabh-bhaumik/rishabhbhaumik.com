@@ -22,12 +22,13 @@ export const SITE = {
 
 /** `current` = the pathname for which this item is the active page (current item). */
 /** `side`: which half of the wide header the link sits in (the logo is centred between them). */
-export const NAV: { label: string; href: string; current?: string; side: "left" | "right" }[] = [
+/** `disabled`: shown, dimmed, but not a link (nothing to open yet). */
+export const NAV: { label: string; href: string; current?: string; side: "left" | "right"; disabled?: boolean }[] = [
   { label: "home", href: "/", current: "/", side: "left" },
   { label: "work", href: "/work", current: "/work", side: "left" },
   { label: "play", href: "/play", current: "/play", side: "left" },
   { label: "about", href: "/about", current: "/about", side: "right" },
-  { label: "resume", href: "/resume", current: "/resume", side: "right" },
+  { label: "resume", href: "/resume", current: "/resume", side: "right", disabled: true },
 ];
 
 /** A company referenced inline in the bio, rendered as a brand chip + link. */
