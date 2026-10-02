@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
+import { useSilentRoute } from "@/lib/sfx";
 
 const KEY = "rb-tab-count";
 
 export default function PageRevealSFX() {
+  const silent = useSilentRoute();
   useEffect(() => {
+    if (silent) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const prev = parseInt(localStorage.getItem(KEY) || "0", 10);
@@ -27,7 +30,7 @@ export default function PageRevealSFX() {
       window.removeEventListener("beforeunload", decrement);
       decrement();
     };
-  }, []);
+  }, [silent]);
 
   return null;
 }

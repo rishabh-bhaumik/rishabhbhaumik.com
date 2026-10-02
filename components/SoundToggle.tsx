@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSfx } from "@/lib/sfx";
+import { useSfx, useSilentRoute } from "@/lib/sfx";
 import { EASE } from "@/lib/motion";
 
 export default function SoundToggle() {
   const { muted, toggle } = useSfx();
+  const silent = useSilentRoute();
+  if (silent) return null;
 
   return (
     <button
