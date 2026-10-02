@@ -146,7 +146,8 @@ export interface SocialLink {
 }
 
 export const FOOTER = {
-  blurb: `${SITE.domain} is my internet home and a repository of my work and play.`,
+  blurb: `${SITE.domain} is my internet home and a repository of my work and experiments.`,
+  pitch: "Open to new projects, collaborations and non-profit work.",
   meta: `This is v2, made with ${SITE.builtWith}.`,
   elsewhere: [
     {

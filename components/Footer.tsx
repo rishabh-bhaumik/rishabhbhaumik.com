@@ -5,7 +5,6 @@ import { FOOTER, type SocialLink } from "@/data/site";
 import { revealItem, staggerContainer } from "@/lib/motion";
 import Reveal from "./Reveal";
 import {
-  IconArrowRight,
   IconMail,
   IconX,
   IconLinkedIn,
@@ -27,37 +26,54 @@ export default function Footer() {
         variants: staggerContainer(0.07),
         initial: "hidden" as const,
         whileInView: "show" as const,
-        viewport: { once: true, margin: "0px 0px -12% 0px" },
+        viewport: { once: true, margin: "0px" },
       };
   const itemProps = reduce ? {} : { variants: revealItem };
 
+  const inlineLink =
+    "text-white underline decoration-white/60 underline-offset-[2px] transition-colors hover:decoration-white";
+
   return (
-    <footer id="contact" className="px-4 pb-16 pt-28 sm:px-6">
-      <div className="mx-auto flex min-h-[420px] max-w-[var(--reading-max)] flex-col justify-between overflow-hidden rounded-3xl border border-border bg-[#0a0a0c] p-8 sm:p-12">
+    <footer id="contact" className="flex justify-center px-4 pt-[120px]">
+      <div
+        className="w-full max-w-[var(--reading-max)] rounded-t-[32px] px-4 pb-[10px] pt-6"
+        style={{
+          backgroundImage:
+            "linear-gradient(230.48deg, rgba(255,255,255,0.2) 1.02%, rgba(178,182,188,0.2) 6.56%, rgba(105,110,120,0.2) 11.12%, rgba(51,58,71,0.2) 17.21%, rgba(28,28,28,0.2) 22.15%)",
+        }}
+      >
         {/* Blurb */}
         <Reveal
           as="p"
-          className="max-w-[34rem] text-[15px] leading-relaxed text-muted"
+          margin="0px"
+          className="px-3 text-[14px] leading-[1.3] text-muted"
         >
-          {FOOTER.blurb}{" "}
+          {FOOTER.blurb}
+          <br />
           This is{" "}
-          <a href="#" className="underline underline-offset-[3px] decoration-muted/50 hover:text-ink transition-colors">v2</a>
+          <a href="#" className={inlineLink}>v2</a>
           , made with{" "}
-          <a href="https://figma.com" target="_blank" rel="noreferrer" className="underline underline-offset-[3px] decoration-muted/50 hover:text-ink transition-colors">Figma</a>
-          {" "}&amp;{" "}
-          <a href="https://claude.ai/code" target="_blank" rel="noreferrer" className="underline underline-offset-[3px] decoration-muted/50 hover:text-ink transition-colors">Claude Code</a>
-          .
+          <a href="https://figma.com" target="_blank" rel="noreferrer" className={inlineLink}>Figma</a>
+          ,{" "}
+          <a href="https://claude.ai/code" target="_blank" rel="noreferrer" className={inlineLink}>Claude Code</a>
+          , and{" "}
+          <a href="https://framer.com" target="_blank" rel="noreferrer" className={inlineLink}>Framer</a>
+          . {FOOTER.pitch}
         </Reveal>
 
         {/* Elsewhere */}
-        <div className="mt-12">
+        <div className="mt-14 flex flex-col gap-2">
           <Reveal
             as="p"
-            className="text-[12px] uppercase tracking-[0.6px] text-[#858e9e]"
+          margin="0px"
+            className="pb-2 text-[12px] uppercase leading-[16px] tracking-[0.6px] text-[#858e9e]"
           >
             Elsewhere
           </Reveal>
-          <motion.ul {...listProps} className="mt-3 flex flex-col gap-2">
+          <motion.ul
+            {...listProps}
+            className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
+          >
             {FOOTER.elsewhere.map((link) => {
               const Icon = PLATFORM_ICON[link.platform];
               return (
@@ -69,19 +85,11 @@ export default function Footer() {
                     aria-label={link.ariaLabel}
                     className="group flex h-[18px] items-center"
                   >
-                    {/* Arrow — reveals far-left on hover */}
-                    <span className="flex w-0 items-center justify-center overflow-hidden text-white opacity-0 transition-all duration-200 group-hover:mr-1 group-hover:w-3 group-hover:opacity-100 group-focus-visible:mr-1 group-focus-visible:w-3 group-focus-visible:opacity-100">
-                      <IconArrowRight />
-                    </span>
-                    {/* Leader line — lightens on hover */}
-                    <span className="flex h-px flex-1 items-center px-1">
-                      <span className="h-[0.5px] w-full rounded-[0.2px] bg-[#262c38] transition-colors group-hover:bg-[#363636] group-focus-visible:bg-[#363636]" />
-                    </span>
-                    {/* Handle — right-aligned, whitens on hover */}
-                    <span className="ml-1 shrink-0 whitespace-nowrap text-[14px] leading-[18px] text-[#a3a3a3] transition-colors group-hover:text-white group-focus-visible:text-white">
+                    {/* Handle — whitens on hover */}
+                    <span className="whitespace-nowrap text-[14px] leading-[18px] text-[#a3a3a3] transition-colors group-hover:text-white group-focus-visible:text-white">
                       {link.handle}
                     </span>
-                    {/* Platform icon — reveals far-right on hover */}
+                    {/* Platform icon — reveals on hover */}
                     <span className="flex w-0 items-center justify-center overflow-hidden text-white opacity-0 transition-all duration-200 group-hover:ml-1 group-hover:w-3 group-hover:opacity-100 group-focus-visible:ml-1 group-focus-visible:w-3 group-focus-visible:opacity-100">
                       <Icon />
                     </span>
