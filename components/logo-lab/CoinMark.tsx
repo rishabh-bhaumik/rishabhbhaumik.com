@@ -114,10 +114,9 @@ function start(variant: CoinVariant): Shared {
 
 /**
  * Fills its container with the live coin of a variant. While `paused`, a
- * variant with a rest look shows it as a single still frame (nothing redraws
- * until it wakes); one without only compiles its shaders, ready for the
- * moment it wakes. The animation loop runs only while the coin is moving and
- * on screen. `onReady` fires once, when a frame has been drawn; if WebGL2 or
+ * variant with a rest look floats in place; one without only compiles its
+ * shaders, ready for the moment it wakes. The animation loop stops while the
+ * coin is off screen or the tab is hidden. `onReady` fires once, when a frame has been drawn; if WebGL2 or
  * anything else is missing it never fires, so the caller keeps its static
  * mark. `onLost` fires if the GPU context is lost later.
  */
@@ -161,7 +160,6 @@ export default function CoinMark({
     let visible = true;
     let last = 0;
     let asleep = true;
-    let stillDrawn = false;
     let notified = false;
     let lostNotified = false;
 
@@ -186,7 +184,6 @@ export default function CoinMark({
       if (canvas.width === w && canvas.height === h) return;
       canvas.width = w;
       canvas.height = h;
-      stillDrawn = false;
       wake();
     };
     const ro = new ResizeObserver(resize);
@@ -221,28 +218,24 @@ export default function CoinMark({
       const span = HOLD + MORPH;
 
       if (pausedRef.current && cfg.rest) {
-        // At rest: one still frame, then nothing until something changes.
+        // At rest: the coin floats in place (the loop stops while off screen or in a background tab).
         asleep = true;
+        wake();
         const rm = lookup(cfg.rest.material);
         if (!rm) return;
         gpu.request(rm, true);
         gpu.pump(1);
-        if (!gpu.ready(rm.key)) return wake();
-        if (!stillDrawn) {
-          const [yaw, pitch, roll] = motionAngles("float", 0, [0, 0]);
-          const state = stateFor(rm, cfg.rest.look, rotationMatrix(yaw, pitch, roll), 0, [0, 0]);
-          if (!gpu.render(state, view.width, view.height)) return wake();
-          stillDrawn = true;
-          drawn();
-        }
+        if (!gpu.ready(rm.key)) return;
         // Warm the hover sequence too, so the flip starts at once.
         for (const s of sequence.slice(0, 2)) {
           const m = lookup(s.key);
-          if (m && !gpu.ready(m.key)) {
-            gpu.request(m);
-            return wake();
-          }
+          if (m && !gpu.ready(m.key)) gpu.request(m);
         }
+        if (now - last < FRAME_MS - 2) return;
+        last = now;
+        const [yaw, pitch, roll] = motionAngles("float", now / 1000, [0, 0]);
+        const state = stateFor(rm, cfg.rest.look, rotationMatrix(yaw, pitch, roll), now / 1000, [0, 0]);
+        if (gpu.render(state, view.width, view.height)) drawn();
         return;
       }
       if (pausedRef.current) {
@@ -261,7 +254,6 @@ export default function CoinMark({
         return;
       }
       wake();
-      stillDrawn = false;
       if (asleep) {
         asleep = false;
         shared.clock = cfg.wakeAt;

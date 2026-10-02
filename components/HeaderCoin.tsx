@@ -9,7 +9,7 @@ import { useReducedMotion } from "framer-motion";
 const CoinMark = dynamic(() => import("./logo-lab/CoinMark"), { ssr: false });
 
 /**
- * The header's logo slot: the Default coin as a still, with a touch of dither
+ * The header's logo slot: the Default coin, floating, with a touch of dither
  * and chroma. Hovering (or focusing) the logo link makes it flip over as it
  * dithers. The plain mark stands in while the coin loads, and stays with
  * reduced motion or without WebGL2. The coin keeps the plain mark's size
