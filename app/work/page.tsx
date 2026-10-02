@@ -13,7 +13,7 @@ export default function WorkPage() {
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-[var(--shell-max)] pt-2">
+      <main className="mx-auto w-full max-w-[var(--shell-max)] px-4 pt-2 sm:px-6">
         <WorkGallery projects={PROJECTS} />
       </main>
       <Footer />
