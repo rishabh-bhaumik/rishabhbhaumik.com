@@ -26,8 +26,8 @@ export const NAV: { label: string; href: string; current?: string; side: "left" 
   { label: "home", href: "/", current: "/", side: "left" },
   { label: "work", href: "/work", current: "/work", side: "left" },
   { label: "play", href: "/play", current: "/play", side: "left" },
-  { label: "resume", href: "/resume", current: "/resume", side: "right" },
   { label: "about", href: "/about", current: "/about", side: "right" },
+  { label: "resume", href: "/resume", current: "/resume", side: "right" },
 ];
 
 /** A company referenced inline in the bio, rendered as a brand chip + link. */
