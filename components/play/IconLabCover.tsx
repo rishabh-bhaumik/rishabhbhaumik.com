@@ -15,60 +15,17 @@ const REST_KEY = "bishnupur-terracotta";
 const REST_LOOK: Look = { relief: 1, light: null, filters: [{ key: "vhs", amount: 1 }] };
 /** The float is slow; 30 frames a second is plenty and halves the cost. */
 const FRAME_MS = 1000 / 30;
-/**
- * On hover: a pre-rendered clip of the coin (made with the lab and finished
- * in ASCII Magic), so no visitor compiles a single extra shader for it.
- */
-const HOVER_CLIP = "/media/iconlab/hover.mp4";
 
 /**
- * The Icon Lab card's cover. A live coin floats on black; while the card is
- * hovered (or focused) the cover plays the hover clip from the start. The coin starts
+ * The Icon Lab card's cover. A live coin floats on black. The coin starts
  * once the card is on screen and the page is idle, and only draws while
  * visible. Without WebGL2, or with reduced motion, it is the plain mark.
  */
 export default function IconLabCover() {
   const reduce = useReducedMotion();
   const glRef = useRef<HTMLCanvasElement>(null);
-  const clipRef = useRef<HTMLVideoElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const [live, setLive] = useState(false);
-  const [hovering, setHovering] = useState(false);
-
-  // Hover and focus anywhere on the card play the hover clip.
-  useEffect(() => {
-    const root = rootRef.current;
-    const video = clipRef.current;
-    const scope = root?.closest<HTMLElement>("[data-card]") ?? root;
-    if (!scope || !video) return;
-    const enter = () => {
-      if (video.preload !== "auto") video.preload = "auto";
-      video.currentTime = 0;
-      video.play().catch(() => {});
-      setHovering(true);
-    };
-    const leave = () => {
-      video.pause();
-      setHovering(false);
-    };
-    // Fetch the clip ahead once the pointer is anywhere over the gallery.
-    const warm = () => {
-      if (video.preload === "none") video.preload = "auto";
-    };
-    const grid = scope.parentElement;
-    grid?.addEventListener("pointerover", warm, { once: true });
-    scope.addEventListener("pointerenter", enter);
-    scope.addEventListener("pointerleave", leave);
-    scope.addEventListener("focusin", enter);
-    scope.addEventListener("focusout", leave);
-    return () => {
-      grid?.removeEventListener("pointerover", warm);
-      scope.removeEventListener("pointerenter", enter);
-      scope.removeEventListener("pointerleave", leave);
-      scope.removeEventListener("focusin", enter);
-      scope.removeEventListener("focusout", leave);
-    };
-  }, []);
 
   // The live coin at rest.
   useEffect(() => {
@@ -181,17 +138,6 @@ export default function IconLabCover() {
         ref={glRef}
         aria-hidden="true"
         className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${live ? "opacity-100" : "opacity-0"}`}
-      />
-      {/* Over the coin, so the coin shows through until the clip's first frame arrives. */}
-      <video
-        ref={clipRef}
-        src={HOVER_CLIP}
-        muted
-        loop
-        playsInline
-        preload="none"
-        aria-hidden="true"
-        className={`absolute inset-0 h-full w-full ${hovering ? "visible" : "invisible"}`}
       />
     </div>
   );
