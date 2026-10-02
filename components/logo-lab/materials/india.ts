@@ -614,18 +614,14 @@ vec3 shade(Hit h) {
     category: "india",
     relief: 0.0,
     light: 130,
-    heroTime: 10.8,
-    loop: "A bamboo stick draws the mark and each dancer, the tarpa circle dances, then fresh mud is wiped over",
+    heroTime: 1.0,
+    loop: "The tarpa circle dances: a wave of steps runs round the linked figures",
     glsl: /* glsl */ `
 #define HAS_SURFACE
-// Warli, from the Sahyadri villages: white rice paste applied with a chewed bamboo stick on an ochre
-// mud-and-dung disc. The mark in the middle; around it a tarpa dance, eighteen figures built from
-// the Warli vocabulary (two triangles, a circle, stick limbs), hands linked.
-// The loop: the fresh plaster dries; the stick draws the mark, then each dancer in turn. Then the
-// circle comes alive: a wave of steps runs round it, the figures hop and stamp, knees lift and
-// linked arms rise and fall with their neighbours. Finally a fresh coat of mud is wiped across
-// and the wall is ready again.
-#define WL_LOOP 18.0
+// Warli, from the Sahyadri villages: white rice paste on an ochre mud-and-dung disc. The mark in the middle;
+// around it a tarpa dance, eighteen figures built from the Warli vocabulary (two triangles, a circle, stick
+// limbs), hands linked. The only motion is the dance: a wave of steps runs round the circle, the figures hop
+// and stamp, knees lift and the linked arms rise and fall with their neighbours.
 #define WL_S 0.8
 #define WL_N 18.0
 #define WL_F 1.6
@@ -642,9 +638,6 @@ float wlTri(vec2 p, vec2 p0, vec2 p1, vec2 p2) {
                    vec2(dot(pq2, pq2), s * (v2.x * e2.y - v2.y * e2.x)));
   return -sqrt(d.x) * sign(d.y);
 }
-float wlP() { return fract(uTime / WL_LOOP); }
-// How much the circle is dancing (0 while it is being drawn and wiped).
-float wlDance(float p) { return smoothstep(0.47, 0.52, p) * (1.0 - smoothstep(0.8, 0.85, p)); }
 // Hop height (figure units) of dancer i: a wave of steps running round the circle.
 float wlHop(float i, float amp) { return amp * 0.034 * max(0.0, sin(uTime * TAU * 1.25 - i * 0.7)); }
 // One dancer, feet on y = 0, head up. hw = half the spacing; hL/hR = the neighbours' hops.
@@ -675,92 +668,37 @@ float wlDancer(vec2 q, float i, float amp, float hw, float hL, float hR) {
   l = min(l, min(wlSeg(q, shR, elR), wlSeg(q, elR, handR)));
   return min(d, l - 0.0045);
 }
-// The fresh coat of plaster wiped across at the end (1 = covered).
-float wlWipe(vec2 uv, float p) {
-  float x = -1.35 + 2.7 * smoothstep(0.86, 0.98, p);
-  return 1.0 - smoothstep(x - 0.04, x + 0.04, uv.x + 0.18 * uv.y * uv.y);
-}
 float surface(vec2 uv, vec4 f) {
-  // Hand-smoothed mud: broad undulation and grit; the wiping hand leaves a ridge at its edge.
-  float p = wlP();
-  float x = -1.35 + 2.7 * smoothstep(0.86, 0.98, p);
-  float ridge = exp(-pow((uv.x + 0.18 * uv.y * uv.y - x) / 0.03, 2.0)) * step(0.86, p) * step(p, 0.985);
-  return 0.007 * (fbm(uv * 4.0) - 0.5) + 0.0025 * (vnoise(uv * 70.0) - 0.5) + 0.006 * ridge;
+  // Hand-smoothed mud: broad undulation and grit.
+  return 0.007 * (fbm(uv * 4.0) - 0.5) + 0.0025 * (vnoise(uv * 70.0) - 0.5);
 }
 vec3 shade(Hit h) {
   vec2 uv = h.uv;
-  float p = wlP();
   float face = 1.0 - h.edge;
   float r = length(uv), a = atan(uv.y, uv.x);
   float n = vnoise(uv * 50.0);
-  float amp = wlDance(p);
-  // The mark, drawn first (0.04 - 0.3), sweeping round.
-  float prog = sat((p - 0.04) / 0.26);
+  // The mark, fully drawn.
   vec2 mu = uv / WL_S;
   float markD = field(mu).x * WL_S + 0.005 * (n - 0.5);
-  float m1 = (1.0 - smoothstep(-0.002, 0.002, markD)) * sat((prog - aroundMark(mu)) / 0.006);
-  // The dancers, each drawn in turn (0.3 - 0.46) from the feet up.
+  float m1 = 1.0 - smoothstep(-0.002, 0.002, markD);
+  // The dancers, always dancing.
   float s = a * WL_N / TAU;
   float i = floor(s);
   float r0 = 0.83;
   float hw = PI * (r0 + 0.088 * WL_F) / WL_N / WL_F;
   vec2 q = vec2((fract(s) - 0.5) * TAU * r / WL_N, r - r0) / WL_F;
-  float dd = wlDancer(q, i, amp, hw, wlHop(i - 1.0, amp), wlHop(i + 1.0, amp)) * WL_F;
-  float ord = mod(i + 9.0, WL_N) / WL_N;
-  float dStart = 0.3 + 0.16 * ord;
-  float dProg = sat((p - dStart) / (0.16 / WL_N));
-  float m2 = (1.0 - smoothstep(-0.0015, 0.0015, dd + 0.002 * (n - 0.5))) * sat((dProg - q.y / 0.14) / 0.08);
-  float cover = max(m1, m2) * (1.0 - wlWipe(uv, p));
-  // Rice paste: chalky, uneven, thinner where the stick ran dry.
+  float dd = wlDancer(q, i, 1.0, hw, wlHop(i - 1.0, 1.0), wlHop(i + 1.0, 1.0)) * WL_F;
+  float m2 = 1.0 - smoothstep(-0.0015, 0.0015, dd + 0.002 * (n - 0.5));
+  float cover = max(m1, m2);
+  // Rice paste: chalky and uneven.
   cover *= (0.7 + 0.3 * n) * step(0.12, hash12(floor(uv * 420.0)));
-  // Mud: ochre with dung-plaster swirls and straw; dark and wet where freshly plastered.
+  // Mud: ochre with dung-plaster swirls and straw.
   vec3 wall = mix(hex(0x7a3d20), hex(0xa4612f), fbm(uv * 2.5 + 1.0));
   wall *= 0.92 + 0.08 * sin(length(uv - vec2(1.3, -1.5)) * 55.0 + vnoise(uv * 4.0) * 3.0);
   float straw = smoothstep(0.82, 0.9, vnoise(rot2(0.6) * uv * vec2(8.0, 140.0)));
   wall = mix(wall, hex(0xc99a55), straw * 0.35);
-  float wet = max(wlWipe(uv, p), 1.0 - smoothstep(0.0, 0.07, p));
-  wall *= 1.0 - 0.4 * wet;
   vec3 alb = mix(wall, vec3(0.93, 0.9, 0.84), cover * face);
-  // The bamboo stick: its tip at the drawing point, held by a hand off the lower right, with its shadow.
-  float drawing = step(0.04, p) * step(p, 0.462);
-  vec2 tip = vec2(0.0);
-  if (drawing > 0.5) {
-    if (p < 0.3) {
-      // Find the stroke on the drawing front: the outermost point of the mark along that ray.
-      float ang = (prog - 0.25) * TAU;
-      vec2 dir = vec2(cos(ang), sin(ang));
-      float best = 0.55;
-      for (int k = 0; k < 20; k++) {
-        float rr = 0.1 + 0.85 * float(k) / 19.0;
-        if (field(dir * rr).x < 0.0) best = rr;
-      }
-      tip = dir * best * WL_S;
-    } else {
-      float di = floor((p - 0.3) / 0.16 * WL_N);
-      float ci = mod(di - 9.0, WL_N);
-      float ca = (ci + 0.5) * TAU / WL_N;
-      float dp = fract((p - 0.3) / 0.16 * WL_N);
-      tip = vec2(cos(ca), sin(ca)) * (r0 + WL_F * 0.14 * dp);
-    }
-  }
-  vec2 sdir = normalize(vec2(1.25, -1.15) - tip);
-  float along = dot(uv - tip, sdir);
-  float across = abs(dot(uv - tip, vec2(-sdir.y, sdir.x)));
-  float wdt = 0.008 + 0.008 * sat(along / 0.12);
-  float stick = drawing * step(0.0, along) * (1.0 - smoothstep(wdt - 0.002, wdt, across));
-  vec2 ush = uv - vec2(0.035, -0.045);
-  float salong = dot(ush - tip, sdir);
-  float sshadow = drawing * step(0.03, salong) * (1.0 - smoothstep(0.004, 0.02, abs(dot(ush - tip, vec2(-sdir.y, sdir.x))) - 0.006));
-  alb *= 1.0 - 0.35 * sshadow * (1.0 - stick);
-  vec3 col = litDielectric(h, alb, 0.95, 0.08);
-  if (stick > 0.0) {
-    float node = smoothstep(0.004, 0.0, abs(fract(along / 0.16) - 0.5) * 0.16 - 0.075);
-    vec3 bamboo = mix(hex(0xa98545), hex(0x6e5228), node) * (0.8 + 0.2 * smoothstep(0.0, wdt, wdt - across));
-    // The chewed, paste-white tip.
-    bamboo = mix(bamboo, vec3(0.85, 0.82, 0.75), 1.0 - smoothstep(0.008, 0.016, along));
-    col = mix(col, bamboo * (0.35 + 0.5 * sat(dot(h.wn, h.l))), stick);
-  }
-  return col;
+  return litDielectric(h, alb, 0.95, 0.08);
 }
 `,
   },

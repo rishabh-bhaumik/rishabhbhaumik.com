@@ -6,6 +6,7 @@
  */
 
 export const CATEGORIES = [
+  { key: "default", label: "Default" },
   { key: "bengal", label: "Bengal" },
   { key: "india", label: "India" },
   { key: "design", label: "Design" },

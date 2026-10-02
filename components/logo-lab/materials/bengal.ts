@@ -55,10 +55,14 @@ vec3 shade(Hit h) {
     glsl: /* glsl */ `
 #define HAS_SDF
 // Jagaddhatri-procession serial lights: a dark board of tiny bulbs on a bamboo lattice; the mark is drawn in bulbs.
+// The board is a thick round slab with a bamboo-wrapped edge, so it keeps its body when it turns or flips; the
+// bulbs light both faces.
 #define CELL 0.042
+#define CT 0.12
+#define CB 0.04
 float materialSDF(vec3 p) {
-  vec2 q = abs(p.xy) - vec2(1.75);
-  return max(max(q.x, q.y), abs(p.z) - 0.02);
+  vec2 w = vec2(length(p.xy) - 1.1 + CB, abs(p.z) - CT + CB);
+  return min(max(w.x, w.y), 0.0) + length(max(w, 0.0)) - CB;
 }
 vec3 bulbColour(float id) {
   int k = int(floor(id * 6.0));
@@ -99,9 +103,12 @@ vec3 shade(Hit h) {
   vec2 g = abs(fract(uv / (CELL * 8.0)) - 0.5) * CELL * 8.0;
   float stick = smoothstep(0.012, 0.006, min(g.x, g.y));
   vec3 bamboo = mix(hex(0x3a2a14), hex(0x6b5126), vnoise(uv * vec2(4.0, 60.0)));
-  vec3 col = mix(board, bamboo * 0.12, stick);
-  col += bulbs(uv);
-  return col * (h.side > 0.0 ? 1.0 : 0.15);
+  vec3 face = mix(board, bamboo * 0.12, stick) + bulbs(uv);
+  if (h.edge < 0.02) return face;
+  // The edge: bamboo wrapped round the board, lit like a solid object.
+  vec3 wrap = mix(hex(0x6b5126), hex(0xa07a3c), vnoise(vec2(atan(h.p.y, h.p.x) * 30.0, h.p.z * 60.0)));
+  vec3 wall = litDielectric(h, wrap * 0.5, 0.55, 0.2);
+  return mix(face, wall, h.edge);
 }
 `,
   },

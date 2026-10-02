@@ -51,7 +51,7 @@ export default function SectionNav() {
           key={s.id}
           href={`#${s.id}`}
           aria-current={active === s.id ? "true" : undefined}
-          className={`text-[13px] leading-tight transition-colors ${
+          className={`text-14 leading-tight transition-colors ${
             active === s.id ? "text-ink" : "text-faint/50 hover:text-faint"
           }`}
         >

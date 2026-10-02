@@ -44,7 +44,7 @@ export default function Hero() {
       <motion.span
         variants={reduce ? undefined : heroItem}
         custom={1}
-        className="w-fit rounded-full bg-surface px-3 py-1 font-mono text-[11px] tracking-wide text-faint ring-1 ring-border"
+        className="w-fit rounded-full bg-surface px-3 py-1 font-mono text-10 tracking-wide text-faint ring-1 ring-border"
       >
         {SITE.version}
       </motion.span>
@@ -53,7 +53,7 @@ export default function Hero() {
       <motion.h1
         variants={reduce ? undefined : heroItem}
         custom={2}
-        className="font-display text-balance text-[clamp(2.5rem,7vw,3.5rem)] leading-[1.05] text-ink"
+        className="font-display text-balance text-40 sm:text-56 leading-[1.05] text-ink"
       >
         {SITE.greeting}
       </motion.h1>
@@ -62,7 +62,7 @@ export default function Hero() {
       <motion.p
         variants={reduce ? undefined : heroItem}
         custom={3}
-        className="max-w-[34rem] text-[18px] leading-[1.5] text-muted"
+        className="max-w-[34rem] text-18 leading-[1.5] text-muted"
       >
         {BIO.lead} <CompanyChip company={BIO.current} /> {BIO.middle}{" "}
         {BIO.companies.map((c, i) => (

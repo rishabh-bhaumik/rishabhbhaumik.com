@@ -13,7 +13,7 @@ const MotionLink = motion.create(Link);
  * The media frame. Two treatments:
  *  - `cover`: full-bleed art on a dark card with a bottom scrim that lifts on
  *    hover (Figma 7834-22472).
- *  - default: a mockup centered on the violet gradient, sized by `mediaWidth`.
+ *  - default: a mockup centered on black, sized by `mediaWidth`.
  */
 function CardMedia({
   project,
@@ -58,7 +58,7 @@ function CardMedia({
 
   return (
     <div
-      className={`relative grid ${aspect} w-full place-items-center overflow-hidden rounded-2xl bg-gradient-to-b from-brand to-brand-bold`}
+      className={`relative grid ${aspect} w-full place-items-center overflow-hidden rounded-2xl bg-black ring-1 ring-border`}
     >
       {project.media && mediaOk ? (
         <motion.div
@@ -93,29 +93,10 @@ function CardMedia({
   );
 }
 
-/** Brand-chip icon shared by both card layouts. */
-function MarkIcon({ size }: { size: "sm" | "lg" }) {
-  const box = size === "lg" ? "size-6" : "size-5";
-  const rounded = size === "lg" ? "rounded-md" : "rounded";
-  return (
-    <span
-      className={`grid ${box} shrink-0 place-items-center overflow-hidden ${rounded} bg-brand p-0.5`}
-    >
-      <Image
-        src="/media/bimakavach-mark.svg"
-        alt=""
-        width={size === "lg" ? 14 : 12}
-        height={size === "lg" ? 12 : 10}
-        className={size === "lg" ? "h-auto w-3.5" : "h-auto w-3"}
-      />
-    </span>
-  );
-}
-
 function Tag({ tag, className = "" }: { tag: string; className?: string }) {
   return (
     <span
-      className={`shrink-0 rounded-full bg-surface px-3 py-1.5 font-mono text-[11px] tracking-wide text-faint ring-1 ring-border ${className}`}
+      className={`shrink-0 rounded-full bg-surface px-3 py-1.5 font-mono text-10 tracking-wide text-faint ring-1 ring-border ${className}`}
     >
       {tag}
     </span>
@@ -159,15 +140,12 @@ export default function ProjectCard({
 
         <div className="mt-4 flex flex-col gap-1.5">
           <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <MarkIcon size="sm" />
-              <h2 className="font-display text-[22px] leading-tight text-ink">
-                {project.title}
-              </h2>
-            </div>
+            <h2 className="font-display text-20 leading-tight text-ink">
+              {project.title}
+            </h2>
             <Tag tag={project.tag} />
           </div>
-          <p className="text-[15px] leading-relaxed text-muted">
+          <p className="text-14 leading-relaxed text-muted">
             {project.description}
           </p>
         </div>
@@ -194,18 +172,15 @@ export default function ProjectCard({
           spans the full width (the Play-card layout). On desktop the tag
           floats to the far right of the whole block. */}
       <div className="mt-5 flex flex-col gap-1.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <div className="flex items-start gap-2.5">
-          <span className="mt-1.5">
-            <MarkIcon size="lg" />
-          </span>
+        <div className="flex items-start">
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-4">
-              <h2 className="font-display text-[28px] leading-tight text-ink">
+              <h2 className="font-display text-28 leading-tight text-ink">
                 {project.title}
               </h2>
               <Tag tag={project.tag} className="mt-1.5 sm:hidden" />
             </div>
-            <p className="mt-1.5 text-[15px] leading-relaxed text-muted sm:max-w-[34rem]">
+            <p className="mt-1.5 text-14 leading-relaxed text-muted sm:max-w-[34rem]">
               {project.description}
             </p>
           </div>

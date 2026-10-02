@@ -48,7 +48,7 @@ brightened only that line in place, and nothing else moved.
 The new model has exactly **one line active at all times**, including before
 any hover: the active line renders at 32px in `#FFFFFF` and is the only one
 receiving cursor-proximity glyph modulation; the other nine sit at 16px in
-`#A7ADB8`. Hovering any line makes it the new active line — the previously
+`#A8A8A8`. Hovering any line makes it the new active line — the previously
 active line springs back to rest size/color, and because the whole stack is
 wrapped in `motion.div layout`, the vertical composition reflows with a FLIP
 animation instead of jump-cutting: growing/shrinking rows push their
@@ -59,7 +59,7 @@ Before any hover, Latin (`en`) is active by default.
 const SIZE_ACTIVE_PX = 32;
 const SIZE_REST_PX = 16;
 const COLOR_ACTIVE = "#FFFFFF";
-const COLOR_REST = "#A7ADB8";
+const COLOR_REST = "#A8A8A8";
 ```
 
 The swap uses a custom spring rather than Framer Motion's default — tuned

@@ -35,7 +35,7 @@ const STEP = 0.09;
 
 function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="w-fit rounded-full bg-surface px-3 py-1 font-mono text-[11px] tracking-wide text-faint ring-1 ring-border">
+    <span className="w-fit rounded-full bg-surface px-3 py-1 font-mono text-10 tracking-wide text-faint ring-1 ring-border">
       {children}
     </span>
   );
@@ -43,7 +43,7 @@ function Tag({ children }: { children: ReactNode }) {
 
 function H({ children }: { children: ReactNode }) {
   return (
-    <h2 className="text-[32px] leading-[1.3] text-ink">{children}</h2>
+    <h2 className="text-32 leading-[1.3] text-ink">{children}</h2>
   );
 }
 
@@ -60,8 +60,8 @@ function Body({
     <p
       className={`leading-relaxed ${
         large
-          ? "text-[32px] leading-[1.3] text-white"
-          : "text-[15px] text-muted"
+          ? "text-32 leading-[1.3] text-white"
+          : "text-14 text-muted"
       } ${className}`}
     >
       {children}
@@ -239,10 +239,10 @@ function MetaPair({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
       <StaggerItem>
-        <dt className="text-[13px] text-faint">{label}</dt>
+        <dt className="text-12 text-faint">{label}</dt>
       </StaggerItem>
       <StaggerItem>
-        <dd className="text-[15px] leading-snug text-ink">{value}</dd>
+        <dd className="text-14 leading-snug text-ink">{value}</dd>
       </StaggerItem>
     </div>
   );
@@ -350,7 +350,7 @@ const WDTH_PEAK = 125;
 const SIZE_ACTIVE_PX = 32;
 const SIZE_REST_PX = 16;
 const COLOR_ACTIVE = "#FFFFFF";
-const COLOR_REST = "#A7ADB8";
+const COLOR_REST = "#A8A8A8";
 /** Custom spring for the swap (Figma: "smoother and more responsive, should
  *  not feel like there's a 'lag'"). Snappy stiffness, low mass. */
 const SWAP_SPRING = { type: "spring" as const, stiffness: 380, damping: 32, mass: 0.9 };
@@ -768,8 +768,8 @@ export default function IdentityContent() {
                   ].map((s) => (
                     <StaggerItem key={s.k}>
                       <div className="flex flex-col gap-1">
-                        <span className="text-[13px] text-faint">{s.k}</span>
-                        <span className="text-[clamp(1.4rem,3vw,2rem)] text-ink">
+                        <span className="text-12 text-faint">{s.k}</span>
+                        <span className="text-24 sm:text-32 text-ink">
                           {s.v}
                         </span>
                       </div>
@@ -1048,7 +1048,7 @@ export default function IdentityContent() {
                   <button
                     type="button"
                     onClick={() => scrollToId("section-work-0")}
-                    className="grid w-full place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-bold py-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white transition-transform hover:scale-[1.02]"
+                    className="grid w-full place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-bold py-4 font-mono text-12 uppercase tracking-[0.3em] text-white transition-transform hover:scale-[1.02]"
                   >
                     Show me the work
                   </button>
@@ -1260,10 +1260,10 @@ function HeroPanel({
         className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 bg-gradient-to-t from-black/80 via-black/30 to-transparent px-6 pb-14 pt-24 text-center transition-opacity duration-500"
         style={{ opacity: entered ? 0 : 1 }}
       >
-        <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/50">
+        <span className="font-mono text-10 uppercase tracking-[0.25em] text-white/50">
           bimakavach rebranding — shipped 2026
         </span>
-        <p className="max-w-[46rem] text-[clamp(1.1rem,2.4vw,1.6rem)] leading-snug text-white">
+        <p className="max-w-[46rem] text-18 sm:text-24 leading-snug text-white">
           Pivoting to the perception of BimaKavach as an intelligence
           company that is rooted in India&rsquo;s rich history of
           Ornamentation, Beauty and Aesthetic Identity.
@@ -1294,7 +1294,7 @@ function HeroPanel({
             }}
           />
           <span
-            className="relative font-mono text-[16px] uppercase tracking-[0.3em] transition-colors duration-300"
+            className="relative font-mono text-16 uppercase tracking-[0.3em] transition-colors duration-300"
             style={{ color: focus === "story" ? "#ffffff" : "#a3a3a3" }}
           >
             Tell me the story
@@ -1318,7 +1318,7 @@ function HeroPanel({
             }}
           />
           <span
-            className="relative font-mono text-[16px] uppercase tracking-[0.3em] transition-colors duration-300"
+            className="relative font-mono text-16 uppercase tracking-[0.3em] transition-colors duration-300"
             style={{ color: focus === "work" ? "#ffffff" : "#a3a3a3" }}
           >
             Show me the work

@@ -10,10 +10,11 @@ function oembedUrl(item: PlayItem): string {
 
 /**
  * Fetch a cover thumbnail for one Play item from its provider's oEmbed. Returns
- * null on any failure ("otherwise skip" → the card falls back to its violet
+ * null on any failure ("otherwise skip" → the card falls back to its black
  * gradient). Runs at build time; Next caches the fetch (weekly revalidate).
  */
 export async function getPlayThumbnail(item: PlayItem): Promise<string | null> {
+  if (item.provider === "link") return null;
   try {
     const res = await fetch(oembedUrl(item), {
       next: { revalidate: 60 * 60 * 24 * 7 },

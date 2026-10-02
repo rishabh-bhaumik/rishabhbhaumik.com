@@ -60,7 +60,7 @@ export default function PasswordInput({
           placeholder={placeholder}
           autoFocus
           aria-label="Password"
-          className="min-w-0 flex-1 bg-transparent text-[14px] leading-none text-white outline-none placeholder:text-faint"
+          className="min-w-0 flex-1 bg-transparent text-14 leading-none text-white outline-none placeholder:text-faint"
           style={{ caretColor: revealed ? "transparent" : undefined }}
         />
         {revealed && (
@@ -81,7 +81,7 @@ export default function PasswordInput({
         )}
       </div>
       {error && (
-        <p className="text-[13px] text-red-400">Incorrect password. Try again.</p>
+        <p className="text-12 text-red-400">Incorrect password. Try again.</p>
       )}
     </div>
   );

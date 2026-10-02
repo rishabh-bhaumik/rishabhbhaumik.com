@@ -31,11 +31,11 @@ export default function PasswordGate({
       <Header />
       <main className="mx-auto w-full max-w-[var(--reading-max)] pt-2">
         <section className="flex flex-col gap-6 px-4 pb-24 pt-16 sm:px-6 sm:pt-24">
-          <h1 className="font-display text-[32px] leading-none text-ink">
+          <h1 className="font-display text-32 leading-none text-ink">
             Confirm Entry for &ldquo;{project}&rdquo;
           </h1>
           <div className="flex flex-col gap-1.5">
-            <span className="text-[14px] leading-[1.4] text-ink">Password</span>
+            <span className="text-14 leading-[1.4] text-ink">Password</span>
             <PasswordInput
               placeholder={`Enter password for "${project}"`}
               minLength={password.length}

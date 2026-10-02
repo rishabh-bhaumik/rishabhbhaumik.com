@@ -90,9 +90,10 @@ export async function loadLogoPaths(url = "/media/logo-mark.svg") {
   return { paths, width: vw, height: vh };
 }
 
-export async function buildLogoField(): Promise<LogoField> {
+/** `size` is the field's resolution in texels; the lab uses 1024, a small embedded coin needs far less. */
+export async function buildLogoField(size = SIZE): Promise<LogoField> {
   const { paths, width, height } = await loadLogoPaths();
-  const n = SIZE;
+  const n = size;
   const pxPerUnit = n / (2 * FIELD_EXTENT);
   // Logo units: centre of the viewBox at 0, the mark's radius (half its width) = 1.
   const svgPerUnit = width / 2;

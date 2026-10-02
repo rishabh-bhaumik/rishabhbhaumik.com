@@ -236,7 +236,7 @@ vec3 shade(Hit h) {
 // A round XY vector scope tube: a P31 green beam draws the outline of the mark, rim first, then each letter,
 // then the smile. The line is thin and hot at the beam head and decays along the trace direction (afterglow);
 // a faint persistent image stays. An illuminated graticule with minor ticks on the axes, curved glass reflections.
-#define OS_S 0.82
+#define OS_S 0.97
 vec3 shade(Hit h) {
   vec2 uv = h.uv;
   float px = tkPx(h.t);
@@ -272,7 +272,7 @@ vec3 shade(Hit h) {
   float halo = exp(-d / 0.025) * 0.18;
   col += vec3(0.25, 1.0, 0.45) * (core * I * 3.0 + halo * I) + vec3(0.7, 1.0, 0.8) * core * head * 6.0;
   // Channel readout bars, top left.
-  vec2 q = uv - vec2(-0.62, 0.62);
+  vec2 q = uv - vec2(-0.1, -0.78);
   col += vec3(0.1, 0.4, 0.2) * step(0.0, q.x) * step(q.x, 0.2) * step(abs(q.y), 0.012) * step(0.3, fract(q.x / 0.04));
   col *= 1.0 - 0.25 * r * r;
   return col + tkGlass(h, uv, 0.25, 0.5);
@@ -359,7 +359,7 @@ vec3 shade(Hit h) {
   float bc = (ab + 0.5) / 450.0, rc = (rb + 0.5) * 0.02;
   vec2 c = rc * vec2(sin(bc * TAU), cos(bc * TAU));
   float scanN = floor(uTime / 4.0 - b);
-  vec4 f = field(c / 0.82);
+  vec4 f = field(c / 0.97);
   float ret = (1.0 - smoothstep(-0.005, 0.02, f.x)) * (0.6 + 0.4 * hash12(vec2(rb, ab) + scanN * 1.7));
   float clutter = smoothstep(0.55, 0.95, hash12(vec2(rb, ab) * 1.3 + scanN)) * exp(-r * 4.0) * 0.8;
   float blip = step(0.9985, hash12(vec2(rb * 0.7, ab) + scanN * 3.1)) * 0.7;

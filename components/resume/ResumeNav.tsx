@@ -67,7 +67,7 @@ export default function ResumeNav() {
           key={c.id}
           href={`#${c.id}`}
           aria-current={active === c.id ? "true" : undefined}
-          className={`py-1 text-[14px] lowercase leading-[1.5] transition-colors ${
+          className={`py-1 text-14 lowercase leading-[1.5] transition-colors ${
             active === c.id
               ? "text-ink"
               : "text-nav-current hover:text-faint"

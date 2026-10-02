@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -8,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV, SITE } from "@/data/site";
 import { EASE } from "@/lib/motion";
+import HeaderCoin from "./HeaderCoin";
 import LocalClock from "./LocalClock";
 
 const headerItem = {
@@ -30,7 +30,7 @@ export default function Header() {
       <motion.div
         initial="hidden"
         animate="show"
-        className="mx-auto flex h-16 w-full max-w-[var(--shell-max)] items-center justify-between px-4 sm:min-w-[700px] sm:px-6"
+        className="flex h-16 w-full items-center justify-between px-4 sm:min-w-[1200px] sm:px-6"
       >
         {/* Left — desktop nav / mobile menu toggle */}
         <nav aria-label="Primary" className="hidden items-center gap-6 sm:flex">
@@ -45,7 +45,7 @@ export default function Header() {
                 <Link
                   href={item.href}
                   aria-current={isCurrent ? "page" : undefined}
-                  className={`block py-1 text-[14px] lowercase tracking-[0.02em] transition-colors ${
+                  className={`block py-1 text-14 lowercase tracking-[0.02em] transition-colors ${
                     isCurrent
                       ? "border-b border-nav-current text-nav-current shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
                       : "text-faint hover:text-ink focus-visible:text-ink"
@@ -83,18 +83,9 @@ export default function Header() {
             aria-label={`${SITE.name} — home`}
             className="group flex items-center gap-2 rounded-[36px] px-1 py-1 transition-opacity hover:opacity-90"
           >
-            <span className="relative grid size-11 place-items-center">
-              <Image
-                src="/media/logo-mark.svg"
-                alt=""
-                width={32}
-                height={32}
-                className="size-8 transition-transform duration-300 group-hover:rotate-[8deg]"
-                priority
-              />
-            </span>
+            <HeaderCoin />
             <span className="flex flex-col items-end pr-1">
-              <span className="hidden whitespace-nowrap font-mono text-[14px] leading-tight text-faint sm:block">
+              <span className="hidden whitespace-nowrap font-mono text-14 leading-tight text-faint sm:block">
                 {SITE.name}
               </span>
               <LocalClock />
@@ -123,7 +114,7 @@ export default function Header() {
                       href={item.href}
                       onClick={() => setOpen(false)}
                       aria-current={isCurrent ? "page" : undefined}
-                      className={`inline-block py-3 text-[16px] lowercase transition-colors ${
+                      className={`inline-block py-3 text-16 lowercase transition-colors ${
                         isCurrent
                           ? "border-b border-nav-current text-nav-current"
                           : "text-faint hover:text-ink"

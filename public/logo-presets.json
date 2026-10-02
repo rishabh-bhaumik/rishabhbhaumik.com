@@ -1,17 +1,12 @@
 [
   {
-    "id": "muqv79rv",
-    "name": "Transmute 3",
-    "look": "m=marble&mo=flip&lp=1&re=2.5&f=thermal%3A0.54%2Bhalftone%3A0.05&tx=bishnupur-terracotta***vhs%3A1.00%2Cchandannagar-lights***vhs%3A1.00*dither%2Cascii***vhs%3A1.00%2Bchroma%3A1.00*channels%2Criver-stone*0.25*110*anamorphic%3A1.00&tn=1&ho=1.9&mt=1.3"
+    "id": "murcpjv6",
+    "name": "Flip",
+    "look": "m=default&mo=flip&lp=1&re=2.5&f=dither%3A0.72%2Bchroma%3A1.00&tx=default*2.5**dither%3A0.18%2Bchroma%3A1.00*dither%2Cdefault*2.5**dither%3A0.72%2Bchroma%3A1.00*dither&tn=1&ho=1.2&mt=1.8"
   },
   {
-    "id": "muquvudq",
-    "name": "Transmute 2",
-    "look": "m=risograph&mo=flip&lp=1&li=206&f=dither%3A1.00&tx=bishnupur-terracotta***vhs%3A1.00*dither%2Cchandannagar-lights***anamorphic%3A1.00*dither%2Cvoxel**231*chroma%3A1.00*dither%2Crisograph**206*dither%3A1.00*dither&tn=1&ho=0.5&mt=4"
-  },
-  {
-    "id": "muqu0q67",
-    "name": "Test",
-    "look": "m=risograph&mo=flip&lp=1&li=206&f=dither%3A1.00&tx=bishnupur-terracotta***vhs%3A1.00%2Cchandannagar-lights***anamorphic%3A1.00%2Cvoxel**231*chroma%3A1.00%2Crisograph**206*dither%3A1.00&tn=1"
+    "id": "murc6ev5",
+    "name": "Loader",
+    "look": "m=default&mo=flip&lp=1&re=2.5&f=dither%3A1.00%2Bchroma%3A1.00&tx=default*2.5**dither%3A1.00%2Bchroma%3A1.00%2Cbishnupur-terracotta*2**chroma%3A1.00*thermal%2Cchandannagar-lights*2.5**anamorphic%3A1.00%2Cbidriware*2.5**chroma%3A1.00%2Bhalftone%3A0.07*dither&tn=1"
   }
 ]

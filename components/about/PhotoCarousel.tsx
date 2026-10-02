@@ -79,7 +79,7 @@ export default function PhotoCarousel() {
           />
         )}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 to-transparent" />
-        <p className="absolute inset-x-0 bottom-5 px-4 text-left font-mono text-[13px] leading-snug text-[#a7adb8] sm:px-8 sm:text-center">
+        <p className="absolute inset-x-0 bottom-5 px-4 text-left font-mono text-12 leading-snug text-muted sm:px-8 sm:text-center">
           {photo.caption}
         </p>
       </div>
@@ -97,7 +97,7 @@ export default function PhotoCarousel() {
           <p
             key={p.src}
             aria-hidden={n !== i}
-            className={`col-start-1 row-start-1 text-left text-[14px] leading-relaxed text-muted sm:text-center ${
+            className={`col-start-1 row-start-1 text-left text-14 leading-relaxed text-muted sm:text-center ${
               n === i ? "" : "invisible"
             }`}
           >
@@ -116,7 +116,7 @@ export default function PhotoCarousel() {
         >
           <ChevronLeft className="size-5" strokeWidth={1.5} />
         </button>
-        <span className="font-mono text-[14px] tabular-nums text-[#575757]">
+        <span className="font-mono text-14 tabular-nums text-[#575757]">
           {pad(i + 1)} / {pad(total)}
         </span>
         <button

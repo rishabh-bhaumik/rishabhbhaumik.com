@@ -6,12 +6,13 @@ import Controls from "./Controls";
 import Library from "./Library";
 import { buildGlyphAtlas, buildLogoField, type LogoField } from "./logoField";
 import { MATERIALS, materialByKey } from "./materials";
-import { motionAngles } from "./motion";
+import { stateFor, transmuteState } from "./frames";
+import { easeInOutCubic, motionAngles } from "./motion";
 import { recordWebm, savePng, type RECORD_LENGTHS } from "./record";
-import { LogoRenderer, lightDirection, materialSource, rotationMatrix, type RenderState } from "./renderer";
+import { LogoRenderer, materialSource, rotationMatrix, type RenderState } from "./renderer";
 import { hashString, loadThumbs, saveThumb } from "./thumbCache";
-import { DEFAULTS, decodeSettings, encodeSettings, type Look, type Settings, type Slot } from "./settings";
-import { FILTERS, transitionIndex, type LogoMaterial } from "./types";
+import { DEFAULTS, decodeSettings, encodeSettings, type Settings, type Slot } from "./settings";
+import { FILTERS, type LogoMaterial } from "./types";
 
 /** Library thumbnails show at 48 px; render at 2x for sharp screens. */
 const THUMB_SIZE = 96;
@@ -50,52 +51,6 @@ function parseHash(): Partial<Settings> {
 
 function writeHash(s: Settings) {
   window.history.replaceState(null, "", `#${encodeSettings(s)}`);
-}
-
-const stateFor = (material: LogoMaterial, s: Look, rot: Float32Array, time: number, pointer: [number, number]): RenderState => ({
-  material,
-  time,
-  rot,
-  relief: material.relief * s.relief,
-  light: lightDirection(s.light ?? material.light ?? 135),
-  filters: s.filters,
-  pointer,
-  seed: 0,
-});
-
-const FLIP_STYLE = transitionIndex("flip");
-/** Coin flip: one and a half turns (cubic in-out), with a small settle wobble as it lands. */
-const flipTurn = (p: number) => {
-  const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-  const settle = p > 0.85 ? 0.12 * Math.sin(((p - 0.85) / 0.15) * Math.PI * 2) * ((1 - p) / 0.15) : 0;
-  return e * 3 * Math.PI + settle;
-};
-
-/**
- * One transmute frame: step `from` giving way to `to` at progress p (0..1) in
- * its transition style. `angles` is the coin's yaw, pitch and roll.
- */
-function transmuteState(from: Slot, to: Slot, p: number, angles: [number, number, number], time: number, pointer: [number, number], fallback: LogoMaterial): RenderState {
-  const a = materialByKey(from.key) ?? fallback;
-  const b = materialByKey(to.key) ?? fallback;
-  const style = transitionIndex(from.transition);
-  const [yaw, pitch, roll] = angles;
-  if (style === FLIP_STYLE) {
-    // The real coin turns over: A until it passes edge-on for the last time, then B, landing face on.
-    const turn = flipTurn(p);
-    const showB = turn >= 1.5 * Math.PI;
-    const rot = rotationMatrix(yaw, pitch + (showB ? turn - 3 * Math.PI : turn), roll);
-    return stateFor(showB ? b : a, showB ? to : from, rot, time, pointer);
-  }
-  const rot = rotationMatrix(yaw, pitch, roll);
-  // Each step keeps its own relief, light and filters.
-  const target = stateFor(b, to, rot, time, pointer);
-  return {
-    ...stateFor(a, from, rot, time, pointer),
-    morphTo: { material: b, relief: target.relief, light: target.light, filters: target.filters },
-    morph: p * p * (3 - 2 * p),
-    morphStyle: style,
-  };
 }
 
 const thumbState = (m: LogoMaterial, time = m.heroTime ?? 1): RenderState => ({
@@ -336,21 +291,22 @@ export default function LogoLab() {
       errors: () => renderer.errors(),
       materials: MATERIALS,
       /** Debug: one transmute frame from material a to b at progress p (0..1) with a transition key, as a webp blob. */
-      morph: async (a: string, b: string, p: number, transition = "stroke", size = 256) => {
+      morph: async (a: string, b: string, p: number, transition = "stroke", size = 256, flipSync = false) => {
         const slot = (key: string): Slot => ({ key, relief: 1, light: null, filters: [], transition: transition as Slot["transition"] });
         const m = materialByKey(a)!;
         // Either program can be trimmed while the other compiles: retry until both are in hand.
         for (let i = 0; i < 20; i++) {
           await ensureReady([a, b]);
-          const job = renderer.thumbnail(transmuteState(slot(a), slot(b), p, [0.32, 0.16, 0], m.heroTime ?? 1, [0, 0], m), size);
+          const job = renderer.thumbnail(transmuteState(slot(a), slot(b), p, [0.32, 0.16, 0], m.heroTime ?? 1, [0, 0], m, materialByKey, flipSync), size);
           if (job) return job;
         }
         return null;
       },
       /** Debug: a still of any material (or an edited copy) as a webp blob. */
-      thumb: async (m: LogoMaterial, size = 384) => {
+      thumb: async (m: LogoMaterial, size = 384, angles?: [number, number, number]) => {
         await ensureReady([m]);
-        return renderer.thumbnail(thumbState(m), size);
+        const state = thumbState(m);
+        return renderer.thumbnail(angles ? { ...state, rot: rotationMatrix(...angles) } : state, size);
       },
       status: () => MATERIALS.map((m) => [m.key, renderer.status(m.key)]),
       /** Debug: GPU ms per frame at `size` px for each material, slowest first. */
@@ -439,9 +395,11 @@ export default function LogoLab() {
         drag.vYaw = Math.abs(drag.vYaw) < 1e-4 ? 0 : drag.vYaw * 0.94;
         drag.vPitch = Math.abs(drag.vPitch) < 1e-4 ? 0 : drag.vPitch * 0.94;
       }
+      // With a transmute running, Flip motion is driven by the morph itself (see transmuteState).
+      const flipSync = transmuting && s.motion === "flip";
       const [yaw, pitch, roll] = still ? [0, 0, 0] : motionAngles(s.motion, now / 1000, pointerRef.current);
-      const angles: [number, number, number] = [yaw + drag.yaw, pitch + drag.pitch, roll];
-      const rot = rotationMatrix(...angles);
+      const angles: [number, number, number] = [yaw + drag.yaw, (flipSync ? 0 : pitch) + drag.pitch, roll];
+      let rot = rotationMatrix(...angles);
 
       let state = stateFor(material, s, rot, time, pointerRef.current);
       if (transmuting) {
@@ -450,7 +408,9 @@ export default function LogoLab() {
         const seg = Math.floor(transmuteClock / span) % s.transmute.length;
         const local = transmuteClock % span;
         const p = local < s.hold ? 0 : Math.min(1, (local - s.hold) / s.morphTime);
-        state = transmuteState(s.transmute[seg], s.transmute[(seg + 1) % s.transmute.length], p, angles, time, pointerRef.current, material);
+        state = transmuteState(s.transmute[seg], s.transmute[(seg + 1) % s.transmute.length], p, angles, time, pointerRef.current, material, materialByKey, flipSync);
+        // The redraw check needs the turn the morph adds.
+        if (flipSync) rot = rotationMatrix(angles[0], angles[1] + easeInOutCubic(p) * 2 * Math.PI, angles[2]);
       }
 
       // ── Preview: only when it is on screen and something changed.

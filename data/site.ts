@@ -13,7 +13,7 @@ export const SITE = {
   greeting: "Hello, World!",
   /** Home hero pill above the headline. */
   version: "shipped '96 • v30.6",
-  /** Home hero looping background video (the "orbitting" piece, also in PLAY). */
+  /** Home hero looping background video (the "orbitting" piece). */
   heroVideo:
     "https://player.vimeo.com/video/780357035?h=430b68184b&background=1",
 } as const;
@@ -82,13 +82,13 @@ export interface Project {
   tag: string;
   description: string;
   href: string;
-  /** Single media image (centered on the card's violet gradient). */
+  /** Single media image (centered on the card's black field). */
   media?: string;
   /** Width of the centered media as a % of the card (tunes each mockup). */
   mediaWidth?: string;
   /**
    * Full-bleed cover art on a dark card instead of a mockup centered on the
-   * violet gradient. The media fills the frame and a bottom scrim lifts on
+   * black field. The media fills the frame and a bottom scrim lifts on
    * hover (Figma 7834-22472). Ignores `mediaWidth`.
    */
   cover?: boolean;
@@ -146,7 +146,7 @@ export interface SocialLink {
 }
 
 export const FOOTER = {
-  blurb: `${SITE.domain} is my internet home and a repository of my work and play.`,
+  blurb: "This is my internet home and a repository of my work and play.",
   meta: `This is v2, made with ${SITE.builtWith}.`,
   elsewhere: [
     {
@@ -186,28 +186,32 @@ export interface PlayItem {
   title: string;
   tag: string;
   description: string;
-  provider: "vimeo" | "soundcloud";
+  /** "link" items open `href` in a new tab instead of playing an embed. */
+  provider: "vimeo" | "soundcloud" | "link";
   /** Public URL used for the oEmbed thumbnail lookup. */
   oembed: string;
   /** Player iframe src loaded on click (autoplay on). */
   embed: string;
+  /** Destination for a "link" item. */
+  href?: string;
 }
 
 export const PLAY: PlayItem[] = [
   {
-    slug: "dystopia",
-    title: "dystopia",
-    tag: "art-direction",
-    description: "In 2021, I made an experimental zero budget fashion film.",
-    provider: "vimeo",
-    oembed: "https://vimeo.com/532172140/81618c0b21",
-    embed:
-      "https://player.vimeo.com/video/532172140?h=81618c0b21&autoplay=1&title=0&byline=0&portrait=0",
+    slug: "icon-lab",
+    title: "Icon Lab",
+    tag: "tool",
+    description:
+      "A Quick Tool made to create the effects of my icon on this website",
+    provider: "link",
+    oembed: "",
+    embed: "",
+    href: "/logo",
   },
   {
     slug: "mr-rays-sequence",
     title: "mr. ray's sequence",
-    tag: "experimental",
+    tag: "narrative-film",
     description: "A Tribute in Visual Expression for the Maestro himself.",
     provider: "vimeo",
     oembed: "https://vimeo.com/530915046/0ffa518b50",
@@ -225,13 +229,13 @@ export const PLAY: PlayItem[] = [
       "https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F1216424269&auto_play=true&visual=true&color=%234100cf&hide_related=true&show_comments=false&show_reposts=false&show_teaser=false",
   },
   {
-    slug: "orbitting",
-    title: "orbitting",
-    tag: "motion-design",
-    description: "The best thing I made for v1 of rishabhbhaumik.com",
+    slug: "dystopia",
+    title: "dystopia",
+    tag: "art-direction",
+    description: "In 2021, I made an experimental zero budget fashion film.",
     provider: "vimeo",
-    oembed: "https://vimeo.com/780357035/430b68184b",
+    oembed: "https://vimeo.com/532172140/81618c0b21",
     embed:
-      "https://player.vimeo.com/video/780357035?h=430b68184b&autoplay=1&title=0&byline=0&portrait=0",
+      "https://player.vimeo.com/video/532172140?h=81618c0b21&autoplay=1&title=0&byline=0&portrait=0",
   },
 ];

@@ -87,7 +87,7 @@ export default function LocalClock() {
           }}
         />
       </span>
-      <span className="font-mono text-[12px] leading-none text-faint tabular-nums">
+      <span className="font-mono text-12 leading-none text-faint tabular-nums">
         {/* suppressHydrationWarning: time is client-only, differs from SSR */}
         <span suppressHydrationWarning>{time ?? "--:-- --"}</span>{" "}
         <span className="text-faint/70">(local)</span>

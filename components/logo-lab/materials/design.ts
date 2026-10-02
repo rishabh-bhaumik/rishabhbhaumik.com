@@ -45,7 +45,7 @@ export const DESIGN: LogoMaterial[] = [
 // square anchors, the anchor being tugged with its bezier handles, the bounding box with its size pill, the cursor.
 // Loop: one path at a time is selected (rim, smile, letters) and an anchor on it is pulled out and back.
 #define VO_BLUE vec3(0.051, 0.6, 1.0)
-#define VO_S 0.76
+#define VO_S 0.88
 float voSeg(vec2 p, vec2 a, vec2 b) {
   vec2 pa = p - a, ba = b - a;
   return length(pa - ba * sat(dot(pa, ba) / max(dot(ba, ba), 1e-8)));
@@ -83,7 +83,7 @@ vec3 shade(Hit h) {
   float px = dkPx(h.t) / VO_S;
   vec3 col = vec3(0.118);                          // the canvas, #1e1e1e
   // The disc's own frame, like a frame outline on the canvas.
-  col = mix(col, vec3(0.22), dkLine(length(h.uv) - 1.08, 0.0015, px * VO_S));
+  col = mix(col, vec3(0.22), dkLine(length(h.uv) - 1.05, 0.0015, px * VO_S));
 
   float seg = floor(uTime / 4.0), ph = fract(uTime / 4.0);
   int ch = 1 + int(mod(seg, 3.0));
@@ -140,7 +140,9 @@ vec3 shade(Hit h) {
           : vec4(-0.625, -0.231, 0.622, 0.625);
   vec2 bc = 0.5 * (bb.xy + bb.zw), be = 0.5 * (bb.zw - bb.xy);
   col = mix(col, VO_BLUE, sat(1.0 - abs(sdBox2(uv - bc, be, 0.0)) / px) * 0.9);
-  col = voSquare(col, (uv - (bc + be * sign(uv - bc))) / px, 2.5, vec3(1.0), VO_BLUE);
+  // A corner handle that would fall off the disc is left out.
+  vec2 corner = bc + be * sign(uv - bc);
+  if (length(corner * VO_S) < 1.08) col = voSquare(col, (uv - corner) / px, 2.5, vec3(1.0), VO_BLUE);
   vec2 lp = (uv - vec2(bc.x, bb.y)) / px + vec2(0.0, 17.0);
   col = mix(col, VO_BLUE, sat(0.5 - sdBox2(lp, vec2(25.0, 8.5), 3.0)));
   float txt = step(abs(lp.y), 2.6) * step(abs(lp.x), 18.0) * step(2.5, abs(lp.x)) * step(0.32, fract(lp.x / 4.2 + 0.1));
@@ -167,7 +169,7 @@ vec3 shade(Hit h) {
 // A disc of cyanotype blueprint: chalky white lines in the Prussian-blue ground, inside a degree-ticked border.
 // Drafted in order: construction lines and circles, the outline part by part, section hatching stroke by stroke,
 // then the dimensions (width, height, a radius leader). The printed drafting grid is there throughout.
-#define BP_S 0.66
+#define BP_S 0.8
 float bpArrow(vec2 p, vec2 tip, vec2 dir, float px) {
   vec2 q = p - tip;
   float back = -dot(q, dir);
@@ -232,14 +234,14 @@ vec3 shade(Hit h) {
 
   // 4. Dimensions: width under the mark, height at the right, extension lines, arrows, figure bars; a radius leader.
   float p5 = sat((tt - 7.6) / 1.6);
-  float dimW = dkLine(u.y + 1.12, 0.0015, upx) * step(abs(u.x), 0.972) * step(0.07, abs(u.x));
-  dimW = max(dimW, dkLine(abs(u.x) - 0.972, 0.0012, upx) * step(abs(u.y + 1.08), 0.08));
-  dimW = max(dimW, max(bpArrow(u, vec2(-0.972, -1.12), vec2(-1.0, 0.0), upx), bpArrow(u, vec2(0.972, -1.12), vec2(1.0, 0.0), upx)));
-  dimW = max(dimW, step(abs(u.y + 1.12), 0.014) * step(abs(u.x), 0.055) * step(0.3, fract(u.x * 30.0 + 0.5)));
-  float dimH = dkLine(u.x - 1.12, 0.0015, upx) * step(abs(u.y), 1.0) * step(0.07, abs(u.y));
-  dimH = max(dimH, dkLine(abs(u.y) - 1.0, 0.0012, upx) * step(abs(u.x - 1.06), 0.08));
-  dimH = max(dimH, max(bpArrow(u, vec2(1.12, -1.0), vec2(0.0, -1.0), upx), bpArrow(u, vec2(1.12, 1.0), vec2(0.0, 1.0), upx)));
-  dimH = max(dimH, step(abs(u.x - 1.12), 0.014) * step(abs(u.y), 0.055) * step(0.3, fract(u.y * 30.0 + 0.5)));
+  float dimW = dkLine(u.y + 0.86, 0.0015, upx) * step(abs(u.x), 0.972) * step(0.07, abs(u.x));
+  dimW = max(dimW, dkLine(abs(u.x) - 0.972, 0.0012, upx) * step(abs(u.y + 0.55), 0.31));
+  dimW = max(dimW, max(bpArrow(u, vec2(-0.972, -0.86), vec2(-1.0, 0.0), upx), bpArrow(u, vec2(0.972, -0.86), vec2(1.0, 0.0), upx)));
+  dimW = max(dimW, step(abs(u.y + 0.86), 0.014) * step(abs(u.x), 0.055) * step(0.3, fract(u.x * 30.0 + 0.5)));
+  float dimH = dkLine(u.x - 0.86, 0.0015, upx) * step(abs(u.y), 1.0) * step(0.07, abs(u.y));
+  dimH = max(dimH, dkLine(abs(u.y) - 1.0, 0.0012, upx) * step(abs(u.x - 0.55), 0.31));
+  dimH = max(dimH, max(bpArrow(u, vec2(0.86, -1.0), vec2(0.0, -1.0), upx), bpArrow(u, vec2(0.86, 1.0), vec2(0.0, 1.0), upx)));
+  dimH = max(dimH, step(abs(u.x - 0.86), 0.014) * step(abs(u.y), 0.055) * step(0.3, fract(u.y * 30.0 + 0.5)));
   vec2 rdir = vec2(0.7071, -0.7071);
   float along = dot(u, rdir);
   float lead = dkLine(dot(u, vec2(0.7071, 0.7071)), 0.0012, upx) * step(0.0, along) * step(along, 0.972);

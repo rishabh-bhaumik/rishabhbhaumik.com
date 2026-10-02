@@ -13,7 +13,7 @@ const StaggerSeqCtx = createContext<{ next: () => number }>({ next: () => 0 });
 
 /**
  * Bima Saathi case study. Composition is final; images + most copy are WIP, so
- * media are violet placeholder blocks and body text is lorem. Real content
+ * media are black placeholder blocks and body text is lorem. Real content
  * drops into this structure later (and into /public/media/saathi/).
  */
 
@@ -22,13 +22,13 @@ const LOREM =
 const LOREM_SHORT =
   "Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor.";
 
-/** WIP media placeholder — a violet gradient block matching the card look. */
+/** WIP media placeholder — a black block with a hairline edge. */
 function Media({ className = "aspect-[800/544]" }: { className?: string }) {
   return (
     <div
-      className={`grid w-full place-items-center overflow-hidden rounded-2xl bg-gradient-to-b from-brand to-brand-bold ${className}`}
+      className={`grid w-full place-items-center overflow-hidden rounded-2xl bg-black ring-1 ring-border ${className}`}
     >
-      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/30">
+      <span className="font-mono text-10 uppercase tracking-[0.2em] text-white/30">
         media
       </span>
     </div>
@@ -38,7 +38,7 @@ function Media({ className = "aspect-[800/544]" }: { className?: string }) {
 /** The little uppercase-ish section tag pill. */
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex w-fit rounded-full bg-surface px-3 py-1.5 font-mono text-[11px] tracking-wide text-faint ring-1 ring-border">
+    <span className="inline-flex w-fit rounded-full bg-surface px-3 py-1.5 font-mono text-10 tracking-wide text-faint ring-1 ring-border">
       {children}
     </span>
   );
@@ -46,7 +46,7 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-display text-[clamp(1.5rem,3.5vw,2rem)] leading-tight text-ink">
+    <h2 className="font-display text-24 sm:text-32 leading-tight text-ink">
       {children}
     </h2>
   );
@@ -54,7 +54,7 @@ function Heading({ children }: { children: React.ReactNode }) {
 
 function Body({ children }: { children: React.ReactNode }) {
   return (
-    <p className="max-w-[46rem] text-[15px] leading-relaxed text-muted">{children}</p>
+    <p className="max-w-[46rem] text-16 leading-relaxed text-muted">{children}</p>
   );
 }
 
@@ -153,10 +153,10 @@ export default function SaathiContent() {
         <SaathiHero>
           <Media className="aspect-[800/544]" />
           <div className="flex flex-col gap-3">
-            <p className="font-mono text-[12px] tracking-wide text-faint">
+            <p className="font-mono text-12 tracking-wide text-faint">
               bima saathi — shipped 2025
             </p>
-            <h1 className="font-display text-[clamp(1.75rem,4.5vw,2.75rem)] leading-tight text-ink">
+            <h1 className="font-display text-32 leading-tight text-ink sm:text-44">
               Designing the product that turned 1,000 agents into
               BimaKavach&rsquo;s second-largest revenue channel.
             </h1>
@@ -171,8 +171,8 @@ export default function SaathiContent() {
             <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
               {META.map((m) => (
                 <div key={m.label} className="flex flex-col gap-2">
-                  <dt className="text-[14px] font-medium text-ink">{m.label}</dt>
-                  <dd className="flex flex-col gap-1 text-[14px] text-muted">
+                  <dt className="text-14 font-medium text-ink">{m.label}</dt>
+                  <dd className="flex flex-col gap-1 text-14 text-muted">
                     {m.values.map((v) => (
                       <span key={v}>{v}</span>
                     ))}
@@ -200,7 +200,7 @@ export default function SaathiContent() {
                 key={i}
                 className="grid items-center gap-6 sm:grid-cols-[1fr_1.4fr]"
               >
-                <p className="text-[16px] leading-relaxed text-ink">{caption}</p>
+                <p className="text-16 leading-relaxed text-ink">{caption}</p>
                 <Media className="aspect-[520/354]" />
               </div>
             ))}
@@ -230,13 +230,13 @@ export default function SaathiContent() {
               "Lead agents had no way to track their sub-agents.",
             ].map((h, i) => (
               <div key={i} className="flex flex-col gap-3">
-                <h3 className="text-[18px] font-medium leading-snug text-ink">{h}</h3>
+                <h3 className="text-20 leading-snug text-ink">{h}</h3>
                 <Body>{LOREM_SHORT}</Body>
               </div>
             ))}
           </div>
           <div className="mt-6 rounded-2xl bg-surface/40 p-6 sm:p-8">
-            <h3 className="text-[20px] leading-snug text-ink">
+            <h3 className="text-20 leading-snug text-ink">
               Key insight: the fastest path to trust was making the next action
               obvious.
             </h3>
@@ -256,7 +256,7 @@ export default function SaathiContent() {
               </div>
             ))}
             <div className="mt-2 rounded-2xl bg-surface/40 p-6 sm:p-8">
-              <h3 className="text-[20px] leading-snug text-ink">
+              <h3 className="text-20 leading-snug text-ink">
                 How might we make buying business insurance feel intuitive,
                 convenient, and worth the agent&rsquo;s time?
               </h3>
@@ -280,7 +280,7 @@ export default function SaathiContent() {
           <Media className="mt-2 aspect-[800/364]" />
           <Body>{LOREM_SHORT}</Body>
           <Media className="mt-2 aspect-[800/560]" />
-          <h3 className="mt-4 text-[20px] leading-snug text-ink">
+          <h3 className="mt-4 text-20 leading-snug text-ink">
             What if we brought in a guided simulation?
           </h3>
           <Body>{LOREM}</Body>
@@ -306,7 +306,7 @@ export default function SaathiContent() {
               "User research is not enough.",
             ].map((h, i) => (
               <div key={i} className="flex flex-col gap-3">
-                <h3 className="text-[18px] font-medium leading-snug text-ink">{h}</h3>
+                <h3 className="text-20 leading-snug text-ink">{h}</h3>
                 <Body>{LOREM}</Body>
               </div>
             ))}

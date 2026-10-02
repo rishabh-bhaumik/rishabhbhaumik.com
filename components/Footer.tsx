@@ -36,17 +36,15 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="flex flex-col gap-8 px-4 pb-10 pt-[120px] lg:flex-row lg:items-center lg:justify-between"
+      className="flex flex-col gap-8 px-4 pb-10 pt-[120px] lg:flex-row lg:items-end lg:justify-between"
     >
       {/* Blurb */}
       <Reveal
         as="p"
         margin="0px"
-        className="px-3 text-[14px] leading-[1.5] text-muted"
+        className="px-3 text-14 leading-[1.5] text-muted"
       >
-        {FOOTER.blurb}
-        <br />
-        This is{" "}
+        {FOOTER.blurb} This is{" "}
         <a href="#" className={inlineLink}>v2</a>
         , made with{" "}
         <a href="https://figma.com" target="_blank" rel="noreferrer" className={inlineLink}>Figma</a>
@@ -57,13 +55,6 @@ export default function Footer() {
 
       {/* Elsewhere */}
       <div className="flex flex-col gap-2 px-3 lg:px-0">
-        <Reveal
-          as="p"
-          margin="0px"
-          className="pb-2 text-[12px] uppercase leading-[16px] tracking-[0.6px] text-[#858e9e]"
-        >
-          Elsewhere
-        </Reveal>
         <motion.ul
           {...listProps}
           className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-12"
@@ -80,7 +71,7 @@ export default function Footer() {
                   className="group flex h-[18px] items-center"
                 >
                   {/* Handle — whitens on hover */}
-                  <span className="whitespace-nowrap text-[14px] leading-[18px] text-[#a3a3a3] transition-colors group-hover:text-white group-focus-visible:text-white">
+                  <span className="whitespace-nowrap text-14 leading-[18px] text-[#a3a3a3] transition-colors group-hover:text-white group-focus-visible:text-white">
                     {link.handle}
                   </span>
                   {/* Platform icon — reveals on hover */}

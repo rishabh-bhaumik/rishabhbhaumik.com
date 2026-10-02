@@ -4,13 +4,13 @@
   /* Surfaces */
   --color-bg: #000000;
   --color-surface: #1c1c1c;
-  --color-surface-2: #262c38;
-  --color-surface-3: #333a47;
+  --color-surface-2: #262626;
+  --color-surface-3: #333333;
   --color-border: #ffffff14;
 
   /* Text */
   --color-ink: #ffffff;
-  --color-muted: #a7adb8;
+  --color-muted: #a8a8a8;
   --color-faint: #a3a3a3;
   /* Nav "current item": text + bottom stroke of the page you are already on. */
   --color-nav-current: #363636;
@@ -29,6 +29,22 @@
   --font-sans: Arial, Helvetica, sans-serif;
   --font-mono: Arial, Helvetica, sans-serif;
   --font-display: Arial, Helvetica, sans-serif;
+
+  /* Type scale — the only font sizes on the site (text-10 … text-56). */
+  --text-10: 10px;
+  --text-12: 12px;
+  --text-14: 14px;
+  --text-16: 16px;
+  --text-18: 18px;
+  --text-20: 20px;
+  --text-24: 24px;
+  --text-28: 28px;
+  --text-32: 32px;
+  --text-36: 36px;
+  --text-40: 40px;
+  --text-44: 44px;
+  --text-48: 48px;
+  --text-56: 56px;
 
   /* Layout */
   --content-max: 832px; /* Home work column */
@@ -89,13 +105,13 @@ html.lenis body {
 }
 
 ::selection {
-  background: var(--color-brand);
+  background: rgba(255, 255, 255, 0.28);
   color: #fff;
 }
 
 /* Focus visibility for keyboard nav */
 :focus-visible {
-  outline: 2px solid var(--color-brand-subtle);
+  outline: 2px solid rgba(255, 255, 255, 0.85);
   outline-offset: 2px;
   border-radius: 4px;
 }

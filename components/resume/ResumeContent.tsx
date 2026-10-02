@@ -61,7 +61,7 @@ function Section({
     <section id={id} className="scroll-mt-24 border-t border-border py-10 sm:py-14">
       <div className="flex flex-col gap-6 sm:flex-row sm:gap-10">
         <Reveal className="sm:w-[132px] sm:shrink-0">
-          <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
+          <h2 className="font-mono text-10 uppercase tracking-[0.18em] text-faint">
             {label}
           </h2>
         </Reveal>
@@ -77,17 +77,17 @@ export default function ResumeContent() {
       {/* Masthead */}
       <header id="overview" className="flex flex-col gap-4 pb-10 sm:flex-row sm:items-start sm:justify-between">
         <Reveal>
-          <h1 className="font-display text-[clamp(1.75rem,5vw,2rem)] leading-tight text-ink">
+          <h1 className="font-display text-28 sm:text-32 leading-tight text-ink">
             {RESUME_HEADER.name}
           </h1>
-          <p className="mt-1 text-[15px] text-muted">{RESUME_HEADER.subtitle}</p>
+          <p className="mt-1 text-14 text-muted">{RESUME_HEADER.subtitle}</p>
         </Reveal>
         <Reveal delay={STEP} className="sm:shrink-0">
           <a
             href={RESUME_HEADER.pdfHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-surface px-4 py-2 font-mono text-[11px] tracking-wide text-faint ring-1 ring-border transition-colors hover:text-ink"
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-surface px-4 py-2 font-mono text-10 tracking-wide text-faint ring-1 ring-border transition-colors hover:text-ink"
           >
             <svg
               width="12"
@@ -113,7 +113,7 @@ export default function ResumeContent() {
         <div className="flex flex-col gap-4">
           {RESUME_ABOUT.map((para, i) => (
             <Reveal key={i} delay={i * STEP}>
-              <p className="text-[15px] leading-relaxed text-muted">
+              <p className="text-14 leading-relaxed text-muted">
                 <Frags parts={para} />
               </p>
             </Reveal>
@@ -126,10 +126,10 @@ export default function ResumeContent() {
           {RESUME_CONTACT.map((row, i) => (
             <Reveal key={row.label} delay={i * STEP}>
               <div className="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
-                <dt className="text-[13px] text-faint sm:w-[88px] sm:shrink-0">
+                <dt className="text-12 text-faint sm:w-[88px] sm:shrink-0">
                   {row.label}
                 </dt>
-                <dd className="min-w-0 break-words text-[15px] text-muted">
+                <dd className="min-w-0 break-words text-14 text-muted">
                   {row.href ? (
                     <a
                       href={row.href}
@@ -151,11 +151,11 @@ export default function ResumeContent() {
         {RESUME_EXPERIENCE.map((job, i) => (
           <Reveal key={i}>
             <div className="flex flex-col gap-1">
-              <h3 className="text-[16px] text-ink">
+              <h3 className="text-16 text-ink">
                 {job.title}
                 <span className="text-muted"> · {job.company}</span>
               </h3>
-              <p className="font-mono text-[11px] tracking-wide text-faint">
+              <p className="font-mono text-10 tracking-wide text-faint">
                 {[job.dates, job.meta, job.location].filter(Boolean).join(" · ")}
               </p>
               <ul className="mt-3 flex flex-col gap-2">
@@ -165,7 +165,7 @@ export default function ResumeContent() {
                     as="li"
                     delay={j * STEP}
                     y={12}
-                    className="relative pl-4 text-[15px] leading-relaxed text-muted before:absolute before:left-0 before:top-[0.7em] before:h-1 before:w-1 before:rounded-full before:bg-faint"
+                    className="relative pl-4 text-14 leading-relaxed text-muted before:absolute before:left-0 before:top-[0.7em] before:h-1 before:w-1 before:rounded-full before:bg-faint"
                   >
                     <Frags parts={b} />
                   </Reveal>
@@ -180,11 +180,11 @@ export default function ResumeContent() {
         {RESUME_EDUCATION.map((ed, i) => (
           <Reveal key={i} delay={i * STEP}>
             <div className="flex flex-col gap-1">
-              <h3 className="text-[16px] text-ink">
+              <h3 className="text-16 text-ink">
                 {ed.title}
                 <span className="text-muted"> · {ed.org}</span>
               </h3>
-              <p className="font-mono text-[11px] tracking-wide text-faint">
+              <p className="font-mono text-10 tracking-wide text-faint">
                 {[ed.dates, ed.location].filter(Boolean).join(" · ")}
               </p>
             </div>
@@ -196,11 +196,11 @@ export default function ResumeContent() {
         {RESUME_CREDENTIALS.map((c, i) => (
           <Reveal key={i} delay={i * STEP}>
             <div className="flex flex-col gap-1">
-              <h3 className="text-[16px] text-ink">
+              <h3 className="text-16 text-ink">
                 {c.title}
                 <span className="text-muted"> · {c.org}</span>
               </h3>
-              <p className="font-mono text-[11px] tracking-wide text-faint">
+              <p className="font-mono text-10 tracking-wide text-faint">
                 {c.dates}
               </p>
             </div>
