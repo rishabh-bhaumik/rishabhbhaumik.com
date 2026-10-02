@@ -38,6 +38,9 @@ const PHOTOS = [
   },
 ];
 
+/** Each slide's sound, levelled so they all play equally loud (the files are mastered unevenly). */
+const SLIDE_VOLUME = [0.25, 0.38, 0.25, 0.7, 0.39];
+
 export default function PhotoCarousel() {
   const [i, setI] = useState(0);
   const total = PHOTOS.length;
@@ -47,12 +50,12 @@ export default function PhotoCarousel() {
   const prev = () => {
     const target = (i - 1 + total) % total;
     setI(target);
-    play(`/media/about-carousel-sfx/${target + 1}.mp3`);
+    play(`/media/about-carousel-sfx/${target + 1}.mp3`, SLIDE_VOLUME[target]);
   };
   const next = () => {
     const target = (i + 1) % total;
     setI(target);
-    play(`/media/about-carousel-sfx/${target + 1}.mp3`);
+    play(`/media/about-carousel-sfx/${target + 1}.mp3`, SLIDE_VOLUME[target]);
   };
 
   return (

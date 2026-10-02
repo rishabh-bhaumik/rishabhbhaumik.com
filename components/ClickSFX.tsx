@@ -27,7 +27,7 @@ export default function ClickSFX() {
       let idx = Math.floor(Math.random() * SOUNDS.length);
       if (idx === lastRef.current) idx = (idx + 1) % SOUNDS.length;
       lastRef.current = idx;
-      playRef.current(SOUNDS[idx], 0.28);
+      playRef.current(SOUNDS[idx], 0.056);
     };
 
     document.addEventListener("click", handler, true);

@@ -16,7 +16,7 @@ export default function PageRevealSFX() {
 
     if (prev === 0) {
       const audio = new Audio("/media/page-reveal.mp3");
-      audio.volume = 0.35;
+      audio.volume = 0.16;
       audio.play().catch(() => {});
     }
 

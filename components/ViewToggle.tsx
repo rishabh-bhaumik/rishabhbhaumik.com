@@ -23,14 +23,14 @@ export default function ViewToggle({
       <div data-no-click-sfx className="flex items-center gap-1 rounded-full bg-surface p-1 ring-1 ring-border">
         <ViewButton
           active={view === "grid"}
-          onClick={() => { onViewChange("grid"); play("/media/switcher/view-grid.mp3", 0.3); }}
+          onClick={() => { onViewChange("grid"); play("/media/switcher/view-grid.mp3", 0.024); }}
           label="Grid view"
           icon="/media/Iconography/switcher/grid.svg"
           layoutId={layoutId}
         />
         <ViewButton
           active={view === "list"}
-          onClick={() => { onViewChange("list"); play("/media/switcher/view-list.mp3", 0.3); }}
+          onClick={() => { onViewChange("list"); play("/media/switcher/view-list.mp3", 0.024); }}
           label="List view"
           icon="/media/Iconography/switcher/list.svg"
           layoutId={layoutId}

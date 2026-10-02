@@ -31,10 +31,10 @@ export default function PasswordInput({
     if (!revealed) return;
     const ok = onSubmit(value);
     if (ok) {
-      play("/media/pw-success.mp3", 0);
+      play("/media/pw-success.mp3", 0.175);
     } else {
       setError(true);
-      play("/media/pw-error.mp3", 0);
+      play("/media/pw-error.mp3", 0.15);
     }
   };
 
