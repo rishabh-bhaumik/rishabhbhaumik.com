@@ -21,8 +21,9 @@ export const SITE = {
 } as const;
 
 /** `current` = the pathname for which this item is the active page (current item). */
-/** `side`: which half of the wide header the link sits in (the logo is centred between them, and links home). */
+/** `side`: which half of the wide header the link sits in (the logo is centred between them). */
 export const NAV: { label: string; href: string; current?: string; side: "left" | "right" }[] = [
+  { label: "home", href: "/", current: "/", side: "left" },
   { label: "work", href: "/work", current: "/work", side: "left" },
   { label: "play", href: "/play", current: "/play", side: "left" },
   { label: "resume", href: "/resume", current: "/resume", side: "right" },

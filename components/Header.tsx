@@ -60,7 +60,7 @@ export default function Header() {
         animate="show"
         className="flex h-16 w-full items-center justify-between px-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-6"
       >
-        {/* Left — Work, Play / mobile menu toggle (the centred logo is the way home) */}
+        {/* Left — Home, Work, Play / mobile menu toggle */}
         {navSet("left", 0, "justify-self-start")}
         <m.button
           variants={headerItem}
