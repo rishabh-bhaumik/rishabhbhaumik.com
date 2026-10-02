@@ -16,14 +16,18 @@ export const SITE = {
   /** Home hero looping background video (the "orbitting" piece). */
   heroVideo:
     "https://player.vimeo.com/video/780357035?h=430b68184b&background=1",
+  /** Its public page, for the poster shown until the player is playing. */
+  heroVideoPage: "https://vimeo.com/780357035/430b68184b",
 } as const;
 
 /** `current` = the pathname for which this item is the active page (current item). */
-export const NAV: { label: string; href: string; current?: string }[] = [
-  { label: "home", href: "/", current: "/" },
-  { label: "work", href: "/work", current: "/work" },
-  { label: "play", href: "/play", current: "/play" },
-  { label: "about", href: "/about", current: "/about" },
+/** `side`: which half of the wide header the link sits in (the logo is centred between them). */
+export const NAV: { label: string; href: string; current?: string; side: "left" | "right" }[] = [
+  { label: "home", href: "/", current: "/", side: "left" },
+  { label: "work", href: "/work", current: "/work", side: "left" },
+  { label: "play", href: "/play", current: "/play", side: "left" },
+  { label: "resume", href: "/resume", current: "/resume", side: "right" },
+  { label: "about", href: "/about", current: "/about", side: "right" },
 ];
 
 /** A company referenced inline in the bio, rendered as a brand chip + link. */
@@ -102,7 +106,7 @@ export const PROJECTS: Project[] = [
     description:
       "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
     href: "/bima-saathi",
-    media: "/media/work/bima.saathi.png",
+    media: "/media/work/bima.saathi.webp",
     cover: true,
   },
   {
@@ -112,7 +116,7 @@ export const PROJECTS: Project[] = [
     description:
       "Building the idea of BimaKavach as an intelligence company that is rooted in India's rich history of Ornamentation, Beauty and Aesthetic Identity.",
     href: "/bimakavach-identity",
-    media: "/media/work/bimakavach.branding.png",
+    media: "/media/work/bimakavach.branding.webp",
     cover: true,
   },
   {

@@ -1,36 +1,16 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
-import { EASE } from "@/lib/motion";
-
-const item = {
-  hidden: { opacity: 0, y: 14, filter: "blur(6px)" },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.5, delay: i * 0.1, ease: EASE },
-  }),
-};
-
-export default function SaathiHero({
-  children,
-}: {
-  children: React.ReactNode[];
-}) {
-  const reduce = useReducedMotion();
-
+/**
+ * The Saathi hero's staggered entrance, in CSS (.rise): it plays as soon as
+ * the page paints, with no JavaScript. Text children also un-blur; media
+ * children only fade and rise.
+ */
+export default function SaathiHero({ children }: { children: React.ReactNode[] }) {
   return (
-    <motion.div
-      initial="hidden"
-      animate="show"
-      className="flex flex-col gap-8"
-    >
+    <div className="flex flex-col gap-8">
       {children.map((child, i) => (
-        <motion.div key={i} variants={reduce ? undefined : item} custom={i}>
+        <div key={i} style={{ "--i": i } as React.CSSProperties} className={i === 0 ? "rise" : "rise-text"}>
           {child}
-        </motion.div>
+        </div>
       ))}
-    </motion.div>
+    </div>
   );
 }

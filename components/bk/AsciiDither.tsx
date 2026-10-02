@@ -311,6 +311,9 @@ export default function AsciiDither({
       gl.deleteTexture(bayerTex);
       gl.deleteBuffer(buf);
       gl.deleteVertexArray(vao);
+      // Unmounted for real (not a dev double-mount): give the GPU context back,
+      // so contexts never pile up and push out the header coin's.
+      if (!canvas.isConnected) gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }, [colors, videoSrc, cell, brightness, contrast]);
 
@@ -330,33 +333,46 @@ export default function AsciiDither({
       stop();
       // Reset so the staggered entry replays next time it scrolls into view.
       revealRef.current = 0;
-      canvas.style.filter = "blur(10px)";
       return;
     }
 
     if (reduceRef.current) {
       // Fully revealed, static — no animation.
       revealRef.current = 1;
-      canvas.style.filter = "none";
       const once = () => drawRef.current?.();
       if (video.readyState >= 2) once();
       else video.addEventListener("loadeddata", once, { once: true });
       return () => video.removeEventListener("loadeddata", once);
     }
 
+    if (video.preload !== "auto") video.preload = "auto";
     video.play().catch(() => {});
     const REVEAL_MS = 1600;
     const start = performance.now();
+    let stopped = false;
+    // Once the bands have settled, draw only when the video has a new frame
+    // (30 a second) instead of on every display refresh.
+    const onVideoFrame = () => {
+      if (stopped) return;
+      drawRef.current?.();
+      video.requestVideoFrameCallback(onVideoFrame);
+    };
     const loop = () => {
       const t = Math.min((performance.now() - start) / REVEAL_MS, 1);
       revealRef.current = t;
-      // Overall blur clears as the bands settle in.
-      canvas.style.filter = t < 1 ? `blur(${(1 - t) * 10}px)` : "none";
       drawRef.current?.();
+      if (t >= 1 && "requestVideoFrameCallback" in video) {
+        rafRef.current = 0;
+        video.requestVideoFrameCallback(onVideoFrame);
+        return;
+      }
       rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
-    return stop;
+    return () => {
+      stopped = true;
+      stop();
+    };
   }, [active]);
 
   return (
@@ -368,8 +384,11 @@ export default function AsciiDither({
         muted
         loop
         playsInline
+        preload="none"
         crossOrigin="anonymous"
-        className="hidden"
+        // Kept rendered (1px, invisible), so the browser keeps decoding it; display:none can throttle that.
+        className="pointer-events-none absolute left-0 top-0 size-px opacity-0"
+        aria-hidden="true"
       />
     </div>
   );

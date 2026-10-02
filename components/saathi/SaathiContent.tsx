@@ -58,7 +58,7 @@ function Body({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Staggered reveal item: fades/blurs/slides in with a per-item delay. */
+/** Staggered reveal item: fades and slides in once, with a per-item delay. */
 function StaggerItem({
   children,
   index,
@@ -78,8 +78,13 @@ function StaggerItem({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // Once in, it stays in: no exit replay while scrolling back and forth.
     const obs = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setVisible(true);
+        obs.disconnect();
+      },
       { threshold: 0.1 },
     );
     obs.observe(el);
@@ -93,12 +98,10 @@ function StaggerItem({
       ref={ref}
       className={className}
       style={{
+        // Fade + rise only (transform and opacity run on the compositor; a blur would repaint every frame).
         opacity: visible ? 1 : 0,
-        filter: visible ? "blur(0px)" : "blur(16px)",
-        transform: `translateY(${visible ? 0 : 20}px)`,
-        transition: visible
-          ? `opacity 1.1s ${EASE_OUT} ${delay}s, filter 1s ${EASE_OUT} ${delay}s, transform 1.2s ${EASE_OUT} ${delay}s`
-          : `opacity 0.5s ease ${delay * 0.2}s, filter 0.5s ease ${delay * 0.2}s, transform 0.5s ease ${delay * 0.2}s`,
+        transform: visible ? "none" : "translateY(20px)",
+        transition: `opacity 1.1s ${EASE_OUT} ${delay}s, transform 1.2s ${EASE_OUT} ${delay}s`,
         ...style,
       }}
     >

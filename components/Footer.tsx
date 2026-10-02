@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m } from "framer-motion";
 import { FOOTER, type SocialLink } from "@/data/site";
 import { revealItem, staggerContainer } from "@/lib/motion";
 import Reveal from "./Reveal";
@@ -19,16 +19,13 @@ const PLATFORM_ICON: Record<SocialLink["platform"], React.FC<{ className?: strin
 };
 
 export default function Footer() {
-  const reduce = useReducedMotion();
-  const listProps = reduce
-    ? {}
-    : {
-        variants: staggerContainer(0.07),
-        initial: "hidden" as const,
-        whileInView: "show" as const,
-        viewport: { once: true, margin: "0px" },
-      };
-  const itemProps = reduce ? {} : { variants: revealItem };
+  const listProps = {
+    variants: staggerContainer(0.07),
+    initial: "hidden" as const,
+    whileInView: "show" as const,
+    viewport: { once: true, margin: "0px" },
+  };
+  const itemProps = { variants: revealItem };
 
   const inlineLink =
     "text-white underline decoration-white/60 underline-offset-[2px] transition-colors hover:decoration-white";
@@ -55,14 +52,14 @@ export default function Footer() {
 
       {/* Elsewhere */}
       <div className="flex flex-col gap-2 px-3 lg:px-0">
-        <motion.ul
+        <m.ul
           {...listProps}
           className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-12"
         >
           {FOOTER.elsewhere.map((link) => {
             const Icon = PLATFORM_ICON[link.platform];
             return (
-              <motion.li key={link.handle} {...itemProps}>
+              <m.li key={link.handle} {...itemProps}>
                 <a
                   href={link.href}
                   target={link.href.startsWith("http") ? "_blank" : undefined}
@@ -79,10 +76,10 @@ export default function Footer() {
                     <Icon />
                   </span>
                 </a>
-              </motion.li>
+              </m.li>
             );
           })}
-        </motion.ul>
+        </m.ul>
       </div>
     </footer>
   );

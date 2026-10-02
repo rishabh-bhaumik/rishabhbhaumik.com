@@ -46,7 +46,7 @@ detects on its own).
   client-side, after a correct password, so there's nothing sensitive baked
   into the static HTML.)
 - Serves everything under `public/` — including `public/media/`, the site's
-  images, audio SFX (`entry01.wav`, `pw-success.wav`, etc.), and video —
+  images, audio SFX (`entry01.mp3`, `pw-success.mp3`, etc.), and video —
   from Vercel's edge CDN, with no extra configuration.
 - Sets up **preview deployments** automatically for every branch push and
   every pull request, each with its own shareable URL and its own comment
@@ -81,7 +81,7 @@ there's no separate "deploy" step to remember:
 ## Common gotchas
 
 - **`public/media/` size.** As of this write-up it's about 65 MB (images,
-  the Anek variable-font showcase assets, and the SFX `.wav` files). That's
+  the Anek variable-font showcase assets, and the SFX `.mp3` files). That's
   comfortably under Vercel Hobby's static-asset limits, but it's worth
   keeping an eye on — if heavier media (long-form video, large image sets)
   pushes the repo well past 100 MB, move that media to a dedicated CDN

@@ -90,8 +90,24 @@ export async function loadLogoPaths(url = "/media/logo-mark.svg") {
   return { paths, width: vw, height: vh };
 }
 
-/** `size` is the field's resolution in texels; the lab uses 1024, a small embedded coin needs far less. */
-export async function buildLogoField(size = SIZE): Promise<LogoField> {
+const fields = new Map<number, Promise<LogoField>>();
+
+/**
+ * `size` is the field's resolution in texels; the lab uses 1024, a small
+ * embedded coin needs far less. Built once per size and shared: every coin on
+ * the site reads the same field, so remounts never redo the distance transforms.
+ */
+export function buildLogoField(size = SIZE): Promise<LogoField> {
+  let job = fields.get(size);
+  if (!job) {
+    job = makeLogoField(size);
+    fields.set(size, job);
+    job.catch(() => fields.delete(size));
+  }
+  return job;
+}
+
+async function makeLogoField(size: number): Promise<LogoField> {
   const { paths, width, height } = await loadLogoPaths();
   const n = size;
   const pxPerUnit = n / (2 * FIELD_EXTENT);

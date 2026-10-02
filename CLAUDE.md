@@ -7,10 +7,11 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 - Next.js 16 (App Router) + TypeScript
 - Tailwind CSS v4 — **CSS-first `@theme` in `app/globals.css`** (no `tailwind.config`)
-- Framer Motion (reveals, hover, layout transitions) + Lenis (smooth scroll) + GSAP/`@gsap/react` in deps
+- Framer Motion via `LazyMotion` + `m` (reveals, hover, layout transitions; engine loads as its own chunk, see `components/MotionProvider.tsx`) + Lenis (smooth scroll, on Framer's frame loop)
 - Body/UI font is **Arial** — not a custom typeface. Anek Variable is
-  self-hosted (`public/media/Anek Font Selection/`, one `@font-face` per
-  script) and used only in the BimaKavach Identity typeface showcase.
+  self-hosted as per-script WOFF2 files subset to the showcase lines
+  (`public/media/anek/`, `@font-face` rules in `components/bk/anek.css`,
+  imported only by the BimaKavach Identity page).
 
 ## Design tokens (`app/globals.css` `@theme`)
 
@@ -37,9 +38,18 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - All editable copy/links/companies/projects live in
   `data/site.ts`. Prefer editing that file over hardcoding strings in components.
 - Path alias `@/*` → repo root (see `tsconfig.json`).
-- Honor `prefers-reduced-motion` in any new animation — check
-  `useReducedMotion()` (Framer Motion) or the media query directly, and render
-  a static end-state instead of animating.
+- Honor `prefers-reduced-motion` in any new animation. Framer animations are
+  covered by `MotionConfig reducedMotion="user"` in the root layout — don't
+  branch on `useReducedMotion()` while rendering (it differs between server
+  and client and breaks hydration); read it in effects only. CSS entrances
+  (`.rise` / `.rise-text` in `globals.css`) switch off under the media query.
+- Above-the-fold entrances use the CSS `.rise` / `.rise-text` utilities
+  (stagger with `style={{ "--i": n }}`), so they paint before hydration.
+  Scroll reveals use `Reveal` / `revealItem`; pass `media` / use `revealMedia`
+  for blocks holding video, images or canvases (no blur on big layers).
+- Media: muted clips go through `components/LazyVideo.tsx` (poster, fetched
+  near the viewport, plays only while visible). Sounds are small MP3s played
+  through the shared Web Audio context in `lib/sfx.tsx`.
 - Availability/online-status logic is isolated in `lib/availability.ts`
   (`getAvailability()` is the seam for swapping the static schedule for a
   real data source later).

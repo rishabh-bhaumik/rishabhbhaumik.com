@@ -19,23 +19,24 @@ export default function LocalClock() {
   const [schedule, setSchedule] = useState<AvailabilitySchedule | null>(null);
   const [status, setStatus] = useState<Status>("offline");
 
-  // Visitor's local time, ticking every second. First tick is deferred to a
-  // timer callback so we never setState synchronously inside the effect body.
+  // Visitor's local time. The display only shows minutes, so it updates on
+  // each minute boundary (not every second), and not at all in a hidden tab.
   useEffect(() => {
-    const fmt = () =>
-      new Date()
-        .toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true,
-        })
-        .toUpperCase();
-    const update = () => setTime(fmt());
-    const first = setTimeout(update, 0);
-    const id = setInterval(update, 1000);
+    const fmt = new Intl.DateTimeFormat("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
+    let id = 0;
+    const update = () => {
+      setTime(fmt.format(new Date()).toUpperCase());
+      id = window.setTimeout(update, 60_000 - (Date.now() % 60_000) + 50);
+    };
+    const onVisibility = () => {
+      window.clearTimeout(id);
+      if (!document.hidden) update();
+    };
+    id = window.setTimeout(update, 0);
+    document.addEventListener("visibilitychange", onVisibility);
     return () => {
-      clearTimeout(first);
-      clearInterval(id);
+      window.clearTimeout(id);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
@@ -87,9 +88,13 @@ export default function LocalClock() {
           }}
         />
       </span>
-      <span className="font-mono text-12 leading-none text-faint tabular-nums">
+      {/* Time and "(local)" side by side, one stack. */}
+      <span className="flex items-baseline gap-1 font-mono text-12 leading-none text-faint tabular-nums">
         {/* suppressHydrationWarning: time is client-only, differs from SSR */}
-        <span suppressHydrationWarning>{time ?? "--:-- --"}</span>{" "}
+        {/* A fixed-width box, so the time arriving never shifts the logo. */}
+        <span suppressHydrationWarning className="inline-block w-[7.5ch] text-right">
+          {time ?? "--:-- --"}
+        </span>
         <span className="text-faint/70">(local)</span>
       </span>
       <span className="sr-only">{meta.label}</span>

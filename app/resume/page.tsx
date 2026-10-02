@@ -6,9 +6,8 @@ import ResumeNav from "@/components/resume/ResumeNav";
 import { SITE } from "@/data/site";
 
 /**
- * Unlisted resume. `robots: noindex, nofollow` keeps it out of search results
- * and it is deliberately absent from NAV — reachable only via a direct link
- * (and, later, a Resume button on Home).
+ * Resume, linked from the header nav. `robots: noindex, nofollow` still keeps
+ * it out of search results.
  */
 export const metadata: Metadata = {
   title: `Resume — ${SITE.name}`,

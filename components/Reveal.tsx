@@ -1,12 +1,15 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m } from "framer-motion";
 import type { ReactNode } from "react";
 import { EASE } from "@/lib/motion";
 
 /**
- * Blur-in + fade + rise on scroll entry (the k95-style reveal). Used to give
- * sections the same calm, staged reveal. Honors reduced-motion (renders static).
+ * Fade + rise (+ a soft blur on text) on scroll entry: the site's calm, staged
+ * reveal. `media` drops the blur for blocks holding video, images or canvases,
+ * where blurring a large layer is expensive. The blur ends on `none`, so no
+ * filter is left on the element afterwards. Reduced motion is handled by the
+ * MotionConfig in the root layout (the rise is skipped; it only fades).
  */
 export default function Reveal({
   children,
@@ -15,6 +18,7 @@ export default function Reveal({
   className,
   as = "div",
   margin = "0px 0px -12% 0px",
+  media = false,
 }: {
   children: ReactNode;
   delay?: number;
@@ -23,20 +27,16 @@ export default function Reveal({
   as?: "div" | "section" | "li" | "span" | "p";
   /** IntersectionObserver rootMargin. Use "0px" for content pinned to the page bottom, which can never scroll past the default inset. */
   margin?: string;
+  /** The block holds media: fade and rise only, no blur. */
+  media?: boolean;
 }) {
-  const reduce = useReducedMotion();
-  const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
+  const MotionTag = m[as];
 
   return (
     <MotionTag
       className={className}
-      initial={{ opacity: 0, y, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={media ? { opacity: 0, y } : { opacity: 0, y, filter: "blur(8px)" }}
+      whileInView={media ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, filter: "blur(0px)", transitionEnd: { filter: "none" } }}
       viewport={{ once: true, margin }}
       transition={{ duration: 0.8, delay, ease: EASE }}
     >

@@ -96,6 +96,47 @@ html.lenis body {
 .lenis.lenis-stopped {
   overflow: hidden;
 }
+/* Mid-scroll, embeds would swallow wheel events and stall the scroll. */
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Entrance for content above the fold. Pure CSS, so it plays from the server
+   HTML before any JavaScript arrives; stagger with style={{ "--i": n }}.
+   .rise moves and fades; .rise-text also un-blurs (text only — blurring big
+   media layers is expensive). Both end on transform/filter none. */
+@layer utilities {
+  .rise,
+  .rise-text {
+    animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(80ms + var(--i, 0) * 90ms);
+  }
+  .rise-text {
+    animation-name: rise-text;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes rise-text {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
 
 /* Display face = Arial (upright). Kept as a hook so display headings can share
    one place to change later. */
@@ -120,6 +161,10 @@ html.lenis body {
   html {
     scroll-behavior: auto;
   }
+  .rise,
+  .rise-text {
+    animation: none;
+  }
   *,
   *::before,
   *::after {
@@ -138,64 +183,3 @@ html.lenis body {
   100% { transform: translateX(0); }
 }
 
-/* Anek Variable — self-hosted, one @font-face per script */
-@font-face {
-  font-family: "Anek Tamil";
-  src: url("/media/Anek Font Selection/Anek_Tamil/AnekTamil-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Kannada";
-  src: url("/media/Anek Font Selection/Anek_Kannada/AnekKannada-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Gujarati";
-  src: url("/media/Anek Font Selection/Anek_Gujarati/AnekGujarati-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Bangla";
-  src: url("/media/Anek Font Selection/Anek_Bangla/AnekBangla-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Latin";
-  src: url("/media/Anek Font Selection/Anek_Latin/AnekLatin-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Devanagari";
-  src: url("/media/Anek Font Selection/Anek_Devanagari/AnekDevanagari-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Odia";
-  src: url("/media/Anek Font Selection/Anek_Odia/AnekOdia-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Gurmukhi";
-  src: url("/media/Anek Font Selection/Anek_Gurmukhi/AnekGurmukhi-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Malayalam";
-  src: url("/media/Anek Font Selection/Anek_Malayalam/AnekMalayalam-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anek Telugu";
-  src: url("/media/Anek Font Selection/Anek_Telugu/AnekTelugu-VariableFont_wdth,wght.ttf") format("truetype");
-  font-weight: 100 800;
-  font-display: swap;
-}

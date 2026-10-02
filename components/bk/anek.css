@@ -1,0 +1,72 @@
+/* Anek Variable — only for the Identity typeface showcase, so it loads only on that page.
+   Each file is subset to the one line it sets (WOFF2, both variable axes kept). */
+@font-face {
+  font-family: "Anek Tamil";
+  src: url("/media/anek/AnekTamil.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Kannada";
+  src: url("/media/anek/AnekKannada.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Gujarati";
+  src: url("/media/anek/AnekGujarati.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Bangla";
+  src: url("/media/anek/AnekBangla.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Latin";
+  src: url("/media/anek/AnekLatin.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Devanagari";
+  src: url("/media/anek/AnekDevanagari.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Odia";
+  src: url("/media/anek/AnekOdia.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Gurmukhi";
+  src: url("/media/anek/AnekGurmukhi.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Malayalam";
+  src: url("/media/anek/AnekMalayalam.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anek Telugu";
+  src: url("/media/anek/AnekTelugu.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}

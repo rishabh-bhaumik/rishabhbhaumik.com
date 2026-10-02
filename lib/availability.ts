@@ -54,18 +54,23 @@ export async function getAvailability(): Promise<AvailabilitySchedule> {
   return WEEKLY_SCHEDULE;
 }
 
+const zoneFormats = new Map<string, Intl.DateTimeFormat>();
+/** One formatter per timezone: building an Intl.DateTimeFormat is not cheap. */
+function zoneFormat(timezone: string) {
+  let fmt = zoneFormats.get(timezone);
+  if (!fmt) {
+    fmt = new Intl.DateTimeFormat("en-US", { timeZone: timezone, weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false });
+    zoneFormats.set(timezone, fmt);
+  }
+  return fmt;
+}
+
 /** The local hour (0–23) and weekday in the schedule's timezone for a given instant. */
 function localPartsInZone(
   date: Date,
   timezone: string,
 ): { weekday: Weekday; hour: number; minute: number } {
-  const fmt = new Intl.DateTimeFormat("en-US", {
-    timeZone: timezone,
-    weekday: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
+  const fmt = zoneFormat(timezone);
   const parts = fmt.formatToParts(date);
   const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "";
   const weekdayMap: Record<string, Weekday> = {

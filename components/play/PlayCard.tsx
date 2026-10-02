@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
-import { revealItem, EASE } from "@/lib/motion";
-import IconLabCover from "./IconLabCover";
+import dynamic from "next/dynamic";
+import { m } from "framer-motion";
+import { revealMedia, EASE } from "@/lib/motion";
+
+// The live coin (renderer and shaders) is its own chunk, loaded only on the client.
+const IconLabCover = dynamic(() => import("./IconLabCover"), { ssr: false });
 import type { PlayCardData } from "./PlayGallery";
 
 /** Cover for a link item: the lab's coin on black; the whole cover opens the page in a new tab. */
@@ -35,21 +38,24 @@ function Title({ item, className }: { item: PlayCardData; className: string }) {
 
 export default function PlayCard({
   item,
-  reduce,
   view,
+  index = -1,
 }: {
   item: PlayCardData;
-  reduce: boolean;
   view: "grid" | "list";
+  /** Position in the gallery; the first cover loads first. */
+  index?: number;
 }) {
   const [playing, setPlaying] = useState(false);
-  const itemProps = reduce ? {} : { variants: revealItem };
-  const prefersReduce = useReducedMotion();
-  const layoutProps = prefersReduce ? {} : { layout: true as const, transition: { duration: 0.5, ease: EASE } };
+  const itemProps = { variants: revealMedia };
+  // Only the card's position animates between views, so covers (and the live coin) are never stretched.
+  const layoutProps = { layout: "position" as const, transition: { duration: 0.5, ease: EASE } };
+  // The first row: their covers are on screen at load, so fetch them first.
+  const eager = index >= 0 && index < 2;
 
   if (view === "list") {
     return (
-      <motion.div {...itemProps} {...layoutProps} data-card className="px-4 sm:px-6">
+      <m.div {...itemProps} {...layoutProps} data-card className="px-4 sm:px-6">
         {/* Media — matches ProjectCard: aspect-[800/544], full width */}
         <div className="relative grid aspect-[800/544] w-full place-items-center overflow-hidden rounded-2xl bg-[#0a0a0c] bg-[radial-gradient(130%_130%_at_82%_12%,rgba(255,255,255,0.07)_0%,rgba(10,10,12,0)_46%)]">
           {item.href ? (
@@ -73,6 +79,8 @@ export default function PlayCard({
               {item.thumb && (
                 <Image
                   src={item.thumb}
+                  preload={eager}
+                  fetchPriority={eager ? "high" : undefined}
                   alt=""
                   fill
                   sizes="(max-width: 640px) 100vw, 832px"
@@ -106,13 +114,13 @@ export default function PlayCard({
             {item.tag}
           </span>
         </div>
-      </motion.div>
+      </m.div>
     );
   }
 
   // Grid view
   return (
-    <motion.div {...itemProps} {...layoutProps} data-card className="flex flex-col gap-4">
+    <m.div {...itemProps} {...layoutProps} data-card className="flex flex-col gap-4">
       {/* Media */}
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-[#0a0a0c] bg-[radial-gradient(130%_130%_at_82%_12%,rgba(255,255,255,0.07)_0%,rgba(10,10,12,0)_46%)]">
         {item.href ? (
@@ -136,6 +144,8 @@ export default function PlayCard({
             {item.thumb && (
               <Image
                 src={item.thumb}
+                  preload={eager}
+                  fetchPriority={eager ? "high" : undefined}
                 alt=""
                 fill
                 sizes="(max-width: 640px) 100vw, 600px"
@@ -169,6 +179,6 @@ export default function PlayCard({
           {item.description}
         </p>
       </div>
-    </motion.div>
+    </m.div>
   );
 }

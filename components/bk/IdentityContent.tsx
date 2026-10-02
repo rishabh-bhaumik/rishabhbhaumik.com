@@ -12,10 +12,10 @@ import React, {
   type ReactNode,
 } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Header from "@/components/Header";
-import { EASE } from "@/lib/motion";
 import AsciiDither from "@/components/bk/AsciiDither";
+import "./anek.css";
 
 const ScrollRootCtx = createContext<React.RefObject<HTMLDivElement | null>>({
   current: null,
@@ -24,7 +24,7 @@ const ScrollDirCtx = createContext<React.RefObject<number>>({ current: 1 });
 /** Per-section sequence: hands each StaggerItem the next reveal index. */
 const StaggerSeqCtx = createContext<{ next: () => number }>({ next: () => 0 });
 
-const HERO_IMG = "/media/bk-branding/composition-hero.png";
+const HERO_IMG = "/media/bk-branding/composition-hero.webp";
 const MC = "/media/bk-branding/main-content";
 const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
 /** Delay between consecutive reveals. Small because sections are now broken
@@ -140,7 +140,7 @@ function Shell({
 }
 
 /**
- * A single reveal unit: direction-aware translateX + blur + fade, driven by an
+ * A single reveal unit: direction-aware translateX + fade, driven by an
  * IntersectionObserver against the horizontal scroll stage. Its reveal index
  * (and therefore its delay) is either passed explicitly or drawn from the
  * section's StaggerSeqCtx in render order.
@@ -188,18 +188,18 @@ function StaggerItem({
 
   // The OUTER wrapper is the observer target — it stays at its resting layout
   // position (no transform), so the 75%-viewport trigger reads the true spot
-  // even for right-edge elements. The INNER element carries the slide/blur/fade.
+  // even for right-edge elements. The INNER element carries the slide/fade.
   return (
     <div ref={ref} className={wrapperClassName}>
       <div
         className={className}
         style={{
+          // Fade + slide only: transform and opacity stay on the compositor (a blur would repaint each frame).
           opacity: visible ? 1 : 0,
-          filter: visible ? "blur(0px)" : "blur(16px)",
-          transform: `translateX(${tx}px)`,
+          transform: tx ? `translateX(${tx}px)` : "none",
           transition: visible
-            ? `opacity 1.1s ${EASE_OUT} ${delay}s, filter 1s ${EASE_OUT} ${delay}s, transform 1.2s ${EASE_OUT} ${delay}s`
-            : `opacity 0.5s ease ${delay * 0.2}s, filter 0.5s ease ${delay * 0.2}s, transform 0.5s ease ${delay * 0.2}s`,
+            ? `opacity 1.1s ${EASE_OUT} ${delay}s, transform 1.2s ${EASE_OUT} ${delay}s`
+            : `opacity 0.5s ease ${delay * 0.2}s, transform 0.5s ease ${delay * 0.2}s`,
           ...style,
         }}
       >
@@ -266,6 +266,9 @@ function WorkVideo() {
   const ref = useRef<HTMLDivElement>(null);
   const scrollRoot = useContext(ScrollRootCtx);
   const [inView, setInView] = useState(false);
+  // The dither (a WebGL context plus a video) is only created once its panel
+  // is within one screen of view, not when the page opens 13 panels away.
+  const [near, setNear] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -275,17 +278,31 @@ function WorkVideo() {
       ([entry]) => setInView(entry.isIntersecting),
       { root, threshold: 0.1 },
     );
+    const nearObs = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setNear(true);
+        nearObs.disconnect();
+      },
+      { root, rootMargin: "0px 100% 0px 100%" },
+    );
     obs.observe(el);
-    return () => obs.disconnect();
+    nearObs.observe(el);
+    return () => {
+      obs.disconnect();
+      nearObs.disconnect();
+    };
   }, [scrollRoot]);
 
   return (
-    <div ref={ref} className="absolute inset-0">
-      <AsciiDither
-        active={inView}
-        colors={FILTER_COLORS}
-        videoSrc={`${MC}/section-work-0-ascii-video.mp4`}
-      />
+    <div ref={ref} className="absolute inset-0 bg-black">
+      {near && (
+        <AsciiDither
+          active={inView}
+          colors={FILTER_COLORS}
+          videoSrc={`${MC}/section-work-0-ascii-video.mp4`}
+        />
+      )}
     </div>
   );
 }
@@ -376,6 +393,10 @@ function TypeLine({
   const pRef = useRef<HTMLParagraphElement>(null);
   const spansRef = useRef<(HTMLSpanElement | null)[]>([]);
   const centersRef = useRef<number[]>([]);
+  // Pointer moves are batched to one paint per frame.
+  const frameRef = useRef(0);
+  const cursorRef = useRef(0);
+  const activatedAt = useRef(0);
 
   const graphemes = useMemo(() => toGraphemes(text), [text]);
 
@@ -411,6 +432,7 @@ function TypeLine({
     if (!isActive) paint(null);
     else measure();
   }, [isActive, measure, paint]);
+  useEffect(() => () => cancelAnimationFrame(frameRef.current), []);
 
   return (
     <p
@@ -425,17 +447,23 @@ function TypeLine({
       }}
       onPointerEnter={() => {
         onActivate();
+        activatedAt.current = performance.now();
         measure();
       }}
       onPointerMove={(e) => {
         if (!isActive) return;
-        const p = pRef.current;
-        if (!p) return;
-        // Re-measure every move: the layout FLIP spring is still resettling
-        // the line's width from 16→32 px for a few hundred ms after activation,
-        // so cached span centers are stale and the falloff misses on the far side.
-        measure();
-        paint(e.clientX - p.getBoundingClientRect().left);
+        cursorRef.current = e.clientX;
+        if (frameRef.current) return;
+        frameRef.current = requestAnimationFrame(() => {
+          frameRef.current = 0;
+          const p = pRef.current;
+          if (!p) return;
+          // While the layout FLIP spring is still resettling the line's width
+          // (16→32 px, a few hundred ms after activation) the span centres
+          // move, so re-measure then; after that the cached ones hold.
+          if (performance.now() - activatedAt.current < 700) measure();
+          paint(cursorRef.current - p.getBoundingClientRect().left);
+        });
       }}
     >
       {graphemes.map((g, i) => (
@@ -469,7 +497,6 @@ function VariableWidthType() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [active, setActive] = useState<string>("en"); // Figma: Latin is default
-  const reduce = useReducedMotion();
 
   // Per-glyph spans lose inter-cluster kerning and can run wider than the
   // shell at the 32 px active size; the active line drives overflow, so
@@ -508,9 +535,9 @@ function VariableWidthType() {
         const isActive = script.lang === active;
         return (
           <StaggerItem key={script.lang} className="w-full">
-            <motion.div
-              layout={reduce ? false : true}
-              transition={reduce ? { duration: 0 } : SWAP_SPRING}
+            <m.div
+              layout
+              transition={SWAP_SPRING}
               style={{
                 fontSize: isActive ? SIZE_ACTIVE_PX : SIZE_REST_PX,
                 width: "100%",
@@ -523,7 +550,7 @@ function VariableWidthType() {
                 isActive={isActive}
                 onActivate={() => setActive(script.lang)}
               />
-            </motion.div>
+            </m.div>
           </StaggerItem>
         );
       })}
@@ -601,14 +628,8 @@ export default function IdentityContent() {
           className="fixed inset-0 z-0 flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden bg-black [&_section]:snap-start"
           style={{ scrollBehavior: "auto" }}
         >
-          <motion.div
-            initial={reduce ? false : { opacity: 0, filter: "blur(12px)" }}
-            animate={
-              reduce ? undefined : { opacity: 1, filter: "blur(0px)" }
-            }
-            transition={{ duration: 1, ease: EASE }}
-            className="flex h-full"
-          >
+          {/* A plain CSS fade for the whole stage: blurring ~20 full-screen panels at once was the costliest frame on the page. */}
+          <div className="rise flex h-full">
             {/* 0 — HERO */}
             <section
               id="hero"
@@ -1218,7 +1239,7 @@ export default function IdentityContent() {
                 </StaggerItem>
               </Shell>
             </section>
-          </motion.div>
+          </div>
         </div>
       </ScrollDirCtx.Provider>
     </ScrollRootCtx.Provider>
@@ -1250,7 +1271,7 @@ function HeroPanel({
         src={HERO_IMG}
         alt="BimaKavach rebranding billboard"
         fill
-        priority
+        preload
         sizes="100vw"
         className="object-cover transition-opacity duration-500"
         style={{ opacity: entered ? 0 : 1 }}

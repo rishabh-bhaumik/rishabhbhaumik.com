@@ -121,9 +121,17 @@ export class LogoRenderer {
     this.quad = vao;
     this.quadBuffer = buf;
 
-    this.filterProgram = this.build(FILTER_FRAG, true);
-    this.morphProgram = this.build(MORPH_FRAG, true);
-    this.blitProgram = this.build(BLIT_FRAG, true);
+    // With parallel compiling these link in the background (no long task at
+    // start-up); `render` waits for them. Without it, linking blocks anyway.
+    const sync = !this.parallel;
+    this.filterProgram = this.build(FILTER_FRAG, sync);
+    this.morphProgram = this.build(MORPH_FRAG, sync);
+    this.blitProgram = this.build(BLIT_FRAG, sync);
+  }
+
+  /** Are the shared filter, morph and blit programs linked? */
+  private coreReady() {
+    return [this.filterProgram, this.morphProgram, this.blitProgram].every((e) => this.isDone(e) && e.status === "ready");
   }
 
   /**
@@ -398,7 +406,7 @@ export class LogoRenderer {
    * canvas. Returns false when a needed program is not ready yet.
    */
   render(state: RenderState, w: number, h: number, sw = w, sh = h, into?: string): boolean {
-    if (!this.fieldTex || !this.ready(state.material.key)) return false;
+    if (!this.fieldTex || !this.coreReady() || !this.ready(state.material.key)) return false;
     const a = this.programs.get(state.material.key)!;
     // While transmuting the morph pass always runs (even at 0), so the background stays the same black throughout.
     const to = state.morphTo && this.ready(state.morphTo.material.key) ? state.morphTo : null;

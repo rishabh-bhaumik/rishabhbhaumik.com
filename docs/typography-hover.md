@@ -286,9 +286,12 @@ useEffect(() => {
 
 Unchanged.
 
-1. Drop the variable TTF into `public/media/Anek Font Selection/Anek_<Script>/`.
-2. Add an `@font-face` block in `app/globals.css` — same `font-weight: 100
-   800` range, `font-display: swap`.
+1. Subset the variable TTF to the new line's text and save it as WOFF2 in
+   `public/media/anek/` (`python3 -m fontTools.subset <ttf> --text="<line> ,!"
+   --layout-features='*' --flavor=woff2 --no-hinting --output-file=...`; the
+   `wght`/`wdth` axes are kept).
+2. Add an `@font-face` block in `components/bk/anek.css` — same `font-weight:
+   100 800` range, `font-display: swap`.
 3. Append `{ text, lang, font }` to `SCRIPTS` in `IdentityContent.tsx` —
    `lang` as the correct BCP-47 subtag, `font` matching step 2 exactly.
 

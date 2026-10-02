@@ -1,5 +1,12 @@
 # Stagger Reveal — `StaggerItem` / `StaggerSeqCtx`
 
+> **Update (Oct 2026, performance pass):** the `filter: blur(16px)` on each
+> `StaggerItem` and the Identity stage's 12px entrance blur were removed —
+> reveals are now opacity + transform only, which stay on the compositor. The
+> stage fades in with the CSS `.rise` utility. Saathi items reveal once and
+> stay (no exit replay); Identity items still slide in and out by scroll
+> direction. Code samples below show the earlier blur version.
+
 ## What it does
 
 Both case studies (`components/bk/IdentityContent.tsx` for BimaKavach

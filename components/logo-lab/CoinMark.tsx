@@ -8,7 +8,7 @@ import { LogoRenderer, rotationMatrix } from "./renderer";
 import type { Look, Slot } from "./settings";
 import type { LogoMaterial } from "./types";
 
-export type CoinVariant = "hero" | "header";
+export type CoinVariant = "header";
 
 interface Config {
   /** Each step flips over into the next, and the last back into the first. */
@@ -28,20 +28,6 @@ interface Config {
 const slot = (key: string, relief: number, filters: Slot["filters"], transition: Slot["transition"] = "stroke"): Slot => ({ key, relief, light: null, filters, transition });
 
 const CONFIGS: Record<CoinVariant, Config> = {
-  // The About hero: four materials, a new one each flip.
-  hero: {
-    sequence: [
-      slot("default", 2.5, [{ key: "dither", amount: 1 }, { key: "chroma", amount: 1 }]),
-      slot("bishnupur-terracotta", 2, [{ key: "chroma", amount: 1 }], "thermal"),
-      slot("chandannagar-lights", 2.5, [{ key: "anamorphic", amount: 1 }]),
-      slot("bidriware", 2.5, [{ key: "chroma", amount: 1 }, { key: "halftone", amount: 0.07 }], "dither"),
-    ],
-    hold: 2,
-    morph: 1.6,
-    fieldSize: 384,
-    maxPx: 1100,
-    wakeAt: 0,
-  },
   // The header logo on hover: the Default coin, dithering as it flips over.
   header: {
     sequence: [
@@ -96,7 +82,9 @@ function start(variant: CoinVariant): Shared {
   if (shared.loading || shared.broken) return shared;
   const cfg = CONFIGS[variant];
   const canvas = document.createElement("canvas");
-  canvas.className = "block h-full w-full";
+  // The canvas is opaque black; in the header that shows as a dark square over
+  // whatever scrolls beneath, so there it is screened onto the bar (black drops out).
+  canvas.className = variant === "header" ? "block h-full w-full mix-blend-screen" : "block h-full w-full";
   canvas.setAttribute("aria-hidden", "true");
   try {
     shared.renderer = new LogoRenderer(canvas);
@@ -109,6 +97,7 @@ function start(variant: CoinVariant): Shared {
   canvas.addEventListener("webglcontextlost", (e) => {
     e.preventDefault();
     s.broken = true;
+    s.shown = false;
   });
   shared.loading = (async () => {
     try {
@@ -124,20 +113,36 @@ function start(variant: CoinVariant): Shared {
 }
 
 /**
- * Fills its container with the live coin of a variant. While `paused` the coin
- * floats at rest if its variant has a rest look; otherwise it only compiles
- * its shaders, ready for the moment it wakes. `onReady` fires once a frame has
- * been drawn; if WebGL2 or anything else is missing it never fires, so the
- * caller keeps its static mark.
+ * Fills its container with the live coin of a variant. While `paused`, a
+ * variant with a rest look shows it as a single still frame (nothing redraws
+ * until it wakes); one without only compiles its shaders, ready for the
+ * moment it wakes. The animation loop runs only while the coin is moving and
+ * on screen. `onReady` fires once, when a frame has been drawn; if WebGL2 or
+ * anything else is missing it never fires, so the caller keeps its static
+ * mark. `onLost` fires if the GPU context is lost later.
  */
-export default function CoinMark({ variant, paused = false, onReady }: { variant: CoinVariant; paused?: boolean; onReady: () => void }) {
+export default function CoinMark({
+  variant,
+  paused = false,
+  onReady,
+  onLost,
+}: {
+  variant: CoinVariant;
+  paused?: boolean;
+  onReady: () => void;
+  onLost?: () => void;
+}) {
   const host = useRef<HTMLSpanElement>(null);
   const readyRef = useRef(onReady);
+  const lostRef = useRef(onLost);
   const pausedRef = useRef(paused);
+  const wakeRef = useRef<(() => void) | null>(null);
   useEffect(() => {
     readyRef.current = onReady;
+    lostRef.current = onLost;
     pausedRef.current = paused;
-  }, [onReady, paused]);
+    wakeRef.current?.();
+  }, [onReady, onLost, paused]);
 
   useEffect(() => {
     const el = host.current;
@@ -148,65 +153,115 @@ export default function CoinMark({ variant, paused = false, onReady }: { variant
     const renderer = shared.renderer;
     if (!canvas || !renderer || shared.broken) return;
     el.appendChild(canvas);
+    const view: HTMLCanvasElement = canvas;
+    const gpu: LogoRenderer = renderer;
 
     const { sequence, hold: HOLD, morph: MORPH } = cfg;
     let raf = 0;
     let visible = true;
     let last = 0;
     let asleep = true;
+    let stillDrawn = false;
+    let notified = false;
+    let lostNotified = false;
+
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
+    const drawn = () => {
+      shared.shown = true;
+      if (!notified) {
+        notified = true;
+        readyRef.current();
+      }
+    };
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
       if (!rect.width) return;
       const fit = Math.min(1, cfg.maxPx / (Math.max(rect.width, rect.height) * dpr));
-      canvas.width = Math.max(1, Math.round(rect.width * dpr * fit));
-      canvas.height = Math.max(1, Math.round(rect.height * dpr * fit));
+      const w = Math.max(1, Math.round(rect.width * dpr * fit));
+      const h = Math.max(1, Math.round(rect.height * dpr * fit));
+      if (canvas.width === w && canvas.height === h) return;
+      canvas.width = w;
+      canvas.height = h;
+      stillDrawn = false;
+      wake();
     };
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
     resize();
     const io = new IntersectionObserver(([e]) => {
       visible = e.isIntersecting;
+      if (visible) wake();
     });
     io.observe(canvas);
+    const onVisibility = () => {
+      if (!document.hidden) wake();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
 
-    const frame = (now: number) => {
-      raf = requestAnimationFrame(frame);
+    // A function declaration, so the observers set up above can wake it before this line runs.
+    function frame(now: number) {
+      raf = 0;
+      if (shared.broken) {
+        if (!lostNotified) {
+          lostNotified = true;
+          lostRef.current?.();
+        }
+        return;
+      }
       const materials = shared.materials;
-      if (shared.broken || !materials || document.hidden) return;
+      // Still loading: look again next frame.
+      if (!materials) return wake();
+      // Off screen or in a background tab: stop; the observers wake it again.
+      if (!visible || document.hidden) return;
       const lookup = (key: string) => materials.get(key);
       const span = HOLD + MORPH;
 
-      if (!visible) return;
       if (pausedRef.current && cfg.rest) {
-        // At rest: the coin floats in place.
+        // At rest: one still frame, then nothing until something changes.
         asleep = true;
         const rm = lookup(cfg.rest.material);
         if (!rm) return;
-        renderer.request(rm, true);
-        renderer.pump(1);
-        if (now - last < FRAME_MS - 2) return;
-        last = now;
-        if (!renderer.ready(rm.key)) return;
-        const [yaw, pitch, roll] = motionAngles("float", now / 1000, [0, 0]);
-        const state = stateFor(rm, cfg.rest.look, rotationMatrix(yaw, pitch, roll), now / 1000, [0, 0]);
-        if (renderer.render(state, canvas.width, canvas.height)) {
-          shared.shown = true;
-          readyRef.current();
+        gpu.request(rm, true);
+        gpu.pump(1);
+        if (!gpu.ready(rm.key)) return wake();
+        if (!stillDrawn) {
+          const [yaw, pitch, roll] = motionAngles("float", 0, [0, 0]);
+          const state = stateFor(rm, cfg.rest.look, rotationMatrix(yaw, pitch, roll), 0, [0, 0]);
+          if (!gpu.render(state, view.width, view.height)) return wake();
+          stillDrawn = true;
+          drawn();
+        }
+        // Warm the hover sequence too, so the flip starts at once.
+        for (const s of sequence.slice(0, 2)) {
+          const m = lookup(s.key);
+          if (m && !gpu.ready(m.key)) {
+            gpu.request(m);
+            return wake();
+          }
         }
         return;
       }
       if (pausedRef.current) {
-        // Asleep: only compile the first steps, so waking is instant.
+        // Asleep: only compile the first steps, so waking is instant; then stop.
         asleep = true;
+        let pending = false;
         for (const s of sequence.slice(0, 2)) {
           const m = lookup(s.key);
-          if (m) renderer.request(m, true);
+          if (m && !gpu.ready(m.key)) {
+            gpu.request(m, true);
+            pending = true;
+          }
         }
-        renderer.pump(1);
+        gpu.pump(1);
+        if (pending) wake();
         return;
       }
+      wake();
+      stillDrawn = false;
       if (asleep) {
         asleep = false;
         shared.clock = cfg.wakeAt;
@@ -221,16 +276,16 @@ export default function CoinMark({ variant, paused = false, onReady }: { variant
       const seg = Math.floor(shared.clock / span) % sequence.length;
       for (let d = 0; d < 2; d++) {
         const m = lookup(sequence[(seg + d) % sequence.length].key);
-        if (m) renderer.request(m, d === 0);
+        if (m) gpu.request(m, d === 0);
       }
-      renderer.pump(1);
+      gpu.pump(1);
 
       const from = sequence[seg];
       const to = sequence[(seg + 1) % sequence.length];
       const fallback = lookup(from.key);
       // Draw as soon as the step on screen is compiled; the next one is only needed once its morph begins.
-      if (!fallback || !renderer.ready(from.key)) return;
-      if (shared.clock % span >= HOLD && !renderer.ready(to.key)) {
+      if (!fallback || !gpu.ready(from.key)) return;
+      if (shared.clock % span >= HOLD && !gpu.ready(to.key)) {
         // Hold at the start of the morph until the next material is ready.
         shared.clock = Math.floor(shared.clock / span) * span + HOLD;
       } else {
@@ -241,19 +296,20 @@ export default function CoinMark({ variant, paused = false, onReady }: { variant
       // Flip motion: a little drift, and one full turn over each morph.
       const [yaw, , roll] = motionAngles("flip", now / 1000, [0, 0]);
       const state = transmuteState(from, to, p, [yaw, 0, roll], shared.clock, [0, 0], fallback, lookup, true);
-      if (renderer.render(state, canvas.width, canvas.height)) {
-        shared.shown = true;
-        readyRef.current();
-      }
-    };
+      if (gpu.render(state, view.width, view.height)) drawn();
+    }
+    wakeRef.current = wake;
     // A coin already drawn on an earlier page is shown straight away.
-    if (shared.shown) readyRef.current();
-    raf = requestAnimationFrame(frame);
+    if (shared.shown) drawn();
+    wake();
 
     return () => {
+      wakeRef.current = null;
       cancelAnimationFrame(raf);
+      raf = 0;
       ro.disconnect();
       io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
       // Detach only: the canvas and renderer live on for the next page.
       canvas.remove();
     };

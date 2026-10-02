@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m } from "framer-motion";
 import type { Project } from "@/data/site";
-import { revealItem, EASE } from "@/lib/motion";
+import { revealMedia, EASE } from "@/lib/motion";
 
-const MotionLink = motion.create(Link);
+const MotionLink = m.create(Link);
 
 /**
  * The media frame. Two treatments:
@@ -17,14 +17,15 @@ const MotionLink = motion.create(Link);
  */
 function CardMedia({
   project,
-  reduce,
   aspect,
   sizes,
+  eager,
 }: {
   project: Project;
-  reduce: boolean;
   aspect: string;
   sizes: string;
+  /** The first card: its image is the page's largest paint, so fetch it first. */
+  eager: boolean;
 }) {
   const [mediaOk, setMediaOk] = useState(true);
 
@@ -33,23 +34,27 @@ function CardMedia({
       <div
         className={`relative ${aspect} w-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#1c1c1c] to-black`}
       >
-        <motion.div
+        <m.div
           variants={{
-            rest: { scale: reduce ? 1.04 : 1 },
+            rest: { scale: 1 },
             hover: { scale: 1.04 },
           }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="absolute inset-0 origin-center will-change-transform"
+          className="absolute inset-0 origin-center group-hover:will-change-transform"
         >
           <Image
             src={project.media}
             alt={project.title}
             fill
+            preload={eager}
+            fetchPriority={eager ? "high" : undefined}
             onError={() => setMediaOk(false)}
-            className="object-contain object-center brightness-[0.9] transition-[filter] duration-500 group-hover:brightness-100"
+            className="object-contain object-center"
             sizes={sizes}
           />
-        </motion.div>
+          {/* Dims the art a touch at rest; fading an overlay is cheaper than animating a filter. */}
+          <div className="pointer-events-none absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
+        </m.div>
         {/* Bottom scrim — the filter that lifts on hover. */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/70 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
       </div>
@@ -61,13 +66,13 @@ function CardMedia({
       className={`relative grid ${aspect} w-full place-items-center overflow-hidden rounded-2xl bg-black ring-1 ring-border`}
     >
       {project.media && mediaOk ? (
-        <motion.div
+        <m.div
           variants={{
-            rest: { scale: reduce ? 1.06 : 1 },
+            rest: { scale: 1 },
             hover: { scale: 1.06 },
           }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="relative origin-center will-change-transform"
+          className="relative origin-center group-hover:will-change-transform"
           style={{ width: project.mediaWidth ?? "70%" }}
         >
           <Image
@@ -75,11 +80,13 @@ function CardMedia({
             alt={project.title}
             width={1200}
             height={760}
+            preload={eager}
+            fetchPriority={eager ? "high" : undefined}
             onError={() => setMediaOk(false)}
             className="h-auto w-full rounded-lg shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
             sizes={sizes}
           />
-        </motion.div>
+        </m.div>
       ) : (
         <Image
           src="/media/bimakavach-mark.svg"
@@ -106,15 +113,17 @@ function Tag({ tag, className = "" }: { tag: string; className?: string }) {
 export default function ProjectCard({
   project,
   view = "list",
+  index = -1,
 }: {
   project: Project;
   view?: "grid" | "list";
+  /** Position in the gallery; the first card's image loads first. */
+  index?: number;
 }) {
-  const reduce = useReducedMotion();
-  const itemProps = reduce ? {} : { variants: revealItem };
-  const layoutProps = reduce
-    ? {}
-    : { layout: true as const, transition: { duration: 0.5, ease: EASE } };
+  const eager = index === 0;
+  const itemProps = { variants: revealMedia };
+  // Only the card's position animates between views, so its image is never stretched.
+  const layoutProps = { layout: "position" as const, transition: { duration: 0.5, ease: EASE } };
   const hoverProps = {
     initial: "rest" as const,
     animate: "rest" as const,
@@ -133,7 +142,7 @@ export default function ProjectCard({
       >
         <CardMedia
           project={project}
-          reduce={!!reduce}
+          eager={eager}
           aspect="aspect-video"
           sizes="(max-width: 640px) 100vw, 600px"
         />
@@ -163,7 +172,7 @@ export default function ProjectCard({
     >
       <CardMedia
         project={project}
-        reduce={!!reduce}
+        eager={eager}
         aspect="aspect-[800/544]"
         sizes="(max-width: 832px) 100vw, 832px"
       />

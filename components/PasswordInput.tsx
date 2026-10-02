@@ -19,7 +19,7 @@ export default function PasswordInput({
   const lastSfx = useRef(-1);
   const { play } = useSfx();
 
-  const ENTRY_SOUNDS = ["/media/entry01.wav", "/media/entry02.wav"];
+  const ENTRY_SOUNDS = ["/media/entry01.mp3", "/media/entry02.mp3"];
   const playKeystroke = useCallback(() => {
     let idx = Math.floor(Math.random() * ENTRY_SOUNDS.length);
     if (idx === lastSfx.current) idx = (idx + 1) % ENTRY_SOUNDS.length;
@@ -31,10 +31,10 @@ export default function PasswordInput({
     if (!revealed) return;
     const ok = onSubmit(value);
     if (ok) {
-      play("/media/pw-success.wav", 0);
+      play("/media/pw-success.mp3", 0);
     } else {
       setError(true);
-      play("/media/pw-error.wav", 0);
+      play("/media/pw-error.mp3", 0);
     }
   };
 

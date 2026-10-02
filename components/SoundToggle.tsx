@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { useSfx, useSilentRoute } from "@/lib/sfx";
 import { EASE } from "@/lib/motion";
 
@@ -28,7 +28,7 @@ export default function SoundToggle() {
         />
         <AnimatePresence>
           {muted && (
-            <motion.svg
+            <m.svg
               key="strike"
               viewBox="0 0 24 24"
               className="absolute inset-0 size-full"
@@ -37,7 +37,7 @@ export default function SoundToggle() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
             >
-              <motion.line
+              <m.line
                 x1="1"
                 y1="23"
                 x2="23"
@@ -50,7 +50,7 @@ export default function SoundToggle() {
                 exit={{ pathLength: 0 }}
                 transition={{ duration: 0.3, ease: EASE }}
               />
-            </motion.svg>
+            </m.svg>
           )}
         </AnimatePresence>
       </span>

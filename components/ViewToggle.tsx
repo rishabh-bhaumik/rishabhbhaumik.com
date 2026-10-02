@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { EASE } from "@/lib/motion";
 import { useSfx } from "@/lib/sfx";
 
@@ -23,14 +23,14 @@ export default function ViewToggle({
       <div data-no-click-sfx className="flex items-center gap-1 rounded-full bg-surface p-1 ring-1 ring-border">
         <ViewButton
           active={view === "grid"}
-          onClick={() => { onViewChange("grid"); play("/media/switcher/view-grid.wav", 0.3); }}
+          onClick={() => { onViewChange("grid"); play("/media/switcher/view-grid.mp3", 0.3); }}
           label="Grid view"
           icon="/media/Iconography/switcher/grid.svg"
           layoutId={layoutId}
         />
         <ViewButton
           active={view === "list"}
-          onClick={() => { onViewChange("list"); play("/media/switcher/view-list.wav", 0.3); }}
+          onClick={() => { onViewChange("list"); play("/media/switcher/view-list.mp3", 0.3); }}
           label="List view"
           icon="/media/Iconography/switcher/list.svg"
           layoutId={layoutId}
@@ -64,7 +64,7 @@ function ViewButton({
       }`}
     >
       {active && (
-        <motion.span
+        <m.span
           layoutId={layoutId}
           className="absolute inset-0 rounded-full bg-surface-2 ring-1 ring-white/10"
           transition={{ duration: 0.3, ease: EASE }}

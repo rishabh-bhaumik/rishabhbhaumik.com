@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PasswordGate from "@/components/PasswordGate";
-import SaathiContent from "@/components/saathi/SaathiContent";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -12,8 +11,6 @@ export const metadata: Metadata = {
 
 export default function BimaSaathiPage() {
   return (
-    <PasswordGate project="Bima Saathi" password="bktsaathi">
-      <SaathiContent />
-    </PasswordGate>
+    <PasswordGate project="Bima Saathi" password="bktsaathi" content="saathi" />
   );
 }

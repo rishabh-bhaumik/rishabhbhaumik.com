@@ -9,31 +9,46 @@ import { useReducedMotion } from "framer-motion";
 const CoinMark = dynamic(() => import("./logo-lab/CoinMark"), { ssr: false });
 
 /**
- * The header's logo slot: the Default coin, floating, with a touch of dither
+ * The header's logo slot: the Default coin as a still, with a touch of dither
  * and chroma. Hovering (or focusing) the logo link makes it flip over as it
  * dithers. The plain mark stands in while the coin loads, and stays with
  * reduced motion or without WebGL2. The coin keeps the plain mark's size
- * (the slot is square, never more than 72px).
+ * (a 28px square slot).
  */
+/**
+ * The header remounts on every page; these remember that the coin has
+ * already started and drawn, so later pages show it at once instead of
+ * flashing the plain mark first.
+ */
+let armedOnce = false;
+let readyOnce = false;
+
 export default function HeaderCoin() {
   const reduce = useReducedMotion();
   const slot = useRef<HTMLSpanElement>(null);
-  const [armed, setArmed] = useState(false);
-  const [ready, setReady] = useState(false);
+  const [armed, setArmed] = useState(() => armedOnce);
+  const [ready, setReady] = useState(() => readyOnce);
   const [hover, setHover] = useState(false);
 
-  // Warm the coin up once the page has settled.
+  // Warm the coin up once the page has loaded and gone idle.
   useEffect(() => {
-    if (reduce) return;
-    let id: number;
+    if (reduce || armedOnce) return;
+    let idle = 0;
+    let timer = 0;
+    const arm = () => {
+      armedOnce = true;
+      setArmed(true);
+    };
     const start = () => {
-      id = window.setTimeout(() => setArmed(true), 300);
+      if (window.requestIdleCallback) idle = window.requestIdleCallback(arm, { timeout: 2500 });
+      else timer = window.setTimeout(arm, 300);
     };
     if (document.readyState === "complete") start();
     else window.addEventListener("load", start, { once: true });
     return () => {
       window.removeEventListener("load", start);
-      window.clearTimeout(id);
+      if (idle) window.cancelIdleCallback?.(idle);
+      window.clearTimeout(timer);
     };
   }, [reduce]);
 
@@ -59,22 +74,32 @@ export default function HeaderCoin() {
   const showCoin = ready;
 
   return (
-    <span ref={slot} className="relative grid size-11 max-h-[72px] max-w-[72px] place-items-center">
+    <span ref={slot} className="relative grid size-7 place-items-center">
       <Image
         src="/media/logo-mark.svg"
         alt=""
-        width={32}
-        height={32}
-        className={`size-8 transition-opacity duration-200 ${showCoin ? "opacity-0" : "opacity-100"}`}
-        priority
+        width={28}
+        height={28}
+        className={`size-7 transition-opacity duration-200 ${showCoin ? "opacity-0" : "opacity-100"}`}
       />
       {armed && (
         // The coin is drawn with room around it to flip: in a front view the mark fills 65.7% of the canvas,
-        // so a 48.7px canvas puts the mark at the plain logo's 32px, and the swap does not change its size.
+        // so a 42.6px canvas puts the mark at the plain logo's 28px, and the swap does not change its size.
         <span
-          className={`absolute left-1/2 top-1/2 size-[48.7px] -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ${showCoin ? "opacity-100" : "opacity-0"}`}
+          className={`absolute left-1/2 top-1/2 size-[42.6px] -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ${showCoin ? "opacity-100" : "opacity-0"}`}
         >
-          <CoinMark variant="header" paused={!hover} onReady={() => setReady(true)} />
+          <CoinMark
+            variant="header"
+            paused={!hover}
+            onReady={() => {
+              readyOnce = true;
+              setReady(true);
+            }}
+            onLost={() => {
+              readyOnce = false;
+              setReady(false);
+            }}
+          />
         </span>
       )}
     </span>

@@ -5,6 +5,7 @@ import ClickSFX from "@/components/ClickSFX";
 import SoundToggle from "@/components/SoundToggle";
 import PageRevealSFX from "@/components/PageRevealSFX";
 import { SfxProvider } from "@/lib/sfx";
+import MotionProvider from "@/components/MotionProvider";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -25,12 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SfxProvider>
-          <PageRevealSFX />
-          <ClickSFX />
-          <SoundToggle />
-          <SmoothScroll>{children}</SmoothScroll>
-        </SfxProvider>
+        <MotionProvider>
+          <SfxProvider>
+            <PageRevealSFX />
+            <ClickSFX />
+            <SoundToggle />
+            <SmoothScroll>{children}</SmoothScroll>
+          </SfxProvider>
+        </MotionProvider>
       </body>
     </html>
   );
