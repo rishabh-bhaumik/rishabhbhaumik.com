@@ -325,5 +325,11 @@ void main() {
 `;
 
 export const BLIT_FRAG = COMMON + /* glsl */ `
-void main() { fragColor = vec4(texture(uSrc, vUv).rgb, 1.0); }
+// uKey: key the black background out (alpha from brightness, colour left premultiplied),
+// so the coin composites over whatever is behind a transparent canvas.
+uniform int uKey;
+void main() {
+  vec3 c = clamp(texture(uSrc, vUv).rgb, 0.0, 1.0);
+  fragColor = uKey == 1 ? vec4(c, max(c.r, max(c.g, c.b))) : vec4(c, 1.0);
+}
 `;

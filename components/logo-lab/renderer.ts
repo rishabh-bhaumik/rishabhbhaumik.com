@@ -96,13 +96,20 @@ export class LogoRenderer {
   /** What each surface target last baked, so a still loop clock skips the bake. */
   private baked: Record<string, string> = {};
 
-  constructor(readonly canvas: HTMLCanvasElement) {
+  /** Draws to a transparent canvas, the black background keyed out. */
+  private readonly transparent: boolean;
+
+  constructor(
+    readonly canvas: HTMLCanvasElement,
+    { transparent = false }: { transparent?: boolean } = {},
+  ) {
+    this.transparent = transparent;
     const gl = canvas.getContext("webgl2", {
       antialias: false,
-      alpha: false,
+      alpha: transparent,
       depth: false,
       stencil: false,
-      premultipliedAlpha: false,
+      premultipliedAlpha: transparent,
       preserveDrawingBuffer: false,
       powerPreference: "high-performance",
     });
@@ -432,7 +439,9 @@ export class LogoRenderer {
       current = out;
     }
     const final = into ? this.target(into, w, h) : null;
-    this.pass(this.blitProgram, current, final, w, h);
+    this.pass(this.blitProgram, current, final, w, h, (p) => {
+      this.gl.uniform1i(this.loc(p, "uKey"), this.transparent && !final ? 1 : 0);
+    });
     return true;
   }
 

@@ -82,12 +82,11 @@ function start(variant: CoinVariant): Shared {
   if (shared.loading || shared.broken) return shared;
   const cfg = CONFIGS[variant];
   const canvas = document.createElement("canvas");
-  // The canvas is opaque black; in the header that shows as a dark square over
-  // whatever scrolls beneath, so there it is screened onto the bar (black drops out).
-  canvas.className = variant === "header" ? "block h-full w-full mix-blend-screen" : "block h-full w-full";
+  canvas.className = "block h-full w-full";
   canvas.setAttribute("aria-hidden", "true");
   try {
-    shared.renderer = new LogoRenderer(canvas);
+    // Transparent: the header bar is see-through, so the coin's black background is keyed out.
+    shared.renderer = new LogoRenderer(canvas, { transparent: true });
   } catch {
     shared.broken = true;
     return shared;

@@ -108,7 +108,10 @@ export default function Header() {
               {SITE.name}
             </span>
             <HeaderCoin />
-            <LocalClock />
+            {/* Phones show the logo alone. */}
+            <span className="hidden sm:contents">
+              <LocalClock />
+            </span>
           </Link>
         </m.div>
 
