@@ -104,11 +104,11 @@ export default function PhotoCarousel() {
           disabled={total < 2}
           aria-label="Previous photo"
           data-no-click-sfx
-          className="grid size-8 place-items-center rounded-full text-[#575757] transition-colors hover:text-ink disabled:opacity-40 disabled:hover:text-[#575757]"
+          className="grid size-8 place-items-center rounded-full text-dim transition-colors hover:text-ink disabled:opacity-40 disabled:hover:text-dim"
         >
           <ChevronLeft className="size-5" strokeWidth={1.5} />
         </button>
-        <span className="font-mono text-14 tabular-nums text-[#575757]">
+        <span className="font-mono text-14 tabular-nums text-dim">
           {pad(i + 1)} / {pad(total)}
         </span>
         <button
@@ -117,7 +117,7 @@ export default function PhotoCarousel() {
           disabled={total < 2}
           aria-label="Next photo"
           data-no-click-sfx
-          className="grid size-8 place-items-center rounded-full text-[#575757] transition-colors hover:text-ink disabled:opacity-40 disabled:hover:text-[#575757]"
+          className="grid size-8 place-items-center rounded-full text-dim transition-colors hover:text-ink disabled:opacity-40 disabled:hover:text-dim"
         >
           <ChevronRight className="size-5" strokeWidth={1.5} />
         </button>

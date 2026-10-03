@@ -18,12 +18,16 @@ function LinkCover({ item }: { item: PlayCardData }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Open ${item.title} in a new tab`}
-      className="absolute inset-0 grid place-items-center bg-black"
+      className="absolute inset-0 grid place-items-center bg-black light:bg-bg"
     >
       <IconLabCover />
     </a>
   );
 }
+
+/** The media frame behind a card: near-black with a soft glow, for dark embeds and thumbnails.
+ *  A link cover (the Icon Lab coin) paints its own backdrop, so in light mode its frame takes the page colour. */
+const FRAME = "bg-[#0a0a0c] bg-[radial-gradient(130%_130%_at_82%_12%,rgba(255,255,255,0.07)_0%,rgba(10,10,12,0)_46%)]";
 
 /** A title that is a link when the item is one. */
 function Title({ item, className }: { item: PlayCardData; className: string }) {
@@ -57,7 +61,7 @@ export default function PlayCard({
     return (
       <m.div {...itemProps} {...layoutProps} data-card className="px-4 sm:px-6">
         {/* Media — matches ProjectCard: aspect-[800/544], full width */}
-        <div className="relative grid aspect-[800/544] w-full place-items-center overflow-hidden rounded-2xl bg-[#0a0a0c] bg-[radial-gradient(130%_130%_at_82%_12%,rgba(255,255,255,0.07)_0%,rgba(10,10,12,0)_46%)]">
+        <div className={`relative grid aspect-[800/544] w-full place-items-center overflow-hidden rounded-2xl ${FRAME} ${item.href ? "light:bg-bg light:bg-none" : ""}`}>
           {item.href ? (
             <LinkCover item={item} />
           ) : playing ? (
@@ -122,7 +126,7 @@ export default function PlayCard({
   return (
     <m.div {...itemProps} {...layoutProps} data-card className="flex flex-col gap-4">
       {/* Media */}
-      <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-[#0a0a0c] bg-[radial-gradient(130%_130%_at_82%_12%,rgba(255,255,255,0.07)_0%,rgba(10,10,12,0)_46%)]">
+      <div className={`relative aspect-video w-full overflow-hidden rounded-2xl ${FRAME} ${item.href ? "light:bg-bg light:bg-none" : ""}`}>
         {item.href ? (
           <LinkCover item={item} />
         ) : playing ? (

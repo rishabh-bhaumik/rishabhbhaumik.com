@@ -33,8 +33,8 @@ export default function PasswordInput({
     <div className="flex flex-col gap-2">
       <div
         data-no-click-sfx
-        className={`flex h-8 w-[298px] max-w-full items-center gap-1 rounded-md border bg-black pl-[9px] pr-1 transition-colors ${
-          error ? "border-red-500/60" : "border-[#1c1c1c] focus-within:border-white/25"
+        className={`flex h-8 w-[298px] max-w-full items-center gap-1 rounded-md border bg-bg pl-[9px] pr-1 transition-colors ${
+          error ? "border-red-500/60" : "border-surface focus-within:border-ink/25"
         }`}
       >
         <input
@@ -50,7 +50,7 @@ export default function PasswordInput({
           placeholder={placeholder}
           autoFocus
           aria-label="Password"
-          className="min-w-0 flex-1 bg-transparent text-14 leading-none text-white outline-none placeholder:text-faint"
+          className="min-w-0 flex-1 bg-transparent text-14 leading-none text-ink outline-none placeholder:text-faint"
           style={{ caretColor: revealed ? "transparent" : undefined }}
         />
         {revealed && (

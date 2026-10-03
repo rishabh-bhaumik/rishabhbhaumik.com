@@ -15,6 +15,7 @@ import Image from "next/image";
 import { m, useReducedMotion } from "framer-motion";
 import Header from "@/components/Header";
 import AsciiDither from "@/components/bk/AsciiDither";
+import { useTheme } from "@/lib/theme";
 import "./anek.css";
 
 const ScrollRootCtx = createContext<React.RefObject<HTMLDivElement | null>>({
@@ -60,7 +61,7 @@ function Body({
     <p
       className={`leading-relaxed ${
         large
-          ? "text-32 leading-[1.3] text-white"
+          ? "text-32 leading-[1.3] text-ink"
           : "text-14 text-muted"
       } ${className}`}
     >
@@ -69,28 +70,42 @@ function Body({
   );
 }
 
+/**
+ * A case-study image. `light`: the image has a light-mode version
+ * (`<name>-light.png`, its baked-in dark backdrop swapped for the page colour);
+ * CSS shows the one for the theme, and lazy loading fetches only that one.
+ */
 function Media({
   name,
   w,
   h,
   alt,
   className = "",
+  light = false,
 }: {
   name: string;
   w: number;
   h: number;
   alt: string;
   className?: string;
+  light?: boolean;
 }) {
-  return (
+  const image = (file: string, show: string) => (
     <Image
-      src={`${MC}/${name}.png`}
+      src={`${MC}/${file}.png`}
       alt={alt}
       width={w}
       height={h}
       sizes="(max-width: 768px) 92vw, 60vw"
-      className={`h-auto w-full ${className}`}
+      className={`h-auto w-full ${show} ${className}`}
     />
+  );
+  if (!light) return image(name, "");
+  return (
+    <>
+      {image(name, "light:hidden")}
+      {image(`${name}-light`, "hidden light:block")}
+    </>
   );
 }
 
@@ -227,7 +242,7 @@ function Card({
     >
       <StaggerItem
         wrapperClassName="absolute inset-0"
-        className="h-full w-full rounded-3xl bg-gradient-to-b from-surface/60 to-black ring-1 ring-white/10"
+        className="h-full w-full rounded-3xl bg-gradient-to-b from-surface/60 to-bg ring-1 ring-ink/10"
       />
       <div className="relative z-10 flex flex-col gap-6">{children}</div>
     </div>
@@ -261,6 +276,10 @@ const FILTER_COLORS = [
   "#21006d",
   "#160049",
 ] as const;
+/** Light theme: the ramp mirrored in lightness (band i takes band 8 − i's
+ *  colour), so the top bands are the darkest ink on the light page, just as
+ *  they are the brightest on black. The violet middle stays put. */
+const FILTER_COLORS_LIGHT = [...FILTER_COLORS].reverse();
 
 function WorkVideo() {
   const ref = useRef<HTMLDivElement>(null);
@@ -269,6 +288,7 @@ function WorkVideo() {
   // The dither (a WebGL context plus a video) is only created once its panel
   // is within one screen of view, not when the page opens 13 panels away.
   const [near, setNear] = useState(false);
+  const light = useTheme() === "light";
 
   useEffect(() => {
     const el = ref.current;
@@ -295,11 +315,12 @@ function WorkVideo() {
   }, [scrollRoot]);
 
   return (
-    <div ref={ref} className="absolute inset-0 bg-black">
+    <div ref={ref} className="absolute inset-0 bg-bg">
       {near && (
         <AsciiDither
           active={inView}
-          colors={FILTER_COLORS}
+          light={light}
+          colors={light ? FILTER_COLORS_LIGHT : FILTER_COLORS}
           videoSrc={`${MC}/section-work-0-ascii-video.mp4`}
         />
       )}
@@ -366,8 +387,8 @@ const WDTH_PEAK = 125;
  *  "active" (bigger, brighter), all others sit muted at half size. */
 const SIZE_ACTIVE_PX = 32;
 const SIZE_REST_PX = 16;
-const COLOR_ACTIVE = "#FFFFFF";
-const COLOR_REST = "#A8A8A8";
+const COLOR_ACTIVE = "var(--color-ink)";
+const COLOR_REST = "var(--color-muted)";
 /** Custom spring for the swap (Figma: "smoother and more responsive, should
  *  not feel like there's a 'lag'"). Snappy stiffness, low mass. */
 const SWAP_SPRING = { type: "spring" as const, stiffness: 380, damping: 32, mass: 0.9 };
@@ -625,7 +646,7 @@ export default function IdentityContent() {
         <div
           ref={stageRef}
           data-lenis-prevent
-          className="fixed inset-0 z-0 flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden bg-black [&_section]:snap-start"
+          className="fixed inset-0 z-0 flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden bg-bg [&_section]:snap-start"
           style={{ scrollBehavior: "auto" }}
         >
           {/* A plain CSS fade for the whole stage: blurring ~20 full-screen panels at once was the costliest frame on the page. */}
@@ -644,7 +665,7 @@ export default function IdentityContent() {
             {/* 1 — section-story-0 (context card) */}
             <section
               id="section-story-0"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={560} gap={10}>
                 <div className="mx-auto flex w-full max-w-[480px] items-center justify-between">
@@ -689,7 +710,7 @@ export default function IdentityContent() {
             {/* 2 — section-story-1 */}
             <section
               id="section-story-1"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell width={700} gap={5}>
                 <Tag>pivots and challenges</Tag>
@@ -718,7 +739,7 @@ export default function IdentityContent() {
             {/* 3 — section-story-2 (32px body text) */}
             <section
               id="section-story-2"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1160}>
                 <div className="grid items-center gap-8 md:grid-cols-[0.8fr_1.4fr]">
@@ -744,7 +765,7 @@ export default function IdentityContent() {
             {/* 4 — section-story-3 */}
             <section
               id="section-story-3"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1100} gap={6}>
                 <SolutionsHead />
@@ -803,7 +824,7 @@ export default function IdentityContent() {
             {/* 5 — section-story-4 */}
             <section
               id="section-story-4"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1100} gap={6}>
                 <SolutionsHead />
@@ -843,7 +864,7 @@ export default function IdentityContent() {
             {/* 6 — section-story-5 */}
             <section
               id="section-story-5"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1100} gap={6}>
                 <SolutionsHead />
@@ -871,7 +892,7 @@ export default function IdentityContent() {
             {/* 7 — section-story-6 */}
             <section
               id="section-story-6"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1100} gap={6}>
                 <SolutionsHead />
@@ -899,7 +920,7 @@ export default function IdentityContent() {
             {/* 8 — section-story-7 */}
             <section
               id="section-story-7"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1200}>
                 <div className="grid items-center gap-8 md:grid-cols-[0.6fr_1.6fr]">
@@ -930,7 +951,7 @@ export default function IdentityContent() {
             {/* 9 — section-story-8 */}
             <section
               id="section-story-8"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1160} gap={10}>
                 <div className="grid items-center gap-8 md:grid-cols-[1.4fr_0.9fr]">
@@ -985,7 +1006,7 @@ export default function IdentityContent() {
             {/* 10 — section-story-9 */}
             <section
               id="section-story-9"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell width={1200} gap={6}>
                 <Tag>checkout &amp; payment</Tag>
@@ -998,6 +1019,7 @@ export default function IdentityContent() {
                   w={1200}
                   h={670}
                   alt="KYC states"
+                  light
                 />
               </Shell>
             </section>
@@ -1005,7 +1027,7 @@ export default function IdentityContent() {
             {/* 11 — section-story-10 */}
             <section
               id="section-story-10"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1200} gap={6}>
                 <StaggerItem>
@@ -1042,7 +1064,7 @@ export default function IdentityContent() {
             {/* 12 — section-story-11 (brand positioning) */}
             <section
               id="section-story-11"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={520} gap={6}>
                 <div className="flex flex-col gap-4">
@@ -1088,7 +1110,7 @@ export default function IdentityContent() {
             {/* 14 — section-work-1 (the brief) */}
             <section
               id="section-work-1"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={560} gap={10}>
                 <div className="mx-auto flex w-full max-w-[480px] items-center justify-between">
@@ -1130,7 +1152,7 @@ export default function IdentityContent() {
             {/* 15 — section-work-2 (brand meta) */}
             <section
               id="section-work-2"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={420}>
                 <dl className="flex flex-col gap-10">
@@ -1165,7 +1187,7 @@ export default function IdentityContent() {
             {/* 16 — section-work-3 (My Task at Hand) */}
             <section
               id="section-work-3"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell width={700} gap={5}>
                 <Tag>pivots and challenges</Tag>
@@ -1192,7 +1214,7 @@ export default function IdentityContent() {
             {/* 17 — section-work-4 (Indian aesthetic) */}
             <section
               id="section-work-4"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell width={784} gap={5}>
                 <Body>
@@ -1213,7 +1235,7 @@ export default function IdentityContent() {
             {/* 18 — section-work-5 (A Typeface for All India) */}
             <section
               id="section-work-5"
-              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-black"
+              className="relative flex h-full w-screen shrink-0 items-center justify-center bg-bg"
             >
               <Shell manual width={1032} gap={6} className="py-16 sm:py-24">
                 {/* Typeface stack owns the upper portion — flex-1 lets it

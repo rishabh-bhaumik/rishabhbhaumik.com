@@ -6,7 +6,9 @@ import SoundToggle from "@/components/SoundToggle";
 import PageRevealSFX from "@/components/PageRevealSFX";
 import { SfxProvider } from "@/lib/sfx";
 import MotionProvider from "@/components/MotionProvider";
+import ThemeSync from "@/components/ThemeSync";
 import { SITE } from "@/data/site";
+import { THEME_SCRIPT } from "@/lib/theme-script";
 
 export const metadata: Metadata = {
   title: `${SITE.name} - ${SITE.role}`,
@@ -24,8 +26,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    // data-theme is set before paint by THEME_SCRIPT, so the server's "dark" may
+    // differ from what the client hydrates over.
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>
+        <ThemeSync />
         <MotionProvider>
           <SfxProvider>
             <PageRevealSFX />

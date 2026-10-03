@@ -27,7 +27,7 @@ const CONTENT = {
   saathi: dynamic(LOADERS.saathi),
   identity: dynamic(LOADERS.identity),
 };
-export type GatedContent = keyof typeof CONTENT;
+type GatedContent = keyof typeof CONTENT;
 
 export default function PasswordGate({
   project,

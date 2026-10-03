@@ -17,9 +17,9 @@ export default function AboutContent() {
       <main className="w-full pb-20">
         {/* Hero — flipping coin box + heading + intro. A CSS entrance (.rise), so it paints before hydration. */}
         <section className="flex flex-col gap-10 pt-2">
-          {/* Same box as the home hero's showreel: 16:9, rounded, black, in the content column. */}
+          {/* Same box as the home hero's showreel: 16:9, rounded, black (page colour in light mode), in the content column. */}
           <div className="mx-auto w-full max-w-[var(--content-max)] px-4 sm:px-6">
-            <div style={at(0)} className="rise relative aspect-video w-full overflow-hidden rounded-2xl bg-black">
+            <div style={at(0)} className="rise relative aspect-video w-full overflow-hidden rounded-2xl bg-black light:bg-bg">
               <HeroCoin />
             </div>
           </div>

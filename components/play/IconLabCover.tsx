@@ -16,8 +16,16 @@ const REST_LOOK: Look = { relief: 1, light: null, filters: [{ key: "vhs", amount
 /** The float is slow; 30 frames a second is plenty and halves the cost. */
 const FRAME_MS = 1000 / 30;
 
+/** The page background (--color-bg) as 0..1 RGB, so the coin's backdrop matches the theme. */
+function pageBackground(): [number, number, number] {
+  let h = getComputedStyle(document.documentElement).getPropertyValue("--color-bg").trim().replace("#", "");
+  if (h.length === 3) h = h.replace(/./g, (c) => c + c);
+  const n = parseInt(h.slice(0, 6), 16);
+  return Number.isNaN(n) ? [0, 0, 0] : [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+}
+
 /**
- * The Icon Lab card's cover. A live coin floats on black. The coin starts
+ * The Icon Lab card's cover. A live coin floats on the page colour. The coin starts
  * once the card is on screen and the page is idle, and only draws while
  * visible. Without WebGL2, or with reduced motion, it is the plain mark.
  */
@@ -92,6 +100,12 @@ export default function IconLabCover() {
     io.observe(root);
     const onVisibility = () => wake();
     document.addEventListener("visibilitychange", onVisibility);
+    // Follow the light / dark switch (it flips <html data-theme>).
+    let bg = pageBackground();
+    const themeObs = new MutationObserver(() => {
+      bg = pageBackground();
+    });
+    themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
     // A function declaration, so the observers set up above can wake it before this line runs.
     function frame(now: number) {
@@ -107,6 +121,7 @@ export default function IconLabCover() {
       if (!r.ready(rest.key)) return;
       const [yaw, pitch, roll] = motionAngles("float", now / 1000, [0, 0]);
       const state = stateFor(rest, REST_LOOK, rotationMatrix(yaw, pitch, roll), now / 1000, [0, 0]);
+      r.background = bg;
       if (r.render(state, view.width, view.height) && !drew) {
         drew = true;
         setLive(true);
@@ -118,6 +133,7 @@ export default function IconLabCover() {
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();
+      themeObs.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
       renderer?.dispose();
       // Unmounted for real (not a dev double-mount): give the GPU context back.
@@ -132,7 +148,7 @@ export default function IconLabCover() {
         alt=""
         width={96}
         height={96}
-        className={`absolute left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 ${live ? "opacity-0" : "opacity-100"}`}
+        className={`absolute left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 light:invert ${live ? "opacity-0" : "opacity-100"}`}
       />
       <canvas
         ref={glRef}

@@ -10,13 +10,13 @@
 /** A run of body text. Plain string, or a fragment that is emphasised, linked, or both. */
 export type Frag = string | { text: string; em?: true; href?: string };
 
-export interface ContactRow {
+interface ContactRow {
   label: string;
   value: string;
   href?: string;
 }
 
-export interface ExperienceItem {
+interface ExperienceItem {
   /** Left rail, e.g. "Jan ‘26 - Present" */
   dates: string;
   /** Left rail secondary — duration, e.g. "(6 Months)". */
@@ -28,14 +28,14 @@ export interface ExperienceItem {
   bullets: Frag[][];
 }
 
-export interface EducationItem {
+interface EducationItem {
   dates: string;
   title: string;
   org: string;
   location?: string;
 }
 
-export interface CredentialItem {
+interface CredentialItem {
   dates: string;
   title: string;
   org: string;

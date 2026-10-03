@@ -32,7 +32,7 @@ function CardMedia({
   if (project.cover && project.media && mediaOk) {
     return (
       <div
-        className={`relative ${aspect} w-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#1c1c1c] to-black`}
+        className={`relative ${aspect} w-full overflow-hidden rounded-2xl bg-gradient-to-br from-surface to-bg`}
       >
         <m.div
           variants={{
@@ -53,17 +53,17 @@ function CardMedia({
             sizes={sizes}
           />
           {/* Dims the art a touch at rest; fading an overlay is cheaper than animating a filter. */}
-          <div className="pointer-events-none absolute inset-0 bg-black/10 transition-opacity duration-500 group-hover:opacity-0" />
+          <div className="pointer-events-none absolute inset-0 bg-black/10 light:bg-bg/10 transition-opacity duration-500 group-hover:opacity-0" />
         </m.div>
-        {/* Bottom scrim — the filter that lifts on hover. */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/70 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
+        {/* Bottom scrim — the filter that lifts on hover. Washes toward the page colour in light mode. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/70 light:from-bg/60 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
       </div>
     );
   }
 
   return (
     <div
-      className={`relative grid ${aspect} w-full place-items-center overflow-hidden rounded-2xl bg-black ring-1 ring-border`}
+      className={`relative grid ${aspect} w-full place-items-center overflow-hidden rounded-2xl bg-bg ring-1 ring-border`}
     >
       {project.media && mediaOk ? (
         <m.div

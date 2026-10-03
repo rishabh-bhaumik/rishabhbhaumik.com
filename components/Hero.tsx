@@ -1,5 +1,4 @@
 import { BIO, SITE } from "@/data/site";
-import { getVimeoThumbnail } from "@/lib/play";
 import CompanyChip from "./CompanyChip";
 import HeroVideo from "./HeroVideo";
 
@@ -7,16 +6,16 @@ import HeroVideo from "./HeroVideo";
  * Home hero. A server component: everything here is in the first HTML and
  * eases in with CSS (.rise), so it paints before any JavaScript arrives.
  */
-export default async function Hero() {
-  const poster = await getVimeoThumbnail(SITE.heroVideoPage);
+export default function Hero() {
   const at = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
   return (
     <section className="flex flex-col items-center gap-6 px-4 pb-20 pt-16 text-center sm:px-6 sm:pt-24">
-      {/* Looping showreel — the "orbitting" piece. Vimeo's `background=1` gives
-          autoplay + muted + loop with no controls and no pointer interaction. */}
-      <div style={at(0)} className="rise relative aspect-video w-full overflow-hidden rounded-2xl bg-black">
-        <HeroVideo src={SITE.heroVideo} poster={poster} title="Showreel" />
+      {/* Looping showreel, the "orbitting" piece, in the version for the
+          current theme (HeroVideo). The card takes the page colour in light
+          mode, which the light clip's backdrop matches exactly. */}
+      <div style={at(0)} className="rise relative aspect-video w-full overflow-hidden rounded-2xl bg-black light:bg-bg">
+        <HeroVideo dark={SITE.heroVideo.dark} light={SITE.heroVideo.light} />
       </div>
 
       {/* Version pill */}

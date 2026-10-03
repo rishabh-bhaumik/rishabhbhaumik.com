@@ -30,13 +30,13 @@ const LOREM =
 const LOREM_SHORT =
   "Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor.";
 
-/** WIP media placeholder — a black block with a hairline edge. */
+/** WIP media placeholder — a surface-coloured block with a hairline edge. */
 function Media({ className = "aspect-[800/544]" }: { className?: string }) {
   return (
     <div
-      className={`grid w-full place-items-center overflow-hidden rounded-2xl bg-black ring-1 ring-border ${className}`}
+      className={`grid w-full place-items-center overflow-hidden rounded-2xl bg-surface ring-1 ring-border ${className}`}
     >
-      <span className="font-mono text-10 uppercase tracking-[0.2em] text-white/30">
+      <span className="font-mono text-10 uppercase tracking-[0.2em] text-ink/30">
         media
       </span>
     </div>

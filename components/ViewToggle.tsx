@@ -66,7 +66,7 @@ function ViewButton({
       {active && (
         <m.span
           layoutId={layoutId}
-          className="absolute inset-0 rounded-full bg-surface-2 ring-1 ring-white/10"
+          className="absolute inset-0 rounded-full bg-surface-2 ring-1 ring-ink/10"
           transition={{ duration: 0.3, ease: EASE }}
         />
       )}
@@ -75,7 +75,7 @@ function ViewButton({
         alt=""
         width={14}
         height={14}
-        className={`relative size-3.5 ${active ? "invert" : "invert opacity-50"}`}
+        className={`relative size-3.5 invert light:invert-0 ${active ? "" : "opacity-50"}`}
       />
     </button>
   );

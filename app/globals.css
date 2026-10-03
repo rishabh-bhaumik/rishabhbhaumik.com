@@ -13,6 +13,8 @@
   --color-faint: #a3a3a3;
   /* Nav "current item": text + bottom stroke of the page you are already on. */
   --color-nav-current: #363636;
+  /* Quiet controls a step below faint (carousel arrows and counter). */
+  --color-dim: #575757;
 
   /* BimaKavach's violet, used only inside its Identity case study. The site
      itself is monochrome; the clock's status dot keeps its own colours in
@@ -45,6 +47,31 @@
   --content-max: 832px; /* Home work column */
   --reading-max: 700px; /* narrow reading column: About text, Saathi, gate, footer */
   --shell-max: 1200px; /* Play gallery */
+}
+
+/* `light:` utilities apply only while the light theme is on (lib/theme.ts). */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+/* Light theme: the same token names, re-pointed. Warm off-white, the colour of
+   the "Studio" backdrop the light hero video is briefed against, so the page
+   and that video meet without an edge. In @layer base so it beats the @theme
+   defaults (layer theme) but never a utility. */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --color-bg: #f5f3ef;
+    --color-surface: #ebe7e0;
+    --color-surface-2: #e2ddd4;
+    --color-border: #1412101a;
+    --color-ink: #141210;
+    --color-muted: #57534c;
+    --color-faint: #6b665e;
+    --color-nav-current: #c4beb3;
+    --color-dim: #a39d92;
+  }
 }
 
 /* Base element styling lives in @layer base so Tailwind utilities (which sit in
@@ -141,15 +168,23 @@ html.lenis body {
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: color-mix(in srgb, var(--color-ink) 12%, transparent);
+  color: var(--color-ink);
 }
 
 /* Focus visibility for keyboard nav */
 :focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline: 2px solid color-mix(in srgb, var(--color-ink) 85%, transparent);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* Switching theme cross-fades the whole page (setTheme in lib/theme.ts skips
+   the transition under reduced motion). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -21,9 +21,6 @@ const headerItem = {
   }),
 };
 
-/** A nav item that is shown but not yet a link. */
-const DISABLED = "cursor-not-allowed select-none text-faint/40";
-
 const LEFT = NAV.filter((item) => item.side === "left");
 
 export default function Header() {
@@ -40,26 +37,17 @@ export default function Header() {
         const isCurrent = !!item.current && pathname === item.current;
         return (
           <m.div key={item.label} variants={headerItem} custom={from + i}>
-            {item.disabled ? (
-              <span
-                aria-disabled="true"
-                className={`block py-1 text-14 lowercase tracking-[0.02em] ${DISABLED}`}
-              >
-                {item.label}
-              </span>
-            ) : (
-              <Link
-                href={item.href}
-                aria-current={isCurrent ? "page" : undefined}
-                className={`block py-1 text-14 lowercase tracking-[0.02em] transition-colors ${
-                  isCurrent
-                    ? "border-b border-nav-current text-nav-current shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
-                    : "text-faint hover:text-ink focus-visible:text-ink"
-                }`}
-              >
-                {item.label}
-              </Link>
-            )}
+            <Link
+              href={item.href}
+              aria-current={isCurrent ? "page" : undefined}
+              className={`block py-1 text-14 lowercase tracking-[0.02em] transition-colors ${
+                isCurrent
+                  ? "border-b border-nav-current text-nav-current shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] light:shadow-none"
+                  : "text-faint hover:text-ink focus-visible:text-ink"
+              }`}
+            >
+              {item.label}
+            </Link>
           </m.div>
         );
       })}
@@ -67,14 +55,15 @@ export default function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b-[0.5px] border-white/10 bg-bg/90">
-      {/* Three columns at every width (links or the menu button left, the clock centred, links right), so the clock's dot sits on the page's centre line. */}
+    <header className="sticky top-0 z-50 w-full border-b-[0.5px] border-ink/10 bg-bg/90">
+      {/* From sm up: three columns (links left, the clock centred, links right), so the clock's dot sits on the page's centre line.
+          On phones the menu button is at the left and the clock at the right. */}
       <m.div
         initial="hidden"
         animate="show"
-        className="grid h-16 w-full grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6"
+        className="grid h-16 w-full grid-cols-[auto_1fr] items-center gap-2 px-4 sm:grid-cols-[1fr_auto_1fr] sm:gap-0 sm:px-6"
       >
-        {/* Left — Home, Work, Play / mobile menu toggle */}
+        {/* Left — Home, Work / mobile menu toggle */}
         {navSet("left", 0, "justify-self-start")}
         <m.button
           variants={headerItem}
@@ -96,12 +85,12 @@ export default function Header() {
         <m.div
           variants={headerItem}
           custom={LEFT.length}
-          className="justify-self-center"
+          className="justify-self-end sm:justify-self-center"
         >
           <LocalClock />
         </m.div>
 
-        {/* Right — Resume, About */}
+        {/* Right — About, Play */}
         {navSet("right", LEFT.length + 1, "justify-self-end")}
       </m.div>
 
@@ -114,34 +103,25 @@ export default function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: EASE }}
-            className="relative overflow-hidden border-b border-white/10 bg-bg/95 sm:hidden"
+            className="relative overflow-hidden border-b border-ink/10 bg-bg/95 sm:hidden"
           >
             <ul className="mx-auto flex max-w-[var(--shell-max)] flex-col px-4 py-2">
               {NAV.map((item) => {
                 const isCurrent = !!item.current && pathname === item.current;
                 return (
                   <li key={item.label}>
-                    {item.disabled ? (
-                      <span
-                        aria-disabled="true"
-                        className={`inline-block py-3 text-16 lowercase ${DISABLED}`}
-                      >
-                        {item.label}
-                      </span>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        onClick={() => setOpen(false)}
-                        aria-current={isCurrent ? "page" : undefined}
-                        className={`inline-block py-3 text-16 lowercase transition-colors ${
-                          isCurrent
-                            ? "border-b border-nav-current text-nav-current"
-                            : "text-faint hover:text-ink"
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                    )}
+                    <Link
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      aria-current={isCurrent ? "page" : undefined}
+                      className={`inline-block py-3 text-16 lowercase transition-colors ${
+                        isCurrent
+                          ? "border-b border-nav-current text-nav-current"
+                          : "text-faint hover:text-ink"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
                   </li>
                 );
               })}

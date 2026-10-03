@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 /** Sections in the case study — shared with SaathiContent (ids must match). */
-export const SAATHI_SECTIONS = [
+const SAATHI_SECTIONS = [
   { id: "details", label: "Details" },
   { id: "overview", label: "Overview" },
   { id: "solution", label: "Solution" },

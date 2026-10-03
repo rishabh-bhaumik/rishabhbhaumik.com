@@ -325,5 +325,13 @@ void main() {
 `;
 
 export const BLIT_FRAG = COMMON + /* glsl */ `
-void main() { fragColor = vec4(texture(uSrc, vUv).rgb, 1.0); }
+uniform vec3 uBg;
+void main() {
+  vec4 s = texture(uSrc, vUv);
+  // The scene's backdrop is black with alpha 0 and the coin is alpha >= 0.5, so
+  // fill the backdrop with uBg (black by default). Edge texels sampled between
+  // the two get the matching share of it.
+  float coin = clamp(s.a * 2.0, 0.0, 1.0);
+  fragColor = vec4(s.rgb + uBg * (1.0 - coin), 1.0);
+}
 `;

@@ -612,8 +612,10 @@ export default function LogoLab() {
   return (
     <main className="mx-auto w-full max-w-[1480px] px-4 pb-10 pt-6 sm:px-6">
 
+      {/* Wide: the Controls panel sets the row's height and the left column fills
+          exactly that (h-0 + min-h-full), the stage taking what the library leaves. */}
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_440px]">
-        <section className="flex min-w-0 flex-col gap-4">
+        <section className="flex min-w-0 flex-col gap-4 lg:h-0 lg:min-h-full">
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-black">
             <Library
               materials={MATERIALS}
@@ -624,10 +626,10 @@ export default function LogoLab() {
               onVisible={onVisible}
             />
           </div>
-          <div className="relative aspect-square max-h-[72vh] w-full overflow-hidden rounded-3xl border border-white/10 bg-black">
+          <div className="relative aspect-square max-h-[72vh] w-full overflow-hidden rounded-3xl border border-white/10 bg-black lg:aspect-auto lg:max-h-none lg:min-h-0 lg:flex-1">
             <canvas
               ref={attachCanvas}
-              className="h-full w-full cursor-grab touch-none active:cursor-grabbing"
+              className="h-full w-full cursor-grab touch-none active:cursor-grabbing lg:absolute lg:left-1/2 lg:top-0 lg:aspect-square lg:w-auto lg:max-w-full lg:-translate-x-1/2"
               onPointerDown={(e) => {
                 const d = dragRef.current;
                 d.down = true;

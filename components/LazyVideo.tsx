@@ -15,12 +15,14 @@ export default function LazyVideo({
   className,
   margin = "200px",
   warm = false,
+  style,
 }: {
   src: string;
   poster: string;
   className?: string;
   margin?: string;
   warm?: boolean;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -61,6 +63,7 @@ export default function LazyVideo({
       playsInline
       preload={warm ? "metadata" : "none"}
       className={className}
+      style={style}
     />
   );
 }

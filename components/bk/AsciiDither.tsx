@@ -12,6 +12,11 @@ import { useEffect, useRef } from "react";
  * band (index 4, #4100cf) with "Plus Lighter" (additive) so it reads as a bright
  * violet strip with white dots. The whole composite is produced in-shader, so no
  * CSS blend modes are involved and it looks identical across browsers.
+ *
+ * Light theme: the same field printed in ink on the page colour. Each band's
+ * dots take its colour over the page instead of black, and the middle band is
+ * a violet strip with page-coloured dots. The caller passes the ramp mirrored
+ * in lightness (IdentityContent), so the bands keep their contrast order.
  */
 
 const VERT = `#version 300 es
@@ -38,6 +43,8 @@ uniform float uCell;        // dither cell size in device px (Figma "Size")
 uniform float uReveal;      // 0..1 staggered entry progress
 uniform float uBandStagger; // normalised delay between consecutive bands
 uniform float uBandDur;     // normalised per-band reveal duration
+uniform float uLight;       // 1 = light theme (ink on paper), 0 = dark
+uniform vec3  uPaper;       // the page colour (--color-bg)
 
 void main() {
   // Which of the 9 horizontal bands this fragment belongs to, and its local Y.
@@ -70,11 +77,16 @@ void main() {
   // colour only on the lit dots; the middle band shows a violet field with
   // white dots.
   vec3 c = uColors[band];
-  vec3 outColor = (band == 4)
+  vec3 dark = (band == 4)
     ? clamp(vec3(mono) + c, 0.0, 1.0)          // plus-lighter
     : clamp(vec3(mono) + c - 1.0, 0.0, 1.0);   // plus-darker
+  // Light: lit dots take the band colour over the page; the middle band flips
+  // to a violet field with page-coloured dots, as in dark.
+  vec3 light = (band == 4) ? mix(c, uPaper, mono) : mix(uPaper, c, mono);
+  vec3 outColor = mix(dark, light, uLight);
 
-  fragColor = vec4(outColor * p, 1.0); // fade the band up from black
+  // Fade the band up from the page colour (black in dark).
+  fragColor = vec4(mix(uPaper * uLight, outColor, p), 1.0);
 }
 `;
 
@@ -97,7 +109,8 @@ function bayerMatrix(n: number): number[][] {
 }
 
 function hexToRgb(hex: string): [number, number, number] {
-  const h = hex.replace("#", "");
+  let h = hex.trim().replace("#", "");
+  if (h.length === 3) h = h.replace(/./g, (ch) => ch + ch);
   return [
     parseInt(h.slice(0, 2), 16) / 255,
     parseInt(h.slice(2, 4), 16) / 255,
@@ -124,6 +137,7 @@ export default function AsciiDither({
   cell = 2,
   brightness = 1.01,
   contrast = 1.0,
+  light = false,
 }: {
   active: boolean;
   colors: readonly string[];
@@ -131,6 +145,8 @@ export default function AsciiDither({
   cell?: number;
   brightness?: number;
   contrast?: number;
+  /** Light theme: ink on the page colour instead of light on black. */
+  light?: boolean;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -224,7 +240,7 @@ export default function AsciiDither({
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    // 1×1 black placeholder until the first frame is ready
+    // 1×1 black placeholder until the first frame is ready (no dots lit)
     gl.texImage2D(
       gl.TEXTURE_2D,
       0,
@@ -256,6 +272,10 @@ export default function AsciiDither({
       colorData.set([r, g, b], i * 3);
     }
     gl.uniform3fv(uColors, colorData);
+    gl.uniform1f(gl.getUniformLocation(prog, "uLight"), light ? 1 : 0);
+    // Read the page colour from the token, so the field meets the page exactly.
+    const paper = getComputedStyle(document.documentElement).getPropertyValue("--color-bg") || "#000000";
+    gl.uniform3fv(gl.getUniformLocation(prog, "uPaper"), hexToRgb(paper));
     gl.uniform1f(uBrightness, brightness);
     gl.uniform1f(uContrast, contrast);
     // Band 0 leads; each later band is delayed by uBandStagger, over uBandDur.
@@ -315,7 +335,7 @@ export default function AsciiDither({
       // so contexts never pile up and push out the header coin's.
       if (!canvas.isConnected) gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [colors, videoSrc, cell, brightness, contrast]);
+  }, [colors, videoSrc, cell, brightness, contrast, light]);
 
   // ── play/pause the render loop with visibility, driving the band reveal ──
   useEffect(() => {
@@ -376,7 +396,7 @@ export default function AsciiDither({
   }, [active]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-black">
+    <div className="absolute inset-0 overflow-hidden bg-bg">
       <canvas ref={canvasRef} className="h-full w-full" />
       <video
         ref={videoRef}

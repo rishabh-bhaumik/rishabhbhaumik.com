@@ -22,7 +22,7 @@ export interface FilterLayer {
 }
 
 /** What a transmute morphs into: a material with its own relief, light and filters. */
-export interface MorphTarget {
+interface MorphTarget {
   material: LogoMaterial;
   relief: number;
   light: [number, number, number];
@@ -95,6 +95,8 @@ export class LogoRenderer {
   private halfFloat: boolean;
   /** What each surface target last baked, so a still loop clock skips the bake. */
   private baked: Record<string, string> = {};
+  /** Colour (0..1 RGB) the empty backdrop is drawn in. Black unless a host page says otherwise. */
+  background: [number, number, number] = [0, 0, 0];
 
   constructor(readonly canvas: HTMLCanvasElement) {
     const gl = canvas.getContext("webgl2", {
@@ -432,7 +434,7 @@ export class LogoRenderer {
       current = out;
     }
     const final = into ? this.target(into, w, h) : null;
-    this.pass(this.blitProgram, current, final, w, h);
+    this.pass(this.blitProgram, current, final, w, h, (p) => this.gl.uniform3f(this.loc(p, "uBg"), ...this.background));
     return true;
   }
 

@@ -22,7 +22,7 @@ runs on Arial.
 
 | Route | Renders | Gated |
 |---|---|---|
-| `/` | `app/page.tsx` — `Header`, `Hero` (looping Vimeo showreel background, version pill, headline, bio with company chips), `Footer` | No |
+| `/` | `app/page.tsx` — `Header`, `Hero` (looping "orbitting" showreel — dark and light clips swapped with the theme — version pill, headline, bio with company chips), `Footer` | No |
 | `/work` | `app/work/page.tsx` — `Header`, `WorkGallery` (fed `PROJECTS` from `data/site.ts`), `Footer` | No |
 | `/about` | `app/about/page.tsx` → `components/about/AboutContent.tsx` (full-bleed video hero + `PhotoCarousel`) | No |
 | `/play` | `app/play/page.tsx` — `Header`, `PlaySection` (→ `PlayGallery`/`PlayCard`, fed `PLAY` from `data/site.ts` + oEmbed thumbnails via `lib/play.ts`), `Footer` | No |
@@ -119,7 +119,7 @@ session (`sessionStorage` guarded) on first load.
 - `PasswordInput` — the password field the gate renders
 
 **Home** (`app/page.tsx`)
-- `Hero` — looping Vimeo showreel background (`SITE.heroVideo`), version pill (`SITE.version`), headline (`SITE.greeting`), and bio with inline company chips
+- `Hero` — looping "orbitting" showreel (`SITE.heroVideo`: dark and light clips, swapped with the theme by `HeroVideo`), version pill (`SITE.version`), headline (`SITE.greeting`), and bio with inline company chips
 - `CompanyChip` — inline brand chip + link used inside the bio text
 
 **Work** (`app/work/page.tsx`)

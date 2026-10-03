@@ -80,7 +80,7 @@ export interface LogoField {
 }
 
 /** Path data from the logo SVG, in document order: rim, smile, ঋ, ভ. */
-export async function loadLogoPaths(url = "/media/logo-mark.svg") {
+async function loadLogoPaths(url = "/media/logo-mark.svg") {
   const text = await (await fetch(url)).text();
   const doc = new DOMParser().parseFromString(text, "image/svg+xml");
   const svg = doc.querySelector("svg");
@@ -152,7 +152,7 @@ async function makeLogoField(size: number): Promise<LogoField> {
  * Glyph atlas for type materials (ASCII, metal type): 16 x 2 cells. Row 0 is a
  * density ramp, light to dark; row 1 is Bengali letters.
  */
-export const GLYPH_ROWS = [" .,:;-=+*cox%#&@", "অআকখগঘচজতদনপবমর"];
+const GLYPH_ROWS = [" .,:;-=+*cox%#&@", "অআকখগঘচজতদনপবমর"];
 export function buildGlyphAtlas(): HTMLCanvasElement {
   const cell = 48;
   const canvas = document.createElement("canvas");

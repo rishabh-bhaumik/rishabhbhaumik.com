@@ -24,14 +24,14 @@ export default function SoundToggle() {
           alt=""
           width={16}
           height={16}
-          className="size-4 invert"
+          className="size-4 invert light:invert-0"
         />
         <AnimatePresence>
           {muted && (
             <m.svg
               key="strike"
               viewBox="0 0 24 24"
-              className="absolute inset-0 size-full"
+              className="absolute inset-0 size-full text-ink"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -42,7 +42,7 @@ export default function SoundToggle() {
                 y1="23"
                 x2="23"
                 y2="1"
-                stroke="white"
+                stroke="currentColor"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 initial={{ pathLength: 0 }}

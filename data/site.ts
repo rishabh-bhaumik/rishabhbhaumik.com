@@ -13,28 +13,29 @@ export const SITE = {
   greeting: "Hello, World!",
   /** Home hero pill above the headline. */
   version: "shipped '96 • v30.6",
-  /** Home hero looping background video (the "orbitting" piece). */
-  heroVideo:
-    "https://player.vimeo.com/video/780357035?h=430b68184b&background=1",
-  /** Its public page, for the poster shown until the player is playing. */
-  heroVideoPage: "https://vimeo.com/780357035/430b68184b",
+  /** Home hero loop (the "orbitting" piece): a dark and a light version, matched
+   *  frame for frame so the theme switch swaps them in step. 12 fps, 12 s.
+   *  Sources and the light version's renderer: <IGNORE>/media-sources. */
+  heroVideo: {
+    dark: { src: "/media/home/orbit-dark.mp4", poster: "/media/home/orbit-dark.webp" },
+    light: { src: "/media/home/orbit-light.mp4", poster: "/media/home/orbit-light.webp" },
+  },
 } as const;
 
 /**
  * Is the resume public? While false, /resume is a 404 in production (it still
- * opens in `npm run dev` for editing) and the header shows "resume" disabled.
+ * opens in `npm run dev` for editing) and the header leaves it out.
  */
 export const RESUME_LIVE = false;
 
 /** `current` = the pathname for which this item is the active page (current item). */
-/** `side`: which half of the wide header the link sits in (the logo is centred between them). */
-/** `disabled`: shown, dimmed, but not a link (nothing to open yet). */
-export const NAV: { label: string; href: string; current?: string; side: "left" | "right"; disabled?: boolean }[] = [
+/** `side`: which half of the wide header the link sits in (the clock is centred between them). */
+export const NAV: { label: string; href: string; current?: string; side: "left" | "right" }[] = [
   { label: "home", href: "/", current: "/", side: "left" },
   { label: "work", href: "/work", current: "/work", side: "left" },
-  { label: "play", href: "/play", current: "/play", side: "left" },
   { label: "about", href: "/about", current: "/about", side: "right" },
-  { label: "resume", href: "/resume", current: "/resume", side: "right", disabled: !RESUME_LIVE },
+  { label: "play", href: "/play", current: "/play", side: "right" },
+  ...(RESUME_LIVE ? [{ label: "resume", href: "/resume", current: "/resume", side: "right" as const }] : []),
 ];
 
 /** A company referenced inline in the bio, rendered as a brand chip + link. */

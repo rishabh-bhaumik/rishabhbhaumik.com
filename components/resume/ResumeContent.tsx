@@ -58,7 +58,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 border-t-[0.5px] border-white/10 py-10 sm:py-14">
+    <section id={id} className="scroll-mt-24 border-t-[0.5px] border-ink/10 py-10 sm:py-14">
       <div className="flex flex-col gap-6 sm:flex-row sm:gap-10">
         <Reveal className="sm:w-[132px] sm:shrink-0">
           <h2 className="font-mono text-10 uppercase tracking-[0.18em] text-faint">

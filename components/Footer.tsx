@@ -28,12 +28,12 @@ export default function Footer() {
   const itemProps = { variants: revealItem };
 
   const inlineLink =
-    "text-white underline decoration-white/60 underline-offset-[2px] transition-colors hover:decoration-white";
+    "text-ink underline decoration-ink/60 underline-offset-[2px] transition-colors hover:decoration-ink";
 
   return (
     <footer
       id="contact"
-      className="flex flex-col gap-8 border-t-[0.5px] border-white/10 px-4 pb-10 pt-10 lg:flex-row lg:items-end lg:justify-between"
+      className="flex flex-col gap-8 border-t-[0.5px] border-ink/10 px-4 pb-16 pt-10 sm:pb-10 lg:flex-row lg:items-end lg:justify-between"
     >
       {/* Blurb */}
       <Reveal
@@ -65,14 +65,15 @@ export default function Footer() {
                   target={link.href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
                   aria-label={link.ariaLabel}
-                  className="group flex h-[18px] items-center"
+                  className="group flex h-[18px] items-center justify-between sm:justify-start"
                 >
                   {/* Handle — whitens on hover */}
-                  <span className="whitespace-nowrap text-14 leading-[18px] text-[#a3a3a3] transition-colors group-hover:text-white group-focus-visible:text-white">
+                  <span className="whitespace-nowrap text-14 leading-[18px] text-faint transition-colors group-hover:text-ink group-focus-visible:text-ink">
                     {link.handle}
                   </span>
-                  {/* Platform icon — reveals on hover */}
-                  <span className="flex w-0 items-center justify-center overflow-hidden text-white opacity-0 transition-all duration-200 group-hover:ml-1 group-hover:w-3 group-hover:opacity-100 group-focus-visible:ml-1 group-focus-visible:w-3 group-focus-visible:opacity-100">
+                  {/* Platform icon — on phones (no hover) always shown, at the row's right
+                      end; from sm up it reveals on hover beside the handle */}
+                  <span className="ml-1 flex w-3 items-center justify-center overflow-hidden text-faint transition-all duration-200 sm:ml-0 sm:w-0 sm:text-ink sm:opacity-0 sm:group-hover:ml-1 sm:group-hover:w-3 sm:group-hover:opacity-100 sm:group-focus-visible:ml-1 sm:group-focus-visible:w-3 sm:group-focus-visible:opacity-100">
                     <Icon />
                   </span>
                 </a>

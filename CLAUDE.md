@@ -20,6 +20,10 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - Brand: `--color-brand #4100cf`, `--color-brand-bold #2c0091`, BimaKavach's violet, used only inside its Identity case study; the site itself has no colour
 - Status dot: online `#34d399`, away `#fbbf24`, offline `#6b7280`, kept in `STATUS_META` (`lib/availability.ts`), not as tokens
 - Fonts: `--font-sans`/`--font-mono`/`--font-display` all resolve to Arial
+- Light theme: the same token names re-pointed under `:root[data-theme="light"]`
+  (warm off-white `--color-bg #f5f3ef`). Use tokens (`text-ink`, `border-ink/10`),
+  not `white`/`black`, for chrome; `light:` is a variant for the rare
+  light-only tweak (e.g. `invert light:invert-0` on icons)
 - Layout widths: `--reading-max` (700px: About, Saathi, resume, gate), `--content-max` (832px: home hero column, list views), `--shell-max` (1200px: Work and Play grids). Header and footer run full width.
 - Hairlines: header bottom, footer top and resume dividers are `0.5px` at `white/10`
 
@@ -51,6 +55,15 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - Media: muted clips go through `components/LazyVideo.tsx` (poster, fetched
   near the viewport, plays only while visible). Sounds are small MP3s played
   through the shared Web Audio context in `lib/sfx.tsx`.
+- Theme: dark by default; the header clock (`LocalClock`) switches to light.
+  `lib/theme.ts` (client: store, `setTheme`, `useThemePreference`) and
+  `lib/theme-script.ts` (server-safe: no-flash `<head>` script,
+  `DARK_ONLY_ROUTES` — `/logo` always renders dark). `useTheme()` gives the
+  theme showing on the current route (the Identity ASCII dither reads it).
+- Home hero: `HeroVideo` stacks a dark and a light clip (`SITE.heroVideo`,
+  `public/media/home/orbit-*.mp4`, 12 fps) that match frame for frame; CSS shows
+  the one for the theme and the hidden one is kept in step. The light clip is
+  rendered by a script in `<IGNORE>/media-sources/orbitting-light/`.
 - Availability/online-status logic is isolated in `lib/availability.ts`
   (`getAvailability()` is the seam for swapping the static schedule for a
   real data source later).
@@ -72,4 +85,4 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 See `docs/` for longer write-ups: `ascii-dither.md`, `stagger-reveal.md`,
 `typography-hover.md`, `horizontal-scroll.md`, `password-gate.md`,
-`architecture.md`, `deploy.md`.
+`architecture.md`, `deploy.md`, `hardcoded-colors.md`.

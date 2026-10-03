@@ -20,7 +20,7 @@ export const stateFor = (material: LogoMaterial, s: Look, rot: Float32Array, tim
   seed: 0,
 });
 
-export const FLIP_STYLE = transitionIndex("flip");
+const FLIP_STYLE = transitionIndex("flip");
 
 /** Coin flip: one and a half turns (cubic in-out), with a small settle wobble as it lands. */
 const flipTurn = (p: number) => {

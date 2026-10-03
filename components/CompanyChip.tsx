@@ -19,10 +19,10 @@ export default function CompanyChip({ company }: { company: Company }) {
       href={company.href}
       target={company.href.startsWith("http") ? "_blank" : undefined}
       rel="noreferrer"
-      className="inline-flex items-center gap-1.5 align-baseline text-ink decoration-white/40 underline-offset-4 transition-colors hover:underline"
+      className="inline-flex items-center gap-1.5 align-baseline text-ink decoration-ink/40 underline-offset-4 transition-colors hover:underline"
     >
       <span
-        className="relative inline-grid size-4 translate-y-[2px] place-items-center overflow-hidden rounded-[4px] ring-[0.5px] ring-white/15"
+        className="relative inline-grid size-4 translate-y-[2px] place-items-center overflow-hidden rounded-[4px] ring-[0.5px] ring-ink/15"
         style={{ backgroundColor: chip.bg, padding: chip.pad ? chip.pad : undefined }}
       >
         {showImage ? (
