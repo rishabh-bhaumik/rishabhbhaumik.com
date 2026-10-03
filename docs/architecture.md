@@ -60,19 +60,18 @@ The token layer is a Tailwind v4 CSS-first `@theme` block in
 `app/globals.css` — there is no `tailwind.config.*`. Token groups:
 
 - **Surfaces** — `--color-bg`, `--color-surface`, `--color-surface-2`,
-  `--color-surface-3`, `--color-border`
+  `--color-border`
 - **Text** — `--color-ink`, `--color-muted`, `--color-faint`
-- **Brand** — `--color-brand` (`#4100cf`), `--color-brand-bold`,
-  `--color-brand-subtle`
-- **Status** — `--color-status-online`, `--color-status-away`,
-  `--color-status-offline` (consumed by `STATUS_META` in
-  `lib/availability.ts`)
+- **Brand** — `--color-brand` (`#4100cf`), `--color-brand-bold`: BimaKavach's
+  violet, used only inside the Identity case study. The site is monochrome.
+- **Status** — the clock's dot colours live in `STATUS_META`
+  (`lib/availability.ts`), not in the token layer
 - **Fonts** — `--font-sans`/`--font-mono`/`--font-display`, all currently
   Arial/Helvetica (no webfont is loaded site-wide; see the typography-hover
   doc for the one section that self-hosts variable fonts instead)
-- **Size caps** — `--content-max` (832px, Home hero column / Work gallery
-  column), `--reading-max` (700px, About/Saathi/gate/footer), `--shell-max`
-  (1200px, header/Play gallery)
+- **Size caps** — `--content-max` (832px, Home hero column / list views),
+  `--reading-max` (700px, About/Saathi/resume/gate), `--shell-max`
+  (1200px, Work and Play grids). Header and footer run full width.
 
 Tailwind v4 gotcha, called out directly in `app/globals.css`'s own comment:
 custom base-element CSS (the `html`/`body` rules) must go inside `@layer
@@ -140,7 +139,7 @@ session (`sessionStorage` guarded) on first load.
 **Bima Saathi** (`/bima-saathi`)
 - `components/saathi/SaathiContent.tsx` — the vertical-scroll case study body, with its own local `StaggerSeqCtx`-driven reveal sequence (WIP media placeholders + lorem copy pending final assets)
 - `components/saathi/SaathiHero.tsx` — the case study's stacked hero intro, staggered per child
-- `components/saathi/SectionNav.tsx` — fixed left table-of-contents that scroll-spies `SAATHI_SECTIONS` via `IntersectionObserver` and highlights the active one
+- `components/saathi/SectionNav.tsx` — sticky left table-of-contents (a grid column, from md up) that scroll-spies `SAATHI_SECTIONS` via `IntersectionObserver` and highlights the active one
 
 ## Deep-dive links
 

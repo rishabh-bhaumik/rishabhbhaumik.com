@@ -46,7 +46,7 @@ detects on its own).
   client-side, after a correct password, so there's nothing sensitive baked
   into the static HTML.)
 - Serves everything under `public/` — including `public/media/`, the site's
-  images, audio SFX (`entry01.mp3`, `pw-success.mp3`, etc.), and video —
+  images, audio SFX (`Click01.mp3`, `pw-success.mp3`, etc.), and video —
   from Vercel's edge CDN, with no extra configuration.
 - Sets up **preview deployments** automatically for every branch push and
   every pull request, each with its own shareable URL and its own comment

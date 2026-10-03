@@ -10,9 +10,10 @@ import {
 } from "@/lib/availability";
 
 /**
- * The header's reworked "link": the visitor's live LOCAL time plus a status
- * dot that reflects Rishabh's availability (computed from the schedule in
- * lib/availability — wire that to a DB later and this updates for free).
+ * The header's centre: the visitor's live local time, a status dot for
+ * Rishabh's availability (computed from the schedule in lib/availability; wire
+ * that to a DB later and this updates for free), then "(local)". The dot sits
+ * on the page's centre line.
  */
 export default function LocalClock() {
   const [time, setTime] = useState<string | null>(null);

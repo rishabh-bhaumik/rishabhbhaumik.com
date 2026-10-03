@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 const CHAPTERS = [
   { id: "overview", label: "overview" },
   { id: "about", label: "about" },
-  { id: "contact", label: "contact" },
+  // Not "contact": the footer already owns that id.
+  { id: "resume-contact", label: "contact" },
   { id: "experience", label: "experience" },
   { id: "education", label: "education" },
   // NOTE: the Figma sidebar (8408:7477) stops at education, even though the
@@ -16,12 +17,11 @@ const CHAPTERS = [
 ] as const;
 
 /**
- * Fixed left chapter rail for the resume (Figma 8408:7477) — the same idea as
- * the Bima Saathi SectionNav, but with this design's own type: lowercase 14px,
- * active in white and the rest in the same #363636 the header uses for the
- * page you are already on.
- *
- * Only shown on wide screens where there is room beside the 700px column.
+ * The resume's chapter rail (Figma 8408:7477), laid out like the Bima Saathi
+ * SectionNav: the left column of the page's grid, sticking under the header
+ * as you scroll, from md up. This design's own type: lowercase 14px, active in
+ * white and the rest in the same #363636 the header uses for the page you are
+ * already on.
  */
 export default function ResumeNav() {
   const [active, setActive] = useState<string>(CHAPTERS[0].id);
@@ -58,24 +58,24 @@ export default function ResumeNav() {
   }, []);
 
   return (
-    <nav
-      aria-label="Resume chapters"
-      className="fixed left-6 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-2 xl:flex"
-    >
-      {CHAPTERS.map((c) => (
-        <a
-          key={c.id}
-          href={`#${c.id}`}
-          aria-current={active === c.id ? "true" : undefined}
-          className={`py-1 text-14 lowercase leading-[1.5] transition-colors ${
-            active === c.id
-              ? "text-ink"
-              : "text-nav-current hover:text-faint"
-          }`}
-        >
-          {c.label}
-        </a>
-      ))}
-    </nav>
+    <aside className="hidden md:block">
+      <nav
+        aria-label="Resume chapters"
+        className="sticky top-16 flex flex-col items-start gap-2 pt-10 sm:pt-24"
+      >
+        {CHAPTERS.map((c) => (
+          <a
+            key={c.id}
+            href={`#${c.id}`}
+            aria-current={active === c.id ? "true" : undefined}
+            className={`py-1 text-14 lowercase leading-[1.5] transition-colors ${
+              active === c.id ? "text-ink" : "text-nav-current hover:text-faint"
+            }`}
+          >
+            {c.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
   );
 }

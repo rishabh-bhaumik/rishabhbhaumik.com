@@ -104,13 +104,11 @@ crawl the gate or the content behind it.
   ("Incorrect password. Try again."), and the trailing icon swaps from the
   enter arrow to a refresh icon. Clicking it while errored clears the input
   (`setValue(""); setError(false)`) so the visitor can retry immediately.
-- **SFX** via `lib/sfx.tsx`'s `useSfx()` hook. Every keystroke alternates
-  between `entry01.mp3` / `entry02.mp3` (never repeating the same sample
-  twice in a row); a correct submit plays `pw-success.mp3`, a wrong one
-  plays `pw-error.mp3`. The input's wrapper carries `data-no-click-sfx` so
-  the site-wide click-SFX listener (`SfxProvider` in `app/layout.tsx`)
-  skips it — otherwise every keystroke/click would double up with the
-  generic click sound.
+- **SFX** via `lib/sfx.tsx`'s `useSfx()` hook: a correct submit plays
+  `pw-success.mp3`, a wrong one `pw-error.mp3`. Typing is silent. The
+  input's wrapper carries `data-no-click-sfx` so the site-wide click-SFX
+  listener (`components/ClickSFX.tsx`) skips it, and a click there doesn't
+  double up with the generic click sound.
 
 ## Security note
 

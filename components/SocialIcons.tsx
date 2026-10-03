@@ -5,17 +5,6 @@
  */
 type IconProps = { className?: string };
 
-export function IconArrowRight({ className = "h-[7px] w-[9px]" }: IconProps) {
-  return (
-    <svg viewBox="0 0 9 7" fill="none" aria-hidden className={className}>
-      <path
-        d="M5.85355 0.146447C5.65829 -0.0488155 5.34171 -0.0488155 5.14645 0.146447C4.95118 0.341709 4.95118 0.658291 5.14645 0.853554L7.29289 3H0.5C0.223858 3 0 3.22386 0 3.5C0 3.77614 0.223858 4 0.5 4H7.29289L5.14645 6.14645C4.95118 6.34171 4.95118 6.65829 5.14645 6.85355C5.34171 7.04882 5.65829 7.04882 5.85355 6.85355L8.85355 3.85355C9.04882 3.65829 9.04882 3.34171 8.85355 3.14645L5.85355 0.146447Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
 export function IconMail({ className = "size-3" }: IconProps) {
   return (
     <svg viewBox="0 0 12 12" fill="none" aria-hidden className={className}>

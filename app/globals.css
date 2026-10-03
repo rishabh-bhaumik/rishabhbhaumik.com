@@ -5,7 +5,6 @@
   --color-bg: #000000;
   --color-surface: #1c1c1c;
   --color-surface-2: #262626;
-  --color-surface-3: #333333;
   --color-border: #ffffff14;
 
   /* Text */
@@ -15,15 +14,11 @@
   /* Nav "current item": text + bottom stroke of the page you are already on. */
   --color-nav-current: #363636;
 
-  /* Brand (violet) */
+  /* BimaKavach's violet, used only inside its Identity case study. The site
+     itself is monochrome; the clock's status dot keeps its own colours in
+     lib/availability.ts (STATUS_META). */
   --color-brand: #4100cf;
   --color-brand-bold: #2c0091;
-  --color-brand-subtle: #e8e2ff;
-
-  /* Status */
-  --color-status-online: #34d399;
-  --color-status-away: #fbbf24;
-  --color-status-offline: #6b7280;
 
   /* Fonts — everything is Arial (a CSS default; no web fonts loaded). */
   --font-sans: Arial, Helvetica, sans-serif;
@@ -146,7 +141,7 @@ html.lenis body {
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
 }
 
@@ -174,12 +169,4 @@ html.lenis body {
   }
 }
 
-@keyframes ticker-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-@keyframes ticker-right {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(0); }
-}
 

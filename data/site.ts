@@ -20,6 +20,12 @@ export const SITE = {
   heroVideoPage: "https://vimeo.com/780357035/430b68184b",
 } as const;
 
+/**
+ * Is the resume public? While false, /resume is a 404 in production (it still
+ * opens in `npm run dev` for editing) and the header shows "resume" disabled.
+ */
+export const RESUME_LIVE = false;
+
 /** `current` = the pathname for which this item is the active page (current item). */
 /** `side`: which half of the wide header the link sits in (the logo is centred between them). */
 /** `disabled`: shown, dimmed, but not a link (nothing to open yet). */
@@ -28,7 +34,7 @@ export const NAV: { label: string; href: string; current?: string; side: "left" 
   { label: "work", href: "/work", current: "/work", side: "left" },
   { label: "play", href: "/play", current: "/play", side: "left" },
   { label: "about", href: "/about", current: "/about", side: "right" },
-  { label: "resume", href: "/resume", current: "/resume", side: "right", disabled: true },
+  { label: "resume", href: "/resume", current: "/resume", side: "right", disabled: !RESUME_LIVE },
 ];
 
 /** A company referenced inline in the bio, rendered as a brand chip + link. */

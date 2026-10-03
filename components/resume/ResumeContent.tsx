@@ -58,7 +58,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 border-t border-border py-10 sm:py-14">
+    <section id={id} className="scroll-mt-24 border-t-[0.5px] border-white/10 py-10 sm:py-14">
       <div className="flex flex-col gap-6 sm:flex-row sm:gap-10">
         <Reveal className="sm:w-[132px] sm:shrink-0">
           <h2 className="font-mono text-10 uppercase tracking-[0.18em] text-faint">
@@ -73,7 +73,9 @@ function Section({
 
 export default function ResumeContent() {
   return (
-    <article className="mx-auto w-full max-w-[var(--reading-max)] px-4 pb-24 pt-10 sm:px-6 sm:pt-16">
+    // Sits in the page grid's 700px column. Below md the grid's own gutter pads
+    // it; from md it pads itself, so the text runs 652px like About and the gates.
+    <article className="mx-auto w-full max-w-[var(--reading-max)] pb-20 pt-10 sm:pt-24 md:px-6">
       {/* Masthead */}
       <header id="overview" className="flex flex-col gap-4 pb-10 sm:flex-row sm:items-start sm:justify-between">
         <Reveal>
@@ -121,7 +123,7 @@ export default function ResumeContent() {
         </div>
       </Section>
 
-      <Section id="contact" label="Contact">
+      <Section id="resume-contact" label="Contact">
         <dl className="flex flex-col gap-3">
           {RESUME_CONTACT.map((row, i) => (
             <Reveal key={row.label} delay={i * STEP}>

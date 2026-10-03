@@ -1,6 +1,6 @@
 # Rishabh Bhaumik — Portfolio · Project Guide
 
-Personal portfolio: dark, editorial, violet. Home work gallery, About, Play,
+Personal portfolio: dark, editorial, monochrome. Home work gallery, About, Play,
 and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 ## Stack
@@ -15,12 +15,13 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 ## Design tokens (`app/globals.css` `@theme`)
 
-- Surfaces: `--color-bg #000000`, `--color-surface #1c1c1c`, `--color-surface-2 #262626`, `--color-surface-3 #333333`, `--color-border #ffffff14`
+- Surfaces: `--color-bg #000000`, `--color-surface #1c1c1c`, `--color-surface-2 #262626`, `--color-border #ffffff14`
 - Text: `--color-ink #fff`, `--color-muted #a8a8a8`, `--color-faint #a3a3a3`
-- Brand: `--color-brand #4100cf`, `--color-brand-bold #2c0091`, `--color-brand-subtle #e8e2ff`
-- Status: online `#34d399`, away `#fbbf24`, offline `#6b7280`
+- Brand: `--color-brand #4100cf`, `--color-brand-bold #2c0091`, BimaKavach's violet, used only inside its Identity case study; the site itself has no colour
+- Status dot: online `#34d399`, away `#fbbf24`, offline `#6b7280`, kept in `STATUS_META` (`lib/availability.ts`), not as tokens
 - Fonts: `--font-sans`/`--font-mono`/`--font-display` all resolve to Arial
-- Layout widths: `--reading-max` (700px — About, Saathi, footer, gate), `--content-max` (832px — home hero column / work gallery column), `--shell-max` (1200px — header, Play gallery)
+- Layout widths: `--reading-max` (700px: About, Saathi, resume, gate), `--content-max` (832px: home hero column, list views), `--shell-max` (1200px: Work and Play grids). Header and footer run full width.
+- Hairlines: header bottom, footer top and resume dividers are `0.5px` at `white/10`
 
 ## Routes
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useSfx } from "@/lib/sfx";
 
@@ -16,16 +16,7 @@ export default function PasswordInput({
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const revealed = value.length >= minLength;
-  const lastSfx = useRef(-1);
   const { play } = useSfx();
-
-  const ENTRY_SOUNDS = ["/media/entry01.mp3", "/media/entry02.mp3"];
-  const playKeystroke = useCallback(() => {
-    let idx = Math.floor(Math.random() * ENTRY_SOUNDS.length);
-    if (idx === lastSfx.current) idx = (idx + 1) % ENTRY_SOUNDS.length;
-    lastSfx.current = idx;
-    play(ENTRY_SOUNDS[idx], 0);
-  }, [play]);
 
   const submit = () => {
     if (!revealed) return;
@@ -52,7 +43,6 @@ export default function PasswordInput({
           onChange={(e) => {
             setValue(e.target.value);
             setError(false);
-            playKeystroke();
           }}
           onKeyDown={(e) => {
             if (e.key === "Enter") submit();
