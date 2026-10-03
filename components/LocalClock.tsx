@@ -67,9 +67,15 @@ export default function LocalClock() {
 
   return (
     <span
-      className="group/clock flex items-center justify-end gap-2 whitespace-nowrap"
+      // Three columns, the outer two always equal, so the dot is the row's exact centre.
+      className="group/clock grid grid-cols-[1fr_auto_1fr] items-center gap-2 whitespace-nowrap"
       title={meta.label}
     >
+      {/* One row: the time, the status dot, then "(local)". */}
+      {/* suppressHydrationWarning: time is client-only, differs from SSR */}
+      <span suppressHydrationWarning className="justify-self-end font-mono text-12 leading-none text-faint tabular-nums">
+        {time ?? "--:-- --"}
+      </span>
       <span
         className="relative inline-flex size-2 shrink-0"
         aria-hidden="true"
@@ -88,15 +94,7 @@ export default function LocalClock() {
           }}
         />
       </span>
-      {/* Time and "(local)" side by side, one stack. */}
-      <span className="flex items-baseline gap-1 font-mono text-12 leading-none text-faint tabular-nums">
-        {/* suppressHydrationWarning: time is client-only, differs from SSR */}
-        {/* A fixed-width box, so the time arriving never shifts the logo. */}
-        <span suppressHydrationWarning className="inline-block w-[7.5ch] text-right">
-          {time ?? "--:-- --"}
-        </span>
-        <span className="text-faint/70">(local)</span>
-      </span>
+      <span className="justify-self-start font-mono text-12 leading-none text-faint/70">(local)</span>
       <span className="sr-only">{meta.label}</span>
     </span>
   );

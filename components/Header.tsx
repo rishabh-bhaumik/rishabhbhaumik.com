@@ -5,9 +5,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { NAV, SITE } from "@/data/site";
+import { NAV } from "@/data/site";
 import { EASE } from "@/lib/motion";
-import HeaderCoin from "./HeaderCoin";
 import LocalClock from "./LocalClock";
 
 /** Each item fades up and un-blurs, one after another across the bar. */
@@ -68,12 +67,12 @@ export default function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/[0.04] bg-bg/90">
-      {/* Wide: three columns — links left, the logo centred, links right. Narrow: menu button and logo. */}
+    <header className="sticky top-0 z-50 w-full border-b-[0.5px] border-white/10 bg-bg/90">
+      {/* Three columns at every width (links or the menu button left, the clock centred, links right), so the clock's dot sits on the page's centre line. */}
       <m.div
         initial="hidden"
         animate="show"
-        className="flex h-16 w-full items-center justify-between px-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-6"
+        className="grid h-16 w-full grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6"
       >
         {/* Left — Home, Work, Play / mobile menu toggle */}
         {navSet("left", 0, "justify-self-start")}
@@ -84,7 +83,7 @@ export default function Header() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="grid size-9 place-items-center rounded-full text-faint transition-colors hover:text-ink sm:hidden"
+          className="grid size-9 place-items-center justify-self-start rounded-full text-faint transition-colors hover:text-ink sm:hidden"
         >
           {open ? (
             <X className="size-5" strokeWidth={1.5} />
@@ -93,26 +92,13 @@ export default function Header() {
           )}
         </m.button>
 
-        {/* Centre — name, logo and local time in a row (the logo flips on hover) */}
+        {/* Centre — the visitor's local time and availability */}
         <m.div
           variants={headerItem}
           custom={LEFT.length}
           className="justify-self-center"
         >
-          <Link
-            href="/"
-            aria-label={`${SITE.name} — home`}
-            className="group flex items-center gap-2 rounded-[36px] px-1 py-1 transition-opacity hover:opacity-90 sm:gap-3"
-          >
-            <span className="hidden whitespace-nowrap font-mono text-12 leading-tight text-faint sm:block">
-              {SITE.name}
-            </span>
-            <HeaderCoin />
-            {/* Phones show the logo alone. */}
-            <span className="hidden sm:contents">
-              <LocalClock />
-            </span>
-          </Link>
+          <LocalClock />
         </m.div>
 
         {/* Right — Resume, About */}

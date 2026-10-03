@@ -103,7 +103,7 @@ function CardMedia({
 function Tag({ tag, className = "" }: { tag: string; className?: string }) {
   return (
     <span
-      className={`shrink-0 rounded-full bg-surface px-3 py-1.5 font-mono text-10 tracking-wide text-faint ring-1 ring-border ${className}`}
+      className={`shrink-0 rounded-full bg-surface px-2 py-1 font-mono text-10 tracking-wide text-faint ring-1 ring-border ${className}`}
     >
       {tag}
     </span>

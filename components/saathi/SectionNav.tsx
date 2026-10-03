@@ -18,9 +18,9 @@ export const SAATHI_SECTIONS = [
 ] as const;
 
 /**
- * Fixed left table-of-contents for the case study (the Figma sidebar).
- * Scroll-spies the sections and highlights the active one. Only shown on wide
- * screens where there's room beside the centered content; hidden below xl.
+ * The case study's table of contents: the left column of the page's grid
+ * (see SaathiContent), sticking under the header as you scroll. Scroll-spies
+ * the sections and highlights the active one. From md up; phones skip it.
  */
 export default function SectionNav() {
   const [active, setActive] = useState<string>(SAATHI_SECTIONS[0].id);
@@ -42,22 +42,24 @@ export default function SectionNav() {
   }, []);
 
   return (
-    <nav
-      aria-label="Case study sections"
-      className="fixed left-6 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-2 xl:flex"
-    >
-      {SAATHI_SECTIONS.map((s) => (
-        <a
-          key={s.id}
-          href={`#${s.id}`}
-          aria-current={active === s.id ? "true" : undefined}
-          className={`text-14 leading-tight transition-colors ${
-            active === s.id ? "text-ink" : "text-faint/50 hover:text-faint"
-          }`}
-        >
-          {s.label}
-        </a>
-      ))}
-    </nav>
+    <aside className="hidden md:block">
+      <nav
+        aria-label="Case study sections"
+        className="sticky top-16 flex flex-col items-start gap-2 pt-16 sm:pt-24"
+      >
+        {SAATHI_SECTIONS.map((s) => (
+          <a
+            key={s.id}
+            href={`#${s.id}`}
+            aria-current={active === s.id ? "true" : undefined}
+            className={`text-14 leading-tight transition-colors ${
+              active === s.id ? "text-ink" : "text-faint/50 hover:text-faint"
+            }`}
+          >
+            {s.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
   );
 }

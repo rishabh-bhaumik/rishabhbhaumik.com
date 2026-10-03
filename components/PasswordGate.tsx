@@ -46,9 +46,11 @@ export default function PasswordGate({
   }
 
   return (
-    <>
+    // At least a screen tall, with the main column taking the slack, so the footer
+    // sits at the bottom of the window however short the gate is.
+    <div className="flex min-h-svh flex-col">
       <Header />
-      <main className="mx-auto w-full max-w-[var(--reading-max)] pt-2">
+      <main className="mx-auto w-full max-w-[var(--reading-max)] flex-1 pt-2">
         <section className="flex flex-col gap-6 px-4 pb-24 pt-16 sm:px-6 sm:pt-24">
           <h1 className="font-display text-32 leading-none text-ink">
             Confirm Entry for &ldquo;{project}&rdquo;
@@ -66,8 +68,8 @@ export default function PasswordGate({
             />
           </div>
         </section>
-        <Footer />
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }

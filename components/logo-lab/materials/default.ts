@@ -32,7 +32,12 @@ vec3 shade(Hit h) {
   // Face: pure black ground and a plain white mark. No glow, no tint.
   // Only the outer rim of the coin counts as wall; the mark's own bevels stay part of the mark.
   float wallK = h.edge * smoothstep(DF_R - 0.1, DF_R - 0.03, length(h.p.xy));
-  float m = h.h * (1.0 - wallK);
+  // The mark's edge, anti-aliased to one screen pixel (not softened across the relief's bevel,
+  // which blurs it at large sizes). A pixel spans about 2 * 1.62 / min(uRes) of the face,
+  // more as the face turns away; the field is a distance in face units.
+  float px = 3.24 / min(uRes.x, uRes.y) / max(abs(h.wn.z), 0.15);
+  float crisp = 1.0 - smoothstep(-px, px, h.f.x);
+  float m = crisp * (1.0 - wallK);
   vec3 mark = vec3(1.55, 1.55, 1.6) * (0.86 + 0.14 * nl);
   vec3 face = mix(vec3(0.0), mark, m);
   // Edge: dark satin graphite, lit just enough to give the thickness a rim.

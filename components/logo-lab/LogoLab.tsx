@@ -18,9 +18,15 @@ import { FILTERS, type LogoMaterial } from "./types";
 const THUMB_SIZE = 96;
 const THUMB_ROT = rotationMatrix(0.32, 0.16, 0);
 /** Bump to invalidate every cached thumbnail. */
-const THUMB_VERSION = "1";
-/** Longest side of the scene pass in pixels; the blit upscales to the canvas. */
-const MAX_SCENE_PX = 1280;
+const THUMB_VERSION = "2";
+/**
+ * Longest side of the scene pass in pixels; the blit upscales to the canvas.
+ * High enough that a full-width preview on a retina screen renders 1:1; the
+ * frame-time scaling below still drops it while a heavy material animates.
+ */
+const MAX_SCENE_PX = 2560;
+/** Once the picture has held still this long, a reduced-resolution frame is redrawn sharp. */
+const SETTLE_MS = 180;
 /** Compiled programs kept resident (the selected and transmuting ones always stay). */
 const MAX_PROGRAMS = 10;
 
@@ -197,6 +203,9 @@ export default function LogoLab() {
     let frameMs = 16.7;
     let goodFrames = 0;
     let lastSig = "";
+    // When the last frame was drawn below full resolution, and when it changed.
+    let soft = false;
+    let changedAt = 0;
     let shown = false;
     let waiting = false;
     let onScreen = true;
@@ -439,6 +448,8 @@ export default function LogoLab() {
           const drew = renderer.render(state, cw, ch, sw, sh);
           if (drew) {
             lastSig = sig;
+            soft = sw < cw || sh < ch;
+            changedAt = now;
             if (png) {
               pngRef.current = false;
               savePng(canvas, `logo-${s.material}`);
@@ -460,6 +471,9 @@ export default function LogoLab() {
               }
             }
           }
+        } else if (soft && now - changedAt > SETTLE_MS) {
+          // Held still: redraw the same picture once at full resolution, so a resting coin is crisp.
+          if (renderer.render(state, cw, ch, cw, ch)) soft = false;
         }
       }
       const isWaiting = !renderer.ready(state.material.key) || (!!state.morphTo && !renderer.ready(state.morphTo.material.key));

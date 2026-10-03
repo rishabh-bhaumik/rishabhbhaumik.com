@@ -10,7 +10,7 @@ const PHOTOS = [
     src: "/media/about/carousel01.mp4",
     caption: "The city of joy, shot from above.",
     content:
-      "I always want to be blown away by the wind of life and what it has to offer. I could float, fly, and soar. I have always been cradled in the City of Joy, being able to be creative and expressive in a city that encourages exploration — where everyone has something to say about everything. However when I first took flight to India’s Silicon Valley — I knew I had to change — mould myself to a new life.",
+      "I always want to be blown away by the wind of life and what it has to offer. I could float, fly, and soar. I have always been cradled in the City of Joy, being able to be creative and expressive in a city that encourages exploration - where everyone has something to say about everything. However when I first took flight to India’s Silicon Valley - I knew I had to change - mould myself to a new life.",
   },
   {
     src: "/media/about/carousel02.mp4",

@@ -33,7 +33,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="flex flex-col gap-8 px-4 pb-10 pt-[120px] lg:flex-row lg:items-end lg:justify-between"
+      className="flex flex-col gap-8 border-t-[0.5px] border-white/10 px-4 pb-10 pt-10 lg:flex-row lg:items-end lg:justify-between"
     >
       {/* Blurb */}
       <Reveal

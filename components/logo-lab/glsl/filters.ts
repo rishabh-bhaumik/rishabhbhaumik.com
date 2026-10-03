@@ -325,11 +325,16 @@ void main() {
 `;
 
 export const BLIT_FRAG = COMMON + /* glsl */ `
-// uKey: key the black background out (alpha from brightness, colour left premultiplied),
-// so the coin composites over whatever is behind a transparent canvas.
+// uKey: key the background out for a transparent canvas. The coin itself stays solid
+// (its black face included); outside it, alpha follows brightness, so a filter's glow
+// or fringe past the rim still shows. Colour is left premultiplied. The coin's alpha is
+// 0.5 or more and the backdrop's 0, so when a smaller output averages several scene
+// texels, alpha * 2 is how much of the pixel the coin covers: an anti-aliased rim.
 uniform int uKey;
 void main() {
-  vec3 c = clamp(texture(uSrc, vUv).rgb, 0.0, 1.0);
-  fragColor = uKey == 1 ? vec4(c, max(c.r, max(c.g, c.b))) : vec4(c, 1.0);
+  vec4 src = texture(uSrc, vUv);
+  vec3 c = clamp(src.rgb, 0.0, 1.0);
+  float a = max(clamp(src.a * 2.0, 0.0, 1.0), max(c.r, max(c.g, c.b)));
+  fragColor = uKey == 1 ? vec4(c, a) : vec4(c, 1.0);
 }
 `;

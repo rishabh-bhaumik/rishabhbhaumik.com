@@ -5,16 +5,16 @@ import PlaySection from "@/components/play/PlaySection";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: `Play — ${SITE.name}`,
+  title: `Play - ${SITE.name}`,
   description:
-    "Films, experiments, and audio — the creative side of Rishabh Bhaumik.",
+    "Films, experiments, and audio - the creative side of Rishabh Bhaumik.",
 };
 
 export default function PlayPage() {
   return (
     <>
       <Header />
-      <main className="w-full pt-2">
+      <main className="w-full pb-20 pt-2">
         <PlaySection />
       </main>
       <Footer />

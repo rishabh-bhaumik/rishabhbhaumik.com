@@ -151,7 +151,7 @@ export default function AsciiDither({
       premultipliedAlpha: false,
     });
     if (!gl) {
-      console.warn("WebGL2 unavailable — ascii dither disabled");
+      console.warn("WebGL2 unavailable - ascii dither disabled");
       return;
     }
 

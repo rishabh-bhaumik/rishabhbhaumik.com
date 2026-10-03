@@ -9,11 +9,11 @@ import MotionProvider from "@/components/MotionProvider";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: `${SITE.name} — ${SITE.role}`,
+  title: `${SITE.name} - ${SITE.role}`,
   description:
-    "Practicing Experience Design at BimaKavach in Bengaluru. Product & visual design, design systems, and craft.",
+    "Practicing Experience Design at BimaKavach in Bengaluru. Product and visual design, design systems, and craft.",
   openGraph: {
-    title: `${SITE.name} — Product & Visual Designer`,
+    title: `${SITE.name} - Product & Visual Designer`,
     description:
       "Design systems and product craft for India's most complex industries.",
     type: "website",

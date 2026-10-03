@@ -3,7 +3,7 @@ import PasswordGate from "@/components/PasswordGate";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: `BimaKavach Identity — ${SITE.name}`,
+  title: `BimaKavach Identity - ${SITE.name}`,
   description:
     "Pivoting the perception of BimaKavach into an intelligence company rooted in India's rich history of ornamentation, beauty and aesthetic identity.",
   robots: { index: false }, // gated case study

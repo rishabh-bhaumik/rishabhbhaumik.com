@@ -84,7 +84,7 @@ export type TransitionKey = (typeof TRANSITIONS)[number]["key"];
 
 export const MOTIONS = [
   { key: "still", label: "Still" },
-  { key: "spin", label: "Coin spin" },
+  { key: "spin", label: "Spin" },
   { key: "flip", label: "Flip" },
   { key: "float", label: "Float" },
   { key: "follow", label: "Follow pointer" },

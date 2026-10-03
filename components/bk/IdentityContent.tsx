@@ -734,7 +734,7 @@ export default function IdentityContent() {
                       name="section-story-2"
                       w={810}
                       h={649}
-                      alt="BimaKavach app — before and after"
+                      alt="BimaKavach app - before and after"
                     />
                   </StaggerItem>
                 </div>
@@ -752,7 +752,7 @@ export default function IdentityContent() {
                   <div className="flex flex-col gap-4">
                     <StaggerItem>
                       <Body>
-                        Redesigning Forms &amp; Modals in order to boost
+                        Redesigning Forms and Modals in order to boost
                         discovery, expedite Quote Generation, and build
                         intuitive journies towards Quote Generation was the
                         next task.
@@ -760,7 +760,7 @@ export default function IdentityContent() {
                     </StaggerItem>
                     <StaggerItem>
                       <Body>
-                        Based on Reports from Support &amp; Sales, Analytics,
+                        Based on Reports from Support and Sales, Analytics,
                         we observed dropoffs after the initial form, and
                         attempted to simplify the UX.
                       </Body>
@@ -1232,7 +1232,7 @@ export default function IdentityContent() {
                 <StaggerItem>
                   <Body>
                     In order to cater to the multicultural hyperlocal nature
-                    of Tier 2 &amp; Tier 3 Businesses, we started with
+                    of Tier 2 and Tier 3 Businesses, we started with
                     Foundational Typography. We had decided that Anek Variable
                     would be the typeface of choice.
                   </Body>
@@ -1267,14 +1267,14 @@ function HeroPanel({
         setFocus("none");
       }}
     >
+      {/* The billboard stays behind the two choices; they sit over it as glass. */}
       <Image
         src={HERO_IMG}
         alt="BimaKavach rebranding billboard"
         fill
         preload
         sizes="100vw"
-        className="object-cover transition-opacity duration-500"
-        style={{ opacity: entered ? 0 : 1 }}
+        className="object-cover"
       />
 
       <div
@@ -1282,7 +1282,7 @@ function HeroPanel({
         style={{ opacity: entered ? 0 : 1 }}
       >
         <span className="font-mono text-10 uppercase tracking-[0.25em] text-white/50">
-          bimakavach rebranding — shipped 2026
+          bimakavach rebranding - shipped 2026
         </span>
         <p className="max-w-[46rem] text-18 sm:text-24 leading-snug text-white">
           Pivoting to the perception of BimaKavach as an intelligence
@@ -1292,60 +1292,51 @@ function HeroPanel({
       </div>
 
       <div
-        className="absolute inset-0 flex transition-opacity duration-500"
+        className="absolute inset-0 flex divide-x divide-white/10 transition-opacity duration-500"
         style={{
           opacity: entered ? 1 : 0,
           pointerEvents: entered ? "auto" : "none",
         }}
       >
-        <button
-          type="button"
-          onClick={onStory}
-          onMouseEnter={() => setFocus("story")}
-          onMouseLeave={() => setFocus("none")}
-          className="relative flex flex-1 items-center justify-center overflow-hidden bg-[#0a0a0c]"
-        >
-          <div
-            className="absolute inset-0 transition-opacity duration-300"
-            style={{
-              backgroundImage:
-                "linear-gradient(147deg, #0e2b72 0%, transparent 25%, transparent 75%, #0e2b72 100%)",
-              opacity:
-                focus === "story" ? 1 : focus === "work" ? 0.3 : 0.6,
-            }}
-          />
-          <span
-            className="relative font-mono text-16 uppercase tracking-[0.3em] transition-colors duration-300"
-            style={{ color: focus === "story" ? "#ffffff" : "#a3a3a3" }}
-          >
-            Tell me the story
-          </span>
-        </button>
-
-        <button
-          type="button"
-          onClick={onWork}
-          onMouseEnter={() => setFocus("work")}
-          onMouseLeave={() => setFocus("none")}
-          className="relative flex flex-1 items-center justify-center overflow-hidden bg-[#0a0a0c]"
-        >
-          <div
-            className="absolute inset-0 transition-opacity duration-300"
-            style={{
-              backgroundImage:
-                "linear-gradient(147deg, #4100cf 0%, transparent 40.5%, transparent 63%, #4100cf 100%)",
-              opacity:
-                focus === "work" ? 1 : focus === "story" ? 0.3 : 0.6,
-            }}
-          />
-          <span
-            className="relative font-mono text-16 uppercase tracking-[0.3em] transition-colors duration-300"
-            style={{ color: focus === "work" ? "#ffffff" : "#a3a3a3" }}
-          >
-            Show me the work
-          </span>
-        </button>
+        <HeroChoice label="Tell me the story" active={focus === "story"} onClick={onStory} onHover={(on) => setFocus(on ? "story" : "none")} />
+        <HeroChoice label="Show me the work" active={focus === "work"} onClick={onWork} onHover={(on) => setFocus(on ? "work" : "none")} />
       </div>
     </div>
+  );
+}
+
+/**
+ * One half of the hero's choice: neutral glass over the billboard. Hovered,
+ * the glass darkens for more contrast and the label goes from soft to pure white.
+ */
+function HeroChoice({
+  label,
+  active,
+  onClick,
+  onHover,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+  onHover: (on: boolean) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      onMouseEnter={() => onHover(true)}
+      onMouseLeave={() => onHover(false)}
+      className={`relative flex flex-1 items-center justify-center backdrop-blur-xl transition-colors duration-300 ${
+        active ? "bg-black/70" : "bg-black/40"
+      }`}
+    >
+      <span
+        className={`font-mono text-16 uppercase tracking-[0.3em] transition-colors duration-300 ${
+          active ? "text-white" : "text-white/70"
+        }`}
+      >
+        {label}
+      </span>
+    </button>
   );
 }

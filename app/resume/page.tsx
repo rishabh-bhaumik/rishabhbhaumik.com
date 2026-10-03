@@ -10,7 +10,7 @@ import { SITE } from "@/data/site";
  * it out of search results.
  */
 export const metadata: Metadata = {
-  title: `Resume — ${SITE.name}`,
+  title: `Resume - ${SITE.name}`,
   description: "Resume of Rishabh Bhaumik, Product & Visual Designer.",
   robots: {
     index: false,

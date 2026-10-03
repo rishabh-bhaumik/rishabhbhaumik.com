@@ -1,7 +1,12 @@
 [
   {
+    "id": "mus6t88o",
+    "name": "Flip Vertical",
+    "look": "m=default&mo=flip&lp=1&re=2.5&f=dither%3A0.72%2Bchroma%3A1.00&tx=default*2.5**dither%3A0.18%2Bchroma%3A1.00*dither%2Cdefault*2.5**dither%3A0.72%2Bchroma%3A1.00*dither&tn=1&ho=1.2&mt=1.8"
+  },
+  {
     "id": "murcpjv6",
-    "name": "Flip",
+    "name": "Flip Horizontal",
     "look": "m=default&mo=flip&lp=1&re=2.5&f=dither%3A0.72%2Bchroma%3A1.00&tx=default*2.5**dither%3A0.18%2Bchroma%3A1.00*dither%2Cdefault*2.5**dither%3A0.72%2Bchroma%3A1.00*dither&tn=1&ho=1.2&mt=1.8"
   },
   {

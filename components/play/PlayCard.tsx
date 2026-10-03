@@ -171,7 +171,7 @@ export default function PlayCard({
       <div className="flex flex-col gap-1.5">
         <div className="flex items-center justify-between gap-4">
           <Title item={item} className="font-display text-20 leading-tight text-ink" />
-          <span className="shrink-0 rounded-full bg-surface px-3 py-1.5 font-mono text-10 tracking-wide text-faint ring-1 ring-border">
+          <span className="shrink-0 rounded-full bg-surface px-2 py-1 font-mono text-10 tracking-wide text-faint ring-1 ring-border">
             {item.tag}
           </span>
         </div>

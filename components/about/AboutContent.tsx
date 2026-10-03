@@ -14,7 +14,7 @@ export default function AboutContent() {
   return (
     <>
       <Header />
-      <main className="w-full">
+      <main className="w-full pb-20">
         {/* Hero — flipping coin box + heading + intro. A CSS entrance (.rise), so it paints before hydration. */}
         <section className="flex flex-col gap-10 pt-2">
           {/* Same box as the home hero's showreel: 16:9, rounded, black, in the content column. */}
@@ -31,8 +31,8 @@ export default function AboutContent() {
             <div style={at(2)} className="rise-text flex justify-center">
               <p className="max-w-[640px] text-center text-18 leading-[1.7] text-muted">
                 Hello World, I&rsquo;m Rishabh- a Visual Designer based out of
-                Bengaluru, India. As a thespian &amp; film student who&rsquo;s
-                started his career in video editing &amp; creative direction, I
+                Bengaluru, India. As a thespian and film student who&rsquo;s
+                started his career in video editing and creative direction, I
                 have seen how the power of stories help shape experiences.
               </p>
             </div>
@@ -94,9 +94,8 @@ export default function AboutContent() {
             </Reveal>
           </div>
         </section>
-
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 }
