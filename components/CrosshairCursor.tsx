@@ -23,7 +23,7 @@ const isDesktop = () => window.matchMedia(DESKTOP).matches;
 /**
  * A scanner-style cursor overlay: a hairline across the page in each axis,
  * crossing under the pointer, a 4px dot where they meet, and the coordinates
- * stacked one character per line (x above-right, y below-left). The native
+ * beside it (x above-right, y below-left). The native
  * cursor is hidden while it is on (globals.css). Colours come from the theme
  * tokens, so it follows light and dark.
  *
@@ -78,8 +78,8 @@ export default function CrosshairCursor() {
       d.style.transform = `translate3d(${x - 2}px,${y - 2}px,0)`;
       xl.style.transform = `translate3d(${x + 8}px,${y - 4}px,0)`;
       yl.style.transform = `translate3d(${x - 8}px,${y + 4}px,0)`;
-      xt.textContent = `${x}:X`;
-      yt.textContent = `Y:${y}`;
+      xt.textContent = `x : ${x}`;
+      yt.textContent = `y : ${y}`;
     };
     const onMove = (e: MouseEvent) => {
       x = Math.round(e.clientX);
@@ -113,15 +113,13 @@ export default function CrosshairCursor() {
       <div ref={dot} className={`${fixed} z-[100] size-1 rounded-full bg-ink`} />
       {/* x sits above-right of the crossing; y below-left (its box ends at the line). */}
       <div ref={xLabel} className={`${label}`}>
-        {/* Stacked upwards from the crossing: the digits, :, then X on top-to-bottom reading. */}
-        <div ref={xText} className="-translate-y-full leading-[1.1] [text-orientation:upright] [writing-mode:vertical-lr]">
-          0:X
+        <div ref={xText} className="-translate-y-full">
+          x : 0
         </div>
       </div>
       <div ref={yLabel} className={`${label}`}>
-        {/* Upright characters stacked top to bottom: Y, :, then each digit. */}
-        <div ref={yText} className="-translate-x-full leading-[1.1] [text-orientation:upright] [writing-mode:vertical-lr]">
-          Y:0
+        <div ref={yText} className="-translate-x-full">
+          y : 0
         </div>
       </div>
     </div>
