@@ -71,7 +71,8 @@ export default function DraftContent() {
     <main className="flex w-full flex-col gap-20">
       {/* Cover + intro */}
       <section className="flex flex-col items-center gap-6 px-6 py-[60px]">
-        <div className="relative aspect-[1512/850] w-full bg-surface">
+        {/* Cover media slot: hidden for now. */}
+        <div className="relative hidden aspect-[1512/850] w-full bg-surface">
           <p className="absolute left-1/2 top-[calc(50%-10.01px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
             MEDIA INCOMING...
           </p>
