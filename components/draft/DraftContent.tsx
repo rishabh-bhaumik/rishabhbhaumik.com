@@ -1,5 +1,7 @@
 import Image from "next/image";
 import "@/components/bk/anek.css";
+import FlowSlides, { type FlowSlide } from "./FlowSlides";
+import { BODY, CARD, Tag, rail } from "./ui";
 
 // First-draft build of the Figma case-study page (Peetal DSL, node 8627:5701),
 // section by section. Colours are theme tokens (Figma values in dark), so the page
@@ -59,6 +61,38 @@ const FORM_ROWS: {
   },
 ];
 
+/** 006.1 - 006.4: one at a time, swapped by scrolling (FlowSlides). */
+const FLOW_SLIDES: FlowSlide[] = [
+  {
+    tag: "006.1",
+    src: "/media/draft/flow-1.png",
+    alt: "Quote page on desktop and mobile: a feed of insurer cards with filters and compare",
+    caption:
+      "The Quote Page acts as a feed - filtering and sorting coverage offerings based on the user’s needs. Each Card contains further details and available quotes can be compared.",
+  },
+  {
+    tag: "006.2",
+    src: "/media/draft/flow-2.png",
+    alt: "Primary Details step on mobile and desktop, with a stepper and the price beside the button",
+    caption:
+      "Steppers help assess the user in how much or little work is pending. The Price is always shown next to the Button to encourage Further Movement and Constant Action.",
+  },
+  {
+    tag: "006.3",
+    src: "/media/draft/flow-3.png",
+    alt: "Four Complete KYC screens showing tool-tip cues for each state",
+    caption:
+      "Contextual Cues via Tool Tips help reduce action, and thus increase movement in the flow.",
+  },
+  {
+    tag: "006.4",
+    src: "/media/draft/flow-4.png",
+    alt: "Personal assistance page and a loading screen that bridge a failed insurer API",
+    caption:
+      "Insurance APIs are wonky - at any step should the API fail in anticipation of or during payment - contingency loaders and screens appear to bridge gaps.",
+  },
+];
+
 const CAPTION =
   "From Left: BimaKavach Homepage as on March 2023, BimaKavach Homepage as of October 2025";
 
@@ -77,16 +111,6 @@ const SCRIPT_LINES: { text: string; lang: string; font: string; right?: boolean;
 ];
 
 const ROW = "flex flex-col gap-6 px-6";
-const CARD = "overflow-hidden rounded-[16px] border-[0.5px] border-ink/25";
-const BODY = "text-14 leading-[1.7] text-muted";
-
-function Tag({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex w-fit rounded-[24px] border border-surface bg-surface-2 px-3 py-[10px] text-12 leading-none text-muted">
-      {children}
-    </span>
-  );
-}
 
 function SectionHead({
   tag,
@@ -118,7 +142,7 @@ export default function DraftContent() {
   return (
     <main className="flex w-full min-w-0 flex-col gap-20">
       {/* Cover + intro */}
-      <section id="context" className="flex scroll-mt-16 flex-col items-center gap-6 px-6 py-[60px]">
+      <section {...rail("context", "For Your Consideration")} className="flex scroll-mt-16 flex-col items-center gap-6 px-6 py-[60px]">
         {/* Cover media slot: hidden for now. */}
         <div className="relative hidden aspect-[1512/850] w-full bg-surface">
           <p className="absolute left-1/2 top-[calc(50%-10.01px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
@@ -136,7 +160,7 @@ export default function DraftContent() {
       </section>
 
       {/* 001 */}
-      <section id="story" className="scroll-mt-16 px-6 py-4">
+      <section {...rail("story", "001. How did my story start?")} className="scroll-mt-16 px-6 py-4">
         <div className="flex flex-col justify-between gap-10 px-6 lg:flex-row">
           <div className="flex flex-col gap-4 lg:flex-1">
             <Tag>001.</Tag>
@@ -168,7 +192,7 @@ export default function DraftContent() {
       </section>
 
       {/* 002 · The Pivot and the Problem */}
-      <section id="problem" className={`scroll-mt-16 ${ROW}`}>
+      <section {...rail("problem", "002. The Pivot and the Problem")} className={`scroll-mt-16 ${ROW}`}>
         <SectionHead tag="002." title="The Pivot and the Problem">
           <p className={BODY}>
             I started off as a Senior Designer - and had to tackle challenges outside the Product’s
@@ -192,7 +216,7 @@ export default function DraftContent() {
 
       {/* 003 Typography and 004 Design Systems: copy left, media right; one block, no gap between */}
       <div className="flex flex-col">
-        <section id="typography" className="scroll-mt-16 px-6 py-[60px]">
+        <section {...rail("typography", "003. Solutions - Typography")} className="scroll-mt-16 px-6 py-[60px]">
           <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
             <SectionHead tag="003." title="Solutions - Typography" className="min-w-0 justify-center">
               <div className={`${BODY} flex flex-col gap-[1.7em]`}>
@@ -234,7 +258,7 @@ export default function DraftContent() {
           </div>
         </section>
 
-        <section id="design-systems" className="scroll-mt-16 px-6 py-[60px]">
+        <section {...rail("design-systems", "004. Solutions - Design Systems")} className="scroll-mt-16 px-6 py-[60px]">
           <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
             <SectionHead tag="004." title="Solutions - Design Systems" className="min-w-0 justify-center">
               <p className={BODY}>
@@ -260,7 +284,9 @@ export default function DraftContent() {
       </div>
 
       {/* 005 · Forms & Modals */}
-      <section id="forms" className={`scroll-mt-16 ${ROW}`}>
+      <section
+        {...rail("forms", "005. Solutions - Forms & Modals for Discovery & Quote Generation")}
+        className={`scroll-mt-16 ${ROW}`}>
         <SectionHead tag="005." title="Solutions - Forms & Modals for Discovery & Quote Generation">
           <p className={BODY}>
             Redesigning Forms &amp; Modals in order to boost discovery, expedite Quote Generation,
@@ -280,11 +306,12 @@ export default function DraftContent() {
       </section>
 
       {/* 005.1 - 005.3: media left, copy right; rows stack with no gap */}
-      <div id="forms-detail" className="flex flex-col">
+      <div className="flex flex-col">
         {FORM_ROWS.map((r) => (
           <section
             key={r.src}
-            className={`flex flex-col gap-6 px-6 py-[60px] lg:flex-row lg:gap-20 ${
+            {...rail(`forms-${r.tag.split(".")[1]}`, r.tag, 2)}
+            className={`scroll-mt-16 flex flex-col gap-6 px-6 py-[60px] lg:flex-row lg:gap-20 ${
               r.bottom ? "lg:items-end" : "lg:items-start"
             }`}
           >
@@ -307,7 +334,7 @@ export default function DraftContent() {
       </div>
 
       {/* 006 · Flows - Checkout & Payment */}
-      <section id="flows" className={`scroll-mt-16 ${ROW}`}>
+      <section {...rail("flows", "006. Flows - Checkout & Payment")} className={`scroll-mt-16 ${ROW}`}>
         <SectionHead tag="006." title="Flows - Checkout & Payment">
           <p className={BODY}>
             Massive diversions and permutations from the quote page exists and change per product -
@@ -325,6 +352,9 @@ export default function DraftContent() {
           />
         </div>
       </section>
+
+      {/* 006.1 - 006.4: pinned, one slide at a time */}
+      <FlowSlides slides={FLOW_SLIDES} idPrefix="flows" />
     </main>
   );
 }
