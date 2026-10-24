@@ -1,14 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { m, AnimatePresence } from "framer-motion";
 import { useSfx, useSilentRoute } from "@/lib/sfx";
 import { EASE } from "@/lib/motion";
 
+/** Routes where the toggle is hidden but click sounds still play (it becomes the presentation toggle later). */
+const HIDDEN_ROUTES = ["/draft"];
+
 export default function SoundToggle() {
   const { muted, toggle } = useSfx();
   const silent = useSilentRoute();
-  if (silent) return null;
+  const pathname = usePathname() ?? "";
+  if (silent || HIDDEN_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`))) return null;
 
   return (
     <button
