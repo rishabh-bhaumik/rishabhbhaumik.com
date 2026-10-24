@@ -46,13 +46,15 @@ function SectionHead({
   tag,
   title,
   children,
+  className = "",
 }: {
   tag: string;
   title: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <div className="flex flex-col gap-5 px-6 pb-6">
+    <div className={`flex flex-col gap-5 px-6 pb-6 ${className}`}>
       <div className="flex flex-col gap-4">
         <Tag>{tag}</Tag>
         <h2 className="py-[2px] text-[36px] font-normal leading-none text-ink">{title}</h2>
@@ -171,40 +173,46 @@ export default function DraftContent() {
         <Caption />
       </section>
 
-      {/* 002 · Typography */}
-      <section className={ROW}>
-        <SectionHead tag="002." title="Solutions - Typography">
-          <p className={BODY}>
-            In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
-            Businesses, we started with Foundational Typography. We had decided that Anek Variable
-            would be the typeface of choice. Anek is a contemporary, multi-script, open-source
-            typeface family created by the Indian foundry Ek Type (in collaboration with Google).
-            <br />
-            It supports multiple Indian scripts (including Devanagari, Tamil, Bengali, etc.) as well
-            as Latin, and it’s offered in a variable font format.
-          </p>
-        </SectionHead>
-        <div className={`flex h-[850px] flex-col items-center justify-center bg-surface ${CARD}`}>
-          <div className="flex w-full flex-col gap-[33.791px] px-6 tracking-[-0.5199px] text-ink">
-            {SCRIPT_LINES.map((l) => (
-              <p
-                key={l.lang}
-                lang={l.lang}
-                className={`${l.small ? "text-[31.191px]" : "text-[34.657px]"} leading-[41.588px] ${
-                  l.right ? "text-right" : ""
-                }`}
-                style={{
-                  fontFamily: `"${l.font}"`,
-                  fontVariationSettings: '"wdth" 100',
-                  fontFeatureSettings: '"zero" 1, "kern" 0, "liga" 0, "dlig" 1',
-                }}
-              >
-                {l.text}
-              </p>
-            ))}
+      {/* 002 · Typography: type card left, copy right */}
+      <section className="px-6">
+        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
+          <div
+            className={`flex aspect-[1464/850] min-w-0 flex-col items-center justify-center bg-surface ${CARD}`}
+          >
+            <div className="flex w-full max-w-[657px] flex-col gap-[16.268px] px-[11.555px] tracking-[-0.2503px] text-ink">
+              {SCRIPT_LINES.map((l) => (
+                <p
+                  key={l.lang}
+                  lang={l.lang}
+                  className={`${l.small ? "text-[15.017px]" : "text-[16.685px]"} leading-[20.023px] ${
+                    l.right ? "text-right" : ""
+                  }`}
+                  style={{
+                    fontFamily: `"${l.font}"`,
+                    fontVariationSettings: '"wdth" 100',
+                    fontFeatureSettings: '"zero" 1, "kern" 0, "liga" 0, "dlig" 1',
+                  }}
+                >
+                  {l.text}
+                </p>
+              ))}
+            </div>
           </div>
+          <SectionHead
+            tag="002."
+            title="Solutions - Typography"
+            className="min-w-0 justify-center"
+          >
+            <p className={BODY}>
+              In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
+              Businesses, we started with Foundational Typography. We had decided that Anek
+              Variable would be the typeface of choice. Anek is a contemporary, multi-script,
+              open-source typeface family created by the Indian foundry Ek Type (in collaboration
+              with Google). It supports multiple Indian scripts (including Devanagari, Tamil,
+              Bengali, etc.) as well as Latin, and it’s offered in a variable font format.
+            </p>
+          </SectionHead>
         </div>
-        <Caption />
       </section>
 
       {/* 002 · Design Systems */}
