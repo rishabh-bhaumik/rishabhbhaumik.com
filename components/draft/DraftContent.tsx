@@ -1,23 +1,19 @@
 import Image from "next/image";
 import "@/components/bk/anek.css";
-import FlowSlides, { type FlowSlide } from "./FlowSlides";
+import ScrollSlides, { type ScrollSlide } from "./ScrollSlides";
 import { BODY, CARD, Tag, rail } from "./ui";
 
 // First-draft build of the Figma case-study page (Peetal DSL, node 8627:5701),
 // section by section. Colours are theme tokens (Figma values in dark), so the page
 // follows light mode; the exported images stay as rendered.
 
-/** 005.x rows: media left, copy right. `bottom` sits the copy at the media's foot. */
-const FORM_ROWS: {
-  tag: string;
-  src: string;
-  alt: string;
-  bottom?: boolean;
-  copy: React.ReactNode;
-}[] = [
+/** 005.1 - 005.3: media left, copy right, one at a time (ScrollSlides). `bottom` sits the copy at the media's foot. */
+const FORM_ROWS: ScrollSlide[] = [
   {
     tag: "005.1",
     src: "/media/draft/forms-chips.png",
+    width: 906,
+    height: 528,
     alt: "Two Share Your Business Details forms: suggestion chips, and the Other chip opening a search field",
     copy: (
       <>
@@ -36,6 +32,8 @@ const FORM_ROWS: {
   {
     tag: "005.2",
     src: "/media/draft/forms-modal.png",
+    width: 906,
+    height: 528,
     alt: "Confirm Last Few Details modal over the loading quote page",
     bottom: true,
     copy: (
@@ -49,6 +47,8 @@ const FORM_ROWS: {
   {
     tag: "005.3",
     src: "/media/draft/forms-otp.png",
+    width: 906,
+    height: 528,
     alt: "Verify Your Number OTP sheet on an iPhone",
     bottom: true,
     copy: (
@@ -62,33 +62,41 @@ const FORM_ROWS: {
 ];
 
 /** 006.1 - 006.4: one at a time, swapped by scrolling (FlowSlides). */
-const FLOW_SLIDES: FlowSlide[] = [
+const FLOW_SLIDES: ScrollSlide[] = [
   {
     tag: "006.1",
     src: "/media/draft/flow-1.png",
+    width: 1464,
+    height: 850,
     alt: "Quote page on desktop and mobile: a feed of insurer cards with filters and compare",
-    caption:
+    copy:
       "The Quote Page acts as a feed - filtering and sorting coverage offerings based on the user’s needs. Each Card contains further details and available quotes can be compared.",
   },
   {
     tag: "006.2",
     src: "/media/draft/flow-2.png",
+    width: 1464,
+    height: 850,
     alt: "Primary Details step on mobile and desktop, with a stepper and the price beside the button",
-    caption:
+    copy:
       "Steppers help assess the user in how much or little work is pending. The Price is always shown next to the Button to encourage Further Movement and Constant Action.",
   },
   {
     tag: "006.3",
     src: "/media/draft/flow-3.png",
+    width: 1464,
+    height: 850,
     alt: "Four Complete KYC screens showing tool-tip cues for each state",
-    caption:
+    copy:
       "Contextual Cues via Tool Tips help reduce action, and thus increase movement in the flow.",
   },
   {
     tag: "006.4",
     src: "/media/draft/flow-4.png",
+    width: 1464,
+    height: 850,
     alt: "Personal assistance page and a loading screen that bridge a failed insurer API",
-    caption:
+    copy:
       "Insurance APIs are wonky - at any step should the API fail in anticipation of or during payment - contingency loaders and screens appear to bridge gaps.",
   },
 ];
@@ -305,33 +313,8 @@ export default function DraftContent() {
         <Caption />
       </section>
 
-      {/* 005.1 - 005.3: media left, copy right; rows stack with no gap */}
-      <div className="flex flex-col">
-        {FORM_ROWS.map((r) => (
-          <section
-            key={r.src}
-            {...rail(`forms-${r.tag.split(".")[1]}`, r.tag, 2)}
-            className={`scroll-mt-16 flex flex-col gap-6 px-6 py-[60px] lg:flex-row lg:gap-20 ${
-              r.bottom ? "lg:items-end" : "lg:items-start"
-            }`}
-          >
-            <div className="min-w-0 flex-1 overflow-hidden rounded-[12px]">
-              <Image
-                src={r.src}
-                alt={r.alt}
-                width={906}
-                height={528}
-                sizes="(min-width: 1024px) 60vw, 100vw"
-                className="block h-auto w-full"
-              />
-            </div>
-            <div className="flex shrink-0 flex-col justify-center gap-6 lg:w-[478px]">
-              <Tag>{r.tag}</Tag>
-              <div className={`${BODY} flex flex-col gap-[1.7em]`}>{r.copy}</div>
-            </div>
-          </section>
-        ))}
-      </div>
+      {/* 005.1 - 005.3: pinned, one at a time */}
+      <ScrollSlides slides={FORM_ROWS} idPrefix="forms" layout="row" />
 
       {/* 006 · Flows - Checkout & Payment */}
       <section {...rail("flows", "006. Flows - Checkout & Payment")} className={`scroll-mt-16 ${ROW}`}>
@@ -354,7 +337,7 @@ export default function DraftContent() {
       </section>
 
       {/* 006.1 - 006.4: pinned, one slide at a time */}
-      <FlowSlides slides={FLOW_SLIDES} idPrefix="flows" />
+      <ScrollSlides slides={FLOW_SLIDES} idPrefix="flows" layout="stack" />
     </main>
   );
 }
