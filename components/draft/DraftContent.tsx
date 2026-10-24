@@ -5,6 +5,60 @@ import "@/components/bk/anek.css";
 // section by section. Colours are theme tokens (Figma values in dark), so the page
 // follows light mode; the exported images stay as rendered.
 
+/** 005.x rows: media left, copy right. `bottom` sits the copy at the media's foot. */
+const FORM_ROWS: {
+  tag: string;
+  src: string;
+  alt: string;
+  bottom?: boolean;
+  copy: React.ReactNode;
+}[] = [
+  {
+    tag: "005.1",
+    src: "/media/draft/forms-chips.png",
+    alt: "Two Share Your Business Details forms: suggestion chips, and the Other chip opening a search field",
+    copy: (
+      <>
+        <p>Two Example of Simplifying Forms:</p>
+        <p>
+          1. Using Data to showcase the most used options as Suggestion Chips - and allowing single
+          select only if the user fits none of the most commonly used options and
+        </p>
+        <p>
+          2. Using Visual Cues in Binary Fields in order to increase the ability to scan the form
+          without increasing cognitive load.
+        </p>
+      </>
+    ),
+  },
+  {
+    tag: "005.2",
+    src: "/media/draft/forms-modal.png",
+    alt: "Confirm Last Few Details modal over the loading quote page",
+    bottom: true,
+    copy: (
+      <p>
+        By showcasing a loading state of the Quote Page and asking no brainer questions in the form
+        of a modal - we were able to reduce drop-offs, as the user is now more incentivized to
+        complete the process.
+      </p>
+    ),
+  },
+  {
+    tag: "005.2",
+    src: "/media/draft/forms-otp.png",
+    alt: "Verify Your Number OTP sheet on an iPhone",
+    bottom: true,
+    copy: (
+      <p>
+        By showcasing a loading state of the Quote Page and asking no brainer questions in the form
+        of a modal - we were able to reduce drop-offs, as the user is now more incentivized to
+        complete the process.
+      </p>
+    ),
+  },
+];
+
 const CAPTION =
   "From Left: BimaKavach Homepage as on March 2023, BimaKavach Homepage as of October 2025";
 
@@ -261,6 +315,33 @@ export default function DraftContent() {
         </div>
         <Caption />
       </section>
+
+      {/* 005.1 - 005.3: media left, copy right; rows stack with no gap */}
+      <div className="flex flex-col">
+        {FORM_ROWS.map((r) => (
+          <section
+            key={r.src}
+            className={`flex flex-col gap-6 px-6 py-[60px] lg:flex-row lg:gap-20 ${
+              r.bottom ? "lg:items-end" : "lg:items-start"
+            }`}
+          >
+            <div className="min-w-0 flex-1 overflow-hidden rounded-[12px]">
+              <Image
+                src={r.src}
+                alt={r.alt}
+                width={906}
+                height={528}
+                sizes="(min-width: 1024px) 60vw, 100vw"
+                className="block h-auto w-full"
+              />
+            </div>
+            <div className="flex shrink-0 flex-col justify-center gap-6 lg:w-[478px]">
+              <Tag>{r.tag}</Tag>
+              <div className={`${BODY} flex flex-col gap-[1.7em]`}>{r.copy}</div>
+            </div>
+          </section>
+        ))}
+      </div>
     </main>
   );
 }
