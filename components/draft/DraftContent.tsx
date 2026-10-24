@@ -32,7 +32,7 @@ const TOC_GROUPS: { title: string; items: string[] }[] = [
 
 const ROW = "flex flex-col gap-6 px-6";
 const CARD = "overflow-hidden rounded-[16px] border-[0.5px] border-[#4e5056]";
-const BODY = "text-[18px] leading-[1.7] text-[#a7adb8]";
+const BODY = "text-14 leading-[1.7] text-[#a7adb8]";
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
