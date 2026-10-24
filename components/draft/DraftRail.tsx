@@ -67,14 +67,14 @@ export default function DraftRail() {
       <a
         href={`#${i.ids[0]}`}
         aria-current={active === i.label ? "true" : undefined}
-        className={`text-14 leading-tight transition-colors ${
+        className={`text-12 leading-tight transition-colors ${
           active === i.label ? "text-ink" : "text-faint/50 hover:text-faint"
         }`}
       >
         {i.label}
       </a>
     ) : (
-      <span className="text-14 leading-tight text-faint/25">{i.label}</span>
+      <span className="text-12 leading-tight text-faint/25">{i.label}</span>
     );
 
   return (
