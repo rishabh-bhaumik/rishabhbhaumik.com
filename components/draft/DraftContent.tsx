@@ -136,9 +136,9 @@ export default function DraftContent() {
         <div className="flex w-full flex-col justify-between gap-6 lg:flex-row">
           <h1 className="text-[40px] font-normal leading-[1.3] text-ink">For Your Consideration</h1>
           <p className={`${BODY} lg:w-[700px] lg:shrink-0`}>
-            Hello World, I’m Rishabh - a Designer based out of Bengaluru, India. As a thespian &amp;
-            film student who’s started his career in video editing &amp; creative direction, I have
-            seen how the power of stories help shape experiences.
+            As a thespian &amp; film student who’s started his career in video editing &amp; creative
+            direction, I have seen how the power of stories help shape experiences. A Designer based
+            out of Bengaluru, India, Hello World - I’m Rishabh.
           </p>
         </div>
       </section>
