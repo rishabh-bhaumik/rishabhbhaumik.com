@@ -45,7 +45,7 @@ const FORM_ROWS: {
     ),
   },
   {
-    tag: "005.2",
+    tag: "005.3",
     src: "/media/draft/forms-otp.png",
     alt: "Verify Your Number OTP sheet on an iPhone",
     bottom: true,
@@ -74,14 +74,6 @@ const SCRIPT_LINES: { text: string; lang: string; font: string; right?: boolean;
   { text: "ସ୍ୱାଗତ, ଉଦୀୟମାନ ଭାରତ!", lang: "or", font: "Anek Odia" },
   { text: "வருக, வளர்ந்து வரும் இந்தியா!", lang: "ta", font: "Anek Tamil", right: true },
   { text: "అభివృద్ధి చెందుతున్న భారతదేశానికి స్వాగతం!", lang: "te", font: "Anek Telugu", small: true },
-];
-
-const TOC_TOP = ["Context", "The Problem"];
-const TOC_GROUPS: { title: string; items: string[] }[] = [
-  { title: "Solutions", items: ["Typography", "Design Systems", "Forms & Modals for Discovery & Quote Generation"] },
-  { title: "Interface Design", items: ["Home & Product Page"] },
-  { title: "Flows", items: ["Checkout & Payment"] },
-  { title: "Visual Design", items: ["Graphic Elements & Visual Motifs", "Implementation & Application Examples"] },
 ];
 
 const ROW = "flex flex-col gap-6 px-6";
@@ -124,9 +116,9 @@ function Caption() {
 
 export default function DraftContent() {
   return (
-    <main className="flex w-full flex-col gap-20">
+    <main className="flex w-full min-w-0 flex-col gap-20">
       {/* Cover + intro */}
-      <section className="flex flex-col items-center gap-6 px-6 py-[60px]">
+      <section id="context" className="flex scroll-mt-16 flex-col items-center gap-6 px-6 py-[60px]">
         {/* Cover media slot: hidden for now. */}
         <div className="relative hidden aspect-[1512/850] w-full bg-surface">
           <p className="absolute left-1/2 top-[calc(50%-10.01px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
@@ -143,37 +135,8 @@ export default function DraftContent() {
         </div>
       </section>
 
-      {/* Media + contents */}
-      <section className="flex items-start px-6 py-[60px]">
-        <div className="flex w-full flex-col gap-6 lg:flex-row lg:justify-between lg:gap-0">
-          <div className={`relative aspect-[1100/640] min-w-0 flex-1 bg-surface ${CARD}`}>
-            <p className="absolute left-[calc(50%+0.5px)] top-[calc(50%-6.67px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
-              MEDIA INCOMING
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-col gap-6 px-6 py-3 lg:w-[427px]">
-            {TOC_TOP.map((t) => (
-              <p key={t} className="text-24 leading-[normal] text-nav-current">
-                {t}
-              </p>
-            ))}
-            {TOC_GROUPS.map((g) => (
-              <div key={g.title} className="flex flex-col gap-3">
-                <p className="text-24 leading-[normal] text-nav-current">{g.title}</p>
-                {g.items.map((i) => (
-                  <p key={i} className="text-16 leading-[normal] text-faint">
-                    {i}
-                  </p>
-                ))}
-              </div>
-            ))}
-            <p className="text-24 leading-[normal] text-nav-current">End</p>
-          </div>
-        </div>
-      </section>
-
       {/* 001 */}
-      <section className="px-6 py-4">
+      <section id="story" className="scroll-mt-16 px-6 py-4">
         <div className="flex flex-col justify-between gap-10 px-6 lg:flex-row">
           <div className="flex flex-col gap-4 lg:flex-1">
             <Tag>001.</Tag>
@@ -205,7 +168,7 @@ export default function DraftContent() {
       </section>
 
       {/* 002 · The Pivot and the Problem */}
-      <section className={ROW}>
+      <section id="problem" className={`scroll-mt-16 ${ROW}`}>
         <SectionHead tag="002." title="The Pivot and the Problem">
           <p className={BODY}>
             I started off as a Senior Designer - and had to tackle challenges outside the Product’s
@@ -229,7 +192,7 @@ export default function DraftContent() {
 
       {/* 003 Typography and 004 Design Systems: copy left, media right; one block, no gap between */}
       <div className="flex flex-col">
-        <section className="px-6 py-[60px]">
+        <section id="typography" className="scroll-mt-16 px-6 py-[60px]">
           <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
             <SectionHead tag="003." title="Solutions - Typography" className="min-w-0 justify-center">
               <div className={`${BODY} flex flex-col gap-[1.7em]`}>
@@ -271,7 +234,7 @@ export default function DraftContent() {
           </div>
         </section>
 
-        <section className="px-6 py-[60px]">
+        <section id="design-systems" className="scroll-mt-16 px-6 py-[60px]">
           <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
             <SectionHead tag="004." title="Solutions - Design Systems" className="min-w-0 justify-center">
               <p className={BODY}>
@@ -297,7 +260,7 @@ export default function DraftContent() {
       </div>
 
       {/* 005 · Forms & Modals */}
-      <section className={ROW}>
+      <section id="forms" className={`scroll-mt-16 ${ROW}`}>
         <SectionHead tag="005." title="Solutions - Forms & Modals for Discovery & Quote Generation">
           <p className={BODY}>
             Redesigning Forms &amp; Modals in order to boost discovery, expedite Quote Generation,
@@ -317,7 +280,7 @@ export default function DraftContent() {
       </section>
 
       {/* 005.1 - 005.3: media left, copy right; rows stack with no gap */}
-      <div className="flex flex-col">
+      <div id="forms-detail" className="flex flex-col">
         {FORM_ROWS.map((r) => (
           <section
             key={r.src}
