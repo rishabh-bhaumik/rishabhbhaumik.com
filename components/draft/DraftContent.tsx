@@ -70,13 +70,13 @@ export default function DraftContent() {
   return (
     <main className="flex w-full flex-col gap-20">
       {/* Cover + intro */}
-      <section className="flex flex-col items-center gap-6 py-[60px]">
-        <div className="relative h-[850px] w-full bg-surface">
-          <p className="absolute left-1/2 top-[calc(50%-10.5px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
+      <section className="flex flex-col items-center gap-6 px-6 py-[60px]">
+        <div className="relative aspect-[1512/850] w-full bg-surface">
+          <p className="absolute left-1/2 top-[calc(50%-10.01px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
             MEDIA INCOMING...
           </p>
         </div>
-        <div className="flex w-full flex-col justify-between gap-6 px-6 lg:flex-row">
+        <div className="flex w-full flex-col justify-between gap-6 lg:flex-row">
           <h1 className="text-[40px] font-normal leading-[1.3] text-ink">For Your Consideration</h1>
           <p className={`${BODY} lg:w-[700px] lg:shrink-0`}>
             Hello World, I’m Rishabh - a Designer based out of Bengaluru, India. As a thespian &amp;
