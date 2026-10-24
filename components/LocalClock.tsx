@@ -122,7 +122,8 @@ export default function LocalClock() {
       onClick={() => setTheme(next, pathname)}
       aria-pressed={theme === "light"}
       title={`${meta.label} · switch to ${next} mode`}
-      className={`${layout} -mx-2 cursor-pointer rounded-full px-2 py-1`}
+      // 32px tall with 16px sides: a roomier target for the theme toggle.
+      className={`${layout} -mx-4 h-8 cursor-pointer rounded-full px-4`}
     >
       {face}
       <span className="sr-only">, light mode</span>

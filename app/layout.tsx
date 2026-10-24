@@ -7,6 +7,7 @@ import PageRevealSFX from "@/components/PageRevealSFX";
 import { SfxProvider } from "@/lib/sfx";
 import MotionProvider from "@/components/MotionProvider";
 import ThemeSync from "@/components/ThemeSync";
+import CrosshairCursor from "@/components/CrosshairCursor";
 import { SITE } from "@/data/site";
 import { THEME_SCRIPT } from "@/lib/theme-script";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeSync />
+        <CrosshairCursor />
         <MotionProvider>
           <SfxProvider>
             <PageRevealSFX />

@@ -64,6 +64,11 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   `public/media/home/orbit-*.mp4`, 12 fps) that match frame for frame; CSS shows
   the one for the theme and the hidden one is kept in step. The light clip is
   rendered by a script in `<IGNORE>/media-sources/orbitting-light/`.
+- Cursor: `components/CrosshairCursor.tsx` (mounted in the root layout) draws a
+  crosshair with a 4px centre dot, x (above-right) and y (below-left) readouts, and hides the
+  system cursor, on mouse desktops only (`hover: hover`,
+  `pointer: fine`, 768px+). It stays off the case studies (any project in
+  `PROJECTS` with an internal `href`) and `/resume`. Colours are theme tokens.
 - Availability/online-status logic is isolated in `lib/availability.ts`
   (`getAvailability()` is the seam for swapping the static schedule for a
   real data source later).
