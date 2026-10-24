@@ -126,7 +126,7 @@ export default function DraftContent() {
             </h2>
           </div>
           <div className="flex flex-col gap-20 lg:w-[480px] lg:shrink-0">
-            <div className="text-[24px] leading-[1.7] text-muted">
+            <div className="text-[18px] leading-[1.7] text-muted">
               <p>
                 I was hired at <b className="font-normal text-ink">BimaKavach</b> in{" "}
                 <b className="font-normal text-ink">2023</b> when the company was nascent, and was
@@ -151,16 +151,12 @@ export default function DraftContent() {
       {/* 002 · The Pivot and the Problem */}
       <section className={ROW}>
         <SectionHead tag="002." title="The Pivot and the Problem">
-          <div className={`${BODY} flex flex-col gap-[1.7em]`}>
-            <p>
-              I started off as a Senior Designer - and had to tackle challenges outside the
-              Product’s Design -&nbsp; not only in the Visual Language and Branding of the company.
-            </p>
-            <p>
-              This helped in pivoting BimaKavach from a Recommendation Engine for urban startups to
-              an SME Focused Online Insurance Broking Firm.
-            </p>
-          </div>
+          <p className={BODY}>
+            I started off as a Senior Designer - and had to tackle challenges outside the Product’s
+            Design -&nbsp; not only in the Visual Language and Branding of the company. This helped
+            in pivoting BimaKavach from a Recommendation Engine for urban startups to an SME Focused
+            Online Insurance Broking Firm.
+          </p>
         </SectionHead>
         <div className={CARD}>
           <Image
