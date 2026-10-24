@@ -21,7 +21,7 @@ const RAIL: RailItem[] = [
     ],
   },
   { label: "Interface Design", children: [{ label: "Home & Product Page" }] },
-  { label: "Flows", children: [{ label: "Checkout & Payment" }] },
+  { label: "Flows", children: [{ label: "Checkout & Payment", ids: ["flows"] }] },
   {
     label: "Visual Design",
     children: [
@@ -36,8 +36,9 @@ const flat = (items: RailItem[]): RailItem[] =>
   items.flatMap((i) => [i, ...(i.children ? flat(i.children) : [])]);
 
 /**
- * The draft's section rail, after Saathi's SectionNav: the left column of the
- * page grid, sticking under the header and scroll-spying the sections. From md
+ * The draft's section rail, after Saathi's SectionNav, scroll-spying the
+ * sections. It stays out of the layout so the page keeps its full width: hovering
+ * the 24px left gutter (or tabbing into it) slides it in over the page. From md
  * up; phones skip it.
  */
 export default function DraftRail() {
@@ -78,10 +79,11 @@ export default function DraftRail() {
     );
 
   return (
-    <aside className="hidden pl-6 md:block">
+    // The aside is the hover target: the gutter strip, widening to the rail while open.
+    <aside className="group fixed bottom-0 left-0 top-16 z-40 hidden w-6 focus-within:w-52 hover:w-52 md:block">
       <nav
         aria-label="Case study sections"
-        className="sticky top-16 flex flex-col items-start gap-2 pt-[60px]"
+        className="flex h-full w-52 -translate-x-full flex-col items-start gap-2 overflow-y-auto border-r-[0.5px] border-ink/10 bg-bg/95 pb-6 pl-6 pr-4 pt-[60px] opacity-0 backdrop-blur-sm transition duration-300 ease-out group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:translate-x-0 group-hover:opacity-100"
       >
         {RAIL.map((i) => (
           <div key={i.label} className="flex flex-col items-start gap-2">

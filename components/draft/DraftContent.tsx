@@ -305,6 +305,26 @@ export default function DraftContent() {
           </section>
         ))}
       </div>
+
+      {/* 006 · Flows - Checkout & Payment */}
+      <section id="flows" className={`scroll-mt-16 ${ROW}`}>
+        <SectionHead tag="006." title="Flows - Checkout & Payment">
+          <p className={BODY}>
+            Massive diversions and permutations from the quote page exists and change per product -
+            meaning that the journey must seem consistent and concise for any user
+          </p>
+        </SectionHead>
+        <div className={CARD}>
+          <Image
+            src="/media/draft/checkout-flow.png"
+            alt="Checkout flow: the quote page branches into the payment flow, post-payment states and offline fallbacks"
+            width={1464}
+            height={505}
+            sizes="(min-width: 1512px) 1464px, 100vw"
+            className="block h-auto w-full"
+          />
+        </div>
+      </section>
     </main>
   );
 }

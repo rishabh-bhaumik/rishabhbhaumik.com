@@ -15,12 +15,10 @@ export default function DraftPage() {
   return (
     <>
       <Header />
-      {/* From md up: the section rail (after Saathi's), then the page. */}
-      <div className="w-full md:grid md:grid-cols-[13rem_minmax(0,1fr)]">
-        <DraftRail />
-        <DraftContent />
-      </div>
-      <Footer />
+      {/* The rail floats over the left edge (hover to open); the page keeps full width. */}
+      <DraftRail />
+      <DraftContent />
+      <Footer elsewhereLabel />
     </>
   );
 }
