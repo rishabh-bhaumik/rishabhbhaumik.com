@@ -105,7 +105,7 @@ export default function CrosshairCursor() {
   if (!active) return null;
 
   const fixed = "pointer-events-none fixed left-0 top-0 will-change-transform";
-  const label = `${fixed} z-[100] select-none whitespace-nowrap text-12 tabular-nums text-ink/[0.06]`;
+  const label = `${fixed} z-[100] select-none whitespace-nowrap text-12 tabular-nums text-ink/10`;
   return (
     <div ref={root} aria-hidden="true" className="pointer-events-none opacity-0">
       <div ref={vLine} className={`${fixed} z-[99] h-screen w-px bg-ink/[0.02]`} />
