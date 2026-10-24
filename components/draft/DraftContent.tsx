@@ -2,8 +2,8 @@ import Image from "next/image";
 import "@/components/bk/anek.css";
 
 // First-draft build of the Figma case-study page (Peetal DSL, node 8627:5701),
-// section by section. Colours and sizes are the Figma values, so the route is
-// dark-only (DARK_ONLY_ROUTES in lib/theme-script.ts).
+// section by section. Colours are theme tokens (Figma values in dark), so the page
+// follows light mode; the exported images stay as rendered.
 
 const CAPTION =
   "From Left: BimaKavach Homepage as on March 2023, BimaKavach Homepage as of October 2025";
@@ -31,12 +31,12 @@ const TOC_GROUPS: { title: string; items: string[] }[] = [
 ];
 
 const ROW = "flex flex-col gap-6 px-6";
-const CARD = "overflow-hidden rounded-[16px] border-[0.5px] border-[#4e5056]";
-const BODY = "text-14 leading-[1.7] text-[#a7adb8]";
+const CARD = "overflow-hidden rounded-[16px] border-[0.5px] border-ink/25";
+const BODY = "text-14 leading-[1.7] text-muted";
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex w-fit rounded-[24px] border border-[#1c1c1c] bg-[#2c2c2c] px-3 py-[10px] text-12 leading-none text-[#a7adb8]">
+    <span className="inline-flex w-fit rounded-[24px] border border-surface bg-surface-2 px-3 py-[10px] text-12 leading-none text-muted">
       {children}
     </span>
   );
@@ -55,7 +55,7 @@ function SectionHead({
     <div className="flex flex-col gap-5 px-6 pb-6">
       <div className="flex flex-col gap-4">
         <Tag>{tag}</Tag>
-        <h2 className="py-[2px] text-[36px] font-normal leading-none text-white">{title}</h2>
+        <h2 className="py-[2px] text-[36px] font-normal leading-none text-ink">{title}</h2>
       </div>
       {children}
     </div>
@@ -63,7 +63,7 @@ function SectionHead({
 }
 
 function Caption() {
-  return <p className="text-center text-12 leading-[1.5] text-[#bcbcbc]">{CAPTION}</p>;
+  return <p className="text-center text-12 leading-[1.5] text-muted">{CAPTION}</p>;
 }
 
 export default function DraftContent() {
@@ -71,13 +71,13 @@ export default function DraftContent() {
     <main className="flex w-full flex-col gap-20">
       {/* Cover + intro */}
       <section className="flex flex-col items-center gap-6 py-[60px]">
-        <div className="relative h-[850px] w-full bg-[#1c1d1f]">
-          <p className="absolute left-1/2 top-[calc(50%-10.5px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-[#a3a3a3]">
+        <div className="relative h-[850px] w-full bg-surface">
+          <p className="absolute left-1/2 top-[calc(50%-10.5px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
             MEDIA INCOMING...
           </p>
         </div>
         <div className="flex w-full flex-col justify-between gap-6 px-6 lg:flex-row">
-          <h1 className="text-[40px] font-normal leading-[1.3] text-white">For Your Consideration</h1>
+          <h1 className="text-[40px] font-normal leading-[1.3] text-ink">For Your Consideration</h1>
           <p className={`${BODY} lg:w-[700px] lg:shrink-0`}>
             Hello World, I’m Rishabh - a Designer based out of Bengaluru, India. As a thespian &amp;
             film student who’s started his career in video editing &amp; creative direction, I have
@@ -89,28 +89,28 @@ export default function DraftContent() {
       {/* Media + contents */}
       <section className="flex items-start px-6 py-[60px]">
         <div className="flex w-full flex-col gap-6 lg:flex-row lg:justify-between lg:gap-0">
-          <div className={`relative aspect-[1100/640] min-w-0 flex-1 bg-[#1c1d1f] ${CARD}`}>
-            <p className="absolute left-[calc(50%+0.5px)] top-[calc(50%-6.67px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-[#8a8a8a]">
+          <div className={`relative aspect-[1100/640] min-w-0 flex-1 bg-surface ${CARD}`}>
+            <p className="absolute left-[calc(50%+0.5px)] top-[calc(50%-6.67px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
               MEDIA INCOMING
             </p>
           </div>
           <div className="flex shrink-0 flex-col gap-6 px-6 py-3 lg:w-[427px]">
             {TOC_TOP.map((t) => (
-              <p key={t} className="text-24 leading-[normal] text-[#363636]">
+              <p key={t} className="text-24 leading-[normal] text-nav-current">
                 {t}
               </p>
             ))}
             {TOC_GROUPS.map((g) => (
               <div key={g.title} className="flex flex-col gap-3">
-                <p className="text-24 leading-[normal] text-[#363636]">{g.title}</p>
+                <p className="text-24 leading-[normal] text-nav-current">{g.title}</p>
                 {g.items.map((i) => (
-                  <p key={i} className="text-16 leading-[normal] text-[#807d73]">
+                  <p key={i} className="text-16 leading-[normal] text-faint">
                     {i}
                   </p>
                 ))}
               </div>
             ))}
-            <p className="text-24 leading-[normal] text-[#363636]">End</p>
+            <p className="text-24 leading-[normal] text-nav-current">End</p>
           </div>
         </div>
       </section>
@@ -120,27 +120,27 @@ export default function DraftContent() {
         <div className="flex flex-col justify-between gap-10 px-6 lg:flex-row">
           <div className="flex flex-col gap-4 lg:flex-1">
             <Tag>001</Tag>
-            <h2 className="py-[2px] text-[36px] font-normal leading-none text-white">
+            <h2 className="py-[2px] text-[36px] font-normal leading-none text-ink">
               How did my story start?
             </h2>
           </div>
           <div className="flex flex-col gap-20 lg:w-[480px] lg:shrink-0">
-            <div className="text-[24px] leading-[1.7] text-[#a7adb8]">
+            <div className="text-[24px] leading-[1.7] text-muted">
               <p>
-                I was hired at <b className="font-normal text-white">BimaKavach</b> in{" "}
-                <b className="font-normal text-white">2023</b> when the company was nascent, and was
-                still a <b className="font-normal text-white">simple recommendation engine</b>.
+                I was hired at <b className="font-normal text-ink">BimaKavach</b> in{" "}
+                <b className="font-normal text-ink">2023</b> when the company was nascent, and was
+                still a <b className="font-normal text-ink">simple recommendation engine</b>.
               </p>
               <p className="mt-[1.7em]">
                 Since then, the company has been able to{" "}
-                <b className="font-normal text-white">display live quotes</b> enabling user-product
+                <b className="font-normal text-ink">display live quotes</b> enabling user-product
                 discovery, and has recently{" "}
-                <b className="font-normal text-white">enabled payments</b> for immediate online
+                <b className="font-normal text-ink">enabled payments</b> for immediate online
                 purchase, and has{" "}
-                <b className="font-normal text-white">grown it’s user base to 4.7×*</b>
+                <b className="font-normal text-ink">grown it’s user base to 4.7×*</b>
               </p>
             </div>
-            <p className="text-12 leading-[1.5] text-[#a7adb8]">
+            <p className="text-12 leading-[1.5] text-muted">
               *from 800 during March 2023 to around 3,760 by October 2025.
             </p>
           </div>
@@ -187,8 +187,8 @@ export default function DraftContent() {
             as Latin, and it’s offered in a variable font format.
           </p>
         </SectionHead>
-        <div className={`flex h-[850px] flex-col items-center justify-center bg-[#1c1d1f] ${CARD}`}>
-          <div className="flex w-full flex-col gap-[33.791px] px-6 tracking-[-0.5199px] text-white">
+        <div className={`flex h-[850px] flex-col items-center justify-center bg-surface ${CARD}`}>
+          <div className="flex w-full flex-col gap-[33.791px] px-6 tracking-[-0.5199px] text-ink">
             {SCRIPT_LINES.map((l) => (
               <p
                 key={l.lang}
