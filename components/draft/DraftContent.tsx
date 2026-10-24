@@ -122,13 +122,13 @@ export default function DraftContent() {
       <section className="px-6 py-4">
         <div className="flex flex-col justify-between gap-10 px-6 lg:flex-row">
           <div className="flex flex-col gap-4 lg:flex-1">
-            <Tag>001</Tag>
+            <Tag>001.</Tag>
             <h2 className="py-[2px] text-[36px] font-normal leading-none text-ink">
               How did my story start?
             </h2>
           </div>
           <div className="flex flex-col gap-20 lg:w-[480px] lg:shrink-0">
-            <div className="text-[18px] leading-[1.7] text-muted">
+            <div className={BODY}>
               <p>
                 I was hired at <b className="font-normal text-ink">BimaKavach</b> in{" "}
                 <b className="font-normal text-ink">2023</b> when the company was nascent, and was
@@ -173,74 +173,78 @@ export default function DraftContent() {
         <Caption />
       </section>
 
-      {/* 002 · Typography: type card left, copy right */}
-      <section className="px-6">
-        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-          <div
-            className={`flex aspect-[1464/850] min-w-0 flex-col items-center justify-center bg-surface ${CARD}`}
-          >
-            <div className="flex w-full max-w-[657px] flex-col gap-[16.268px] px-[11.555px] tracking-[-0.2503px] text-ink">
-              {SCRIPT_LINES.map((l) => (
-                <p
-                  key={l.lang}
-                  lang={l.lang}
-                  className={`${l.small ? "text-[15.017px]" : "text-[16.685px]"} leading-[20.023px] ${
-                    l.right ? "text-right" : ""
-                  }`}
-                  style={{
-                    fontFamily: `"${l.font}"`,
-                    fontVariationSettings: '"wdth" 100',
-                    fontFeatureSettings: '"zero" 1, "kern" 0, "liga" 0, "dlig" 1',
-                  }}
-                >
-                  {l.text}
+      {/* 003 Typography and 004 Design Systems: copy left, media right; one block, no gap between */}
+      <div className="flex flex-col">
+        <section className="px-6 py-[60px]">
+          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
+            <SectionHead tag="003." title="Solutions - Typography" className="min-w-0 justify-center">
+              <div className={`${BODY} flex flex-col gap-[1.7em]`}>
+                <p>
+                  In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
+                  Businesses, we started with Foundational Typography. We had decided that Anek
+                  Variable would be the typeface of choice.
                 </p>
-              ))}
+                <p>
+                  Anek is a contemporary, multi-script, open-source typeface family created by the
+                  Indian foundry Ek Type (in collaboration with Google). It supports multiple Indian
+                  scripts (including Devanagari, Tamil, Bengali, etc.) as well as Latin, and it’s
+                  offered in a variable font format.
+                </p>
+              </div>
+            </SectionHead>
+            <div
+              className={`flex aspect-[1464/850] min-w-0 flex-col items-center justify-center bg-surface ${CARD}`}
+            >
+              <div className="flex w-full max-w-[657px] flex-col gap-[16.268px] px-[11.555px] tracking-[-0.2503px] text-ink">
+                {SCRIPT_LINES.map((l) => (
+                  <p
+                    key={l.lang}
+                    lang={l.lang}
+                    className={`${l.small ? "text-[15.017px]" : "text-[16.685px]"} leading-[20.023px] ${
+                      l.right ? "text-right" : ""
+                    }`}
+                    style={{
+                      fontFamily: `"${l.font}"`,
+                      fontVariationSettings: '"wdth" 100',
+                      fontFeatureSettings: '"zero" 1, "kern" 0, "liga" 0, "dlig" 1',
+                    }}
+                  >
+                    {l.text}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
-          <SectionHead
-            tag="002."
-            title="Solutions - Typography"
-            className="min-w-0 justify-center"
-          >
-            <p className={BODY}>
-              In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
-              Businesses, we started with Foundational Typography. We had decided that Anek
-              Variable would be the typeface of choice. Anek is a contemporary, multi-script,
-              open-source typeface family created by the Indian foundry Ek Type (in collaboration
-              with Google). It supports multiple Indian scripts (including Devanagari, Tamil,
-              Bengali, etc.) as well as Latin, and it’s offered in a variable font format.
-            </p>
-          </SectionHead>
-        </div>
-      </section>
+        </section>
 
-      {/* 002 · Design Systems */}
-      <section className={ROW}>
-        <SectionHead tag="002." title="Solutions - Design Systems">
-          <p className={BODY}>
-            Scaling Anek to work for Disvovery, Conversation and Retention, we had quickly developed
-            a modern Design System Library, aptly called Peetal. Peetal is built completely
-            in-house, with whiffs of Blade and UX4G - taking cues from Blade’s Collaborative
-            Structure and Usefulness to Developers, and UX4G’s scalability and simplicity.
-          </p>
-        </SectionHead>
-        <div className={CARD}>
-          <Image
-            src="/media/draft/design-systems.png"
-            alt="Peetal design system: colour scales, borders, buttons, elevation"
-            width={1464}
-            height={850}
-            sizes="(min-width: 1512px) 1464px, 100vw"
-            className="block h-auto w-full"
-          />
-        </div>
-        <Caption />
-      </section>
+        <section className="px-6 py-[60px]">
+          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
+            <SectionHead tag="004." title="Solutions - Design Systems" className="min-w-0 justify-center">
+              <p className={BODY}>
+                Scaling Anek to work for Disvovery, Conversation and Retention, we had quickly
+                developed a modern Design System Library, aptly called Peetal. Peetal is built
+                completely in-house, with whiffs of Blade and UX4G - taking cues from Blade’s
+                Collaborative Structure and Usefulness to Developers, and UX4G’s scalability and
+                simplicity.
+              </p>
+            </SectionHead>
+            <div className={`min-w-0 ${CARD}`}>
+              <Image
+                src="/media/draft/design-systems.png"
+                alt="Peetal design system: colour scales, borders, buttons, elevation"
+                width={720}
+                height={418}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="block h-auto w-full"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
 
-      {/* 002 · Forms & Modals */}
+      {/* 005 · Forms & Modals */}
       <section className={ROW}>
-        <SectionHead tag="002." title="Solutions - Forms & Modals for Discovery & Quote Generation">
+        <SectionHead tag="005." title="Solutions - Forms & Modals for Discovery & Quote Generation">
           <p className={BODY}>
             Redesigning Forms &amp; Modals in order to boost discovery, expedite Quote Generation,
             and build intuitive journies towards Quote Generation was the next task.
