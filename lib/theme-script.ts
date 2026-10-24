@@ -6,7 +6,7 @@
 export const THEME_KEY = "theme";
 
 /** Routes that always render dark, whatever the visitor picked. */
-const DARK_ONLY_ROUTES = ["/logo"];
+const DARK_ONLY_ROUTES = ["/logo", "/draft"];
 
 export function isDarkOnlyRoute(pathname: string) {
   return DARK_ONLY_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`));
