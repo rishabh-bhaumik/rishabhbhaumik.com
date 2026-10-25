@@ -13,6 +13,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionNav from "@/components/saathi/SectionNav";
 import SaathiHero from "@/components/saathi/SaathiHero";
+import Image from "next/image";
+import { PROJECTS } from "@/data/site";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const STEP = 0.09; // seconds per stagger step
@@ -30,11 +32,52 @@ const LOREM =
 const LOREM_SHORT =
   "Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor.";
 
-/** WIP media placeholder — a surface-coloured block with a hairline edge. */
-function Media({ className = "aspect-[800/544]" }: { className?: string }) {
+const PAIN_POINTS = [
+  {
+    title: "Agents didn't know commercial insurance was something they could sell.",
+    body: "Most had built their careers on life, health and motor. Business cover felt like broker territory, so even agents whose clients ran shops and factories never brought it up.",
+  },
+  {
+    title: "Lead agents had no way to track their sub-agents.",
+    body: "Many run a small team of sub-agents under them. With no view of who was quoting, who had sold and who was stuck, they managed by phone calls and chat threads, and leads went cold.",
+  },
+];
+
+/** The work gallery's cover for this project, reused as the hero image. */
+const COVER = PROJECTS.find((p) => p.slug === "bima-saathi")!.media;
+
+/**
+ * A media block with a hairline edge. Without `src` it is a WIP placeholder;
+ * with one, the image sits on the same gradient as the work gallery's card.
+ */
+function Media({
+  className = "aspect-[800/544]",
+  src,
+  alt = "",
+}: {
+  className?: string;
+  src?: string;
+  alt?: string;
+}) {
+  if (src) {
+    return (
+      <div
+        className={`relative w-full overflow-hidden rounded-xl bg-gradient-to-br from-surface to-bg ring-[0.5px] ring-border ${className}`}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority
+          sizes="(max-width: 700px) 100vw, 700px"
+          className="object-contain object-center"
+        />
+      </div>
+    );
+  }
   return (
     <div
-      className={`grid w-full place-items-center overflow-hidden rounded-2xl bg-surface ring-1 ring-border ${className}`}
+      className={`grid w-full place-items-center overflow-hidden rounded-xl bg-surface ring-[0.5px] ring-border ${className}`}
     >
       <span className="font-mono text-10 uppercase tracking-[0.2em] text-ink/30">
         media
@@ -146,7 +189,7 @@ function Section({
 const META = [
   { label: "Role", values: ["Product Designer"] },
   { label: "Timeline", values: ["Oct – Dec 2024"] },
-  { label: "Team", values: ["1 PM", "1 Engineer", "1 Designer (me!)"] },
+  { label: "Team", values: ["1 PM", "1 Engineer", "1 Designer"] },
   { label: "Skills", values: ["Product Design", "User Research"] },
 ];
 
@@ -169,11 +212,15 @@ export default function SaathiContent() {
         <main className="flex w-full min-w-0 flex-col gap-24 pb-20 pt-16 sm:pt-24">
           {/* Hero */}
           <SaathiHero>
-            <Media className="aspect-[800/544]" />
+            <Media
+              className="aspect-[800/544]"
+              src={COVER}
+              alt="Bima Saathi's Submit a Claim screen on a phone"
+            />
             <div className="flex flex-col gap-3">
               {/* The same pill as the project card's tag. */}
               <span className="self-start rounded-full bg-surface px-2 py-1 font-mono text-10 tracking-wide text-faint ring-1 ring-border">
-                bima saathi - shipped 2025
+                bima saathi - live 2025
               </span>
               <h1 className="font-display text-32 leading-tight text-ink sm:text-44">
                 Designing the product that turned 1,000 agents into
@@ -185,12 +232,12 @@ export default function SaathiContent() {
           {/* Details + meta grid */}
           <Section id="details">
             <Tag>details</Tag>
-            <div className="flex flex-col gap-8 rounded-2xl border border-border bg-surface/30 p-6 sm:p-8">
+            <div className="flex flex-col gap-8 rounded-xl bg-surface/30 p-6 ring-[0.5px] ring-border">
               <Body>
-                Saathi is India&rsquo;s smartest insurance partner app, allowing
-                BimaKavach to offer Insurance Products beyond Life, Health, and
-                Motor to agents, so that Business Insurance can reach places
-                even we normally couldn&rsquo;t.
+                Saathi is India&rsquo;s smartest business insurance partner
+                app, allowing BimaKavach to offer insurance products beyond
+                life, health, and motor to partners, who can reach customers
+                even we normally can&rsquo;t.
               </Body>
               <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
                 {META.map((m) => (
@@ -215,7 +262,7 @@ export default function SaathiContent() {
               India already trusts?
             </Heading>
             <Body>
-              Across India, insurance agents sell Life, Health and Motor every
+              Across India, insurance agents sell life, health and motor every
               day, but business insurance has always been out of their reach.
               It&rsquo;s complex to quote, slow to issue and hard to explain to a
               client. That gap is where Saathi started. The agents already had
@@ -258,17 +305,14 @@ export default function SaathiContent() {
           <Section id="pain-points">
             <Tag>Pain Points</Tag>
             <div className="grid gap-8 sm:grid-cols-2">
-              {[
-                "Agents didn't know commercial insurance was something they could sell.",
-                "Lead agents had no way to track their sub-agents.",
-              ].map((h, i) => (
-                <div key={i} className="flex flex-col gap-3">
-                  <h3 className="text-20 leading-snug text-ink">{h}</h3>
-                  <Body>{LOREM_SHORT}</Body>
+              {PAIN_POINTS.map((p) => (
+                <div key={p.title} className="flex flex-col gap-3">
+                  <h3 className="text-20 leading-snug text-ink">{p.title}</h3>
+                  <Body>{p.body}</Body>
                 </div>
               ))}
             </div>
-            <div className="mt-6 rounded-2xl bg-surface/40 p-6 sm:p-8">
+            <div className="mt-6 rounded-xl bg-surface/40 p-4 ring-[0.5px] ring-border">
               <h3 className="text-20 leading-snug text-ink">
                 Key insight: the fastest path to trust was making the next
                 action obvious.

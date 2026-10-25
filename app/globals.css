@@ -93,13 +93,6 @@
     background-color: var(--color-bg);
     color: var(--color-ink);
   }
-
-  /* CrosshairCursor draws the pointer itself, so the system one goes while it is
-     on. !important beats cursor-pointer and the like, which sit in the utilities layer. */
-  html[data-crosshair],
-  html[data-crosshair] * {
-    cursor: none !important;
-  }
 }
 
 /* Scroll reveals leave anything not yet scrolled into view at opacity 0. When

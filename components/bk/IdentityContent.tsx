@@ -237,12 +237,12 @@ function Card({
 }) {
   return (
     <div
-      className="relative mx-auto w-full rounded-3xl p-8"
+      className="relative mx-auto w-full rounded-xl p-6"
       style={{ maxWidth: width }}
     >
       <StaggerItem
         wrapperClassName="absolute inset-0"
-        className="h-full w-full rounded-3xl bg-gradient-to-b from-surface/60 to-bg ring-1 ring-ink/10"
+        className="h-full w-full rounded-xl bg-gradient-to-b from-surface/60 to-bg ring-[0.5px] ring-ink/10"
       />
       <div className="relative z-10 flex flex-col gap-6">{children}</div>
     </div>
@@ -1304,7 +1304,7 @@ function HeroPanel({
         style={{ opacity: entered ? 0 : 1 }}
       >
         <span className="font-mono text-10 uppercase tracking-[0.25em] text-white/50">
-          bimakavach rebranding - shipped 2026
+          bimakavach rebranding - live 2026
         </span>
         <p className="max-w-[46rem] text-18 sm:text-24 leading-snug text-white">
           Pivoting to the perception of BimaKavach as an intelligence

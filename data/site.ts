@@ -110,7 +110,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "bima-saathi",
     title: "bima saathi",
-    tag: "shipped 2026",
+    tag: "live 2026",
     description:
       "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
     href: "/bima-saathi",
@@ -120,7 +120,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "bimakavach-identity",
     title: "BimaKavach Identity",
-    tag: "shipped 2026",
+    tag: "live 2026",
     description:
       "Building the idea of BimaKavach as an intelligence company that is rooted in India's rich history of Ornamentation, Beauty and Aesthetic Identity.",
     href: "/bimakavach-identity",
@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "bima-kendra",
     title: "bima kendra",
-    tag: "shipped 2026",
+    tag: "live 2026",
     description:
       "Creating the foundations for India's first centralized Commercial Insurance Management Software.",
     href: "#",
@@ -140,10 +140,10 @@ export const PROJECTS: Project[] = [
   {
     slug: "peetal",
     title: "Peetal",
-    tag: "shipped 2024",
+    tag: "live 2024",
     description:
       "Nunc blandit sed purus commodo purus. Mattis bibendum augue urna dictumst tempor tincidunt. Mauris vestibulum nec enim posuere ornare.",
-    href: "#",
+    href: "/peetal",
     media: "/media/work/design.system.png",
     cover: true,
   },

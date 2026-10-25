@@ -11,11 +11,15 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**.sndcdn.com" },
     ],
   },
-  // /draft is unlisted: reachable by link, never indexed.
+  // /draft and /peetal are unlisted: reachable by link, never indexed.
   async headers() {
     return [
       {
         source: "/draft/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }],
+      },
+      {
+        source: "/peetal/:path*",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }],
       },
     ];

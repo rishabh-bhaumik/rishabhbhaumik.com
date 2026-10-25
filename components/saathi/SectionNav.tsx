@@ -22,8 +22,15 @@ const SAATHI_SECTIONS = [
  * (see SaathiContent), sticking under the header as you scroll. Scroll-spies
  * the sections and highlights the active one. From md up; phones skip it.
  */
-export default function SectionNav() {
-  const [active, setActive] = useState<string>(SAATHI_SECTIONS[0].id);
+export type NavSection = { readonly id: string; readonly label: string };
+
+export default function SectionNav({
+  sections = SAATHI_SECTIONS,
+}: {
+  /** Defaults to the Saathi list; other case studies pass their own. */
+  sections?: readonly NavSection[];
+}) {
+  const [active, setActive] = useState<string>(sections[0].id);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,12 +41,12 @@ export default function SectionNav() {
       },
       { rootMargin: "-30% 0px -60% 0px" },
     );
-    SAATHI_SECTIONS.forEach((s) => {
+    sections.forEach((s) => {
       const el = document.getElementById(s.id);
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [sections]);
 
   return (
     <aside className="hidden md:block">
@@ -47,7 +54,7 @@ export default function SectionNav() {
         aria-label="Case study sections"
         className="sticky top-16 flex flex-col items-start gap-2 pt-16 sm:pt-24"
       >
-        {SAATHI_SECTIONS.map((s) => (
+        {sections.map((s) => (
           <a
             key={s.id}
             href={`#${s.id}`}
