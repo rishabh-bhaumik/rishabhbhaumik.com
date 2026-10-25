@@ -176,9 +176,9 @@ const OUTCOMES: Record<string, Stat[]> = {
     { value: "<2 Mins", label: "to a first quote" },
   ],
   flows: [
-    { value: "x%", label: "checkout completion" },
-    { value: "x min", label: "from quote to policy" },
-    { value: "x", label: "failure paths with a recovery screen" },
+    { value: "8%", label: "Increase in Checkout Completion" },
+    { value: "<2 Mins", label: "From Quote to Policy Issuance Online" },
+    { value: "15%", label: "Recoveries from Failure Paths" },
   ],
 };
 
@@ -439,7 +439,7 @@ export default function DraftContent() {
       {/* 006 · Flows - Checkout & Payment: copy left, flowchart right */}
       <section
         {...rail("flows", "006. Flows - Checkout & Payment")}
-        className="flex scroll-mt-16 flex-col gap-6 px-6 lg:flex-row lg:items-start"
+        className={`scroll-mt-16 ${ROW}`}
       >
         <SectionHead
           tag="006."
@@ -449,7 +449,6 @@ export default function DraftContent() {
               <br />& Payment
             </>
           }
-          className="min-w-0 flex-1 justify-center"
         >
           <p className={BODY}>
             Massive diversions and permutations from the quote page exists and change per product -
@@ -457,13 +456,13 @@ export default function DraftContent() {
           </p>
           <Stats items={OUTCOMES.flows} />
         </SectionHead>
-        <div className="overflow-hidden rounded-[10.5px] border-[0.5px] border-ink/25 lg:w-[960px] lg:shrink-0">
+        <div className="overflow-hidden rounded-[10.5px] border-[0.5px] border-ink/25">
           <Image
             src="/media/draft/checkout-flow.png"
             alt="Checkout flow: the quote page branches into the payment flow, post-payment states and offline fallbacks"
             width={1464}
             height={505}
-            sizes="(min-width: 1024px) 960px, 100vw"
+            sizes="(min-width: 1512px) 1464px, 100vw"
             className="block h-auto w-full"
           />
         </div>

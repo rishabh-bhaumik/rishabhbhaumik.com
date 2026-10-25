@@ -42,8 +42,8 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
   return (
     <div className={`${CARD} grid lg:aspect-[1000/548] lg:grid-cols-2`}>
       {/* Phone, cropped at the card's foot */}
-      <div className="relative h-[320px] overflow-hidden sm:h-[420px] lg:h-auto">
-        <div className="absolute left-1/2 top-[3%] aspect-[2360/4652] w-[min(72%,360px)] -translate-x-1/2 lg:left-[9%] lg:w-[73%] lg:translate-x-0">
+      <div className="relative h-[320px] overflow-clip sm:h-[420px] lg:h-auto">
+        <div className="absolute left-1/2 top-6 aspect-[2360/4652] w-[min(72%,360px)] -translate-x-1/2 lg:left-[9%] lg:w-[73%] lg:translate-x-0">
           {/* Screen, sitting under the frame's transparent cutout (measured from the PNG). */}
           <div className="absolute left-[8.47%] top-[4.3%] h-[91.36%] w-[83.05%] overflow-hidden rounded-[13%/6.2%] bg-white">
             <AnimatePresence initial={false}>
