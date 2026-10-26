@@ -115,7 +115,7 @@ export default function ResumeContent() {
         <div className="flex flex-col gap-4">
           {RESUME_ABOUT.map((para, i) => (
             <Reveal key={i} delay={i * STEP}>
-              <p className="text-14 leading-relaxed text-muted">
+              <p className="text-14 leading-relaxed text-muted text-pretty">
                 <Frags parts={para} />
               </p>
             </Reveal>

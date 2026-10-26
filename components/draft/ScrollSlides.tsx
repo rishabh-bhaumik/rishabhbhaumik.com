@@ -68,7 +68,8 @@ export default function ScrollSlides({
     },
   });
 
-  // The media is sized to fit the pinned screen (leaving room for the copy in a stack).
+  // The media is sized to fit the pinned screen (leaving room for the copy in a stack);
+  // stacked media (006) is capped at 904px wide.
   const ratio = `${s.width} / ${s.height}`;
   const media = (
     <m.div
@@ -78,7 +79,7 @@ export default function ScrollSlides({
         aspectRatio: ratio,
         width:
           layout === "stack"
-            ? `min(100%, calc((100svh - 4rem - 11rem) * ${s.width} / ${s.height}))`
+            ? `min(100%, 904px, calc((100svh - 4rem - 11rem) * ${s.width} / ${s.height}))`
             : "100%",
       }}
     >
@@ -114,25 +115,26 @@ export default function ScrollSlides({
                 <m.div {...layer(48, 0.08)}>
                   <Tag>{s.tag}</Tag>
                 </m.div>
-                <m.div {...layer(28, 0.16)} className={`max-w-[60rem] text-center ${BODY}`}>
+                <m.div {...layer(28, 0.16)} className={`max-w-[560px] text-center text-balance ${BODY}`}>
                   {s.copy}
                 </m.div>
               </div>
             ) : (
               <div
                 key={s.tag}
-                className={`col-start-1 row-start-1 flex w-full flex-col gap-6 lg:flex-row lg:gap-20 ${
+                className={`col-start-1 row-start-1 flex w-full flex-col gap-6 lg:flex-row lg:justify-between lg:gap-20 lg:px-6 ${
                   s.bottom ? "lg:items-end" : "lg:items-start"
                 }`}
               >
-                {/* Capped so the row's height fits the pinned screen. */}
+                {/* 720px wide on desktop (shrinks if the row is narrower), and capped so
+                    the row's height fits the pinned screen. */}
                 <div
-                  className="min-w-0 flex-1"
+                  className="min-w-0 flex-1 lg:grow-0 lg:basis-[720px]"
                   style={{ maxWidth: `calc((100svh - 4rem - 4rem) * ${s.width} / ${s.height})` }}
                 >
                   {media}
                 </div>
-                <div className="flex shrink-0 flex-col justify-center gap-6 lg:w-[478px]">
+                <div className="flex shrink-0 flex-col justify-center gap-6 lg:w-[480px]">
                   <m.div {...layer(48, 0.08)}>
                     <Tag>{s.tag}</Tag>
                   </m.div>

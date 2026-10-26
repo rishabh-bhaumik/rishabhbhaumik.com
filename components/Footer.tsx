@@ -40,7 +40,7 @@ export default function Footer({ elsewhereLabel = false }: { elsewhereLabel?: bo
       <Reveal
         as="p"
         margin="0px"
-        className="px-3 text-14 leading-[1.5] text-muted"
+        className="px-3 text-12 leading-[1.2] text-muted"
       >
         {FOOTER.blurb} This is{" "}
         <a href="#" className={inlineLink}>v2</a>
@@ -69,10 +69,10 @@ export default function Footer({ elsewhereLabel = false }: { elsewhereLabel?: bo
                   target={link.href.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
                   aria-label={link.ariaLabel}
-                  className="group flex h-[18px] items-center justify-between sm:justify-start"
+                  className="group flex items-center justify-between sm:justify-start"
                 >
                   {/* Handle — whitens on hover */}
-                  <span className="whitespace-nowrap text-14 leading-[18px] text-faint transition-colors group-hover:text-ink group-focus-visible:text-ink">
+                  <span className="whitespace-nowrap text-12 leading-[1.2] text-faint transition-colors group-hover:text-ink group-focus-visible:text-ink">
                     {link.handle}
                   </span>
                   {/* Platform icon — on phones (no hover) always shown, at the row's right

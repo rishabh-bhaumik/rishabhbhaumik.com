@@ -9,7 +9,7 @@ import { BODY, CARD, Stats, Tag, rail, type Stat } from "./ui";
 // section by section. Colours are theme tokens (Figma values in dark), so the page
 // follows light mode; the exported images stay as rendered.
 
-/** 005.1 - 005.3: media left, copy right, one at a time (ScrollSlides). `bottom` sits the copy at the media's foot. */
+/** 005.1 - 005.3: media left, copy right, one at a time (ScrollSlides). Copy tops align with the media. */
 const FORM_ROWS: ScrollSlide[] = [
   {
     tag: "005.1",
@@ -37,7 +37,6 @@ const FORM_ROWS: ScrollSlide[] = [
     width: 906,
     height: 528,
     alt: "Confirm Last Few Details modal over the loading quote page",
-    bottom: true,
     copy: (
       <p>
         By showcasing a loading state of the Quote Page and asking no brainer questions in the form
@@ -52,7 +51,6 @@ const FORM_ROWS: ScrollSlide[] = [
     width: 906,
     height: 528,
     alt: "Verify Your Number OTP sheet on an iPhone",
-    bottom: true,
     // Draft copy (005.3 had 005.2's text); the user to confirm or replace.
     copy: (
       <p>
@@ -111,19 +109,19 @@ const DETAILS: { label: string; values: string[] }[][] = [
   [
     { label: "Role", values: ["Founding Designer"] },
     { label: "Timeline", values: ["2023 - present"] },
-    { label: "Scope", values: ["Product", "Brand & identity", "Design system", "Coded prototypes"] },
+    { label: "Scope", values: ["Product", "Brand & Identity", "Design Thinking", "Tools & Systems"] },
   ],
   [
-    { label: "Tools", values: ["Figma", "Claude Code", "Next.js", "Storybook"] },
+    { label: "Tools", values: ["Figma", "Claude Code", "Storybook"] },
     {
       label: "Team",
       values: [
-        "Vishnu (SDE III)",
-        "Tanmay (Tester)",
-        "Saharsh Jain (PM)",
-        "Pradeep (CPTO)",
-        "Gopi Solia (Brand & Experience)",
         "Tejas Jain (Founder & CEO)",
+        "Gopi Solia (Brand & Experience)",
+        "Pradeep Ragiri (Product & Technology)",
+        "Saharsh Jain (Product)",
+        "Vishnu Gupta (Engineering)",
+        "Rohit Mishra (Engineering)",
       ],
     },
   ],
@@ -186,22 +184,22 @@ const OUTCOMES: Record<string, Stat[]> = {
 const PIVOT_STEPS: PivotStep[] = [
   {
     date: "03.23",
-    title: "The Website I saw",
+    title: "Minimum Viable Product",
     summary: "Aayra as Mascot, Tech Founder First, Recommendation Engine",
   },
   {
     date: "10.23",
-    title: "The Initial Pivot",
+    title: "The Gentle Nudge",
     summary: "Dilip Joshi as Mascot, SME Inclusive, Quote Generation Available",
   },
   {
     date: "03.25",
-    title: "Nudges: Imitation",
+    title: "Platform as a Pivot",
     summary: "No Mascot, Marketplace positioning, Online Checkout",
   },
   {
     date: "06.26",
-    title: "Square One: Flattery",
+    title: "Orienting the Axis",
     summary: "Re-Branding, Online Checkout, Underwriting Intelligence.",
   },
 ];
@@ -269,12 +267,12 @@ export default function DraftContent() {
       {/* 001 */}
       <section {...rail("story", "001. How did my story start?")} className="scroll-mt-16 px-6 py-4">
         <div className="flex flex-col justify-between gap-10 px-6 lg:flex-row">
-          <div className="flex flex-col gap-4 lg:flex-1">
+          <div className="flex flex-col gap-4 lg:w-[480px] lg:shrink-0">
             <Tag>001.</Tag>
             <h2 className="py-[2px] text-[36px] font-normal leading-none text-ink">
               How did my story start?
             </h2>
-            <div className={`${BODY} mt-6 max-w-[557px]`}>
+            <div className={`${BODY} mt-6`}>
               <p>
                 I was hired at <b className="font-normal text-ink">BimaKavach</b> in{" "}
                 <b className="font-normal text-ink">2023</b> when the company was nascent, and was
@@ -289,18 +287,27 @@ export default function DraftContent() {
                 <b className="font-normal text-ink">grown its user base 4.7×*</b>
               </p>
             </div>
+            {/* Footnote for the 4.7×. On desktop it sits just above the stats row's divider
+                opposite: lifted by that row's height (hairline + 24px + 32px figure + 8px +
+                16.8px label) plus 4px. */}
+            <p className="text-12 leading-[1.5] text-muted lg:mt-auto lg:mb-[calc(0.5px+1.5rem+32px+0.5rem+16.8px+4px)]">
+              *from 800 during March 2023 to around 3,760 by October 2025.
+            </p>
           </div>
           <div className="flex flex-col gap-20 lg:w-[480px] lg:shrink-0">
             {/* Project facts, above the outcomes. */}
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-8 rounded-xl bg-surface/30 p-6 ring-[0.5px] ring-border">
+            {/* Second column (Tools, Team) hugs its longest line from sm up; the first takes the rest. */}
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-[1fr_max-content]">
               {DETAILS.map((cell) => (
                 <div key={cell[0].label} className="flex flex-col gap-6">
                   {cell.map((d) => (
                     <div key={d.label} className="flex flex-col gap-2">
-                      <dt className="text-14 font-medium text-ink">{d.label}</dt>
-                      <dd className="flex flex-col gap-1 text-14 text-muted">
+                      <dt className="text-12 leading-[1.6] font-medium text-ink">{d.label}</dt>
+                      <dd className="flex flex-col gap-1 text-12 leading-[1.6] text-muted">
                         {d.values.map((v) => (
-                          <span key={v}>{v}</span>
+                          <span key={v} className="sm:whitespace-nowrap">
+                            {v}
+                          </span>
                         ))}
                       </dd>
                     </div>
@@ -309,9 +316,6 @@ export default function DraftContent() {
               ))}
             </dl>
             <Stats items={OUTCOMES.story} />
-            <p className="text-12 leading-[1.5] text-muted">
-              *from 800 during March 2023 to around 3,760 by October 2025.
-            </p>
           </div>
         </div>
       </section>
@@ -319,26 +323,25 @@ export default function DraftContent() {
       {/* 002 · The Pivot and the Problem */}
       <section {...rail("problem", "002. The Pivot and the Problem")} className={`scroll-mt-16 ${ROW}`}>
         <SectionHead tag="002." title="The Pivot and the Problem">
-          <div className={BODY}>
-            <p>
-              I started off as a Senior Designer - and had to tackle challenges outside the
-              Product’s design including the Visual Language and Branding of the company.
-            </p>
-            <p className="mt-[1.7em]">
-              This helped in pivoting BimaKavach from a Recommendation Engine for urban startups to
-              an SME inclusive, Insurtech Broking Firm.
-            </p>
-          </div>
-          <Stats items={OUTCOMES.problem} />
+          <p className={BODY}>
+            I started off as a Senior Designer - and had to tackle challenges outside the Product’s
+            design including the Visual Language and Branding of the company. This helped in
+            pivoting BimaKavach from a Recommendation Engine for urban startups to an SME
+            inclusive, Insurtech Broking Firm.
+          </p>
         </SectionHead>
         <PivotTimeline steps={PIVOT_STEPS} />
+        {/* Outcomes close the section, inset like the head above. */}
+        <div className="px-6">
+          <Stats items={OUTCOMES.problem} />
+        </div>
       </section>
 
       {/* 003 Typography and 004 Design Systems: copy left, media right; one block, no gap between */}
       <div className="flex flex-col">
         <section {...rail("typography", "003. Solutions - Typography")} className="scroll-mt-16 px-6 py-[60px]">
           <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            <SectionHead tag="003." title="Solutions - Typography" className="min-w-0 justify-center">
+            <SectionHead tag="003." title={"Solutions -\u00a0Typography"} className="min-w-0 justify-center lg:max-w-[528px]">
               <div className={`${BODY} flex flex-col gap-[1.7em]`}>
                 <p>
                   In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
@@ -355,14 +358,16 @@ export default function DraftContent() {
               <Stats items={OUTCOMES.typography} />
             </SectionHead>
             <div
-              className={`flex aspect-[1464/850] min-w-0 flex-col items-center justify-center bg-surface ${CARD}`}
+              className="@container flex aspect-[1464/850] min-w-0 flex-col items-center justify-center lg:mr-6 lg:w-[564px] lg:max-w-[calc(100%-1.5rem)] lg:justify-self-end"
             >
-              <div className="flex w-full max-w-[657px] flex-col gap-[16.268px] px-[11.555px] tracking-[-0.2503px] text-ink">
+              {/* Sized in container units against a 640px-wide card, so the lines keep
+                  their proportions (and fit) at any card width. */}
+              <div className="flex w-full flex-col gap-[2.542cqw] tracking-[-0.0391cqw] text-ink">
                 {SCRIPT_LINES.map((l) => (
                   <p
                     key={l.lang}
                     lang={l.lang}
-                    className={`${l.small ? "text-[15.017px]" : "text-[16.685px]"} leading-[20.023px] ${
+                    className={`${l.small ? "text-[2.346cqw]" : "text-[2.607cqw]"} leading-[3.129cqw] ${
                       l.right ? "text-right" : ""
                     }`}
                     style={{
@@ -381,7 +386,7 @@ export default function DraftContent() {
 
         <section {...rail("design-systems", "004. Solutions - Design Systems")} className="scroll-mt-16 px-6 py-[60px]">
           <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            <SectionHead tag="004." title="Solutions - Design Systems" className="min-w-0 justify-center">
+            <SectionHead tag="004." title={"Solutions -\u00a0Design Systems"} className="min-w-0 justify-center lg:max-w-[528px]">
               <p className={BODY}>
                 Scaling Anek to work for Discovery, Conversation and Retention, we had quickly
                 developed a modern Design System Library, aptly called Peetal. Peetal is built
@@ -397,7 +402,7 @@ export default function DraftContent() {
               </Link>
               <Stats items={OUTCOMES.designSystems} />
             </SectionHead>
-            <div className={`min-w-0 ${CARD}`}>
+            <div className={`min-w-0 lg:mr-6 lg:w-[564px] lg:max-w-[calc(100%-1.5rem)] lg:justify-self-end ${CARD}`}>
               <Image
                 src="/media/draft/design-systems.png"
                 alt="Peetal design system: colour scales, borders, buttons, elevation"
@@ -415,7 +420,7 @@ export default function DraftContent() {
       <section
         {...rail("forms", "005. Solutions - Forms & Modals for Discovery & Quote Generation")}
         className={`scroll-mt-16 ${ROW}`}>
-        <SectionHead tag="005." title="Solutions - Forms & Modals for Discovery & Quote Generation">
+        <SectionHead tag="005." title={"Solutions -\u00a0Forms & Modals for Discovery & Quote Generation"}>
           <p className={BODY}>
             Redesigning Forms &amp; Modals in order to boost discovery, expedite Quote Generation,
             and build intuitive journeys towards Quote Generation was the next task.
@@ -441,6 +446,16 @@ export default function DraftContent() {
         {...rail("flows", "006. Flows - Checkout & Payment")}
         className={`scroll-mt-16 ${ROW}`}
       >
+        <div className="overflow-hidden rounded-[10.5px] border-[0.5px] border-ink/25">
+          <Image
+            src="/media/draft/checkout-flow.png"
+            alt="Checkout flow: the quote page branches into the payment flow, post-payment states and offline fallbacks"
+            width={1464}
+            height={505}
+            sizes="(min-width: 1512px) 1464px, 100vw"
+            className="block h-auto w-full"
+          />
+        </div>
         <SectionHead
           tag="006."
           title={
@@ -454,17 +469,10 @@ export default function DraftContent() {
             Massive diversions and permutations from the quote page exists and change per product -
             meaning that the journey must seem consistent and concise for any user
           </p>
-          <Stats items={OUTCOMES.flows} />
         </SectionHead>
-        <div className="overflow-hidden rounded-[10.5px] border-[0.5px] border-ink/25">
-          <Image
-            src="/media/draft/checkout-flow.png"
-            alt="Checkout flow: the quote page branches into the payment flow, post-payment states and offline fallbacks"
-            width={1464}
-            height={505}
-            sizes="(min-width: 1512px) 1464px, 100vw"
-            className="block h-auto w-full"
-          />
+        {/* Outcomes close the section, inset like the head above. */}
+        <div className="px-6">
+          <Stats items={OUTCOMES.flows} />
         </div>
       </section>
 

@@ -26,7 +26,7 @@ export default function AboutContent() {
 
           <div className="mx-auto flex w-full max-w-[var(--content-max)] flex-col gap-6 px-4 sm:px-6">
             <h1 style={at(1)} className="rise-text text-center font-display text-32 leading-[1.1] sm:text-44 text-ink">
-              Who&rsquo;s this Jack again?
+              For your consideration
             </h1>
             <div style={at(2)} className="rise-text flex justify-center">
               <p className="max-w-[640px] text-center text-18 leading-[1.7] text-muted">
@@ -46,7 +46,7 @@ export default function AboutContent() {
           className="mx-auto mt-28 flex w-full max-w-[var(--reading-max)] flex-col gap-5 px-4 sm:px-6"
         >
           <h2 className="text-center font-display text-24 sm:text-36 leading-tight text-ink">
-            My heritage forms the core of my being
+            Memories moulding my mind
           </h2>
           <p className="text-center text-16 leading-[1.7] text-muted">
             My experiences, weather good or bad, have shaped who I am today. The
@@ -59,11 +59,10 @@ export default function AboutContent() {
           </div>
         </Reveal>
 
-        {/* Curiosity — one vertical stack, as wide as its headline: the clip
-            (4:3, the stack's width) on top, the text below it.
-            The headline sets the width; the paragraph only fills it. */}
+        {/* Curiosity — one vertical stack at the intro paragraph's width (640px):
+            the clip (4:3, the stack's width) on top, the text below it. */}
         <section className="mt-28 px-4 sm:px-6">
-          <div className="mx-auto flex w-fit max-w-full flex-col gap-3">
+          <div className="mx-auto flex w-full max-w-[640px] flex-col gap-3">
             <Reveal media>
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
                 <LazyVideo
@@ -80,7 +79,7 @@ export default function AboutContent() {
                   About Me
                 </span>
                 <h2 className="text-center font-display text-24 leading-tight text-ink sm:whitespace-nowrap sm:text-28">
-                  Where does curiosity come from?
+                  Wearing charm, chasing wonder
                 </h2>
               </div>
               <p className="w-0 min-w-full text-center text-16 leading-[1.7] text-muted">

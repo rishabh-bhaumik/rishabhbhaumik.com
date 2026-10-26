@@ -93,6 +93,27 @@
     background-color: var(--color-bg);
     color: var(--color-ink);
   }
+
+  /* Type rag: no orphans or widows, even line lengths. Headings and the site's
+     (short) paragraphs and list items are balanced, so no block ends on a
+     stub line; definition lists, quotes and captions use `pretty`, which keeps
+     a lone word off the last line. Chrome only balances blocks of up to 6
+     lines (longer ones wrap normally), and browsers without support just wrap
+     as before. */
+  dd,
+  dt,
+  blockquote,
+  figcaption {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  li {
+    text-wrap: balance;
+  }
 }
 
 /* Scroll reveals leave anything not yet scrolled into view at opacity 0. When
