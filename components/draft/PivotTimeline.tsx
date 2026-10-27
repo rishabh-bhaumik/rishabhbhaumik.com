@@ -12,8 +12,10 @@ export type PivotStep = {
   title: string;
   /** One line of what changed, comma separated. */
   summary: string;
-  /** The homepage at that point, shown in the phone. A blank screen until it's in. */
-  screen?: { src: string; alt: string };
+  /** The homepage at that point, shown in the phone. A blank screen until it's in.
+      The shot fills the screen's width from just under the status bar; `bg` fills
+      the status bar and anything below a short shot. */
+  screen?: { src: string; alt: string; width: number; height: number; bg: string };
 };
 
 /** The ruler runs one tick per month across these years. */
@@ -51,6 +53,7 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
                 <m.div
                   key={step.date}
                   className="absolute inset-0"
+                  style={{ backgroundColor: step.screen.bg }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -59,9 +62,10 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
                   <Image
                     src={step.screen.src}
                     alt={step.screen.alt}
-                    fill
-                    sizes="360px"
-                    className="object-cover object-top"
+                    width={step.screen.width}
+                    height={step.screen.height}
+                    sizes="(min-width: 1024px) 380px, 300px"
+                    className="absolute inset-x-0 top-[5.5%] h-auto w-full"
                   />
                 </m.div>
               )}

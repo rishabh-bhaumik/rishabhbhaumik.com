@@ -186,21 +186,49 @@ const PIVOT_STEPS: PivotStep[] = [
     date: "03.23",
     title: "Minimum Viable Product",
     summary: "Aayra as Mascot, Tech Founder First, Recommendation Engine",
+    screen: {
+      src: "/media/draft/pivot-01-mvp.png",
+      alt: "BimaKavach's 2023 mobile homepage: Complete Insurance for your business, with Aayra the mascot",
+      width: 484,
+      height: 776,
+      bg: "#1b043d",
+    },
   },
   {
     date: "10.23",
     title: "The Gentle Nudge",
     summary: "Dilip Joshi as Mascot, SME Inclusive, Quote Generation Available",
+    screen: {
+      src: "/media/draft/pivot-02-gentle-nudge.png",
+      alt: "BimaKavach's late-2023 mobile homepage: Get a Business Insurance Quote in Minutes, with Dilip Joshi",
+      width: 968,
+      height: 1552,
+      bg: "#ffffff",
+    },
   },
   {
     date: "03.25",
     title: "Platform as a Pivot",
     summary: "No Mascot, Marketplace positioning, Online Checkout",
+    screen: {
+      src: "/media/draft/pivot-03-platform.png",
+      alt: "BimaKavach's 2025 mobile homepage: India ka trusted business Kavach, quotes from 20+ insurers",
+      width: 968,
+      height: 1552,
+      bg: "#ffffff",
+    },
   },
   {
     date: "06.26",
     title: "Orienting the Axis",
     summary: "Re-Branding, Online Checkout, Underwriting Intelligence.",
+    screen: {
+      src: "/media/draft/pivot-04-axis.png",
+      alt: "BimaKavach's 2026 mobile homepage: India's first AI driven Business Insurance Platform",
+      width: 968,
+      height: 1552,
+      bg: "#fff7f0",
+    },
   },
 ];
 
@@ -246,7 +274,8 @@ export default function DraftContent() {
   return (
     <main className="flex w-full min-w-0 flex-col gap-20">
       {/* Cover + intro */}
-      <section {...rail("context", "000. For Your Consideration")} className="flex scroll-mt-16 flex-col items-center gap-6 px-6 py-[60px]">
+      {/* Not in the rail while the title is hidden and the cover waits for the showreel. */}
+      <section id="context" className="flex scroll-mt-16 flex-col items-center gap-6 px-6 py-[60px]">
         {/* Cover media slot (showreel to come); capped at 1200px, centred. */}
         <div className="relative aspect-[1512/850] w-full max-w-[1200px] bg-surface">
           <p className="absolute left-1/2 top-[calc(50%-10.01px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
