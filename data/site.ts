@@ -20,6 +20,9 @@ export const SITE = {
     dark: { src: "/media/home/orbit-dark.mp4", poster: "/media/home/orbit-dark.webp" },
     light: { src: "/media/home/orbit-light.mp4", poster: "/media/home/orbit-light.webp" },
   },
+  /** The dock's background music (components/Dock.tsx): one looping track, faded in and out.
+      Drop a track you have the rights to at this path. */
+  bgm: { src: "/media/bgm/bgm.mp3", volume: 0.2 },
 } as const;
 
 /**

@@ -8,6 +8,14 @@ import Lenis from "lenis";
 /** Pages that scroll on their own (the lab's panels, Identity's horizontal stage): no Lenis there. */
 const NATIVE_ROUTES = ["/logo", "/bimakavach-identity"];
 
+let current: Lenis | null = null;
+
+/**
+ * The running Lenis instance, or null (native routes, reduced motion). Scroll through
+ * it when it's there: a plain `window.scrollTo` is overridden by Lenis's own easing.
+ */
+export const getLenis = () => current;
+
 /**
  * Site-wide smooth scroll (Lenis). Mirrors the buttery feel of the reference
  * portfolio. Disabled automatically under prefers-reduced-motion so the page
@@ -37,6 +45,7 @@ export default function SmoothScroll({
       touchMultiplier: 1.5,
     });
     lenisRef.current = lenis;
+    current = lenis;
 
     const update = ({ timestamp }: { timestamp: number }) => lenis.raf(timestamp);
     frame.update(update, true);
@@ -45,6 +54,7 @@ export default function SmoothScroll({
       cancelFrame(update);
       lenis.destroy();
       lenisRef.current = null;
+      current = null;
     };
   }, [native]);
 

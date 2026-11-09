@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { AnimatePresence, m } from "framer-motion";
+import { useRef, useState } from "react";
+import { AnimatePresence, m, useMotionValueEvent, useScroll } from "framer-motion";
+import { getLenis } from "@/components/SmoothScroll";
 import { EASE } from "@/lib/motion";
 import { CARD } from "./ui";
 
@@ -35,82 +36,126 @@ const at = (index: number) => `${(index / (MONTHS - 1)) * 100}%`;
  * 002's before-and-after as a stepper: a phone showing the homepage of the
  * moment on the left, the step's title and what changed on the right, and a
  * month ruler along the foot whose markers jump between steps.
+ *
+ * The card pins under the header for a screen of scrolling per step, and the
+ * scroll position picks the step (each gets an equal stretch): scrolling down
+ * walks 03.23 → 06.26, scrolling up walks back, and past the last step it lets
+ * go. Previous, Next and the ruler scroll to a step rather than set it, so the
+ * two never disagree.
  */
 export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
+  const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    setActive(Math.min(steps.length - 1, Math.max(0, Math.floor(p * steps.length))));
+  });
+
+  /** Scrolls to the middle of step `i`'s stretch. */
+  const go = (i: number) => {
+    const el = ref.current;
+    if (!el) return;
+    const range = el.offsetHeight - window.innerHeight;
+    const y = el.getBoundingClientRect().top + window.scrollY + range * ((i + 0.5) / steps.length);
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(y);
+    else window.scrollTo({ top: y }); // no Lenis: native routes or reduced motion, so no easing
+  };
+
   const step = steps[active];
   const last = active === steps.length - 1;
 
   return (
-    <div className={`${CARD} grid lg:aspect-[1000/548] lg:grid-cols-2`}>
-      {/* Phone, cropped at the card's foot */}
-      <div className="relative h-[320px] overflow-clip sm:h-[420px] lg:h-auto">
-        <div className="absolute left-1/2 top-6 aspect-[2360/4652] w-[min(72%,360px)] -translate-x-1/2 lg:left-[9%] lg:w-[73%] lg:translate-x-0">
-          {/* Screen, sitting under the frame's transparent cutout (measured from the PNG). */}
-          <div className="absolute left-[8.47%] top-[4.3%] h-[91.36%] w-[83.05%] overflow-hidden rounded-[13%/6.2%] bg-white">
-            <AnimatePresence initial={false}>
-              {step.screen && (
+    <div ref={ref} className="relative" style={{ height: `${steps.length * 100}svh` }}>
+      <div className="sticky top-16 flex h-[calc(100svh-4rem)] items-center">
+        {/* Capped so the card's height fits the pinned screen. */}
+        <div
+          className={`${CARD} mx-auto grid w-full lg:aspect-[1000/548] lg:grid-cols-2`}
+          style={{ maxWidth: "calc((100svh - 4rem - 3rem) * 1000 / 548)" }}
+        >
+          {/* Phone, cropped at the card's foot */}
+          <div className="relative h-[320px] overflow-clip sm:h-[420px] lg:h-auto">
+            <div className="absolute left-1/2 top-6 aspect-[2360/4652] w-[min(72%,360px)] -translate-x-1/2 lg:left-[9%] lg:w-[73%] lg:translate-x-0">
+              {/* Screen, sitting under the frame's transparent cutout (measured from the PNG). */}
+              <div className="absolute left-[8.47%] top-[4.3%] h-[91.36%] w-[83.05%] overflow-hidden rounded-[13%/6.2%] bg-white">
+                <AnimatePresence initial={false}>
+                  {step.screen && (
+                    <m.div
+                      key={step.date}
+                      className="absolute inset-0"
+                      style={{ backgroundColor: step.screen.bg }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4, ease: EASE }}
+                    >
+                      <Image
+                        src={step.screen.src}
+                        alt={step.screen.alt}
+                        width={step.screen.width}
+                        height={step.screen.height}
+                        sizes="(min-width: 1024px) 380px, 300px"
+                        className="absolute inset-x-0 top-[5.5%] h-auto w-full"
+                      />
+                    </m.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              <Image
+                src="/media/iphone-15-pro.png"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 420px, 360px"
+                className="pointer-events-none select-none"
+              />
+            </div>
+          </div>
+
+          {/* Step copy and the ruler */}
+          <div className="flex flex-col gap-10 px-6 pb-6 pt-8 lg:gap-0 lg:pb-[5%] lg:pl-[12%] lg:pr-[14%] lg:pt-[15%]">
+            <div className="flex items-baseline justify-between text-12 text-faint">
+              <span className="tabular-nums">{step.date}</span>
+              {/* Previous joins after the first step; the last step restarts. */}
+              <div className="flex items-baseline gap-4">
+                {active > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => go(active - 1)}
+                    className="text-12 text-faint transition-colors hover:text-ink"
+                  >
+                    Previous
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => go(last ? 0 : active + 1)}
+                  className="text-12 text-faint transition-colors hover:text-ink"
+                >
+                  {last ? "Restart" : "Next"}
+                </button>
+              </div>
+            </div>
+
+            <div className="lg:mt-[22%] lg:flex-1" aria-live="polite">
+              <AnimatePresence mode="wait" initial={false}>
                 <m.div
                   key={step.date}
-                  className="absolute inset-0"
-                  style={{ backgroundColor: step.screen.bg }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4, ease: EASE }}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3, ease: EASE }}
+                  className="flex flex-col gap-3"
                 >
-                  <Image
-                    src={step.screen.src}
-                    alt={step.screen.alt}
-                    width={step.screen.width}
-                    height={step.screen.height}
-                    sizes="(min-width: 1024px) 380px, 300px"
-                    className="absolute inset-x-0 top-[5.5%] h-auto w-full"
-                  />
+                  <h3 className="text-[32px] font-normal leading-[1.1] text-ink">{step.title}</h3>
+                  <p className="text-14 leading-[1.5] text-muted">{step.summary}</p>
                 </m.div>
-              )}
-            </AnimatePresence>
+              </AnimatePresence>
+            </div>
+
+            <Ruler steps={steps} active={active} onSelect={go} />
           </div>
-          <Image
-            src="/media/iphone-15-pro.png"
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 420px, 360px"
-            className="pointer-events-none select-none"
-          />
         </div>
-      </div>
-
-      {/* Step copy and the ruler */}
-      <div className="flex flex-col gap-10 px-6 pb-6 pt-8 lg:gap-0 lg:pb-[5%] lg:pl-[12%] lg:pr-[14%] lg:pt-[15%]">
-        <div className="flex items-baseline justify-between text-12 text-faint">
-          <span className="tabular-nums">{step.date}</span>
-          <button
-            type="button"
-            onClick={() => setActive(last ? 0 : active + 1)}
-            className="text-12 text-faint transition-colors hover:text-ink"
-          >
-            {last ? "Back" : "Next"}
-          </button>
-        </div>
-
-        <div className="lg:mt-[22%] lg:flex-1" aria-live="polite">
-          <AnimatePresence mode="wait" initial={false}>
-            <m.div
-              key={step.date}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3, ease: EASE }}
-              className="flex flex-col gap-3"
-            >
-              <h3 className="text-[32px] font-normal leading-[1.1] text-ink">{step.title}</h3>
-              <p className="text-14 leading-[1.5] text-muted">{step.summary}</p>
-            </m.div>
-          </AnimatePresence>
-        </div>
-
-        <Ruler steps={steps} active={active} onSelect={setActive} />
       </div>
     </div>
   );

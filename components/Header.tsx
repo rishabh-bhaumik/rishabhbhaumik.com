@@ -7,6 +7,7 @@ import { AnimatePresence, m } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV } from "@/data/site";
 import { EASE } from "@/lib/motion";
+import { DockControls } from "./Dock";
 import LocalClock from "./LocalClock";
 
 /** Each item fades up and un-blurs, one after another across the bar. */
@@ -57,11 +58,12 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b-[0.5px] border-ink/10 bg-bg/90">
       {/* From sm up: three columns (links left, the clock centred, links right), so the clock's dot sits on the page's centre line.
-          On phones the menu button is at the left and the clock at the right. */}
+          On phones: the menu button, the clock 12px past its icon, and the view control at the right
+          (the floating dock is hidden there). */}
       <m.div
         initial="hidden"
         animate="show"
-        className="grid h-16 w-full grid-cols-[auto_1fr] items-center gap-2 px-4 sm:grid-cols-[1fr_auto_1fr] sm:gap-0 sm:px-6"
+        className="grid h-16 w-full grid-cols-[auto_1fr_auto] items-center gap-1 px-4 sm:grid-cols-[1fr_auto_1fr] sm:gap-0 sm:px-6"
       >
         {/* Left — Home, Work / mobile menu toggle */}
         {navSet("left", 0, "justify-self-start")}
@@ -85,13 +87,16 @@ export default function Header() {
         <m.div
           variants={headerItem}
           custom={LEFT.length}
-          className="justify-self-end sm:justify-self-center"
+          className="justify-self-start sm:justify-self-center"
         >
           <LocalClock />
         </m.div>
 
-        {/* Right — About, Play */}
+        {/* Right — About, Play / the view control on phones */}
         {navSet("right", LEFT.length + 1, "justify-self-end")}
+        <m.div variants={headerItem} custom={LEFT.length + 1} className="justify-self-end sm:hidden">
+          <DockControls />
+        </m.div>
       </m.div>
 
       {/* Mobile dropdown menu */}

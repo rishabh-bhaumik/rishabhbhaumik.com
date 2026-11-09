@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import "@/components/bk/anek.css";
+import CheckoutFlow from "./CheckoutFlow";
 import PivotTimeline, { type PivotStep } from "./PivotTimeline";
 import ScrollSlides, { type ScrollSlide } from "./ScrollSlides";
+import TokenRamps from "./TokenRamps";
+import TypeSpecimen from "./TypeSpecimen";
 import { BODY, CARD, Stats, Tag, rail, type Stat } from "./ui";
 
 // First-draft build of the Figma case-study page (Peetal DSL, node 8627:5701),
@@ -232,40 +235,44 @@ const PIVOT_STEPS: PivotStep[] = [
   },
 ];
 
-/** One welcome line per script, set in the matching Anek face (zigzag alignment, as designed). */
-const SCRIPT_LINES: { text: string; lang: string; font: string; right?: boolean; small?: boolean }[] = [
-  { text: "Welcome, Emerging India!", lang: "en", font: "Anek Latin", right: true },
-  { text: "স্বাগতম, উদীয়মান ভারত!", lang: "bn", font: "Anek Bangla" },
-  { text: "उभरते भारत का स्वागत है!", lang: "hi", font: "Anek Devanagari", right: true },
-  { text: "સ્વાગત છે, ઉભરતા ભારત!", lang: "gu", font: "Anek Gujarati" },
-  { text: "ਜੀ ਆਇਆਂ ਨੂੰ, ਉੱਭਰ ਰਹੇ ਭਾਰਤ!", lang: "pa", font: "Anek Gurmukhi", right: true },
-  { text: "ಉದಯೋನ್ಮುಖ ಭಾರತಕ್ಕೆ ಸ್ವಾಗತ!", lang: "kn", font: "Anek Kannada" },
-  { text: "സ്വാഗതം, വളർന്നുവരുന്ന ഇന്ത്യ!", lang: "ml", font: "Anek Malayalam", right: true },
-  { text: "ସ୍ୱାଗତ, ଉଦୀୟମାନ ଭାରତ!", lang: "or", font: "Anek Odia" },
-  { text: "வருக, வளர்ந்து வரும் இந்தியா!", lang: "ta", font: "Anek Tamil", right: true },
-  { text: "అభివృద్ధి చెందుతున్న భారతదేశానికి స్వాగతం!", lang: "te", font: "Anek Telugu", small: true },
-];
-
 const ROW = "flex flex-col gap-6 px-6";
 
 function SectionHead({
   tag,
   title,
   children,
+  foot,
   className = "",
 }: {
   tag: string;
   title: React.ReactNode;
   children: React.ReactNode;
+  /** Kept apart from the copy, so a `justify-between` head can sink it to its foot. */
+  foot?: React.ReactNode;
   className?: string;
 }) {
+  const head = (
+    <div className="flex flex-col gap-4">
+      <Tag>{tag}</Tag>
+      <h2 className="py-[2px] text-[36px] font-normal leading-none text-ink">{title}</h2>
+    </div>
+  );
   return (
     <div className={`flex flex-col gap-5 px-6 pb-6 ${className}`}>
-      <div className="flex flex-col gap-4">
-        <Tag>{tag}</Tag>
-        <h2 className="py-[2px] text-[36px] font-normal leading-none text-ink">{title}</h2>
-      </div>
-      {children}
+      {foot ? (
+        <>
+          <div className="flex flex-col gap-5">
+            {head}
+            {children}
+          </div>
+          {foot}
+        </>
+      ) : (
+        <>
+          {head}
+          {children}
+        </>
+      )}
     </div>
   );
 }
@@ -365,56 +372,17 @@ export default function DraftContent() {
         </div>
       </section>
 
-      {/* 003 Typography and 004 Design Systems: copy left, media right; one block, no gap between */}
+      {/* 003 Design Systems and 004 Typography: copy left, media right; one block, no gap between */}
       <div className="flex flex-col">
-        <section {...rail("typography", "003. Solutions - Typography")} className="scroll-mt-16 px-6 py-[60px]">
-          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            <SectionHead tag="003." title={"Solutions -\u00a0Typography"} className="min-w-0 justify-center lg:max-w-[528px]">
-              <div className={`${BODY} flex flex-col gap-[1.7em]`}>
-                <p>
-                  In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
-                  Businesses, we started with Foundational Typography. We had decided that Anek
-                  Variable would be the obvious typeface of choice.
-                </p>
-                <p>
-                  Anek is a contemporary, multi-script, open-source typeface family created by the
-                  Indian foundry Ek Type (in collaboration with Google). It supports multiple Indian
-                  scripts (including Devanagari, Tamil, Bengali, etc.) as well as Latin, and it’s
-                  offered in a variable font format.
-                </p>
-              </div>
-              <Stats items={OUTCOMES.typography} />
-            </SectionHead>
-            <div
-              className="@container flex aspect-[1464/850] min-w-0 flex-col items-center justify-center lg:mr-6 lg:w-[564px] lg:max-w-[calc(100%-1.5rem)] lg:justify-self-end"
+        <section {...rail("design-systems", "003. Solutions - Design Systems")} className="scroll-mt-16 px-6 py-[60px]">
+          {/* Same frame as 004: two equal columns, the copy stretching to the art's height. */}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <SectionHead
+              tag="003."
+              title={"Solutions -\u00a0Design Systems"}
+              foot={<Stats items={OUTCOMES.designSystems} />}
+              className="min-w-0 justify-between"
             >
-              {/* Sized in container units against a 640px-wide card, so the lines keep
-                  their proportions (and fit) at any card width. */}
-              <div className="flex w-full flex-col gap-[2.542cqw] tracking-[-0.0391cqw] text-ink">
-                {SCRIPT_LINES.map((l) => (
-                  <p
-                    key={l.lang}
-                    lang={l.lang}
-                    className={`${l.small ? "text-[2.346cqw]" : "text-[2.607cqw]"} leading-[3.129cqw] ${
-                      l.right ? "text-right" : ""
-                    }`}
-                    style={{
-                      fontFamily: `"${l.font}"`,
-                      fontVariationSettings: '"wdth" 100',
-                      fontFeatureSettings: '"zero" 1, "kern" 0, "liga" 0, "dlig" 1',
-                    }}
-                  >
-                    {l.text}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section {...rail("design-systems", "004. Solutions - Design Systems")} className="scroll-mt-16 px-6 py-[60px]">
-          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            <SectionHead tag="004." title={"Solutions -\u00a0Design Systems"} className="min-w-0 justify-center lg:max-w-[528px]">
               <p className={BODY}>
                 Scaling Anek to work for Discovery, Conversation and Retention, we had quickly
                 developed a modern Design System Library, aptly called Peetal. Peetal is built
@@ -428,18 +396,36 @@ export default function DraftContent() {
               >
                 More on Peetal
               </Link>
-              <Stats items={OUTCOMES.designSystems} />
             </SectionHead>
-            <div className={`min-w-0 lg:mr-6 lg:w-[564px] lg:max-w-[calc(100%-1.5rem)] lg:justify-self-end ${CARD}`}>
-              <Image
-                src="/media/draft/design-systems.png"
-                alt="Peetal design system: colour scales, borders, buttons, elevation"
-                width={720}
-                height={418}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="block h-auto w-full"
-              />
-            </div>
+            <TokenRamps className="min-w-0 lg:self-start" />
+          </div>
+        </section>
+
+        <section {...rail("typography", "004. Solutions - Typography")} className="scroll-mt-16 px-6 py-[60px]">
+          {/* Two equal columns (720 each at 1512): the copy column stretches to the
+              specimen's height, its stats sinking to the foot above 24px of padding. */}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <SectionHead
+              tag="004."
+              title={"Solutions -\u00a0Typography"}
+              foot={<Stats items={OUTCOMES.typography} />}
+              className="min-w-0 justify-between"
+            >
+              <div className={`${BODY} flex flex-col gap-[1.7em]`}>
+                <p>
+                  In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
+                  Businesses, we started with Foundational Typography. We had decided that Anek
+                  Variable would be the obvious typeface of choice.
+                </p>
+                <p>
+                  Anek is a contemporary, multi-script, open-source typeface family created by the
+                  Indian foundry Ek Type (in collaboration with Google). It supports multiple Indian
+                  scripts (including Devanagari, Tamil, Bengali, etc.) as well as Latin, and it’s
+                  offered in a variable font format.
+                </p>
+              </div>
+            </SectionHead>
+            <TypeSpecimen className="min-w-0 lg:self-start" />
           </div>
         </section>
       </div>
@@ -469,38 +455,35 @@ export default function DraftContent() {
       {/* 005.1 - 005.3: pinned, one at a time */}
       <ScrollSlides slides={FORM_ROWS} idPrefix="forms" layout="row" />
 
-      {/* 006 · Flows - Checkout & Payment: copy left, flowchart right */}
+      {/* 006 · Flows - Checkout & Payment: copy left and outcomes right, over the flowchart */}
       <section
         {...rail("flows", "006. Flows - Checkout & Payment")}
         className={`scroll-mt-16 ${ROW}`}
       >
-        <div className="overflow-hidden rounded-[10.5px] border-[0.5px] border-ink/25">
-          <Image
-            src="/media/draft/checkout-flow.png"
-            alt="Checkout flow: the quote page branches into the payment flow, post-payment states and offline fallbacks"
-            width={1464}
-            height={505}
-            sizes="(min-width: 1512px) 1464px, 100vw"
-            className="block h-auto w-full"
-          />
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
+          <SectionHead
+            tag="006."
+            title={
+              <>
+                Flows - Checkout
+                <br />& Payment
+              </>
+            }
+            className="lg:flex-1"
+          >
+            <p className={`${BODY} max-w-[432px]`}>
+              Massive diversions and permutations from the quote page exists and change per product -
+              meaning that the journey must seem consistent and concise for any user
+            </p>
+          </SectionHead>
+          {/* Inset like the head; on desktop it keeps at least the 432px drawn. */}
+          <div className="px-6 lg:min-w-[480px] lg:shrink-0">
+            <Stats items={OUTCOMES.flows} />
+          </div>
         </div>
-        <SectionHead
-          tag="006."
-          title={
-            <>
-              Flows - Checkout
-              <br />& Payment
-            </>
-          }
-        >
-          <p className={BODY}>
-            Massive diversions and permutations from the quote page exists and change per product -
-            meaning that the journey must seem consistent and concise for any user
-          </p>
-        </SectionHead>
-        {/* Outcomes close the section, inset like the head above. */}
-        <div className="px-6">
-          <Stats items={OUTCOMES.flows} />
+        {/* Phones: drawn at Figma's own 960px and scrolled sideways, so the labels stay legible. */}
+        <div className={`${CARD} max-sm:overflow-x-auto max-sm:overscroll-x-contain`}>
+          <CheckoutFlow className="max-sm:w-[960px]" />
         </div>
       </section>
 

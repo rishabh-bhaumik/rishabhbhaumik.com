@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   getAvailability,
@@ -9,24 +8,17 @@ import {
   type AvailabilitySchedule,
   type Status,
 } from "@/lib/availability";
-import { isDarkOnlyRoute, setTheme, useThemePreference } from "@/lib/theme";
 
 /**
  * The header's centre: the visitor's live local time, a status dot for
  * Rishabh's availability (computed from the schedule in lib/availability; wire
  * that to a DB later and this updates for free), then "(local)". The dot sits
- * on the page's centre line.
- *
- * It is also the light / dark switch (lib/theme.ts), except on dark-only
- * routes, where it is just the clock.
+ * on the page's centre line. Display only: the theme switch lives in the dock.
  */
 export default function LocalClock() {
   const [time, setTime] = useState<string | null>(null);
   const [schedule, setSchedule] = useState<AvailabilitySchedule | null>(null);
   const [status, setStatus] = useState<Status>("offline");
-  const pathname = usePathname() ?? "/";
-  const theme = useThemePreference();
-  const switchable = !isDarkOnlyRoute(pathname);
 
   // Visitor's local time. The display only shows minutes, so it updates on
   // each minute boundary (not every second), and not at all in a hidden tab.
@@ -74,15 +66,12 @@ export default function LocalClock() {
 
   const meta = STATUS_META[status];
 
-  const next = theme === "light" ? "dark" : "light";
-  // Three columns, the outer two always equal, so the dot is the row's exact centre.
-  const layout = "group/clock grid grid-cols-[1fr_auto_1fr] items-center gap-2 whitespace-nowrap";
-
-  const face = (
-    <>
+  return (
+    // Three columns, the outer two always equal, so the dot is the row's exact centre.
+    <span className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 whitespace-nowrap" title={meta.label}>
       {/* One row: the time, the status dot, then "(local)". */}
       {/* suppressHydrationWarning: time is client-only, differs from SSR */}
-      <span suppressHydrationWarning className="justify-self-end font-mono text-12 leading-none text-faint tabular-nums transition-colors group-hover/clock:text-ink">
+      <span suppressHydrationWarning className="justify-self-end font-mono text-12 leading-none text-faint tabular-nums">
         {time ?? "--:-- --"}
       </span>
       <span
@@ -103,30 +92,8 @@ export default function LocalClock() {
           }}
         />
       </span>
-      <span className="justify-self-start font-mono text-12 leading-none text-faint/70 transition-colors group-hover/clock:text-ink">(local)</span>
+      <span className="justify-self-start font-mono text-12 leading-none text-faint/70">(local)</span>
       <span className="sr-only">{meta.label}</span>
-    </>
-  );
-
-  if (!switchable) {
-    return (
-      <span className={layout} title={meta.label}>
-        {face}
-      </span>
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={() => setTheme(next, pathname)}
-      aria-pressed={theme === "light"}
-      title={`${meta.label} · switch to ${next} mode`}
-      // 32px tall with 16px sides: a roomier target for the theme toggle.
-      className={`${layout} -mx-4 h-8 cursor-pointer rounded-full px-4`}
-    >
-      {face}
-      <span className="sr-only">, light mode</span>
-    </button>
+    </span>
   );
 }

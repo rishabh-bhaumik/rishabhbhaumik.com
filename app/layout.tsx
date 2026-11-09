@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ClickSFX from "@/components/ClickSFX";
-import SoundToggle from "@/components/SoundToggle";
+import Dock from "@/components/Dock";
 import PageRevealSFX from "@/components/PageRevealSFX";
 import { SfxProvider } from "@/lib/sfx";
 import MotionProvider from "@/components/MotionProvider";
@@ -38,7 +38,7 @@ export default function RootLayout({
           <SfxProvider>
             <PageRevealSFX />
             <ClickSFX />
-            <SoundToggle />
+            <Dock />
             <SmoothScroll>{children}</SmoothScroll>
           </SfxProvider>
         </MotionProvider>

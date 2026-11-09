@@ -55,7 +55,10 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - Media: muted clips go through `components/LazyVideo.tsx` (poster, fetched
   near the viewport, plays only while visible). Sounds are small MP3s played
   through the shared Web Audio context in `lib/sfx.tsx`.
-- Theme: dark by default; the header clock (`LocalClock`) switches to light.
+- Theme: dark by default; the dock's sun/moon switches to light (the header clock is display only).
+- Dock (`components/Dock.tsx`): view control (theme, background music `SITE.bgm`, sound
+  mute; music state shared via `lib/bgm.ts`). From sm up it floats bottom right, always
+  visible, with the header's `bg-bg/90` overlay fill. On phones it sits in the header, right side.
   `lib/theme.ts` (client: store, `setTheme`, `useThemePreference`) and
   `lib/theme-script.ts` (server-safe: no-flash `<head>` script,
   `DARK_ONLY_ROUTES` — `/logo` always renders dark). `useTheme()` gives the

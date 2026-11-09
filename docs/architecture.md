@@ -104,7 +104,7 @@ Three ingredients work together:
 
 Sound is a fourth, smaller layer, not motion but choreographed alongside it:
 `lib/sfx.tsx`'s `SfxProvider`/`useSfx` gate all audio behind a mute toggle and
-`prefers-reduced-motion`; `ClickSFX` and `SoundToggle` are mounted globally in
+`prefers-reduced-motion`; `ClickSFX` and `Dock` are mounted globally in
 `app/layout.tsx`, and `PageRevealSFX` plays a one-time reveal sound per
 session (`sessionStorage` guarded) on first load.
 

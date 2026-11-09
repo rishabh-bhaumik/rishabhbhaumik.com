@@ -7,10 +7,10 @@ import { isDarkOnlyRoute, THEME_KEY as KEY } from "./theme-script";
 /**
  * Light / dark theme. Dark is the site's default; the visitor's choice is kept
  * in localStorage and written to <html data-theme>, which the light tokens in
- * globals.css key off. The header clock is the switch (components/LocalClock).
+ * globals.css key off. The dock's sun/moon (components/Dock) is the switch.
  *
  * Some routes are designed only in dark and ignore the choice: the theme there
- * stays dark and the clock is not a switch.
+ * stays dark and the switch is disabled.
  */
 export type Theme = "dark" | "light";
 

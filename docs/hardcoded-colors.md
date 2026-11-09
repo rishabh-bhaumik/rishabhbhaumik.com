@@ -18,7 +18,7 @@ the light/dark switch. Snapshot: 2026-10-03.
 | `components/ProjectCard.tsx:56,59` | `bg-black/10`, `from-black/70` (light variants added) | Shading over cover art |
 | `components/ProjectCard.tsx:86` | `shadow rgba(0,0,0,0.35)` | Drop shadow |
 | `components/Header.tsx:56` | current-item `shadow rgba(0,0,0,0.25)` (`light:shadow-none`) | — |
-| `components/SoundToggle.tsx:27`, `ViewToggle.tsx:78` | `invert light:invert-0` on icons | Icons are black SVGs |
+| `components/ViewToggle.tsx:78` | `invert light:invert-0` on icons | Icons are black SVGs |
 | `components/bk/AsciiDither.tsx:271,277` | `#000000` fallbacks for a missing band colour / page colour | Defaults only; the field reads `--color-bg` |
 | `components/bk/IdentityContent.tsx:1288` | hero caption fade `from-black/80 via-black/30` | Sits on the billboard photo |
 | `components/bk/IdentityContent.tsx:1291,1294` | hero caption text `text-white/50`, `text-white` | Sits on the billboard photo |
