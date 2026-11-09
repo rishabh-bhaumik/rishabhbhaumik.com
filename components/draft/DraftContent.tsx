@@ -316,16 +316,11 @@ export default function DraftContent() {
                 <b className="font-normal text-ink">grown its user base 4.7×*</b>
               </p>
             </div>
-            {/* Footnote for the 4.7×. On desktop it sits just above the stats row's divider
-                opposite: lifted by that row's height (hairline + 24px + 32px figure + 8px +
-                16.8px label) plus 4px. */}
-            <p className="text-12 leading-[1.5] text-muted lg:mt-auto lg:mb-[calc(0.5px+1.5rem+32px+0.5rem+16.8px+4px)]">
-              *from 800 during March 2023 to around 3,760 by October 2025.
-            </p>
+            <Stats items={OUTCOMES.story} />
           </div>
-          <div className="flex flex-col gap-20 lg:w-[480px] lg:shrink-0">
-            {/* Project facts, above the outcomes. */}
-            {/* Second column (Tools, Team) hugs its longest line from sm up; the first takes the rest. */}
+          <div className="flex flex-col justify-between gap-8 lg:w-[480px] lg:shrink-0">
+            {/* Project facts. Second column (Tools, Team) hugs its longest line from sm up; the
+                first takes the rest. */}
             <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-[1fr_max-content]">
               {DETAILS.map((cell) => (
                 <div key={cell[0].label} className="flex flex-col gap-6">
@@ -344,7 +339,11 @@ export default function DraftContent() {
                 </div>
               ))}
             </dl>
-            <Stats items={OUTCOMES.story} />
+            {/* Footnote for the 4.7×, at the column's foot: on desktop it lines up with the
+                foot of the stats opposite. */}
+            <p className="text-12 leading-[1.5] text-muted">
+              *from 800 during March 2023 to around 3,760 by October 2025.
+            </p>
           </div>
         </div>
       </section>
