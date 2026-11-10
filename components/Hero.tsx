@@ -1,6 +1,8 @@
 import { BIO, SITE } from "@/data/site";
+import { Fragment } from "react";
 import CompanyChip from "./CompanyChip";
 import HeroVideo from "./HeroVideo";
+import { versionLabel } from "@/lib/version";
 
 /**
  * Home hero. A server component: everything here is in the first HTML and
@@ -14,7 +16,8 @@ export default function Hero() {
       {/* Looping showreel, the "orbitting" piece, in the version for the
           current theme (HeroVideo). The card takes the page colour in light
           mode, which the light clip's backdrop matches exactly. */}
-      <div style={at(0)} className="rise relative aspect-video w-full overflow-hidden rounded-2xl bg-black light:bg-bg">
+      {/* hero-card: the /enter splash blurs and grains this same card, then clears it (globals.css). */}
+      <div style={at(0)} className="hero-card @container rise relative aspect-video w-full overflow-hidden rounded-2xl bg-black light:bg-bg">
         <HeroVideo dark={SITE.heroVideo.dark} light={SITE.heroVideo.light} />
       </div>
 
@@ -23,7 +26,7 @@ export default function Hero() {
         style={at(1)}
         className="rise w-fit rounded-full bg-surface px-3 py-1 font-mono text-10 tracking-wide text-faint ring-1 ring-border"
       >
-        {SITE.version}
+        {versionLabel()}
       </span>
 
       {/* Headline */}
@@ -34,11 +37,14 @@ export default function Hero() {
       {/* Bio with inline company chips */}
       <p style={at(3)} className="rise-text max-w-[34rem] text-18 leading-[1.5] text-muted">
         {BIO.lead} <CompanyChip company={BIO.current} /> {BIO.middle}{" "}
-        {BIO.companies.map((c, i) => (
-          <span key={c.name}>
-            <CompanyChip company={c} />
-            {i < BIO.companies.length - 1 ? ", " : ", "}
-          </span>
+        {/* Each chip keeps its comma: an inline box allows a line break right after it,
+            which could leave the comma alone at the start of the next line. */}
+        {BIO.companies.map((c) => (
+          <Fragment key={c.name}>
+            <span className="whitespace-nowrap">
+              <CompanyChip company={c} />,
+            </span>{" "}
+          </Fragment>
         ))}
         {BIO.tail}
       </p>

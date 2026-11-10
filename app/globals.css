@@ -212,6 +212,61 @@ html.lenis body {
     transform: scaleY(0.45);
   }
 }
+/* The /enter splash (components/enter/Splash.tsx) is the home page held back: the
+   hero card's clip blurred and grained (blur at full: 24px on the 784px desktop clip,
+   12px on the 343px phone clip, a straight line between; grain at 20% in the page
+   colour, from Figma 8713:24303), everything else hidden. On Enter it flips to "off": the
+   same clip pulls into focus over --morph while the header, footer and hero text
+   rise in as on a normal home load. Unlayered on purpose: it has to outrank .rise
+   (a utility), and Tailwind keeps only class-led rules inside its layers. */
+[data-splash] .hero-card video {
+  transition: filter var(--morph) cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Held back: full blur, easing toward 75% as a mouse nears Enter (--splash-blur,
+   1 to 0.75, set by Splash; it follows the pointer quickly). Enter then clears it from
+   wherever it is over --morph (the rule above). */
+[data-splash="on"] .hero-card video {
+  /* 2.6667px + 2.7211% of the clip's width: 24px at 784px, 12px at 343px. */
+  filter: blur(calc((2.6667px + 2.7211cqw) * var(--splash-blur, 1)));
+  transition-duration: 0.25s;
+}
+/* The grain is the page colour, cut out by the noise tile (used as a mask): black
+   specks in dark, warm off-white in light. Either way it vanishes into the page and
+   only textures the subject, as Figma's black-on-black grain does, so the card melts
+   into the page in both themes. Transparent until the tile is drawn. */
+[data-splash] .hero-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--color-bg);
+  -webkit-mask-image: var(--splash-noise, linear-gradient(transparent, transparent));
+  mask-image: var(--splash-noise, linear-gradient(transparent, transparent));
+  -webkit-mask-size: 128px 128px;
+  mask-size: 128px 128px;
+  opacity: 0;
+  transition: opacity var(--morph) cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-splash="on"] .hero-card::after {
+  opacity: 1;
+}
+/* Hero text waits; dropping the pause on Enter replays its .rise entrance, held
+   back 0.7s so the clip mostly settles into focus before the page rises around it. */
+[data-splash="on"] :is(.rise, .rise-text):not(.hero-card) {
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+}
+[data-splash="off"] :is(.rise, .rise-text):not(.hero-card) {
+  animation-delay: calc(700ms + var(--i, 0) * 90ms);
+}
+[data-splash] :is(header, footer) {
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.7s;
+}
+[data-splash="on"] :is(header, footer) {
+  opacity: 0;
+  visibility: hidden;
+}
 /* Draft 006's dotted connectors (CheckoutFlow) march along their paths. One loop
    moves six dash periods (6 × 2 × 2.0806) so it repeats seamlessly. */
 @keyframes flow-dash {

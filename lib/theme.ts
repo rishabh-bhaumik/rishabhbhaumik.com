@@ -16,8 +16,8 @@ import {
  * Light / dark theme. The visitor picks a mode (dark, auto or light; dark until
  * they choose, see DEFAULT_MODE), kept in localStorage; the theme it resolves to is
  * written to <html data-theme>, which the light tokens in globals.css key off. The
- * dock's mode control (components/Dock) is the switch; ThemeSync keeps auto in step
- * with the clock.
+ * dock's mode control (components/Dock) switches dark/light (auto isn't offered there
+ * for now); ThemeSync keeps a saved auto in step with the clock.
  *
  * Some routes are designed only in dark and ignore the choice: the theme there
  * stays dark and the switch is disabled.

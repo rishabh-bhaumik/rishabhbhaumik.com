@@ -29,10 +29,19 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 ## Routes
 
+- `/enter` — splash, the front door: the home page held back (`components/enter/Splash.tsx`):
+  the hero clip blurred and grained in place, one Enter button, and only the theme switch
+  (bottom right, every screen size; it follows the visitor's theme). Enter morphs it into home
+  with no page change (clip unblurs over `MORPH`, page rises in, music fades in muffled to
+  clear, URL becomes `/` via replaceState) and marks the session entered; a fresh load of `/`
+  goes here first (`ENTER_SCRIPT`, `lib/enter.ts`). Keep its tree in step with app/page.tsx.
+  The WebGPU shader host (`components/enter/ShaderVideo.tsx`, modules in `lib/custom-effects/`)
+  is kept but not mounted while Figma's shaders are hidden.
 - `/` — home (Header, Hero, Footer)
 - `/work` — work gallery (Header, WorkGallery, Footer)
 - `/about` — `AboutContent`
 - `/play` — Play gallery (Vimeo/SoundCloud embeds via oEmbed)
+- `app/not-found.tsx` — 404 for any unknown address: Header, "404 / 404 / 404 / 404", a Retry button
 - `/bima-saathi` — password-gated, vertical-scroll case study
 - `/bimakavach-identity` — password-gated, horizontal panel-snap-scroll case study (19 sections)
 
@@ -56,10 +65,10 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   near the viewport, plays only while visible). Sounds are small MP3s played
   through the shared Web Audio context in `lib/sfx.tsx`.
 - Theme: three modes, dark / auto / light (auto = light 06:00-18:00 local, dark otherwise),
-  `DEFAULT_MODE` in `lib/theme-script.ts` (dark for now). The dock's mode control cycles
-  them; the header clock is display only.
-- Dock (`components/Dock.tsx`): view control, Figma's "supermenu": a round eye button
-  whose hover reveals a slim pill of theme, background music (`SITE.bgm`, state shared via
+  `DEFAULT_MODE` in `lib/theme-script.ts` (dark for now). The dock's mode control switches
+  dark/light only (auto is built but not offered); the header clock is display only.
+- Dock (`components/Dock.tsx`): view control, Figma's "supermenu": a round settings button
+  (Lucide settings-2; an x while pinned open by a click) whose hover reveals a slim pill of theme, background music (`SITE.bgm`, state shared via
   `lib/bgm.ts`; on by default for visits landing on home: tries to play on load, else at
   the first gesture, as browsers allow; an "off" is remembered) and sound effects; music and sfx are independent switches. Hovering a
   control lights it and writes its state beside it ("dark: on"). From sm up it floats

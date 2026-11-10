@@ -14,11 +14,19 @@ import { audioContext } from "./sfx";
  */
 const FADE = 0.8;
 const KEY = "bgm";
+/**
+ * The /enter morph, in seconds: the music fades in muffled and opens up to full
+ * clarity while the clip pulls into focus (the splash uses the same length).
+ */
+export const MORPH = 1.6;
+/** Where the morph's low-pass starts (muffled, as if through a wall) and ends (open). */
+const MUFFLED_HZ = 280;
+const OPEN_HZ = 20000;
 
 let on = false;
 let playing = false;
 let decided = false;
-let node: { audio: HTMLAudioElement; gain: GainNode } | null = null;
+let node: { audio: HTMLAudioElement; tone: BiquadFilterNode; gain: GainNode } | null = null;
 let pauseTimer = 0;
 const listeners = new Set<() => void>();
 
@@ -36,11 +44,20 @@ function setPlaying(next: boolean) {
   notify();
 }
 
-function ramp(gain: GainNode, to: number) {
+function ramp(gain: GainNode, to: number, seconds = FADE) {
   const t = gain.context.currentTime;
   gain.gain.cancelScheduledValues(t);
   gain.gain.setValueAtTime(gain.gain.value, t);
-  gain.gain.linearRampToValueAtTime(to, t + FADE);
+  gain.gain.linearRampToValueAtTime(to, t + seconds);
+}
+
+/** Opens the low-pass: at once, or swept from muffled over the morph. */
+function openTone(tone: BiquadFilterNode, morph: boolean) {
+  const t = tone.context.currentTime;
+  tone.frequency.cancelScheduledValues(t);
+  if (!morph) return tone.frequency.setValueAtTime(OPEN_HZ, t);
+  tone.frequency.setValueAtTime(MUFFLED_HZ, t);
+  tone.frequency.exponentialRampToValueAtTime(OPEN_HZ, t + MORPH);
 }
 
 /**
@@ -49,7 +66,7 @@ function ramp(gain: GainNode, to: number) {
  * site before, arrived by clicking through it, or allowed sound for it). When it's
  * refused, `onBlocked` runs (or, without one, the switch goes back off).
  */
-function start(onBlocked?: () => void) {
+function start(onBlocked?: () => void, morph = false) {
   const c = audioContext();
   if (!c) return setOn(false);
   if (!node) {
@@ -59,12 +76,15 @@ function start(onBlocked?: () => void) {
     audio.addEventListener("error", () => setOn(false));
     audio.addEventListener("playing", () => setPlaying(true));
     audio.addEventListener("pause", () => setPlaying(false));
+    const tone = c.createBiquadFilter();
+    tone.type = "lowpass";
+    tone.frequency.value = OPEN_HZ;
     const gain = c.createGain();
     gain.gain.value = 0;
-    c.createMediaElementSource(audio).connect(gain).connect(c.destination);
-    node = { audio, gain };
+    c.createMediaElementSource(audio).connect(tone).connect(gain).connect(c.destination);
+    node = { audio, tone, gain };
   }
-  const { audio, gain } = node;
+  const { audio, tone, gain } = node;
   window.clearTimeout(pauseTimer);
   const blocked = () => (onBlocked ? onBlocked() : setOn(false));
   // The audio context must be running too; a locked one never settles its resume(),
@@ -80,8 +100,9 @@ function start(onBlocked?: () => void) {
         return blocked();
       }
       // Switched off while it was starting: let it go quiet.
-      if (on) ramp(gain, SITE.bgm.volume);
-      else stop();
+      if (!on) return stop();
+      openTone(tone, morph);
+      ramp(gain, SITE.bgm.volume, morph ? MORPH : FADE);
     },
     (err: DOMException) => (err?.name === "NotAllowedError" ? blocked() : setOn(false)),
   );
@@ -131,6 +152,22 @@ export function armOnLanding(pathname: string) {
     if (on) start(arm);
   }
   go();
+}
+
+/**
+ * The /enter click: an interaction, so the music can start in every browser (unless
+ * the visitor turned it off before), and it morphs in: muffled to clear over MORPH.
+ * Settles the landing decision too.
+ */
+export function startOnEnter() {
+  decided = true;
+  try {
+    if (localStorage.getItem(KEY) === "off") return;
+  } catch {
+    // No storage: use the default.
+  }
+  setOn(true);
+  start(undefined, true);
 }
 
 function subscribe(onChange: () => void) {
