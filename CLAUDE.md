@@ -96,4 +96,5 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 See `docs/` for longer write-ups: `ascii-dither.md`, `stagger-reveal.md`,
 `typography-hover.md`, `horizontal-scroll.md`, `password-gate.md`,
-`architecture.md`, `deploy.md`, `hardcoded-colors.md`.
+`architecture.md`, `deploy.md`, `hardcoded-colors.md`, `optimizations.md` (lighter/faster
+things to do later, e.g. re-encoding the 18 MB music file).

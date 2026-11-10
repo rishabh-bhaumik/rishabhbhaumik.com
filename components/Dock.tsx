@@ -6,7 +6,6 @@ import { AnimatePresence, m } from "framer-motion";
 import {
   AudioLines,
   EyeClosed,
-  EyeOff,
   Moon,
   SunMedium,
   SunMoon,
@@ -32,6 +31,19 @@ const AudioLinesX = createLucideIcon("audio-lines-x", [
   ["path", { d: "M22 10v3", key: "f" }],
   ["path", { d: "m17 17 5 5", key: "g" }],
   ["path", { d: "m22 17-5 5", key: "h" }],
+]);
+
+/** Lucide's eye-dashed (newer than the installed lucide-react): the eye while the pill is out. */
+const EyeDashed = createLucideIcon("eye-dashed", [
+  ["path", { d: "M13.054 18.946a11 11 0 0 1-2.11 0", key: "a" }],
+  ["path", { d: "M13.054 5.054a11 11 0 0 0-2.11-.001", key: "b" }],
+  ["path", { d: "M17.072 6.274a11 11 0 0 1 1.753 1.173", key: "c" }],
+  ["path", { d: "M18.825 16.552a11 11 0 0 1-1.753 1.174", key: "d" }],
+  ["path", { d: "M2.514 13.303a11 11 0 0 1-.452-.954 1 1 0 0 1 0-.697 11 11 0 0 1 .45-.955", key: "e" }],
+  ["path", { d: "M21.485 10.697a11 11 0 0 1 .453.955 1 1 0 0 1 0 .697 11 11 0 0 1-.453.954", key: "f" }],
+  ["path", { d: "M5.173 7.448a11 11 0 0 1 1.753-1.174", key: "g" }],
+  ["path", { d: "M6.926 17.726a11 11 0 0 1-1.753-1.174", key: "h" }],
+  ["circle", { cx: "12", cy: "12", r: "3", key: "i" }],
 ]);
 
 /*
@@ -63,7 +75,7 @@ const SUNK = "text-surface";
  *
  * - Default (8705:56274): only the button, eye shut.
  * - Hover the eye (8705:56275): the pill comes out at rest, the eye turns to a
- *   white eye-off.
+ *   white eye-dashed.
  * - Hover a control (8705:56349 / 56400 / 56447): it lights up with its state
  *   written beside it ("mode: dark", "music: on", "sfx: on"); the other controls
  *   and the eye sink.
@@ -144,7 +156,7 @@ export function DockControls({ drop = "up", className = "" }: { drop?: "up" | "d
 
   const shown = hoverIn || focusIn || tapped;
   const tone = (i: number) => (hot === null ? REST : hot === i ? LIT : SUNK);
-  // The eye: shut at rest (Figma's #E6E8EA), white eye-off while the pill is out,
+  // The eye: shut at rest (Figma's #E6E8EA), white eye-dashed while the pill is out,
   // sunk while a control is lit.
   const eyeTone = !shown ? "text-[#e6e8ea] light:text-ink/70" : hot === null ? LIT : SUNK;
 
@@ -217,7 +229,7 @@ export function DockControls({ drop = "up", className = "" }: { drop?: "up" | "d
         aria-label="View controls"
         className={`grid size-[41.25px] place-items-center rounded-full transition-colors duration-200 ${SKIN} ${eyeTone}`}
       >
-        {shown ? <EyeOff {...ICON} /> : <EyeClosed {...ICON} />}
+        {shown ? <EyeDashed {...ICON} /> : <EyeClosed {...ICON} />}
       </button>
 
       <AnimatePresence>
