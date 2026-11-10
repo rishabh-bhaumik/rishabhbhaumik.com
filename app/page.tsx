@@ -2,8 +2,8 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 
-// Rebuilt daily so the hero's version pill (lib/version.ts) moves on with the month.
-export const revalidate = 86400;
+// Rebuilt hourly so the hero's version pill (lib/version.ts) ticks over on the 28th.
+export const revalidate = 3600;
 
 export default function Home() {
   return (

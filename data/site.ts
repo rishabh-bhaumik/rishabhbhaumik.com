@@ -11,9 +11,10 @@ export const SITE = {
   builtWith: "Figma & Claude Code",
   /** Home hero headline. */
   greeting: "Hello, World!",
-  /** Home hero pill above the headline: "shipped ’96 • v30.9", the year I was born and
-   *  my age as a version (years.months), worked out from this (lib/version.ts). */
-  born: { year: 1996, month: 2 },
+  /** Home hero pill above the headline: "shipped ’96 • v30.8", the year I was born and
+   *  my age as a version (years.months), worked out from this (lib/version.ts): it
+   *  ticks over on the 28th of each month, in Indian time. */
+  born: { year: 1996, month: 2, day: 28, timeZone: "Asia/Kolkata" },
   /** Home hero loop (the "orbitting" piece): a dark and a light version, matched
    *  frame for frame so the theme switch swaps them in step. 12 fps, 12 s.
    *  Sources and the light version's renderer: <IGNORE>/media-sources. */

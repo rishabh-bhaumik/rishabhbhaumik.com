@@ -7,8 +7,8 @@ import Splash from "@/components/enter/Splash";
 // The site's front door: shared links start here. It is the home page held back
 // behind Enter (components/enter/Splash), so keep the tree in step with
 // app/page.tsx. Crawlers index home itself, so this page stays out of search.
-// Rebuilt daily, like home, for the hero's version pill (lib/version.ts).
-export const revalidate = 86400;
+// Rebuilt hourly, like home, for the hero's version pill (lib/version.ts).
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   robots: { index: false, follow: true },
