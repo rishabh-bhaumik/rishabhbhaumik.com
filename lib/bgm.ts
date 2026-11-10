@@ -5,20 +5,35 @@ import { audioContext } from "./sfx";
 /**
  * The dock's background music, shared by every dock on the page (the floating one
  * and the phone header's): one looping track through the shared audio context, so
- * the fades work on iOS too (it ignores `audio.volume`). Call these from click
- * handlers, where browsers allow playback to begin.
+ * the fades work on iOS too (it ignores `audio.volume`). Independent of the sound
+ * effects mute.
+ *
+ * A visit that lands on home starts with it on and tries to play at once (see
+ * armOnLanding); a visitor who turns it off is remembered, so it stays off on their
+ * next visit.
  */
 const FADE = 0.8;
+const KEY = "bgm";
 
 let on = false;
+let playing = false;
+let decided = false;
 let node: { audio: HTMLAudioElement; gain: GainNode } | null = null;
 let pauseTimer = 0;
 const listeners = new Set<() => void>();
 
+const notify = () => listeners.forEach((l) => l());
+
 function setOn(next: boolean) {
   if (on === next) return;
   on = next;
-  listeners.forEach((l) => l());
+  notify();
+}
+
+function setPlaying(next: boolean) {
+  if (playing === next) return;
+  playing = next;
+  notify();
 }
 
 function ramp(gain: GainNode, to: number) {
@@ -28,7 +43,13 @@ function ramp(gain: GainNode, to: number) {
   gain.gain.linearRampToValueAtTime(to, t + FADE);
 }
 
-function start() {
+/**
+ * Starts (or resumes) the track. Browsers decide whether sound may start: on a
+ * gesture always; on page load only where they allow it (the visitor has used the
+ * site before, arrived by clicking through it, or allowed sound for it). When it's
+ * refused, `onBlocked` runs (or, without one, the switch goes back off).
+ */
+function start(onBlocked?: () => void) {
   const c = audioContext();
   if (!c) return setOn(false);
   if (!node) {
@@ -36,6 +57,8 @@ function start() {
     audio.loop = true;
     // A missing or unplayable file turns the switch back off.
     audio.addEventListener("error", () => setOn(false));
+    audio.addEventListener("playing", () => setPlaying(true));
+    audio.addEventListener("pause", () => setPlaying(false));
     const gain = c.createGain();
     gain.gain.value = 0;
     c.createMediaElementSource(audio).connect(gain).connect(c.destination);
@@ -43,10 +66,24 @@ function start() {
   }
   const { audio, gain } = node;
   window.clearTimeout(pauseTimer);
-  if (c.state === "suspended") c.resume().catch(() => {});
-  audio.play().then(
-    () => ramp(gain, SITE.bgm.volume),
-    () => setOn(false),
+  const blocked = () => (onBlocked ? onBlocked() : setOn(false));
+  // The audio context must be running too; a locked one never settles its resume(),
+  // so give it a moment and then look at its state.
+  const unlock =
+    c.state === "running"
+      ? Promise.resolve()
+      : Promise.race([c.resume().catch(() => {}), new Promise((r) => setTimeout(r, 400))]);
+  Promise.all([audio.play(), unlock]).then(
+    () => {
+      if (c.state !== "running") {
+        audio.pause();
+        return blocked();
+      }
+      // Switched off while it was starting: let it go quiet.
+      if (on) ramp(gain, SITE.bgm.volume);
+      else stop();
+    },
+    (err: DOMException) => (err?.name === "NotAllowedError" ? blocked() : setOn(false)),
   );
 }
 
@@ -58,18 +95,42 @@ function stop() {
   pauseTimer = window.setTimeout(() => audio.pause(), FADE * 1000);
 }
 
-/** Turns the music on or off. While `muted` (the speaker), it's remembered but silent. */
-export function setBgm(next: boolean, muted: boolean) {
+/** Turns the music on or off, and remembers the choice. */
+export function setBgm(next: boolean) {
+  try {
+    localStorage.setItem(KEY, next ? "on" : "off");
+  } catch {
+    // Private mode: it still switches for this visit.
+  }
   setOn(next);
-  if (next && !muted) start();
+  if (next) start();
   else stop();
 }
 
-/** The speaker changed to `muted`: silence the music, or bring it back if it's on. */
-export function followMute(muted: boolean) {
-  if (!on) return;
-  if (muted) stop();
-  else start();
+/**
+ * Called with the page a visit lands on (only the first call counts). On home, the
+ * music is on unless the visitor turned it off before, and it tries to start right
+ * away. Where the browser holds sound back until the visitor interacts, it starts
+ * on their first click, tap or key press instead.
+ */
+export function armOnLanding(pathname: string) {
+  if (decided) return;
+  decided = true;
+  if (pathname !== "/") return;
+  try {
+    if (localStorage.getItem(KEY) === "off") return;
+  } catch {
+    // No storage: use the default.
+  }
+  setOn(true);
+  const events = ["pointerdown", "pointerup", "keydown"] as const;
+  const arm = () => events.forEach((t) => window.addEventListener(t, go, true));
+  function go() {
+    events.forEach((t) => window.removeEventListener(t, go, true));
+    // Refused (no gesture yet, or one the browser doesn't count): wait for the next.
+    if (on) start(arm);
+  }
+  go();
 }
 
 function subscribe(onChange: () => void) {
@@ -82,4 +143,9 @@ function subscribe(onChange: () => void) {
 /** Whether the music is switched on (off on the server and during hydration). */
 export function useBgm() {
   return useSyncExternalStore(subscribe, () => on, () => false);
+}
+
+/** Whether it's actually sounding (on, the visitor has interacted, the track loaded). */
+export function useBgmPlaying() {
+  return useSyncExternalStore(subscribe, () => playing, () => false);
 }

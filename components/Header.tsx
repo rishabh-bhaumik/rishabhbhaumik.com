@@ -95,7 +95,7 @@ export default function Header() {
         {/* Right — About, Play / the view control on phones */}
         {navSet("right", LEFT.length + 1, "justify-self-end")}
         <m.div variants={headerItem} custom={LEFT.length + 1} className="justify-self-end sm:hidden">
-          <DockControls />
+          <DockControls drop="down" />
         </m.div>
       </m.div>
 

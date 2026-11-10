@@ -55,10 +55,16 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - Media: muted clips go through `components/LazyVideo.tsx` (poster, fetched
   near the viewport, plays only while visible). Sounds are small MP3s played
   through the shared Web Audio context in `lib/sfx.tsx`.
-- Theme: dark by default; the dock's sun/moon switches to light (the header clock is display only).
-- Dock (`components/Dock.tsx`): view control (theme, background music `SITE.bgm`, sound
-  mute; music state shared via `lib/bgm.ts`). From sm up it floats bottom right, always
-  visible, with the header's `bg-bg/90` overlay fill. On phones it sits in the header, right side.
+- Theme: three modes, dark / auto / light (auto = light 06:00-18:00 local, dark otherwise),
+  `DEFAULT_MODE` in `lib/theme-script.ts` (dark for now). The dock's mode control cycles
+  them; the header clock is display only.
+- Dock (`components/Dock.tsx`): view control, Figma's "supermenu": a round eye button
+  whose hover reveals a slim pill of theme, background music (`SITE.bgm`, state shared via
+  `lib/bgm.ts`; on by default for visits landing on home: tries to play on load, else at
+  the first gesture, as browsers allow; an "off" is remembered) and sound effects; music and sfx are independent switches. Hovering a
+  control lights it and writes its state beside it ("dark: on"). From sm up it floats
+  bottom right (pill opens upward), always visible, with the header's `bg-bg/90` overlay
+  fill; on phones it sits in the header, right side (tap to open, pill drops down).
   `lib/theme.ts` (client: store, `setTheme`, `useThemePreference`) and
   `lib/theme-script.ts` (server-safe: no-flash `<head>` script,
   `DARK_ONLY_ROUTES` — `/logo` always renders dark). `useTheme()` gives the
