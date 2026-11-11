@@ -3,7 +3,7 @@ import { FootShade } from "./ui";
 /**
  * The Anek type specimen beside 004 (Figma 8734:41473): the system's typographic
  * rules up top, and below them ten scripts climbing the same size ramp in five
- * mirrored pairs, on a surface that fades darker at the foot. Up to 960 × 540 on the
+ * mirrored pairs, on a surface that fades darker at the foot. Up to 696 × 392 on the
  * page; positions are drawn on a 720 × 405 frame (the same picture, smaller) in
  * container units against that 720px width, so it scales as one picture.
  */
@@ -83,7 +83,7 @@ function RampGlyphs({ ramp, x, side }: { ramp: Ramp; x: number; side: "left" | "
 export default function TypeSpecimen({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`@container relative aspect-[720/405] w-full max-w-[960px] overflow-hidden bg-surface light:bg-white leading-none text-ink ${className}`}
+      className={`@container relative aspect-[720/405] w-full max-w-[696px] overflow-hidden bg-surface light:bg-white leading-none text-ink ${className}`}
     >
       {RULES.map((r) => (
         <div

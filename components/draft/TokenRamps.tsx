@@ -1,7 +1,7 @@
 /**
  * Peetal's primitive colour ramps beside 003 (Figma 8736:44262): neutral, primary,
  * secondary and success, cropped by the frame, on the same surface as 004's specimen
- * and fading darker at the foot. Up to 960 × 540 on the page; positions are drawn on a
+ * and fading darker at the foot. Up to 696 × 392 on the page; positions are drawn on a
  * 1464 × 823.5 frame (the same picture, larger) in container units against that 1464px
  * width, so it scales as one picture (the same treatment as TypeSpecimen).
  */
@@ -32,7 +32,7 @@ export default function TokenRamps({ className = "" }: { className?: string }) {
     <div
       role="img"
       aria-label="Peetal colour ramps: neutral, primary, secondary and success, steps 50 to 900"
-      className={`@container relative aspect-[1464/823.5] w-full max-w-[960px] overflow-hidden bg-surface light:bg-white leading-[1.5] font-medium text-ink ${className}`}
+      className={`@container relative aspect-[1464/823.5] w-full max-w-[696px] overflow-hidden bg-surface light:bg-white leading-[1.5] font-medium text-ink ${className}`}
     >
       {RAMPS.map((r) => (
         <div

@@ -263,11 +263,12 @@ const PIVOT_STEPS: PivotStep[] = [
 const ROW = "flex flex-col gap-6 px-6";
 
 /**
- * 003 and 004's frame (Figma 8631:84086 / 8736:44262): the copy column capped at 480 and
- * the art at 960 (480 + 24 + 960 fills the 1464 between the gutters at 1512). Narrower,
- * the copy keeps its 480 while it can and the art takes the rest.
+ * 003 and 004's frame (Figma 8744:47835): copy and art in two columns of up to 696, 72
+ * apart (696 + 72 + 696 fills the 1464 between the gutters at 1512); narrower, both
+ * shrink alike.
  */
-const SPLIT = "grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,480px)_minmax(0,960px)]";
+const SPLIT =
+  "grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,696px)_minmax(0,696px)] lg:justify-between lg:gap-x-[72px]";
 
 /** Out to the Peetal deep-dive, from 003 and 004. */
 const PEETAL_LINK = (
@@ -426,9 +427,7 @@ export default function DraftContent() {
           <div className={SPLIT}>
             <SectionHead
               tag="003."
-              // 440px against the 480 column's 432: on one line from lg, running 8px into
-              // the gutter, as in Figma.
-              title={<span className="lg:whitespace-nowrap">{"Solutions -\u00a0Design Systems"}</span>}
+              title={"Solutions -\u00a0Design Systems"}
               foot={<Stats items={OUTCOMES.designSystems} />}
               className="min-w-0 justify-between"
             >
@@ -459,7 +458,7 @@ export default function DraftContent() {
                 <p>
                   In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
                   Businesses, we started with Foundational Typography. We had decided that Anek
-                  Variable would be the obvious typeface of choice.
+                  Variable would be the typeface of choice.
                 </p>
                 <p>
                   Anek is a contemporary, multi-script, open-source typeface family created by the
