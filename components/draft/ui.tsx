@@ -1,6 +1,42 @@
 // Shared bits of the draft page (server and client sections both use them).
 
 export const CARD = "overflow-hidden rounded-[16px] border-[0.5px] border-ink/25";
+/**
+ * The shade over the draft's art frames (Figma's "filter", 8736:45045 / 8736:45215): black
+ * down to 80%, then #131313 at the foot, in difference, so the frame and everything on it
+ * turn more muted over the bottom fifth: darker on dark, greyer on light. Used in both
+ * themes on 003 and 004's art, 005's frames and 006's slides. The frame must be `relative`.
+ */
+export function FootShade() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 mix-blend-difference"
+      style={{ backgroundImage: "linear-gradient(to bottom, #000 0%, #000 80.206%, #131313 100%)" }}
+    />
+  );
+}
+
+/**
+ * A 2px neutral bar along a frame's foot, pinned left, that grows to full width as a
+ * loop plays: 005 and 006's frames. `once` plays a single pass (re-key it each loop to
+ * keep it in step with a timed animation); otherwise it repeats. Hidden under reduced
+ * motion. The frame must be `relative`.
+ */
+export function LoopBar({ seconds, once = false }: { seconds: number; once?: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full origin-left animate-[loop-bar_1s_linear_infinite] bg-[#A9ACB1]/30 motion-reduce:hidden"
+      style={{
+        animationDuration: `${seconds}s`,
+        animationIterationCount: once ? 1 : "infinite",
+        animationFillMode: once ? "forwards" : "none",
+      }}
+    />
+  );
+}
+
 /** Body copy. Short blocks, so lines are balanced (the `p` children too) for an even rag. */
 export const BODY = "text-14 leading-[1.7] text-muted text-balance [&_p]:text-balance";
 

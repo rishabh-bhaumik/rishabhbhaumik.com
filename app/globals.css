@@ -267,6 +267,29 @@ html.lenis body {
   opacity: 0;
   visibility: hidden;
 }
+/* The floating dock (outside the splash, in the layout) steps aside while a splash is
+   up; the splash shows its own theme switch. Showing it again replays its .rise. */
+:root:has([data-splash="on"]) .site-dock {
+  display: none;
+}
+/* The draft's loop bar (components/draft/ui.tsx LoopBar): pinned left, growing to full
+   width as a loop plays. Used through an animate-[loop-bar…] class, so Tailwind keeps it
+   (it drops keyframes no class names). */
+@keyframes loop-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+/* The 404's marquee (app/not-found.tsx): the track holds two identical runs, so moving
+   it half its width loops seamlessly. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
 /* Draft 006's dotted connectors (CheckoutFlow) march along their paths. One loop
    moves six dash periods (6 × 2 × 2.0806) so it repeats seamlessly. */
 @keyframes flow-dash {

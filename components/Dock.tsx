@@ -276,11 +276,12 @@ export function DockControls({ drop = "up", className = "" }: { drop?: "up" | "d
 }
 
 /**
- * /enter's only control: the theme switch on its own, bottom right on every screen
- * size (the splash has no header). Same skin and icons as the dock; hovering it
- * writes its state beside it. Enter swaps it for the full dock.
+ * The splash's only control (/enter and the 404, components/enter/Splash): the theme
+ * switch on its own, bottom right on every screen size (the splash has no header).
+ * Same skin and icons as the dock; hovering it writes its state beside it. Enter
+ * swaps it for the full dock.
  */
-function EnterModeSwitch() {
+export function EnterModeSwitch() {
   const pathname = usePathname() ?? "/";
   const mode = useThemePreference();
   const [hot, setHot] = useState(false);
@@ -322,16 +323,15 @@ function EnterModeSwitch() {
 /**
  * The floating view control, bottom right, from sm up (phones carry it in the
  * header instead). Always there; content passing under it is veiled by the same
- * 90% background the header uses. On the /enter splash it's just the theme switch.
+ * 90% background the header uses. While a splash is up (/enter, the 404) it steps
+ * aside for the splash's own theme switch (`.site-dock`, globals.css).
  */
 export default function Dock() {
   const silent = useSilentRoute();
-  const pathname = usePathname() ?? "/";
   if (silent) return null;
-  if (pathname === "/enter") return <EnterModeSwitch />;
   return (
-    // .rise: it fades up as it appears (on load, and after /enter's Enter).
-    <div style={{ "--i": 6 } as React.CSSProperties} className="rise fixed bottom-8 right-8 z-40 max-sm:hidden">
+    // .rise: it fades up as it appears (on load, and again when a splash's Enter shows it).
+    <div style={{ "--i": 6 } as React.CSSProperties} className="site-dock rise fixed bottom-8 right-8 z-40 max-sm:hidden">
       <DockControls />
     </div>
   );

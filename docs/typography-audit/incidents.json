@@ -1,0 +1,6584 @@
+[
+ {
+  "n": 1,
+  "page": "Work",
+  "path": "/work",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "BimaKavach's",
+  "text": "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 144,
+   "y": 594,
+   "w": 544,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 144,
+   "y": 619.75,
+   "w": 88.265625,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 2,
+  "page": "Work",
+  "path": "/work",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ng the product that turned 1,000 agents into",
+  "text": "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 144,
+   "y": 594,
+   "w": 544,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 141,
+   "y": 595,
+   "w": 324.34375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 3,
+  "page": "Work",
+  "path": "/work",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "India's",
+  "text": "Building the idea of BimaKavach as an intelligence company that is rooted in India's rich history of Ornamentation, Beauty and Aesthetic Identity.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 752,
+   "y": 594,
+   "w": 544,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 766.78125,
+   "y": 619.75,
+   "w": 40.046875,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 4,
+  "page": "Work",
+  "path": "/work",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "India's",
+  "text": "Creating the foundations for India's first centralized Commercial Insurance Management Software.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 144,
+   "y": 679.5,
+   "w": 544,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 320.65625,
+   "y": 682.5,
+   "w": 40.046875,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 5,
+  "page": "About",
+  "path": "/about",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: hyphen used as a dash, unspaced",
+  "sev": "Medium",
+  "line": "Rishabh- a",
+  "text": "Hello World, I’m Rishabh- a Visual Designer based out of Bengaluru, India. As a thespian and film student who’s started his career in video editing and creative direction, I have seen how the power of stories help shape ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 400,
+   "y": 626.390625,
+   "w": 640,
+   "h": 91.78125
+  },
+  "focus": {
+   "x": 554.34375,
+   "y": 631.390625,
+   "w": 87.0625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": "005-about-desktop.jpg"
+ },
+ {
+  "n": 6,
+  "page": "About",
+  "path": "/about",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ho’s started his career in video editing and",
+  "text": "Hello World, I’m Rishabh- a Visual Designer based out of Bengaluru, India. As a thespian and film student who’s started his career in video editing and creative direction, I have seen how the power of stories help shape ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 400,
+   "y": 626.390625,
+   "w": 640,
+   "h": 91.78125
+  },
+  "focus": {
+   "x": 418.984375,
+   "y": 659.984375,
+   "w": 602.03125,
+   "h": 24
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 7,
+  "page": "About",
+  "path": "/about",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "hat it has to offer. I could float, fly, and",
+  "text": "I always want to be blown away by the wind of life and what it has to offer. I could float, fly, and soar. I have always been cradled in the City of Joy, being able to be creative and expressive in a city that encourages",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 406,
+   "y": 511.125,
+   "w": 628,
+   "h": 91
+  },
+  "focus": {
+   "x": 425.03125,
+   "y": 512.125,
+   "w": 589.9375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 8,
+  "page": "About",
+  "path": "/about",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "eing able to be creative and expressive in a",
+  "text": "I always want to be blown away by the wind of life and what it has to offer. I could float, fly, and soar. I have always been cradled in the City of Joy, being able to be creative and expressive in a city that encourages",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 406,
+   "y": 511.125,
+   "w": 628,
+   "h": 91
+  },
+  "focus": {
+   "x": 419.453125,
+   "y": 534.875,
+   "w": 601.09375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 9,
+  "page": "About",
+  "path": "/about",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: hyphen used as a dash, unspaced",
+  "sev": "Medium",
+  "line": "Rishabh- a",
+  "text": "Hello World, I’m Rishabh- a Visual Designer based out of Bengaluru, India. As a thespian and film student who’s started his career in video editing and creative direction, I have seen how the power of stories help shape ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 400,
+   "y": 626.390625,
+   "w": 640,
+   "h": 91.78125
+  },
+  "focus": {
+   "x": 551.34375,
+   "y": 629.390625,
+   "w": 93.0625,
+   "h": 24
+  },
+  "extra": "",
+  "fix": "“Rishabh - a Visual Designer” (the site's spaced hyphen)",
+  "manualKey": "/aboutRishabh- a",
+  "shot": "009-about-desktop.jpg"
+ },
+ {
+  "n": 10,
+  "page": "About",
+  "path": "/about",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: typo",
+  "sev": "Medium",
+  "line": "weather good or bad",
+  "text": "My experiences, weather good or bad, have shaped who I am today. The duality of privilege and burden, of wealth and poverty, and of peace and chaos, are all potent in forming my earliest impressions on this wonderful thi",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 394,
+   "y": 400.171875,
+   "w": 652,
+   "h": 81.5625
+  },
+  "focus": {
+   "x": 554.5,
+   "y": 403.171875,
+   "w": 152.78125,
+   "h": 21
+  },
+  "extra": "",
+  "fix": "“whether good or bad”",
+  "manualKey": "/aboutweather good or bad",
+  "shot": "010-about-desktop.jpg"
+ },
+ {
+  "n": 11,
+  "page": "Play",
+  "path": "/play",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "ray's",
+  "text": "mr. ray's sequence",
+  "where": {
+   "label": "#play",
+   "id": "play"
+  },
+  "tag": "h3",
+  "el": {
+   "x": 328,
+   "y": 516.96875,
+   "w": 335.125,
+   "h": 35
+  },
+  "focus": {
+   "x": 374.65625,
+   "y": 518.96875,
+   "w": 58.25,
+   "h": 31
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 12,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "digital products. Currently, I am working on",
+  "text": "I am a Product and Visual Designer with 5 years of experience in creating visual communication and digital products. Currently, I am working on Product, Video and Design at BimaKavach.",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 566,
+   "y": 332.390625,
+   "w": 480,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 563,
+   "y": 356.140625,
+   "w": 435.28125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 13,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "taking shape at 145 East, where I focused on",
+  "text": "My journey started taking shape at 145 East, where I focused on Photography, Videography, and Motion Design and Graphic Design. Joining Nymbl and especially Vedantu, have shaped my skills especially in Branding, Visual D",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 566,
+   "y": 416.640625,
+   "w": 480,
+   "h": 91
+  },
+  "focus": {
+   "x": 563,
+   "y": 417.640625,
+   "w": 405.234375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 14,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Hyphenated word wraps at its hyphen",
+  "sev": "Low",
+  "line": "user-centered,",
+  "text": "What sets me apart is my ability to bring nuanced perspectives to the table, while balancing customer goals, business requirements, and technical limitations. Collaborating with exceptional Individuals in Engineering, Ma",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 566,
+   "y": 523.640625,
+   "w": 480,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 960.5,
+   "y": 594.890625,
+   "w": 31.90625,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 15,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Very short last line",
+  "sev": "Low",
+  "line": "and action.",
+  "text": "I excel at understanding the core of a business, product and service and translating it into impactful visuals. I love coming up with ideas that come from left-field thinking due to my past in film, theatre, and performa",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 566,
+   "y": 653.390625,
+   "w": 480,
+   "h": 136.5
+  },
+  "focus": {
+   "x": 563,
+   "y": 768.140625,
+   "w": 74.5,
+   "h": 20
+  },
+  "extra": "14% of the longest line",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 16,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " core of a business, product and service and",
+  "text": "I excel at understanding the core of a business, product and service and translating it into impactful visuals. I love coming up with ideas that come from left-field thinking due to my past in film, theatre, and performa",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 566,
+   "y": 653.390625,
+   "w": 480,
+   "h": 136.5
+  },
+  "focus": {
+   "x": 563,
+   "y": 654.390625,
+   "w": 452.734375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 17,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " and a passion for re-inventing the wheel, I",
+  "text": "I excel at understanding the core of a business, product and service and translating it into impactful visuals. I love coming up with ideas that come from left-field thinking due to my past in film, theatre, and performa",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 566,
+   "y": 653.390625,
+   "w": 480,
+   "h": 136.5
+  },
+  "focus": {
+   "x": 563,
+   "y": 722.640625,
+   "w": 474.5,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 18,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Hyphenated word wraps at its hyphen",
+  "sev": "Low",
+  "line": "self-serve",
+  "text": "1,000 agents onboarded onto Bima Saathi, a field-agent mobile app I designed end-to-end (onboarding, quote builder, policy tracker), turning a paper-based sales force into a self-serve digital channel generating measurab",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 566,
+   "y": 350.609375,
+   "w": 480,
+   "h": 91
+  },
+  "focus": {
+   "x": 927.5,
+   "y": 399.109375,
+   "w": 26.46875,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 19,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " merchandise, HR/admin), led end-to-end from",
+  "text": "55-day full rebrand across 12 touchpoints (web, app, marketing, merchandise, HR/admin), led end-to-end from user research and moodboarding through developer handoff.",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 566,
+   "y": 449.609375,
+   "w": 480,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 579,
+   "y": 473.359375,
+   "w": 360.046875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": null
+ },
+ {
+  "n": 20,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "A conversion on the Quote Generation page by",
+  "text": "60% lift in CTA conversion on the Quote Generation page by running A/B tests on layout variants, conducting competitive analysis across 8 insurance platforms, and redesigning the page hierarchy using analytics that pinpo",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 566,
+   "y": 619.453125,
+   "w": 480,
+   "h": 91
+  },
+  "focus": {
+   "x": 579,
+   "y": 620.453125,
+   "w": 380.09375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": null
+ },
+ {
+  "n": 21,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "on that cut design-to-dev handoff time by an",
+  "text": "3-platform design system (Peetal) built from scratch covering web, app, and POS, defining component architecture, Figma variables, auto-layout structures, and documentation that cut design-to-dev handoff time by an estim",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 566,
+   "y": 614.046875,
+   "w": 480,
+   "h": 91
+  },
+  "focus": {
+   "x": 579,
+   "y": 660.546875,
+   "w": 451.6875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": null
+ },
+ {
+  "n": 22,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "sign shipped end-to-end, from wireframes and",
+  "text": "Full website redesign shipped end-to-end, from wireframes and prototyping through developer handoff and QA, resulting in a responsive product that aligned brand perception with the actual product experience.",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 566,
+   "y": 294.296875,
+   "w": 480,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 579,
+   "y": 295.296875,
+   "w": 397.4375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 23,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "rected India’s first VEVO music video out of",
+  "text": "Earlier: directed India’s first VEVO music video out of Kolkata and tour documentaries for Grammy Award-winning percussionist Pandit Tanmay Bose, building the storytelling and motion design instincts that now inform prod",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 566,
+   "y": 344.984375,
+   "w": 480,
+   "h": 91
+  },
+  "focus": {
+   "x": 579,
+   "y": 345.984375,
+   "w": 334.125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 11,
+  "shot": null
+ },
+ {
+  "n": 24,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: three dots instead of an ellipsis (…)",
+  "sev": "Low",
+  "line": "INCOMING...",
+  "text": "MEDIA INCOMING...",
+  "where": {
+   "label": "#context",
+   "id": "context"
+  },
+  "tag": "p",
+  "el": {
+   "x": 663.9921875,
+   "y": 452.28125,
+   "w": 112.015625,
+   "h": 14
+  },
+  "focus": {
+   "x": 704.6640625,
+   "y": 452.28125,
+   "w": 71.34375,
+   "h": 14
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 25,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ding the Visual Language and Branding of the",
+  "text": "I started off as a Senior Designer - and had to tackle challenges outside the Product’s design including the Visual Language and Branding of the company. This helped in pivoting BimaKavach from a Recommendation Engine fo",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 550.171875,
+   "w": 1344,
+   "h": 47.59375
+  },
+  "focus": {
+   "x": 45,
+   "y": 551.171875,
+   "w": 896.390625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 26,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "dia, BimaKavach had a young, adventurous and",
+  "text": "Working only as a recommendation engine for the maturing tech-startup markets across Tier 1 India, BimaKavach had a young, adventurous and confident look to it while its first feature was a successful experiment.",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "p",
+  "el": {
+   "x": 761.6875,
+   "y": 420.5,
+   "w": 592.5,
+   "h": 66.65625
+  },
+  "focus": {
+   "x": 758.6875,
+   "y": 441.71875,
+   "w": 552.25,
+   "h": 23
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 27,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ng Data to showcase the most used options as",
+  "text": "1. Using Data to showcase the most used options as Suggestion Chips - and allowing single select only if the user fits none of the most commonly used options and",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 912,
+   "y": 655.078125,
+   "w": 480,
+   "h": 71.390625
+  },
+  "focus": {
+   "x": 909,
+   "y": 656.078125,
+   "w": 332.078125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 28,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ips - and allowing single select only if the",
+  "text": "1. Using Data to showcase the most used options as Suggestion Chips - and allowing single select only if the user fits none of the most commonly used options and",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 912,
+   "y": 655.078125,
+   "w": 480,
+   "h": 71.390625
+  },
+  "focus": {
+   "x": 909,
+   "y": 679.875,
+   "w": 350.765625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 29,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Hyphenated word wraps at its hyphen",
+  "sev": "Low",
+  "line": "drop-offs,",
+  "text": "By showcasing a loading state of the Quote Page and asking no brainer questions in the form of a modal - we were able to reduce drop-offs, as the user is now more incentivized to complete the process.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 912,
+   "y": 330.203125,
+   "w": 480,
+   "h": 71.390625
+  },
+  "focus": {
+   "x": 1319.765625,
+   "y": 357,
+   "w": 32.6875,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 30,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ts and change per product - meaning that the",
+  "text": "Massive diversions and permutations from the quote page exists and change per product - meaning that the journey must seem consistent and concise for any user",
+  "where": {
+   "label": "006. Flows - Checkout & Payment",
+   "id": "flows"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 792.28125,
+   "w": 432,
+   "h": 71.390625
+  },
+  "focus": {
+   "x": 45,
+   "y": 817.078125,
+   "w": 345.34375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 31,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " and sorting coverage offerings based on the",
+  "text": "The Quote Page acts as a feed - filtering and sorting coverage offerings based on the user’s needs. Each Card contains further details and available quotes can be compared.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "div",
+  "el": {
+   "x": 440,
+   "y": 761.625,
+   "w": 560,
+   "h": 47.59375
+  },
+  "focus": {
+   "x": 452.90625,
+   "y": 762.625,
+   "w": 534.1875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": null
+ },
+ {
+  "n": 32,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "much or little work is pending. The Price is",
+  "text": "Steppers help assess the user in how much or little work is pending. The Price is always shown next to the Button to encourage Further Movement and Constant Action.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "div",
+  "el": {
+   "x": 440,
+   "y": 761.625,
+   "w": 560,
+   "h": 47.59375
+  },
+  "focus": {
+   "x": 467.71875,
+   "y": 762.625,
+   "w": 504.546875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": null
+ },
+ {
+  "n": 33,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " step should the API fail in anticipation of",
+  "text": "Insurance APIs are wonky - at any step should the API fail in anticipation of or during payment - contingency loaders and screens appear to bridge gaps.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "div",
+  "el": {
+   "x": 440,
+   "y": 761.625,
+   "w": 560,
+   "h": 47.59375
+  },
+  "focus": {
+   "x": 485.078125,
+   "y": 762.625,
+   "w": 469.828125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": null
+ },
+ {
+  "n": 34,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "The coded prototype that serves as the",
+  "text": "The coded prototype that serves as the UI/UX source of truth at developer handoff.",
+  "where": {
+   "label": "Go deeper",
+   "id": "deeper"
+  },
+  "tag": "span",
+  "el": {
+   "x": 992,
+   "y": 852.828125,
+   "w": 400,
+   "h": 47.59375
+  },
+  "focus": {
+   "x": 989,
+   "y": 853.828125,
+   "w": 248.8125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 35,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: grammar",
+  "sev": "Medium",
+  "line": "page exists and",
+  "text": "Massive diversions and permutations from the quote page exists and change per product - meaning that the journey must seem consistent and concise for any user",
+  "where": {
+   "label": "006. Flows - Checkout & Payment",
+   "id": "flows"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 792.28125,
+   "w": 432,
+   "h": 71.390625
+  },
+  "focus": {
+   "x": 45,
+   "y": 817.078125,
+   "w": 104.078125,
+   "h": 20
+  },
+  "extra": "",
+  "fix": "“permutations … exist”",
+  "manualKey": "/draftpage exists and",
+  "shot": "035-draft-desktop.jpg"
+ },
+ {
+  "n": 36,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: missing hyphen",
+  "sev": "Medium",
+  "line": "asking no brainer",
+  "text": "By showcasing a loading state of the Quote Page and asking no brainer questions in the form of a modal - we were able to reduce drop-offs, as the user is now more incentivized to complete the process.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 912,
+   "y": 330.203125,
+   "w": 480,
+   "h": 71.390625
+  },
+  "focus": {
+   "x": 909,
+   "y": 331.203125,
+   "w": 402.9375,
+   "h": 43.796875
+  },
+  "extra": "",
+  "fix": "“no-brainer”",
+  "manualKey": "/draftasking no brainer",
+  "shot": "036-draft-desktop.jpg"
+ },
+ {
+  "n": 37,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "What's",
+  "text": "What's next",
+  "where": {
+   "label": "nav",
+   "id": ""
+  },
+  "tag": "a",
+  "el": {
+   "x": 24,
+   "y": 365,
+   "w": 72.703125,
+   "h": 17.5
+  },
+  "focus": {
+   "x": 24,
+   "y": 365,
+   "w": 42.359375,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 38,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: three dots instead of an ellipsis (…)",
+  "sev": "Low",
+  "line": "PENDING...",
+  "text": "MEDIA PENDING...",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 667.3203125,
+   "y": 351,
+   "w": 105.359375,
+   "h": 14
+  },
+  "focus": {
+   "x": 707.9921875,
+   "y": 351,
+   "w": 64.6875,
+   "h": 14
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 39,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "One source of truth for",
+  "text": "One source of truth for designers, developers and the agents that build with them.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "h1",
+  "el": {
+   "x": 370,
+   "y": 623,
+   "w": 700,
+   "h": 165
+  },
+  "focus": {
+   "x": 367,
+   "y": 624,
+   "w": 446.21875,
+   "h": 53
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 40,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "designers, developers and the",
+  "text": "One source of truth for designers, developers and the agents that build with them.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "h1",
+  "el": {
+   "x": 370,
+   "y": 623,
+   "w": 700,
+   "h": 165
+  },
+  "focus": {
+   "x": 367,
+   "y": 679,
+   "w": 595.515625,
+   "h": 53
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 41,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Developers couldn’t keep up, and",
+  "text": "Developers couldn’t keep up, and journeys were shipping old parts.",
+  "where": {
+   "label": "#context",
+   "id": "context"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 370,
+   "y": 788.5625,
+   "w": 700,
+   "h": 80
+  },
+  "focus": {
+   "x": 367,
+   "y": 788.5625,
+   "w": 480.984375,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 42,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "kits from Blade and UX4G exude whiffs of the",
+  "text": "Built on borrowed scaffolding, starter kits from Blade and UX4G exude whiffs of the documentation and scaling principles that make both of these inspirations stand out.",
+  "where": {
+   "label": "#context",
+   "id": "context"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 499.5625,
+   "w": 700,
+   "h": 52
+  },
+  "focus": {
+   "x": 367,
+   "y": 501.5625,
+   "w": 592.390625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 43,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Code follows the documented spec, not the",
+  "text": "Code follows the documented spec, not the other way round. When a build and its doc disagree, the build is the one that changes.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 818.5625,
+   "w": 334,
+   "h": 78
+  },
+  "focus": {
+   "x": 367,
+   "y": 820.5625,
+   "w": 312.859375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 44,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Switching to Bangla, Devanagari or",
+  "text": "Every size, line height and weight comes from the Anek Latin scale. Switching to Bangla, Devanagari or Tamil changes only the font family.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 736,
+   "y": 791.0625,
+   "w": 334,
+   "h": 104
+  },
+  "focus": {
+   "x": 733,
+   "y": 845.0625,
+   "w": 255.921875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": null
+ },
+ {
+  "n": 45,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "as component props, so a person or an",
+  "text": "Captions read as key = value (size = XSmall, state = Hover), the same shape as component props, so a person or an agent can lift the API straight off the page.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 473.0625,
+   "w": 334,
+   "h": 104
+  },
+  "focus": {
+   "x": 367,
+   "y": 527.0625,
+   "w": 284.390625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": null
+ },
+ {
+  "n": 46,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "can't",
+  "text": "Primitives are hidden from publishing and semantic tokens are scoped to where they may be used, so the wrong value can't be picked in the first place.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 736,
+   "y": 473.0625,
+   "w": 334,
+   "h": 104
+  },
+  "focus": {
+   "x": 778.6875,
+   "y": 555.0625,
+   "w": 33.3125,
+   "h": 17
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": null
+ },
+ {
+  "n": 47,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "and semantic tokens are scoped to",
+  "text": "Primitives are hidden from publishing and semantic tokens are scoped to where they may be used, so the wrong value can't be picked in the first place.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 736,
+   "y": 473.0625,
+   "w": 334,
+   "h": 104
+  },
+  "focus": {
+   "x": 733,
+   "y": 501.0625,
+   "w": 254.15625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 48,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "omponent tokens on top. The brand moved from",
+  "text": "v0.0.4 drops styles entirely for variables in three tiers: hidden primitives, semantic colours, and component tokens on top. The brand moved from navy and yellow to ojas violet (#4100CF) and agni orange (#FF7700).",
+  "where": {
+   "label": "#foundations",
+   "id": "foundations"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 789.0625,
+   "w": 700,
+   "h": 78
+  },
+  "focus": {
+   "x": 367,
+   "y": 817.0625,
+   "w": 516.21875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 11,
+  "shot": null
+ },
+ {
+  "n": 49,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ugh Web and Mobile modes: display runs 80 to",
+  "text": "Type runs on Anek across ten scripts, with Instrument Serif for display. Font sizes switch through Web and Mobile modes: display runs 80 to 48 on large screens and 48 to 34 on small, body 10 to 18 and 10 to 16.",
+  "where": {
+   "label": "#foundations",
+   "id": "foundations"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 805.921875,
+   "w": 700,
+   "h": 78
+  },
+  "focus": {
+   "x": 367,
+   "y": 833.921875,
+   "w": 493.0625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 12,
+  "shot": null
+ },
+ {
+  "n": 50,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "rops mirror Figma properties one to one, and",
+  "text": "Props mirror Figma properties one to one, and comments cite the Figma node each part came from.",
+  "where": {
+   "label": "#code",
+   "id": "code"
+  },
+  "tag": "span",
+  "el": {
+   "x": 387.328125,
+   "y": 448.671875,
+   "w": 682.671875,
+   "h": 52
+  },
+  "focus": {
+   "x": 384.328125,
+   "y": 450.671875,
+   "w": 334.15625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 13,
+  "shot": null
+ },
+ {
+  "n": 51,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "llows one documentation template written for",
+  "text": "Every component page follows one documentation template written for engineers: anatomy, states, a token reference and notes for engineers, with real values, such as a 240px tooltip and a 300ms show, 100ms hide.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 833.65625,
+   "w": 700,
+   "h": 78
+  },
+  "focus": {
+   "x": 367,
+   "y": 835.65625,
+   "w": 504.953125,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 14,
+  "shot": null
+ },
+ {
+  "n": 52,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Real masters, properties in",
+  "text": "Real masters, properties in the naming grammar, every value bound to a token, a full documentation frame, and an AA contrast check.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 497.40625,
+   "w": 217.328125,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 367,
+   "y": 498.40625,
+   "w": 173.296875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 15,
+  "shot": null
+ },
+ {
+  "n": 53,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "value bound to a token, a",
+  "text": "Real masters, properties in the naming grammar, every value bound to a token, a full documentation frame, and an AA contrast check.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 497.40625,
+   "w": 217.328125,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 367,
+   "y": 543.90625,
+   "w": 163.234375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 16,
+  "shot": null
+ },
+ {
+  "n": 54,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Props mirror Figma one to",
+  "text": "Props mirror Figma one to one, tokens only, a story for every variant and state with a play test, and keyboard and screen-reader checks.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 611.328125,
+   "y": 497.40625,
+   "w": 217.328125,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 608.328125,
+   "y": 498.40625,
+   "w": 168.609375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 17,
+  "shot": null
+ },
+ {
+  "n": 55,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "one, tokens only, a story for",
+  "text": "Props mirror Figma one to one, tokens only, a story for every variant and state with a play test, and keyboard and screen-reader checks.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 611.328125,
+   "y": 497.40625,
+   "w": 217.328125,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 608.328125,
+   "y": 521.15625,
+   "w": 176.953125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 18,
+  "shot": null
+ },
+ {
+  "n": 56,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "every variant and state with",
+  "text": "Props mirror Figma one to one, tokens only, a story for every variant and state with a play test, and keyboard and screen-reader checks.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 611.328125,
+   "y": 497.40625,
+   "w": 217.328125,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 608.328125,
+   "y": 543.90625,
+   "w": 176.421875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 19,
+  "shot": null
+ },
+ {
+  "n": 57,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Figma node IDs cited in",
+  "text": "Figma node IDs cited in code, the documentation linked, and a changelog entry with a version bump.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 852.65625,
+   "y": 497.40625,
+   "w": 217.328125,
+   "h": 91
+  },
+  "focus": {
+   "x": 849.65625,
+   "y": 498.40625,
+   "w": 153.078125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 20,
+  "shot": null
+ },
+ {
+  "n": 58,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "few docs still describe sizes and states the",
+  "text": "A page only turns 🟢 when all three stages pass. Being honest about the gaps is part of it: a few docs still describe sizes and states the components don’t have yet, and closing that drift is the current pass.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 370,
+   "y": 627.15625,
+   "w": 700,
+   "h": 78
+  },
+  "focus": {
+   "x": 367,
+   "y": 655.15625,
+   "w": 469.34375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 21,
+  "shot": null
+ },
+ {
+  "n": 59,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Heading: one word alone on the last line",
+  "sev": "High",
+  "line": "days",
+  "text": "6 wks → x days",
+  "where": {
+   "label": "#impact",
+   "id": "impact"
+  },
+  "tag": "dd",
+  "el": {
+   "x": 370,
+   "y": 503.15625,
+   "w": 157,
+   "h": 56
+  },
+  "focus": {
+   "x": 367,
+   "y": 527.15625,
+   "w": 62.90625,
+   "h": 35
+  },
+  "extra": "",
+  "ei": 22,
+  "shot": "059-peetal-desktop.jpg"
+ },
+ {
+  "n": 60,
+  "page": "Logo lab",
+  "path": "/logo",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "▶ No material, just the white mark on",
+  "text": "▶ No material, just the white mark on a black coin that holds up as it turns",
+  "where": {
+   "label": "aside",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 997,
+   "y": 120.390625,
+   "w": 398,
+   "h": 41.59375
+  },
+  "focus": {
+   "x": 994,
+   "y": 120.390625,
+   "w": 221.203125,
+   "h": 19
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 61,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " insurance products beyond life, health, and",
+  "text": "Saathi is India’s smartest business insurance partner app, allowing BimaKavach to offer insurance products beyond life, health, and motor to partners, who can reach customers even we normally can’t.",
+  "where": {
+   "label": "#details",
+   "id": "details"
+  },
+  "tag": "p",
+  "el": {
+   "x": 394,
+   "y": 535,
+   "w": 652,
+   "h": 78
+  },
+  "focus": {
+   "x": 391,
+   "y": 563,
+   "w": 459.328125,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 62,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: em/en dash in visible text",
+  "sev": "Medium",
+  "line": "Oct – Dec 2024",
+  "text": "Oct – Dec 2024",
+  "where": {
+   "label": "#details",
+   "id": "details"
+  },
+  "tag": "span",
+  "el": {
+   "x": 563,
+   "y": 675.390625,
+   "w": 145,
+   "h": 22.390625
+  },
+  "focus": {
+   "x": 563,
+   "y": 678.390625,
+   "w": 97.28125,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": "062-bima-saathi-desktop.jpg"
+ },
+ {
+  "n": 63,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "What if we put business insurance in the",
+  "text": "What if we put business insurance in the hands of the agents India already trusts?",
+  "where": {
+   "label": "#overview",
+   "id": "overview"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 370,
+   "y": 415.5625,
+   "w": 700,
+   "h": 80
+  },
+  "focus": {
+   "x": 367,
+   "y": 415.5625,
+   "w": 578.75,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 64,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "didn't",
+  "text": "Agents didn't know commercial insurance was something they could sell.",
+  "where": {
+   "label": "#pain-points",
+   "id": "pain-points"
+  },
+  "tag": "h3",
+  "el": {
+   "x": 370,
+   "y": 649.875,
+   "w": 334,
+   "h": 82.5
+  },
+  "focus": {
+   "x": 437.8125,
+   "y": 651.875,
+   "w": 47.203125,
+   "h": 22
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 65,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "voting to the perception of BimaKavach as an",
+  "text": "Pivoting to the perception of BimaKavach as an intelligence company that is rooted in India’s rich history of Ornamentation, Beauty and Aesthetic Identity.",
+  "where": {
+   "label": "#hero",
+   "id": "hero"
+  },
+  "tag": "p",
+  "el": {
+   "x": 352,
+   "y": 745,
+   "w": 736,
+   "h": 99
+  },
+  "focus": {
+   "x": 464.84375,
+   "y": 746,
+   "w": 510.3125,
+   "h": 31
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 66,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "duct discovery, and has enabled payments for",
+  "text": "Since then, the company has been able to display live quotes, enabling user-product discovery, and has enabled payments for immediate online purchase, and has grown it’s user base to 4.7×*",
+  "where": {
+   "label": "#section-story-0",
+   "id": "section-story-0"
+  },
+  "tag": "p",
+  "el": {
+   "x": 480,
+   "y": 399.359375,
+   "w": 432,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 477,
+   "y": 423.109375,
+   "w": 399.53125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 67,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "Communication",
+  "text": "UX/UI Design, Visual Communication",
+  "where": {
+   "label": "#section-story-0",
+   "id": "section-story-0"
+  },
+  "tag": "dd",
+  "el": {
+   "x": 588,
+   "y": 597.234375,
+   "w": 204,
+   "h": 38.5
+  },
+  "focus": {
+   "x": 585,
+   "y": 615.484375,
+   "w": 103.265625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": "067-bimakavach-identity-desktop.jpg"
+ },
+ {
+  "n": 68,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "r - and had to tackle challenges outside the",
+  "text": "I started off as a Senior Designer - and had to tackle challenges outside the Product Design - not only in the Visual Language and Branding of the company.",
+  "where": {
+   "label": "#section-story-1",
+   "id": "section-story-1"
+  },
+  "tag": "p",
+  "el": {
+   "x": 898,
+   "y": 254.609375,
+   "w": 652,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 895,
+   "y": 255.609375,
+   "w": 472.703125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 69,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Heading: one word alone on the last line",
+  "sev": "High",
+  "line": "Platform.",
+  "text": "This helped in pivoting BimaKavach from a Recommendation Engine for urban startups to an SME Focused, Online Insure-Tech Brokerage Platform.",
+  "where": {
+   "label": "#section-story-2",
+   "id": "section-story-2"
+  },
+  "tag": "p",
+  "el": {
+   "x": 524,
+   "y": 267.984375,
+   "w": 392.71875,
+   "h": 364
+  },
+  "focus": {
+   "x": 521,
+   "y": 585.984375,
+   "w": 134.03125,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": "069-bimakavach-identity-desktop.jpg"
+ },
+ {
+  "n": 70,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "BimaKavach from a",
+  "text": "This helped in pivoting BimaKavach from a Recommendation Engine for urban startups to an SME Focused, Online Insure-Tech Brokerage Platform.",
+  "where": {
+   "label": "#section-story-2",
+   "id": "section-story-2"
+  },
+  "tag": "p",
+  "el": {
+   "x": 524,
+   "y": 267.984375,
+   "w": 392.71875,
+   "h": 364
+  },
+  "focus": {
+   "x": 521,
+   "y": 325.984375,
+   "w": 285.21875,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 71,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "for urban startups to an",
+  "text": "This helped in pivoting BimaKavach from a Recommendation Engine for urban startups to an SME Focused, Online Insure-Tech Brokerage Platform.",
+  "where": {
+   "label": "#section-story-2",
+   "id": "section-story-2"
+  },
+  "tag": "p",
+  "el": {
+   "x": 524,
+   "y": 267.984375,
+   "w": 392.71875,
+   "h": 364
+  },
+  "focus": {
+   "x": 521,
+   "y": 429.984375,
+   "w": 336.859375,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 72,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ng Data to showcase the most used options as",
+  "text": "1. Using Data to showcase the most used options as Suggestion Chips - and allowing single select only if the user fits none of the most commonly used options and",
+  "where": {
+   "label": "#section-story-4",
+   "id": "section-story-4"
+  },
+  "tag": "p",
+  "el": {
+   "x": 386,
+   "y": 462.078125,
+   "w": 510,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 383,
+   "y": 463.078125,
+   "w": 332.078125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": null
+ },
+ {
+  "n": 73,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ips - and allowing single select only if the",
+  "text": "1. Using Data to showcase the most used options as Suggestion Chips - and allowing single select only if the user fits none of the most commonly used options and",
+  "where": {
+   "label": "#section-story-4",
+   "id": "section-story-4"
+  },
+  "tag": "p",
+  "el": {
+   "x": 386,
+   "y": 462.078125,
+   "w": 510,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 383,
+   "y": 485.828125,
+   "w": 350.765625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": null
+ },
+ {
+  "n": 74,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Hyphenated word wraps at its hyphen",
+  "sev": "Low",
+  "line": "drop-offs,",
+  "text": "By showcasing a loading state of the Quote Page and asking no brainer questions in the form of a modal - we were able to reduce drop-offs, as the user is now more incentivized to complete the process.",
+  "where": {
+   "label": "#section-story-5",
+   "id": "section-story-5"
+  },
+  "tag": "p",
+  "el": {
+   "x": 122,
+   "y": 473.453125,
+   "w": 510,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 529.765625,
+   "y": 499.203125,
+   "w": 32.6875,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": null
+ },
+ {
+  "n": 75,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Massive diversions and permutations from",
+  "text": "Massive diversions and permutations from the quote page exists and change per product - meaning that the journey must seem consistent and concise for any user",
+  "where": {
+   "label": "#section-story-7",
+   "id": "section-story-7"
+  },
+  "tag": "p",
+  "el": {
+   "x": 576,
+   "y": 425.28125,
+   "w": 305.453125,
+   "h": 91
+  },
+  "focus": {
+   "x": 573,
+   "y": 426.28125,
+   "w": 268.234375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 76,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "How do we capitalize on",
+  "text": "How do we capitalize on this first movers advantage?",
+  "where": {
+   "label": "#section-story-11",
+   "id": "section-story-11"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 340,
+   "y": 338.109375,
+   "w": 472,
+   "h": 83.1875
+  },
+  "focus": {
+   "x": 337,
+   "y": 338.109375,
+   "w": 351.078125,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 11,
+  "shot": null
+ },
+ {
+  "n": 77,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "that users were likely to face challenges in",
+  "text": "After receiving its IRDAI-approved ISMP Payment License in 2025, BimaKavach recognized that users were likely to face challenges in staying retained amongst rising competition, and that retaining customers requires more ",
+  "where": {
+   "label": "#section-story-11",
+   "id": "section-story-11"
+  },
+  "tag": "p",
+  "el": {
+   "x": 460,
+   "y": 437.296875,
+   "w": 472,
+   "h": 91
+  },
+  "focus": {
+   "x": 457,
+   "y": 461.046875,
+   "w": 423.109375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 12,
+  "shot": null
+ },
+ {
+  "n": 78,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "amous face” in Collaboration, beginning with",
+  "text": "Experimenting with phases like using a 3D Mascot made before AI, having the “famous face” in Collaboration, beginning with having to move from a traditional brokerage house, and becoming India’s go-to online destination ",
+  "where": {
+   "label": "#section-work-1",
+   "id": "section-work-1"
+  },
+  "tag": "p",
+  "el": {
+   "x": 984,
+   "y": 448.671875,
+   "w": 432,
+   "h": 91
+  },
+  "focus": {
+   "x": 981,
+   "y": 472.421875,
+   "w": 379.5625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 13,
+  "shot": null
+ },
+ {
+  "n": 79,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: grammar",
+  "sev": "Medium",
+  "line": "Two Example of",
+  "text": "Two Example of Simplifying Forms:",
+  "where": {
+   "label": "#section-story-4",
+   "id": "section-story-4"
+  },
+  "tag": "p",
+  "el": {
+   "x": 1178,
+   "y": 423.328125,
+   "w": 510,
+   "h": 22.75
+  },
+  "focus": {
+   "x": 1175,
+   "y": 424.328125,
+   "w": 105.609375,
+   "h": 20
+  },
+  "extra": "",
+  "fix": "“Two examples of simplifying forms:”",
+  "manualKey": "/bimakavach-identityTwo Example of",
+  "shot": "079-bimakavach-identity-desktop.jpg"
+ },
+ {
+  "n": 80,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: grammar",
+  "sev": "Medium",
+  "line": "first movers advantage",
+  "text": "How do we capitalize on this first movers advantage?",
+  "where": {
+   "label": "#section-story-11",
+   "id": "section-story-11"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 340,
+   "y": 338.109375,
+   "w": 472,
+   "h": 83.1875
+  },
+  "focus": {
+   "x": 395.6875,
+   "y": 379.703125,
+   "w": 329.703125,
+   "h": 40
+  },
+  "extra": "",
+  "fix": "“first-mover advantage”",
+  "manualKey": "/bimakavach-identityfirst movers advantage",
+  "shot": "080-bimakavach-identity-desktop.jpg"
+ },
+ {
+  "n": 81,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: garbled phrase",
+  "sev": "Medium",
+  "line": "my stint as at solving",
+  "text": "Through my stint as at solving for product, BimaKavach ended up realizing that the personality of the Brand was now feeling out of touch.",
+  "where": {
+   "label": "#section-work-1",
+   "id": "section-work-1"
+  },
+  "tag": "p",
+  "el": {
+   "x": 984,
+   "y": 356.421875,
+   "w": 432,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 1037.03125,
+   "y": 357.421875,
+   "w": 135.953125,
+   "h": 20
+  },
+  "extra": "",
+  "fix": "e.g. “Through my stint solving for product”",
+  "manualKey": "/bimakavach-identitymy stint as at solving",
+  "shot": "081-bimakavach-identity-desktop.jpg"
+ },
+ {
+  "n": 82,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: paragraph ends on a comma",
+  "sev": "Medium",
+  "line": "insurance solutions,",
+  "text": "Experimenting with phases like using a 3D Mascot made before AI, having the “famous face” in Collaboration, beginning with having to move from a traditional brokerage house, and becoming India’s go-to online destination ",
+  "where": {
+   "label": "#section-work-1",
+   "id": "section-work-1"
+  },
+  "tag": "p",
+  "el": {
+   "x": 984,
+   "y": 448.671875,
+   "w": 432,
+   "h": 91
+  },
+  "focus": {
+   "x": 1269.4375,
+   "y": 517.921875,
+   "w": 129.75,
+   "h": 20
+  },
+  "extra": "",
+  "fix": "end with a full stop",
+  "manualKey": "/bimakavach-identityinsurance solutions,",
+  "shot": "082-bimakavach-identity-desktop.jpg"
+ },
+ {
+  "n": 83,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: grammar",
+  "sev": "Medium",
+  "line": "page exists and",
+  "text": "Massive diversions and permutations from the quote page exists and change per product - meaning that the journey must seem consistent and concise for any user",
+  "where": {
+   "label": "#section-story-7",
+   "id": "section-story-7"
+  },
+  "tag": "p",
+  "el": {
+   "x": 576,
+   "y": 425.28125,
+   "w": 305.453125,
+   "h": 91
+  },
+  "focus": {
+   "x": 635.265625,
+   "y": 449.03125,
+   "w": 104.078125,
+   "h": 20
+  },
+  "extra": "",
+  "fix": "“permutations … exist”",
+  "manualKey": "/bimakavach-identitypage exists and",
+  "shot": "083-bimakavach-identity-desktop.jpg"
+ },
+ {
+  "n": 84,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "desktop",
+  "vpLabel": "Desktop 1440px",
+  "issue": "Copy: missing hyphen",
+  "sev": "Medium",
+  "line": "asking no brainer",
+  "text": "By showcasing a loading state of the Quote Page and asking no brainer questions in the form of a modal - we were able to reduce drop-offs, as the user is now more incentivized to complete the process.",
+  "where": {
+   "label": "#section-story-5",
+   "id": "section-story-5"
+  },
+  "tag": "p",
+  "el": {
+   "x": 1034,
+   "y": 473.453125,
+   "w": 510,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 1031,
+   "y": 474.453125,
+   "w": 402.9375,
+   "h": 42.75
+  },
+  "extra": "",
+  "fix": "“no-brainer”",
+  "manualKey": "/bimakavach-identityasking no brainer",
+  "shot": "084-bimakavach-identity-desktop.jpg"
+ },
+ {
+  "n": 85,
+  "page": "Home",
+  "path": "/",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Practicing Experience Design at",
+  "text": "Practicing Experience Design at BimaKavach in Bengaluru. Previously Rishabh has worked with Vedantu, 145 145 East, Nymbl, UNICEF, iterating craft and chasing ideas.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 467.9375,
+   "w": 343,
+   "h": 135
+  },
+  "focus": {
+   "x": 56.921875,
+   "y": 468.9375,
+   "w": 261.140625,
+   "h": 24
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 86,
+  "page": "Work",
+  "path": "/work",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "BimaKavach's",
+  "text": "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 408.9375,
+   "w": 343,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 16,
+   "y": 434.6875,
+   "w": 88.265625,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 87,
+  "page": "Work",
+  "path": "/work",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ng the product that turned 1,000 agents into",
+  "text": "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 408.9375,
+   "w": 343,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 13,
+   "y": 409.9375,
+   "w": 324.34375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 88,
+  "page": "Work",
+  "path": "/work",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "India's",
+  "text": "Building the idea of BimaKavach as an intelligence company that is rooted in India's rich history of Ornamentation, Beauty and Aesthetic Identity.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 750.375,
+   "w": 343,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 176.296875,
+   "y": 776.125,
+   "w": 40.046875,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 89,
+  "page": "Work",
+  "path": "/work",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ny that is rooted in India's rich history of",
+  "text": "Building the idea of BimaKavach as an intelligence company that is rooted in India's rich history of Ornamentation, Beauty and Aesthetic Identity.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 750.375,
+   "w": 343,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 13,
+   "y": 774.125,
+   "w": 293.484375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 90,
+  "page": "Work",
+  "path": "/work",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "India's",
+  "text": "Creating the foundations for India's first centralized Commercial Insurance Management Software.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 667.5625,
+   "w": 343,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 192.65625,
+   "y": 670.5625,
+   "w": 40.046875,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 91,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: hyphen used as a dash, unspaced",
+  "sev": "Medium",
+  "line": "Rishabh- a",
+  "text": "Hello World, I’m Rishabh- a Visual Designer based out of Bengaluru, India. As a thespian and film student who’s started his career in video editing and creative direction, I have seen how the power of stories help shape ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 365.125,
+   "w": 343,
+   "h": 183.5625
+  },
+  "focus": {
+   "x": 182.953125,
+   "y": 370.125,
+   "w": 87.0625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": "091-about-phone.jpg"
+ },
+ {
+  "n": 92,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "started his career in video editing and",
+  "text": "Hello World, I’m Rishabh- a Visual Designer based out of Bengaluru, India. As a thespian and film student who’s started his career in video editing and creative direction, I have seen how the power of stories help shape ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 365.125,
+   "w": 343,
+   "h": 183.5625
+  },
+  "focus": {
+   "x": 34.90625,
+   "y": 459.90625,
+   "w": 305.1875,
+   "h": 24
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 93,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "creative direction, I have seen how the",
+  "text": "Hello World, I’m Rishabh- a Visual Designer based out of Bengaluru, India. As a thespian and film student who’s started his career in video editing and creative direction, I have seen how the power of stories help shape ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 365.125,
+   "w": 343,
+   "h": 183.5625
+  },
+  "focus": {
+   "x": 30.90625,
+   "y": 490.5,
+   "w": 313.1875,
+   "h": 24
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 94,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "of privilege and burden, of wealth and",
+  "text": "My experiences, weather good or bad, have shaped who I am today. The duality of privilege and burden, of wealth and poverty, and of peace and chaos, are all potent in forming my earliest impressions on this wonderful thi",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 710.6875,
+   "w": 343,
+   "h": 163.125
+  },
+  "focus": {
+   "x": 51.0625,
+   "y": 768.0625,
+   "w": 272.859375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 95,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "as to offer. I could float, fly, and soar. I",
+  "text": "I always want to be blown away by the wind of life and what it has to offer. I could float, fly, and soar. I have always been cradled in the City of Joy, being able to be creative and expressive in a city that encourages",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 28,
+   "y": 734.90625,
+   "w": 319,
+   "h": 182
+  },
+  "focus": {
+   "x": 25,
+   "y": 758.65625,
+   "w": 319.90625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 96,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " flight to India’s Silicon Valley - I knew I",
+  "text": "I always want to be blown away by the wind of life and what it has to offer. I could float, fly, and soar. I have always been cradled in the City of Joy, being able to be creative and expressive in a city that encourages",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 28,
+   "y": 287.90625,
+   "w": 319,
+   "h": 182
+  },
+  "focus": {
+   "x": 25,
+   "y": 425.40625,
+   "w": 306.625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 97,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "estruck at the window in front of me. It’s a",
+  "text": "My childhood was filled with awe. I remember distinctly sitting on the floor as a toddler, looking awestruck at the window in front of me. It’s a sunny afternoon in the hot, hot city of Kolkata. Sparks of dust, floating ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 587.34375,
+   "w": 343,
+   "h": 244.6875
+  },
+  "focus": {
+   "x": 27.234375,
+   "y": 644.71875,
+   "w": 320.515625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 98,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " perfectly. Reminds me of how reflections on",
+  "text": "My childhood was filled with awe. I remember distinctly sitting on the floor as a toddler, looking awestruck at the window in front of me. It’s a sunny afternoon in the hot, hot city of Kolkata. Sparks of dust, floating ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 587.34375,
+   "w": 343,
+   "h": 244.6875
+  },
+  "focus": {
+   "x": 15.234375,
+   "y": 753.46875,
+   "w": 344.515625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": null
+ },
+ {
+  "n": 99,
+  "page": "About",
+  "path": "/about",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "diamonds.",
+  "text": "My childhood was filled with awe. I remember distinctly sitting on the floor as a toddler, looking awestruck at the window in front of me. It’s a sunny afternoon in the hot, hot city of Kolkata. Sparks of dust, floating ",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 240.34375,
+   "w": 343,
+   "h": 244.6875
+  },
+  "focus": {
+   "x": 147.578125,
+   "y": 460.84375,
+   "w": 79.828125,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": "099-about-phone.jpg"
+ },
+ {
+  "n": 100,
+  "page": "Play",
+  "path": "/play",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "A Quick Tool made to create the",
+  "text": "A Quick Tool made to create the effects of my icon on this website",
+  "where": {
+   "label": "#play",
+   "id": "play"
+  },
+  "tag": "p",
+  "el": {
+   "x": 32,
+   "y": 441.46875,
+   "w": 253.875,
+   "h": 45.5
+  },
+  "focus": {
+   "x": 29,
+   "y": 442.46875,
+   "w": 204.1875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 101,
+  "page": "Play",
+  "path": "/play",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "ray's",
+  "text": "mr. ray's sequence",
+  "where": {
+   "label": "#play",
+   "id": "play"
+  },
+  "tag": "h3",
+  "el": {
+   "x": 32,
+   "y": 367.4375,
+   "w": 209.703125,
+   "h": 70
+  },
+  "focus": {
+   "x": 78.65625,
+   "y": 369.4375,
+   "w": 58.25,
+   "h": 31
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 102,
+  "page": "Play",
+  "path": "/play",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Heading: one word alone on the last line",
+  "sev": "High",
+  "line": "sequence",
+  "text": "mr. ray's sequence",
+  "where": {
+   "label": "#play",
+   "id": "play"
+  },
+  "tag": "h3",
+  "el": {
+   "x": 32,
+   "y": 367.4375,
+   "w": 209.703125,
+   "h": 70
+  },
+  "focus": {
+   "x": 29,
+   "y": 402.4375,
+   "w": 127.4375,
+   "h": 35
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": "102-play-phone.jpg"
+ },
+ {
+  "n": 103,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " Product and Visual Designer with 5 years of",
+  "text": "I am a Product and Visual Designer with 5 years of experience in creating visual communication and digital products. Currently, I am working on Product, Video and Design at BimaKavach.",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 343.390625,
+   "w": 343,
+   "h": 91
+  },
+  "focus": {
+   "x": 13,
+   "y": 344.390625,
+   "w": 320.15625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 104,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ey started taking shape at 145 East, where I",
+  "text": "My journey started taking shape at 145 East, where I focused on Photography, Videography, and Motion Design and Graphic Design. Joining Nymbl and especially Vedantu, have shaped my skills especially in Branding, Visual D",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 450.390625,
+   "w": 343,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 13,
+   "y": 451.390625,
+   "w": 332.859375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 105,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Design and Graphic Design. Joining Nymbl and",
+  "text": "My journey started taking shape at 145 East, where I focused on Photography, Videography, and Motion Design and Graphic Design. Joining Nymbl and especially Vedantu, have shaped my skills especially in Branding, Visual D",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 450.390625,
+   "w": 343,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 13,
+   "y": 496.890625,
+   "w": 300.171875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 106,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Vedantu, have shaped my skills especially in",
+  "text": "My journey started taking shape at 145 East, where I focused on Photography, Videography, and Motion Design and Graphic Design. Joining Nymbl and especially Vedantu, have shaped my skills especially in Branding, Visual D",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 450.390625,
+   "w": 343,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 13,
+   "y": 519.640625,
+   "w": 347.640625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 107,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ollaborating with exceptional Individuals in",
+  "text": "What sets me apart is my ability to bring nuanced perspectives to the table, while balancing customer goals, business requirements, and technical limitations. Collaborating with exceptional Individuals in Engineering, Ma",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 580.140625,
+   "w": 343,
+   "h": 159.25
+  },
+  "focus": {
+   "x": 13,
+   "y": 649.390625,
+   "w": 276.828125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 108,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ors, I create user-centered, functional, and",
+  "text": "What sets me apart is my ability to bring nuanced perspectives to the table, while balancing customer goals, business requirements, and technical limitations. Collaborating with exceptional Individuals in Engineering, Ma",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 580.140625,
+   "w": 343,
+   "h": 159.25
+  },
+  "focus": {
+   "x": 13,
+   "y": 694.890625,
+   "w": 332.84375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 109,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": ". I love coming up with ideas that come from",
+  "text": "I excel at understanding the core of a business, product and service and translating it into impactful visuals. I love coming up with ideas that come from left-field thinking due to my past in film, theatre, and performa",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 308.390625,
+   "w": 343,
+   "h": 182
+  },
+  "focus": {
+   "x": 13,
+   "y": 354.890625,
+   "w": 321.921875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 110,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "hinking due to my past in film, theatre, and",
+  "text": "I excel at understanding the core of a business, product and service and translating it into impactful visuals. I love coming up with ideas that come from left-field thinking due to my past in film, theatre, and performa",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 308.390625,
+   "w": 343,
+   "h": 182
+  },
+  "focus": {
+   "x": 13,
+   "y": 377.640625,
+   "w": 325.84375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": null
+ },
+ {
+  "n": 111,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": " art. With obsessive attention to detail and",
+  "text": "I excel at understanding the core of a business, product and service and translating it into impactful visuals. I love coming up with ideas that come from left-field thinking due to my past in film, theatre, and performa",
+  "where": {
+   "label": "#about",
+   "id": "about"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 308.390625,
+   "w": 343,
+   "h": 182
+  },
+  "focus": {
+   "x": 13,
+   "y": 400.390625,
+   "w": 344.515625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": null
+ },
+ {
+  "n": 112,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "1,000 agents onboarded onto Bima Saathi, a",
+  "text": "1,000 agents onboarded onto Bima Saathi, a field-agent mobile app I designed end-to-end (onboarding, quote builder, policy tracker), turning a paper-based sales force into a self-serve digital channel generating measurab",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 332.609375,
+   "w": 343,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 29,
+   "y": 333.609375,
+   "w": 283.890625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": null
+ },
+ {
+  "n": 113,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "led end-to-end from user research and",
+  "text": "55-day full rebrand across 12 touchpoints (web, app, marketing, merchandise, HR/admin), led end-to-end from user research and moodboarding through developer handoff.",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 454.359375,
+   "w": 343,
+   "h": 91
+  },
+  "focus": {
+   "x": 29,
+   "y": 500.859375,
+   "w": 244.921875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 114,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Devanagari and Dravidian scripts, and",
+  "text": "70% reduction in localization effort (estimated) by transitioning the product to Anek Variable, a multi-lingual typeface supporting Devanagari and Dravidian scripts, and embedding typographic foundations into the design ",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 321.703125,
+   "w": 343,
+   "h": 136.5
+  },
+  "focus": {
+   "x": 29,
+   "y": 390.953125,
+   "w": 243.359375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 11,
+  "shot": null
+ },
+ {
+  "n": 115,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "embedding typographic foundations into",
+  "text": "70% reduction in localization effort (estimated) by transitioning the product to Anek Variable, a multi-lingual typeface supporting Devanagari and Dravidian scripts, and embedding typographic foundations into the design ",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 321.703125,
+   "w": 343,
+   "h": 136.5
+  },
+  "focus": {
+   "x": 29,
+   "y": 413.703125,
+   "w": 254.296875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 12,
+  "shot": null
+ },
+ {
+  "n": 116,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "by leading the platform migration from",
+  "text": "5x daily blog output, 45% faster turnaround by leading the platform migration from Ghost to WordPress, designing the category architecture, author profiles, curation posts, and dark mode, all informed by content analytic",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 466.203125,
+   "w": 343,
+   "h": 136.5
+  },
+  "focus": {
+   "x": 29,
+   "y": 489.953125,
+   "w": 241,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 13,
+  "shot": null
+ },
+ {
+  "n": 117,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Hyphenated word wraps at its hyphen",
+  "sev": "Low",
+  "line": "design-to-dev",
+  "text": "3-platform design system (Peetal) built from scratch covering web, app, and POS, defining component architecture, Figma variables, auto-layout structures, and documentation that cut design-to-dev handoff time by an estim",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 379.046875,
+   "w": 343,
+   "h": 136.5
+  },
+  "focus": {
+   "x": 274.015625,
+   "y": 450.296875,
+   "w": 45.9375,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 14,
+  "shot": null
+ },
+ {
+  "n": 118,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "handoff time by an estimated 40% and",
+  "text": "3-platform design system (Peetal) built from scratch covering web, app, and POS, defining component architecture, Figma variables, auto-layout structures, and documentation that cut design-to-dev handoff time by an estim",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 379.046875,
+   "w": 343,
+   "h": 136.5
+  },
+  "focus": {
+   "x": 71.796875,
+   "y": 471.046875,
+   "w": 244.6875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 15,
+  "shot": null
+ },
+ {
+  "n": 119,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ep flow simplified to 4 for the purchase and",
+  "text": "7-step flow simplified to 4 for the purchase and onboarding journey, based on user research sessions with SME owners, reducing form abandonment and shortening time-to-first-policy.",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 523.546875,
+   "w": 343,
+   "h": 91
+  },
+  "focus": {
+   "x": 29,
+   "y": 524.546875,
+   "w": 295.5,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 16,
+  "shot": null
+ },
+ {
+  "n": 120,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "developer handoff and QA, resulting in",
+  "text": "Full website redesign shipped end-to-end, from wireframes and prototyping through developer handoff and QA, resulting in a responsive product that aligned brand perception with the actual product experience.",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 622.546875,
+   "w": 343,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 29,
+   "y": 669.046875,
+   "w": 244.6875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 17,
+  "shot": null
+ },
+ {
+  "n": 121,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Performance marketing creatives designed for",
+  "text": "Performance marketing creatives designed for 2 products, producing ad variants and landing pages that fed directly into growth experimentation cycles alongside the product and growth teams.",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 634.390625,
+   "w": 343,
+   "h": 91
+  },
+  "focus": {
+   "x": 29,
+   "y": 635.390625,
+   "w": 292.375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 18,
+  "shot": null
+ },
+ {
+  "n": 122,
+  "page": "Résumé",
+  "path": "/resume",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Conversion-focused campaigns for",
+  "text": "Conversion-focused campaigns for fintech and e-commerce clients including HDFC Securities, QueMath, and Stockal.",
+  "where": {
+   "label": "#experience",
+   "id": "experience"
+  },
+  "tag": "li",
+  "el": {
+   "x": 16,
+   "y": 405.578125,
+   "w": 343,
+   "h": 68.25
+  },
+  "focus": {
+   "x": 29,
+   "y": 406.578125,
+   "w": 222.34375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 19,
+  "shot": null
+ },
+ {
+  "n": 123,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: three dots instead of an ellipsis (…)",
+  "sev": "Low",
+  "line": "INCOMING...",
+  "text": "MEDIA INCOMING...",
+  "where": {
+   "label": "#context",
+   "id": "context"
+  },
+  "tag": "p",
+  "el": {
+   "x": 131.4921875,
+   "y": 206.890625,
+   "w": 112.015625,
+   "h": 14
+  },
+  "focus": {
+   "x": 172.1640625,
+   "y": 206.890625,
+   "w": 71.34375,
+   "h": 14
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 124,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Hyphenated word wraps at its hyphen",
+  "sev": "Low",
+  "line": "user-product",
+  "text": "Since then, the company has been able to display live quotes enabling user-product discovery, and has recently enabled payments for immediate online purchase, and has grown its user base 4.7×*",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 726.015625,
+   "w": 279,
+   "h": 118.984375
+  },
+  "focus": {
+   "x": 238.6875,
+   "y": 752.8125,
+   "w": 31.921875,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 125,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Deep rag: a middle line far shorter",
+  "sev": "Low",
+  "line": "discovery, and has recently",
+  "text": "Since then, the company has been able to display live quotes enabling user-product discovery, and has recently enabled payments for immediate online purchase, and has grown its user base 4.7×*",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 726.015625,
+   "w": 279,
+   "h": 118.984375
+  },
+  "focus": {
+   "x": 95.578125,
+   "y": 774.609375,
+   "w": 174.609375,
+   "h": 20
+  },
+  "extra": "61% of the longest line",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 126,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "Checkouts",
+  "text": "Increase in Online Checkouts",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "dt",
+  "el": {
+   "x": 199.5,
+   "y": 487,
+   "w": 127.5,
+   "h": 33.59375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 502.796875,
+   "w": 62.703125,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": "126-draft-phone.jpg"
+ },
+ {
+  "n": 127,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "& CEO)",
+  "text": "Tejas Jain (Founder & CEO)",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "span",
+  "el": {
+   "x": 199.5,
+   "y": 338.328125,
+   "w": 127.5,
+   "h": 38.375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 357.515625,
+   "w": 47.34375,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": "127-draft-phone.jpg"
+ },
+ {
+  "n": 128,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "Experience)",
+  "text": "Gopi Solia (Brand & Experience)",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "span",
+  "el": {
+   "x": 199.5,
+   "y": 380.703125,
+   "w": 127.5,
+   "h": 38.375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 399.890625,
+   "w": 70.03125,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": "128-draft-phone.jpg"
+ },
+ {
+  "n": 129,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Gopi Solia (Brand &",
+  "text": "Gopi Solia (Brand & Experience)",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "span",
+  "el": {
+   "x": 199.5,
+   "y": 380.703125,
+   "w": 127.5,
+   "h": 38.375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 380.703125,
+   "w": 112.0625,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 130,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "(Engineering)",
+  "text": "Vishnu Gupta (Engineering)",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "span",
+  "el": {
+   "x": 199.5,
+   "y": 488.640625,
+   "w": 127.5,
+   "h": 38.375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 507.828125,
+   "w": 78.046875,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": "130-draft-phone.jpg"
+ },
+ {
+  "n": 131,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "(Engineering)",
+  "text": "Rohit Mishra (Engineering)",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "span",
+  "el": {
+   "x": 199.5,
+   "y": 531.015625,
+   "w": 127.5,
+   "h": 38.375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 550.203125,
+   "w": 78.046875,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": "131-draft-phone.jpg"
+ },
+ {
+  "n": 132,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "*from 800 during March 2023 to",
+  "text": "*from 800 during March 2023 to around 3,760 by October 2025.",
+  "where": {
+   "label": "001. How did my story start?",
+   "id": "story"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 601.390625,
+   "w": 279,
+   "h": 36
+  },
+  "focus": {
+   "x": 45,
+   "y": 601.390625,
+   "w": 174.765625,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": null
+ },
+ {
+  "n": 133,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "The Pivot and",
+  "text": "The Pivot and the Problem",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 48,
+   "y": 336.390625,
+   "w": 279,
+   "h": 76
+  },
+  "focus": {
+   "x": 45,
+   "y": 333.390625,
+   "w": 228.140625,
+   "h": 45
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 134,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "design including the Visual Language and",
+  "text": "I started off as a Senior Designer - and had to tackle challenges outside the Product’s design including the Visual Language and Branding of the company. This helped in pivoting BimaKavach from a Recommendation Engine fo",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 432.390625,
+   "w": 279,
+   "h": 166.578125
+  },
+  "focus": {
+   "x": 45,
+   "y": 480.984375,
+   "w": 264.953125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 11,
+  "shot": null
+ },
+ {
+  "n": 135,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Branding of the company. This helped in",
+  "text": "I started off as a Senior Designer - and had to tackle challenges outside the Product’s design including the Visual Language and Branding of the company. This helped in pivoting BimaKavach from a Recommendation Engine fo",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 432.390625,
+   "w": 279,
+   "h": 166.578125
+  },
+  "focus": {
+   "x": 45,
+   "y": 504.78125,
+   "w": 255.3125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 12,
+  "shot": null
+ },
+ {
+  "n": 136,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "pivoting BimaKavach from a",
+  "text": "I started off as a Senior Designer - and had to tackle challenges outside the Product’s design including the Visual Language and Branding of the company. This helped in pivoting BimaKavach from a Recommendation Engine fo",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 432.390625,
+   "w": 279,
+   "h": 166.578125
+  },
+  "focus": {
+   "x": 45,
+   "y": 528.578125,
+   "w": 180.3125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 13,
+  "shot": null
+ },
+ {
+  "n": 137,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Heading: one word alone on the first line",
+  "sev": "Medium",
+  "line": "Minimum",
+  "text": "Minimum Viable Product",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "h3",
+  "el": {
+   "x": 49,
+   "y": 489.546875,
+   "w": 277,
+   "h": 64.375
+  },
+  "focus": {
+   "x": 46,
+   "y": 487.546875,
+   "w": 119.5625,
+   "h": 35
+  },
+  "extra": "",
+  "ei": 14,
+  "shot": "137-draft-phone.jpg"
+ },
+ {
+  "n": 138,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "ays into my journey, the brief was given for",
+  "text": "This is the BimaKavach I saw and joined. Days into my journey, the brief was given for how this worked so far, the change at hand, and ideas for solutions.",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "p",
+  "el": {
+   "x": 49,
+   "y": 675.046875,
+   "w": 277,
+   "h": 72.75
+  },
+  "focus": {
+   "x": 46,
+   "y": 692.234375,
+   "w": 280.421875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 15,
+  "shot": null
+ },
+ {
+  "n": 139,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "Companies.",
+  "text": "Initial attempts to create quote generation resulted in a successful IRDAI License. We realized that the basic Product Landing Page (PLP) would require lead generation, Raters and APIs from Insurance Companies.",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "p",
+  "el": {
+   "x": 49,
+   "y": 429.953125,
+   "w": 277,
+   "h": 109.125
+  },
+  "focus": {
+   "x": 46,
+   "y": 519.890625,
+   "w": 80.703125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 16,
+  "shot": "139-draft-phone.jpg"
+ },
+ {
+  "n": 140,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "Checkout",
+  "text": "Products at Online Checkout",
+  "where": {
+   "label": "002. The Pivot and the Problem",
+   "id": "problem"
+  },
+  "tag": "dt",
+  "el": {
+   "x": 199.5,
+   "y": 415.96875,
+   "w": 127.5,
+   "h": 33.59375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 431.765625,
+   "w": 56.703125,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 17,
+  "shot": "140-draft-phone.jpg"
+ },
+ {
+  "n": 141,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Structure and Usefulness to Developers, and",
+  "text": "Scaling Anek to work for Discovery, Conversation and Retention, we had quickly developed a modern Design System Library, aptly called Peetal. Peetal is built completely in-house, with whiffs of Blade and UX4G - taking cu",
+  "where": {
+   "label": "003. Solutions - Design Systems",
+   "id": "design-systems"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 386.15625,
+   "w": 279,
+   "h": 190.375
+  },
+  "focus": {
+   "x": 45,
+   "y": 529.9375,
+   "w": 284.609375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 18,
+  "shot": null
+ },
+ {
+  "n": 142,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Reduction in",
+  "text": "Reduction in Development Timelines",
+  "where": {
+   "label": "003. Solutions - Design Systems",
+   "id": "design-systems"
+  },
+  "tag": "dt",
+  "el": {
+   "x": 199.5,
+   "y": 711.921875,
+   "w": 127.5,
+   "h": 33.59375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 710.921875,
+   "w": 72.71875,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 19,
+  "shot": null
+ },
+ {
+  "n": 143,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Heading: one word alone on the last line",
+  "sev": "High",
+  "line": "Typography",
+  "text": "Solutions - Typography",
+  "where": {
+   "label": "004. Solutions - Typography",
+   "id": "typography"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 48,
+   "y": 700.453125,
+   "w": 279,
+   "h": 76
+  },
+  "focus": {
+   "x": 54.34375,
+   "y": 733.453125,
+   "w": 194.140625,
+   "h": 45
+  },
+  "extra": "",
+  "ei": 20,
+  "shot": "143-draft-phone.jpg"
+ },
+ {
+  "n": 144,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "3 Businesses, we started with",
+  "text": "In order to cater to the multicultural hyperlocal nature of Tier 2 & Tier 3 Businesses, we started with Foundational Typography. We had decided that Anek Variable would be the obvious typeface of choice.",
+  "where": {
+   "label": "004. Solutions - Typography",
+   "id": "typography"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 349.453125,
+   "w": 279,
+   "h": 142.78125
+  },
+  "focus": {
+   "x": 45,
+   "y": 398.046875,
+   "w": 190.421875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 21,
+  "shot": null
+ },
+ {
+  "n": 145,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Hyphenated word wraps at its hyphen",
+  "sev": "Low",
+  "line": "open-source",
+  "text": "Anek is a contemporary, multi-script, open-source typeface family created by the Indian foundry Ek Type (in collaboration with Google). It supports multiple Indian scripts (including Devanagari, Tamil, Bengali, etc.) as ",
+  "where": {
+   "label": "004. Solutions - Typography",
+   "id": "typography"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 516.03125,
+   "w": 279,
+   "h": 166.578125
+  },
+  "focus": {
+   "x": 277.25,
+   "y": 519.03125,
+   "w": 35.828125,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 22,
+  "shot": null
+ },
+ {
+  "n": 146,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "foundry Ek Type (in collaboration with",
+  "text": "Anek is a contemporary, multi-script, open-source typeface family created by the Indian foundry Ek Type (in collaboration with Google). It supports multiple Indian scripts (including Devanagari, Tamil, Bengali, etc.) as ",
+  "where": {
+   "label": "004. Solutions - Typography",
+   "id": "typography"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 516.03125,
+   "w": 279,
+   "h": 166.578125
+  },
+  "focus": {
+   "x": 45,
+   "y": 564.625,
+   "w": 238.421875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 23,
+  "shot": null
+ },
+ {
+  "n": 147,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Reduction in",
+  "text": "Reduction in Type Tokens",
+  "where": {
+   "label": "004. Solutions - Typography",
+   "id": "typography"
+  },
+  "tag": "dt",
+  "el": {
+   "x": 199.5,
+   "y": 775.609375,
+   "w": 127.5,
+   "h": 33.59375
+  },
+  "focus": {
+   "x": 196.5,
+   "y": 774.609375,
+   "w": 72.71875,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 24,
+  "shot": null
+ },
+ {
+  "n": 148,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Heading: one word alone on the last line",
+  "sev": "High",
+  "line": "Generation",
+  "text": "Solutions - Forms & Modals for Discovery & Quote Generation",
+  "where": {
+   "label": "005. Solutions - Forms & Modals for Discovery & Quote Generation",
+   "id": "forms"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 48,
+   "y": 337.140625,
+   "w": 279,
+   "h": 184
+  },
+  "focus": {
+   "x": 45,
+   "y": 478.140625,
+   "w": 184.125,
+   "h": 45
+  },
+  "extra": "",
+  "ei": 25,
+  "shot": "148-draft-phone.jpg"
+ },
+ {
+  "n": 149,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Redesigning Forms & Modals in order to",
+  "text": "Redesigning Forms & Modals in order to boost discovery, expedite Quote Generation, and build intuitive journeys towards Quote Generation was the next task.",
+  "where": {
+   "label": "005. Solutions - Forms & Modals for Discovery & Quote Generation",
+   "id": "forms"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 541.140625,
+   "w": 279,
+   "h": 95.1875
+  },
+  "focus": {
+   "x": 45,
+   "y": 542.140625,
+   "w": 256.5625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 26,
+  "shot": null
+ },
+ {
+  "n": 150,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "fewer drop-offs on the",
+  "text": "fewer drop-offs on the quote form",
+  "where": {
+   "label": "005. Solutions - Forms & Modals for Discovery & Quote Generation",
+   "id": "forms"
+  },
+  "tag": "dt",
+  "el": {
+   "x": 48,
+   "y": 729.328125,
+   "w": 127.5,
+   "h": 33.59375
+  },
+  "focus": {
+   "x": 45,
+   "y": 728.328125,
+   "w": 122.515625,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 27,
+  "shot": null
+ },
+ {
+  "n": 151,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "single select only if the user fits none of",
+  "text": "1. Using Data to showcase the most used options as Suggestion Chips - and allowing single select only if the user fits none of the most commonly used options and",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 24,
+   "y": 502.890625,
+   "w": 327,
+   "h": 95.1875
+  },
+  "focus": {
+   "x": 21,
+   "y": 551.484375,
+   "w": 250.359375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 28,
+  "shot": null
+ },
+ {
+  "n": 152,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "2. Using Visual Cues in Binary Fields in",
+  "text": "2. Using Visual Cues in Binary Fields in order to increase the ability to scan the form without increasing cognitive load.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 24,
+   "y": 621.875,
+   "w": 327,
+   "h": 71.390625
+  },
+  "focus": {
+   "x": 21,
+   "y": 622.875,
+   "w": 250.078125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 29,
+  "shot": null
+ },
+ {
+  "n": 153,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "order to increase the ability to scan the",
+  "text": "2. Using Visual Cues in Binary Fields in order to increase the ability to scan the form without increasing cognitive load.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 24,
+   "y": 621.875,
+   "w": 327,
+   "h": 71.390625
+  },
+  "focus": {
+   "x": 21,
+   "y": 646.671875,
+   "w": 246.46875,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 30,
+  "shot": null
+ },
+ {
+  "n": 154,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "in the form of a modal - we were able to",
+  "text": "By showcasing a loading state of the Quote Page and asking no brainer questions in the form of a modal - we were able to reduce drop-offs, as the user is now more incentivized to complete the process.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 24,
+   "y": 514.78125,
+   "w": 327,
+   "h": 118.984375
+  },
+  "focus": {
+   "x": 21,
+   "y": 563.375,
+   "w": 251.90625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 31,
+  "shot": null
+ },
+ {
+  "n": 155,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Massive diversions and permutations from",
+  "text": "Massive diversions and permutations from the quote page exists and change per product - meaning that the journey must seem consistent and concise for any user",
+  "where": {
+   "label": "006. Flows - Checkout & Payment",
+   "id": "flows"
+  },
+  "tag": "p",
+  "el": {
+   "x": 48,
+   "y": 379.921875,
+   "w": 279,
+   "h": 95.1875
+  },
+  "focus": {
+   "x": 45,
+   "y": 380.921875,
+   "w": 268.234375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 32,
+  "shot": null
+ },
+ {
+  "n": 156,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "Completion",
+  "text": "Increase in Checkout Completion",
+  "where": {
+   "label": "006. Flows - Checkout & Payment",
+   "id": "flows"
+  },
+  "tag": "dt",
+  "el": {
+   "x": 48,
+   "y": 572.109375,
+   "w": 127.5,
+   "h": 33.59375
+  },
+  "focus": {
+   "x": 45,
+   "y": 587.90625,
+   "w": 66.703125,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 33,
+  "shot": "156-draft-phone.jpg"
+ },
+ {
+  "n": 157,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Recoveries from",
+  "text": "Recoveries from Failure Paths",
+  "where": {
+   "label": "006. Flows - Checkout & Payment",
+   "id": "flows"
+  },
+  "tag": "dt",
+  "el": {
+   "x": 48,
+   "y": 669.703125,
+   "w": 127.5,
+   "h": 33.59375
+  },
+  "focus": {
+   "x": 45,
+   "y": 668.703125,
+   "w": 93.359375,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 34,
+  "shot": null
+ },
+ {
+  "n": 158,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "and sorting coverage offerings based on the",
+  "text": "The Quote Page acts as a feed - filtering and sorting coverage offerings based on the user’s needs. Each Card contains further details and available quotes can be compared.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "div",
+  "el": {
+   "x": 24,
+   "y": 708.765625,
+   "w": 327,
+   "h": 95.1875
+  },
+  "focus": {
+   "x": 48.03125,
+   "y": 733.5625,
+   "w": 278.9375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 35,
+  "shot": null
+ },
+ {
+  "n": 159,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "should the API fail in anticipation of or",
+  "text": "Insurance APIs are wonky - at any step should the API fail in anticipation of or during payment - contingency loaders and screens appear to bridge gaps.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "div",
+  "el": {
+   "x": 24,
+   "y": 526.328125,
+   "w": 327,
+   "h": 95.1875
+  },
+  "focus": {
+   "x": 67.75,
+   "y": 551.125,
+   "w": 239.484375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 36,
+  "shot": null
+ },
+ {
+  "n": 160,
+  "page": "Draft (BimaKavach case study)",
+  "path": "/draft",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "The coded prototype that serves as the",
+  "text": "The coded prototype that serves as the UI/UX source of truth at developer handoff.",
+  "where": {
+   "label": "Go deeper",
+   "id": "deeper"
+  },
+  "tag": "span",
+  "el": {
+   "x": 48,
+   "y": 533.6875,
+   "w": 279,
+   "h": 47.59375
+  },
+  "focus": {
+   "x": 45,
+   "y": 534.6875,
+   "w": 248.8125,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 37,
+  "shot": null
+ },
+ {
+  "n": 161,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: three dots instead of an ellipsis (…)",
+  "sev": "Low",
+  "line": "PENDING...",
+  "text": "MEDIA PENDING...",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "p",
+  "el": {
+   "x": 134.8203125,
+   "y": 218.515625,
+   "w": 105.359375,
+   "h": 14
+  },
+  "focus": {
+   "x": 175.4921875,
+   "y": 218.515625,
+   "w": 64.6875,
+   "h": 14
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 162,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "One source of truth for",
+  "text": "One source of truth for designers, developers and the agents that build with them.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "h1",
+  "el": {
+   "x": 16,
+   "y": 390.046875,
+   "w": 343,
+   "h": 160
+  },
+  "focus": {
+   "x": 13,
+   "y": 390.046875,
+   "w": 326.15625,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 163,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "from Blade and UX4G exude whiffs of the",
+  "text": "Built on borrowed scaffolding, starter kits from Blade and UX4G exude whiffs of the documentation and scaling principles that make both of these inspirations stand out.",
+  "where": {
+   "label": "#context",
+   "id": "context"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 634.390625,
+   "w": 343,
+   "h": 104
+  },
+  "focus": {
+   "x": 13,
+   "y": 662.390625,
+   "w": 300.09375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 164,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Code follows the documented spec, not the",
+  "text": "Code follows the documented spec, not the other way round. When a build and its doc disagree, the build is the one that changes.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 548.390625,
+   "w": 343,
+   "h": 78
+  },
+  "focus": {
+   "x": 13,
+   "y": 550.390625,
+   "w": 312.859375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": null
+ },
+ {
+  "n": 165,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Switching to Bangla, Devanagari or",
+  "text": "Every size, line height and weight comes from the Anek Latin scale. Switching to Bangla, Devanagari or Tamil changes only the font family.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 697.890625,
+   "w": 343,
+   "h": 104
+  },
+  "focus": {
+   "x": 13,
+   "y": 751.890625,
+   "w": 255.921875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 166,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "as component props, so a person or an",
+  "text": "Captions read as key = value (size = XSmall, state = Hover), the same shape as component props, so a person or an agent can lift the API straight off the page.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 426.390625,
+   "w": 343,
+   "h": 104
+  },
+  "focus": {
+   "x": 13,
+   "y": 480.390625,
+   "w": 284.390625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 167,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "can't",
+  "text": "Primitives are hidden from publishing and semantic tokens are scoped to where they may be used, so the wrong value can't be picked in the first place.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 601.890625,
+   "w": 343,
+   "h": 104
+  },
+  "focus": {
+   "x": 58.6875,
+   "y": 683.890625,
+   "w": 33.3125,
+   "h": 17
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 168,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "and semantic tokens are scoped to",
+  "text": "Primitives are hidden from publishing and semantic tokens are scoped to where they may be used, so the wrong value can't be picked in the first place.",
+  "where": {
+   "label": "#principles",
+   "id": "principles"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 601.890625,
+   "w": 343,
+   "h": 104
+  },
+  "focus": {
+   "x": 13,
+   "y": 629.890625,
+   "w": 254.15625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": null
+ },
+ {
+  "n": 169,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "colours, and component tokens on top. The",
+  "text": "v0.0.4 drops styles entirely for variables in three tiers: hidden primitives, semantic colours, and component tokens on top. The brand moved from navy and yellow to ojas violet (#4100CF) and agni orange (#FF7700).",
+  "where": {
+   "label": "#foundations",
+   "id": "foundations"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 440.890625,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 494.890625,
+   "w": 313.46875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": null
+ },
+ {
+  "n": 170,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Eight hues, each with a",
+  "text": "Eight hues, each with a branded name and a job:",
+  "where": {
+   "label": "#foundations",
+   "id": "foundations"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 569.34375,
+   "w": 343,
+   "h": 52
+  },
+  "focus": {
+   "x": 13,
+   "y": 571.34375,
+   "w": 171.4375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": null
+ },
+ {
+  "n": 171,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "The ramps were built in OKLCH with",
+  "text": "The ramps were built in OKLCH with manual HSB and LCH adjustments, weighing the 9-step Tailwind / Refactoring UI method against the 7-step data and accordion method for testing and iterations.",
+  "where": {
+   "label": "#foundations",
+   "id": "foundations"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 470.34375,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 472.34375,
+   "w": 264.765625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 172,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "UI method against the 7-step data and",
+  "text": "The ramps were built in OKLCH with manual HSB and LCH adjustments, weighing the 9-step Tailwind / Refactoring UI method against the 7-step data and accordion method for testing and iterations.",
+  "where": {
+   "label": "#foundations",
+   "id": "foundations"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 470.34375,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 550.34375,
+   "w": 278.1875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 11,
+  "shot": null
+ },
+ {
+  "n": 173,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Type runs on Anek across ten scripts, with",
+  "text": "Type runs on Anek across ten scripts, with Instrument Serif for display. Font sizes switch through Web and Mobile modes: display runs 80 to 48 on large screens and 48 to 34 on small, body 10 to 18 and 10 to 16.",
+  "where": {
+   "label": "#foundations",
+   "id": "foundations"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 474.40625,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 476.40625,
+   "w": 304.8125,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 12,
+  "shot": null
+ },
+ {
+  "n": 174,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "runs 80 to 48 on large screens and 48 to",
+  "text": "Type runs on Anek across ten scripts, with Instrument Serif for display. Font sizes switch through Web and Mobile modes: display runs 80 to 48 on large screens and 48 to 34 on small, body 10 to 18 and 10 to 16.",
+  "where": {
+   "label": "#foundations",
+   "id": "foundations"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 474.40625,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 554.40625,
+   "w": 293.3125,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 13,
+  "shot": null
+ },
+ {
+  "n": 175,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "structure and swaps only its tokens, so the",
+  "text": "Every colour intent repeats the same structure and swaps only its tokens, so the next intent is a token set, not a redesign.",
+  "where": {
+   "label": "#components",
+   "id": "components"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 418.34375,
+   "w": 343,
+   "h": 78
+  },
+  "focus": {
+   "x": 13,
+   "y": 446.34375,
+   "w": 307.484375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 14,
+  "shot": null
+ },
+ {
+  "n": 176,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "The Storybook pilot runs on React and",
+  "text": "The Storybook pilot runs on React and Storybook 10: four components (Alert, InteractiveInput, Scrollbar, Ticker), 32 stories and 122 tokens pulled from the Figma variables through the Figma MCP.",
+  "where": {
+   "label": "#code",
+   "id": "code"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 678.34375,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 680.34375,
+   "w": 279.046875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 15,
+  "shot": null
+ },
+ {
+  "n": 177,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "stories and 122 tokens pulled from the",
+  "text": "The Storybook pilot runs on React and Storybook 10: four components (Alert, InteractiveInput, Scrollbar, Ticker), 32 stories and 122 tokens pulled from the Figma variables through the Figma MCP.",
+  "where": {
+   "label": "#code",
+   "id": "code"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 678.34375,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 758.34375,
+   "w": 277.28125,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 16,
+  "shot": null
+ },
+ {
+  "n": 178,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "to one, and comments cite the",
+  "text": "Props mirror Figma properties one to one, and comments cite the Figma node each part came from.",
+  "where": {
+   "label": "#code",
+   "id": "code"
+  },
+  "tag": "span",
+  "el": {
+   "x": 33.328125,
+   "y": 377.34375,
+   "w": 325.671875,
+   "h": 78
+  },
+  "focus": {
+   "x": 30.328125,
+   "y": 405.34375,
+   "w": 220.34375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 17,
+  "shot": null
+ },
+ {
+  "n": 179,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "127 commits, every one co-authored with",
+  "text": "Netra, a coded prototype of the purchase journey, is the UI/UX source of truth at handoff: 127 commits, every one co-authored with Claude, and 99 files that cite 167 Figma node IDs. Peetal’s inputs, checkboxes and select",
+  "where": {
+   "label": "#tooling",
+   "id": "tooling"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 638.984375,
+   "w": 343,
+   "h": 182
+  },
+  "focus": {
+   "x": 13,
+   "y": 692.984375,
+   "w": 298.59375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 18,
+  "shot": null
+ },
+ {
+  "n": 180,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "nodes.",
+  "text": "Netra, a coded prototype of the purchase journey, is the UI/UX source of truth at handoff: 127 commits, every one co-authored with Claude, and 99 files that cite 167 Figma node IDs. Peetal’s inputs, checkboxes and select",
+  "where": {
+   "label": "#tooling",
+   "id": "tooling"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 191.984375,
+   "w": 343,
+   "h": 182
+  },
+  "focus": {
+   "x": 13,
+   "y": 349.984375,
+   "w": 54.046875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 19,
+  "shot": "180-peetal-phone.jpg"
+ },
+ {
+  "n": 181,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "NetraBot studio grew out of the same work: a",
+  "text": "NetraBot studio grew out of the same work: a parametric mascot tool with 78 expressions, 56 animations, a timeline and JSON export.",
+  "where": {
+   "label": "#tooling",
+   "id": "tooling"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 509.984375,
+   "w": 343,
+   "h": 78
+  },
+  "focus": {
+   "x": 13,
+   "y": 511.984375,
+   "w": 326.15625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 20,
+  "shot": null
+ },
+ {
+  "n": 182,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "I oversee how Peetal is made and",
+  "text": "I oversee how Peetal is made and updated, handle the change logs, and use Claude for AI-assisted work.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 584.953125,
+   "w": 343,
+   "h": 78
+  },
+  "focus": {
+   "x": 13,
+   "y": 586.953125,
+   "w": 247.03125,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 21,
+  "shot": null
+ },
+ {
+  "n": 183,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "for engineers, with real values, such as a",
+  "text": "Every component page follows one documentation template written for engineers: anatomy, states, a token reference and notes for engineers, with real values, such as a 240px tooltip and a 300ms show, 100ms hide.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 678.953125,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 758.953125,
+   "w": 295.9375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 22,
+  "shot": null
+ },
+ {
+  "n": 184,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "of it: a few docs still describe sizes and",
+  "text": "A page only turns 🟢 when all three stages pass. Being honest about the gaps is part of it: a few docs still describe sizes and states the components don’t have yet, and closing that drift is the current pass.",
+  "where": {
+   "label": "#governance",
+   "id": "governance"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 355.203125,
+   "w": 343,
+   "h": 130
+  },
+  "focus": {
+   "x": 13,
+   "y": 409.203125,
+   "w": 281.6875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 23,
+  "shot": null
+ },
+ {
+  "n": 185,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Heading: one word alone on the last line",
+  "sev": "High",
+  "line": "days",
+  "text": "6 wks → x days",
+  "where": {
+   "label": "#impact",
+   "id": "impact"
+  },
+  "tag": "dd",
+  "el": {
+   "x": 16,
+   "y": 347.203125,
+   "w": 159.5,
+   "h": 56
+  },
+  "focus": {
+   "x": 13,
+   "y": 371.203125,
+   "w": 62.90625,
+   "h": 35
+  },
+  "extra": "",
+  "ei": 24,
+  "shot": "185-peetal-phone.jpg"
+ },
+ {
+  "n": 186,
+  "page": "Peetal",
+  "path": "/peetal",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "The 16 intent boards for",
+  "text": "The 16 intent boards for Buttons turned into components",
+  "where": {
+   "label": "#next",
+   "id": "next"
+  },
+  "tag": "span",
+  "el": {
+   "x": 33.328125,
+   "y": 771.59375,
+   "w": 325.671875,
+   "h": 52
+  },
+  "focus": {
+   "x": 30.328125,
+   "y": 773.59375,
+   "w": 175.890625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 25,
+  "shot": null
+ },
+ {
+  "n": 187,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Designing the",
+  "text": "Designing the product that turned 1,000 agents into BimaKavach’s second-largest revenue channel.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "h1",
+  "el": {
+   "x": 16,
+   "y": 430.234375,
+   "w": 343,
+   "h": 240
+  },
+  "focus": {
+   "x": 13,
+   "y": 430.234375,
+   "w": 201.6875,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 188,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "1,000 agents into",
+  "text": "Designing the product that turned 1,000 agents into BimaKavach’s second-largest revenue channel.",
+  "where": {
+   "label": "main",
+   "id": ""
+  },
+  "tag": "h1",
+  "el": {
+   "x": 16,
+   "y": 430.234375,
+   "w": 343,
+   "h": 240
+  },
+  "focus": {
+   "x": 13,
+   "y": 510.234375,
+   "w": 251.53125,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": null
+ },
+ {
+  "n": 189,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "products beyond life, health, and",
+  "text": "Saathi is India’s smartest business insurance partner app, allowing BimaKavach to offer insurance products beyond life, health, and motor to partners, who can reach customers even we normally can’t.",
+  "where": {
+   "label": "#details",
+   "id": "details"
+  },
+  "tag": "p",
+  "el": {
+   "x": 40,
+   "y": 383.234375,
+   "w": 295,
+   "h": 156
+  },
+  "focus": {
+   "x": 37,
+   "y": 463.234375,
+   "w": 237.28125,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 190,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: em/en dash in visible text",
+  "sev": "Medium",
+  "line": "Oct – Dec 2024",
+  "text": "Oct – Dec 2024",
+  "where": {
+   "label": "#details",
+   "id": "details"
+  },
+  "tag": "span",
+  "el": {
+   "x": 199.5,
+   "y": 601.625,
+   "w": 135.5,
+   "h": 22.390625
+  },
+  "focus": {
+   "x": 199.5,
+   "y": 604.625,
+   "w": 97.28125,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": "190-bima-saathi-phone.jpg"
+ },
+ {
+  "n": 191,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "insurance in the hands of the",
+  "text": "What if we put business insurance in the hands of the agents India already trusts?",
+  "where": {
+   "label": "#overview",
+   "id": "overview"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 16,
+   "y": 474.578125,
+   "w": 343,
+   "h": 90
+  },
+  "focus": {
+   "x": 13,
+   "y": 503.578125,
+   "w": 314.21875,
+   "h": 31
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 192,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "uote, slow to issue and hard to explain to a",
+  "text": "Across India, insurance agents sell life, health and motor every day, but business insurance has always been out of their reach. It’s complex to quote, slow to issue and hard to explain to a client. That gap is where Saa",
+  "where": {
+   "label": "#overview",
+   "id": "overview"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 580.578125,
+   "w": 343,
+   "h": 182
+  },
+  "focus": {
+   "x": 13,
+   "y": 660.578125,
+   "w": 336,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 193,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "lient. That gap is where Saathi started. The",
+  "text": "Across India, insurance agents sell life, health and motor every day, but business insurance has always been out of their reach. It’s complex to quote, slow to issue and hard to explain to a client. That gap is where Saa",
+  "where": {
+   "label": "#overview",
+   "id": "overview"
+  },
+  "tag": "p",
+  "el": {
+   "x": 16,
+   "y": 580.578125,
+   "w": 343,
+   "h": 182
+  },
+  "focus": {
+   "x": 13,
+   "y": 686.578125,
+   "w": 318.484375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 194,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Copy: straight apostrophe (use ’)",
+  "sev": "Low",
+  "line": "didn't",
+  "text": "Agents didn't know commercial insurance was something they could sell.",
+  "where": {
+   "label": "#pain-points",
+   "id": "pain-points"
+  },
+  "tag": "h3",
+  "el": {
+   "x": 16,
+   "y": 589.28125,
+   "w": 343,
+   "h": 82.5
+  },
+  "focus": {
+   "x": 83.8125,
+   "y": 591.28125,
+   "w": 47.203125,
+   "h": 22
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": null
+ },
+ {
+  "n": 195,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "intuitive, convenient, and",
+  "text": "How might we make buying business insurance feel intuitive, convenient, and worth the agent’s time?",
+  "where": {
+   "label": "#research",
+   "id": "research"
+  },
+  "tag": "h3",
+  "el": {
+   "x": 40,
+   "y": 646.921875,
+   "w": 295,
+   "h": 110
+  },
+  "focus": {
+   "x": 37,
+   "y": 701.921875,
+   "w": 226.15625,
+   "h": 26
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": null
+ },
+ {
+  "n": 196,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "were complex and",
+  "text": "Existing interfaces were complex and not built for agents.",
+  "where": {
+   "label": "#competitors",
+   "id": "competitors"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 16,
+   "y": 469.921875,
+   "w": 343,
+   "h": 90
+  },
+  "focus": {
+   "x": 13,
+   "y": 498.921875,
+   "w": 200.765625,
+   "h": 31
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": null
+ },
+ {
+  "n": 197,
+  "page": "Bima Saathi (gated)",
+  "path": "/bima-saathi",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "What if we brought in",
+  "text": "What if we brought in a guided simulation?",
+  "where": {
+   "label": "#process",
+   "id": "process"
+  },
+  "tag": "h3",
+  "el": {
+   "x": 16,
+   "y": 496.875,
+   "w": 343,
+   "h": 55
+  },
+  "focus": {
+   "x": 13,
+   "y": 496.875,
+   "w": 193.875,
+   "h": 26
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 198,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Pivoting to the perception of",
+  "text": "Pivoting to the perception of BimaKavach as an intelligence company that is rooted in India’s rich history of Ornamentation, Beauty and Aesthetic Identity.",
+  "where": {
+   "label": "#hero",
+   "id": "hero"
+  },
+  "tag": "p",
+  "el": {
+   "x": 24,
+   "y": 632.25,
+   "w": 327,
+   "h": 123.75
+  },
+  "focus": {
+   "x": 72.921875,
+   "y": 632.25,
+   "w": 229.15625,
+   "h": 24
+  },
+  "extra": "",
+  "ei": 0,
+  "shot": null
+ },
+ {
+  "n": 199,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "story",
+  "text": "TELL ME THE STORY",
+  "where": {
+   "label": "#hero",
+   "id": "hero"
+  },
+  "tag": "span",
+  "el": {
+   "x": 0,
+   "y": 380.40625,
+   "w": 187,
+   "h": 51.1875
+  },
+  "focus": {
+   "x": 51.21875,
+   "y": 408,
+   "w": 84.546875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 1,
+  "shot": "199-bimakavach-identity-phone.jpg"
+ },
+ {
+  "n": 200,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Tell me the",
+  "text": "TELL ME THE STORY",
+  "where": {
+   "label": "#hero",
+   "id": "hero"
+  },
+  "tag": "span",
+  "el": {
+   "x": 0,
+   "y": 380.40625,
+   "w": 187,
+   "h": 51.1875
+  },
+  "focus": {
+   "x": 12.96875,
+   "y": 382.40625,
+   "w": 161.0625,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 2,
+  "shot": null
+ },
+ {
+  "n": 201,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "work",
+  "text": "SHOW ME THE WORK",
+  "where": {
+   "label": "#hero",
+   "id": "hero"
+  },
+  "tag": "span",
+  "el": {
+   "x": 188,
+   "y": 380.40625,
+   "w": 187,
+   "h": 51.1875
+  },
+  "focus": {
+   "x": 244,
+   "y": 408,
+   "w": 74.984375,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 3,
+  "shot": "201-bimakavach-identity-phone.jpg"
+ },
+ {
+  "n": 202,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "Show me the",
+  "text": "SHOW ME THE WORK",
+  "where": {
+   "label": "#hero",
+   "id": "hero"
+  },
+  "tag": "span",
+  "el": {
+   "x": 188,
+   "y": 380.40625,
+   "w": 187,
+   "h": 51.1875
+  },
+  "focus": {
+   "x": 194.90625,
+   "y": 382.40625,
+   "w": 173.1875,
+   "h": 21
+  },
+  "extra": "",
+  "ei": 4,
+  "shot": null
+ },
+ {
+  "n": 203,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Hyphenated word wraps at its hyphen",
+  "sev": "Low",
+  "line": "user-product",
+  "text": "Since then, the company has been able to display live quotes, enabling user-product discovery, and has enabled payments for immediate online purchase, and has grown it’s user base to 4.7×*",
+  "where": {
+   "label": "#section-story-0",
+   "id": "section-story-0"
+  },
+  "tag": "p",
+  "el": {
+   "x": 133.75,
+   "y": 324.734375,
+   "w": 273.5,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 328.3125,
+   "y": 350.484375,
+   "w": 31.90625,
+   "h": 16
+  },
+  "extra": "",
+  "ei": 5,
+  "shot": null
+ },
+ {
+  "n": 204,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Deep rag: a middle line far shorter",
+  "sev": "Low",
+  "line": "Visual",
+  "text": "UX/UI Design, Visual Communication",
+  "where": {
+   "label": "#section-story-0",
+   "id": "section-story-0"
+  },
+  "tag": "dd",
+  "el": {
+   "x": 282.5,
+   "y": 568.109375,
+   "w": 124.75,
+   "h": 57.75
+  },
+  "focus": {
+   "x": 279.5,
+   "y": 586.359375,
+   "w": 43.890625,
+   "h": 20
+  },
+  "extra": "39% of the longest line",
+  "ei": 6,
+  "shot": null
+ },
+ {
+  "n": 205,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "Communication",
+  "text": "UX/UI Design, Visual Communication",
+  "where": {
+   "label": "#section-story-0",
+   "id": "section-story-0"
+  },
+  "tag": "dd",
+  "el": {
+   "x": -43.5,
+   "y": 568.109375,
+   "w": 124.75,
+   "h": 57.75
+  },
+  "focus": {
+   "x": -46.5,
+   "y": 605.609375,
+   "w": 103.265625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 7,
+  "shot": "205-bimakavach-identity-phone.jpg"
+ },
+ {
+  "n": 206,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "for Discovery &",
+  "text": "Forms & Modals for Discovery & Quote Generation",
+  "where": {
+   "label": "#section-story-3",
+   "id": "section-story-3"
+  },
+  "tag": "h2",
+  "el": {
+   "x": 84.75,
+   "y": 75.171875,
+   "w": 321.5,
+   "h": 124.78125
+  },
+  "focus": {
+   "x": 81.75,
+   "y": 116.765625,
+   "w": 222.9375,
+   "h": 40
+  },
+  "extra": "",
+  "ei": 8,
+  "shot": null
+ },
+ {
+  "n": 207,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "time",
+  "text": "quote generation time",
+  "where": {
+   "label": "#section-story-3",
+   "id": "section-story-3"
+  },
+  "tag": "span",
+  "el": {
+   "x": 197.25,
+   "y": 705.65625,
+   "w": 96.5,
+   "h": 38.375
+  },
+  "focus": {
+   "x": 194.25,
+   "y": 724.84375,
+   "w": 28.671875,
+   "h": 18
+  },
+  "extra": "",
+  "ei": 9,
+  "shot": "207-bimakavach-identity-phone.jpg"
+ },
+ {
+  "n": 208,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "single select only if the user fits none of",
+  "text": "1. Using Data to showcase the most used options as Suggestion Chips - and allowing single select only if the user fits none of the most commonly used options and",
+  "where": {
+   "label": "#section-story-4",
+   "id": "section-story-4"
+  },
+  "tag": "p",
+  "el": {
+   "x": 47.75,
+   "y": 330.453125,
+   "w": 321.5,
+   "h": 91
+  },
+  "focus": {
+   "x": 44.75,
+   "y": 376.953125,
+   "w": 250.359375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 10,
+  "shot": null
+ },
+ {
+  "n": 209,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "in the form of a modal - we were able to",
+  "text": "By showcasing a loading state of the Quote Page and asking no brainer questions in the form of a modal - we were able to reduce drop-offs, as the user is now more incentivized to complete the process.",
+  "where": {
+   "label": "#section-story-5",
+   "id": "section-story-5"
+  },
+  "tag": "p",
+  "el": {
+   "x": 10.75,
+   "y": 341.828125,
+   "w": 321.5,
+   "h": 113.75
+  },
+  "focus": {
+   "x": 7.75,
+   "y": 388.328125,
+   "w": 251.90625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 11,
+  "shot": null
+ },
+ {
+  "n": 210,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "should the API fail in anticipation of or",
+  "text": "Insurance APIs are wonky - at any step should the API fail in anticipation of or during payment - contingency loaders and screens appear to bridge gaps.",
+  "where": {
+   "label": "#section-story-10",
+   "id": "section-story-10"
+  },
+  "tag": "p",
+  "el": {
+   "x": 31.75,
+   "y": 656.171875,
+   "w": 321.5,
+   "h": 91
+  },
+  "focus": {
+   "x": 28.75,
+   "y": 679.921875,
+   "w": 239.484375,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 12,
+  "shot": null
+ },
+ {
+  "n": 211,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Widow: one word alone on the last line",
+  "sev": "Medium",
+  "line": "solutions,",
+  "text": "Experimenting with phases like using a 3D Mascot made before AI, having the “famous face” in Collaboration, beginning with having to move from a traditional brokerage house, and becoming India’s go-to online destination ",
+  "where": {
+   "label": "#section-work-1",
+   "id": "section-work-1"
+  },
+  "tag": "p",
+  "el": {
+   "x": 150.75,
+   "y": 370.546875,
+   "w": 273.5,
+   "h": 159.25
+  },
+  "focus": {
+   "x": 147.75,
+   "y": 508.046875,
+   "w": 65.15625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 13,
+  "shot": "211-bimakavach-identity-phone.jpg"
+ },
+ {
+  "n": 212,
+  "page": "BimaKavach Identity (gated)",
+  "path": "/bimakavach-identity",
+  "vp": "phone",
+  "vpLabel": "Phone 375px",
+  "issue": "Short word stranded at a line end",
+  "sev": "Low",
+  "line": "nterprise Software Offerings , BimaKavach is",
+  "text": "While still maintaining the minimalism and sleek execution of a Technology Company with SAAS Enterprise Software Offerings, BimaKavach is to be perceived as a Global Indian Company.",
+  "where": {
+   "label": "#section-work-3",
+   "id": "section-work-3"
+  },
+  "tag": "p",
+  "el": {
+   "x": 52.75,
+   "y": 313.609375,
+   "w": 321.5,
+   "h": 91
+  },
+  "focus": {
+   "x": 49.75,
+   "y": 360.109375,
+   "w": 289.765625,
+   "h": 20
+  },
+  "extra": "",
+  "ei": 14,
+  "shot": null
+ }
+]

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { AnimatePresence, m, useMotionValueEvent, useScroll } from "framer-motion";
 import { getLenis } from "@/components/SmoothScroll";
 import { EASE } from "@/lib/motion";
@@ -11,8 +11,10 @@ export type PivotStep = {
   /** Month the step happened, as "MM.YY" (shown on the card and the ruler). */
   date: string;
   title: string;
-  /** One line of what changed, comma separated. */
-  summary: string;
+  /** Paragraphs on the step, under the title (optional while copy is in progress). */
+  body?: string[];
+  /** What changed, one ticked line each. */
+  points: string[];
   /** The homepage at that point, shown in the phone. A blank screen until it's in.
       The shot fills the screen's width from just under the status bar; `bg` fills
       the status bar and anything below a short shot. */
@@ -22,15 +24,12 @@ export type PivotStep = {
 /** The ruler runs one tick per month across these years. */
 const FIRST_YEAR = 2023;
 const YEARS = 4;
-const MONTHS = YEARS * 12;
 
 /** "03.25" -> month index on the ruler (0 = Jan of FIRST_YEAR). */
 function monthIndex(date: string) {
   const [mm, yy] = date.split(".").map(Number);
   return (2000 + yy - FIRST_YEAR) * 12 + (mm - 1);
 }
-
-const at = (index: number) => `${(index / (MONTHS - 1)) * 100}%`;
 
 /**
  * 002's before-and-after as a stepper: a phone showing the homepage of the
@@ -69,14 +68,16 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
   return (
     <div ref={ref} className="relative" style={{ height: `${steps.length * 100}svh` }}>
       <div className="sticky top-16 flex h-[calc(100svh-4rem)] items-center">
-        {/* Capped so the card's height fits the pinned screen. */}
+        {/* Capped so the card's height fits the pinned screen. Stacked (below lg) it fills
+            the screen and the phone takes whatever height the copy leaves. */}
         <div
-          className={`${CARD} mx-auto grid w-full lg:aspect-[1000/548] lg:grid-cols-2`}
+          className={`${CARD} mx-auto grid w-full max-lg:h-[calc(100svh-6rem)] max-lg:grid-rows-[minmax(0,1fr)_auto] max-lg:[container:pivot-card/size] lg:aspect-[1000/548] lg:grid-cols-2`}
           style={{ maxWidth: "calc((100svh - 4rem - 3rem) * 1000 / 548)" }}
         >
-          {/* Phone, cropped at the card's foot */}
-          <div className="relative h-[320px] overflow-clip sm:h-[420px] lg:h-auto">
-            <div className="absolute left-1/2 top-6 aspect-[2360/4652] w-[min(72%,360px)] -translate-x-1/2 lg:left-[9%] lg:w-[73%] lg:translate-x-0">
+          {/* Phone, cropped at the card's foot. A size container, so on a short phone
+              where the copy leaves under 96px it steps aside rather than show a sliver of bezel. */}
+          <div className="relative overflow-clip [container-type:size]">
+            <div className="absolute left-1/2 top-6 aspect-[2360/4652] w-[min(72%,360px)] -translate-x-1/2 lg:left-[9%] lg:w-[73%] lg:translate-x-0 [@container(max-height:96px)]:hidden">
               {/* Screen, sitting under the frame's transparent cutout (measured from the PNG). */}
               <div className="absolute left-[8.47%] top-[4.3%] h-[91.36%] w-[83.05%] overflow-hidden rounded-[13%/6.2%] bg-white">
                 <AnimatePresence initial={false}>
@@ -112,8 +113,10 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
             </div>
           </div>
 
-          {/* Step copy and the ruler */}
-          <div className="flex flex-col gap-10 px-6 pb-6 pt-8 lg:gap-0 lg:pb-[5%] lg:pl-[12%] lg:pr-[14%] lg:pt-[15%]">
+          {/* Step copy and the ruler (Figma 8719:24722). From lg the copy sizes against
+              this column (cqw: 624 units wide in Figma), capped at Figma's px, so the
+              pinned card never overflows on shorter screens. */}
+          <div className="@container flex flex-col gap-6 px-6 pb-6 pt-8 lg:gap-0 lg:pb-[6.5%] lg:pl-[6%] lg:pr-[8.75%] lg:pt-[16%] [@container_pivot-card_(max-height:560px)]:gap-4 [@container_pivot-card_(max-height:560px)]:pt-6">
             <div className="flex items-baseline justify-between text-12 text-faint">
               <span className="tabular-nums">{step.date}</span>
               {/* Previous joins after the first step; the last step restarts. */}
@@ -137,7 +140,7 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
               </div>
             </div>
 
-            <div className="lg:mt-[22%] lg:flex-1" aria-live="polite">
+            <div className="lg:mt-[min(32px,5.128cqw)] lg:flex-1" aria-live="polite">
               <AnimatePresence mode="wait" initial={false}>
                 <m.div
                   key={step.date}
@@ -145,15 +148,54 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.3, ease: EASE }}
-                  className="flex flex-col gap-3"
+                  className="flex flex-col gap-3 lg:gap-[min(20px,3.205cqw)]"
                 >
-                  <h3 className="text-[32px] font-normal leading-[1.1] text-ink">{step.title}</h3>
-                  <p className="text-14 leading-[1.5] text-muted">{step.summary}</p>
+                  <h3 className="text-[28px] font-normal leading-[1.15] text-ink lg:text-[length:min(48px,7.692cqw)]">
+                    {step.title}
+                  </h3>
+                  {step.body && (
+                    // Paragraphs a blank line apart, as in Figma (one line of 1.3).
+                    <div className="flex flex-col gap-[1.3em] text-14 leading-[1.3] text-muted lg:text-[length:max(14px,min(18px,2.885cqw))]">
+                      {step.body.map((para) => (
+                        <p key={para} className="text-pretty">
+                          {/* Last two words held together: no paragraph ends on a lone word
+                              (Chrome's `pretty` lets a longish one through). */}
+                          {para.replace(/ (\S+)$/, "\u00A0$1")}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                  <ul className="flex flex-col gap-2 lg:gap-[min(16px,2.564cqw)]">
+                    {step.points.map((point) => (
+                      <li
+                        key={point}
+                        className="flex items-start gap-2 text-16 leading-[1.15] text-muted lg:text-[length:max(16px,min(24px,3.846cqw))]"
+                      >
+                        {/* Figma's icon/ticker, drawn in ink: dark in the file, flipped for dark
+                            mode. Centred on the first line, so a point that wraps keeps it there. */}
+                        <span className="flex h-[1.15em] shrink-0 items-center">
+                          <Image
+                            src="/media/draft/pivot/tick.svg"
+                            alt=""
+                            width={16}
+                            height={16}
+                            className="size-[14px] invert light:invert-0 lg:size-[max(14px,min(16px,2.564cqw))]"
+                          />
+                        </span>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 </m.div>
               </AnimatePresence>
             </div>
 
-            <Ruler steps={steps} active={active} onSelect={go} />
+            {/* A short phone (the stacked card under 560px, e.g. an iPhone SE with Safari's bars)
+                hasn't room for every step's copy and the ruler: the ruler steps aside, and the date,
+                Previous / Next and scrolling still move between steps. */}
+            <div className="[@container_pivot-card_(max-height:560px)]:hidden">
+              <Ruler steps={steps} active={active} onSelect={go} />
+            </div>
           </div>
         </div>
       </div>
@@ -161,6 +203,13 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
   );
 }
 
+/**
+ * The month ruler (Figma 8731:40836): a block of twelve ticks per year with a dashed
+ * rule between years, and a dated marker in place of the tick for each step. Months
+ * before the first step are fainter. Blocks are 132 of Figma's 624 units wide, so the
+ * ruler scales with its column and the four 16-unit gaps either side of a rule fall out
+ * of justify-between.
+ */
 function Ruler({
   steps,
   active,
@@ -170,55 +219,66 @@ function Ruler({
   active: number;
   onSelect: (i: number) => void;
 }) {
+  const start = monthIndex(steps[0].date);
   return (
-    <div className="relative h-[52px] w-full" role="group" aria-label="Timeline">
-      {/* Month ticks */}
-      <div className="absolute inset-x-0 bottom-0 flex h-[28px] items-end justify-between">
-        {Array.from({ length: MONTHS }, (_, i) => (
-          <span key={i} className="h-full w-px bg-ink/25" />
-        ))}
-      </div>
-      {/* Year boundaries */}
-      {Array.from({ length: YEARS - 1 }, (_, y) => (
-        <span
-          key={y}
-          className="absolute bottom-0 h-full border-l border-dashed border-ink/15"
-          style={{ left: at((y + 1) * 12 - 0.5) }}
-        />
+    <div className="flex h-[54px] w-full items-end justify-between" role="group" aria-label="Timeline">
+      {Array.from({ length: YEARS }, (_, y) => (
+        <Fragment key={y}>
+          {y > 0 && (
+            <span
+              aria-hidden
+              className="h-full w-px bg-[repeating-linear-gradient(to_bottom,currentColor_0_4px,transparent_4px_8px)] text-ink/15"
+            />
+          )}
+          <div className="flex h-full w-[21.154%] items-end justify-between">
+            {Array.from({ length: 12 }, (_, m) => {
+              const month = y * 12 + m;
+              const i = steps.findIndex((s) => monthIndex(s.date) === month);
+              return (
+                <span key={m} className="relative h-full w-0">
+                  {i < 0 ? (
+                    <span
+                      className={`absolute bottom-0 left-0 h-5 w-0.5 -translate-x-1/2 rounded-full ${
+                        month < start ? "bg-ink/12" : "bg-ink/25"
+                      }`}
+                    />
+                  ) : (
+                    <Marker step={steps[i]} on={i === active} onClick={() => onSelect(i)} />
+                  )}
+                </span>
+              );
+            })}
+          </div>
+        </Fragment>
       ))}
-      {/* Step markers */}
-      {steps.map((s, i) => {
-        const on = i === active;
-        return (
-          <button
-            key={s.date}
-            type="button"
-            onClick={() => onSelect(i)}
-            aria-label={`${s.date}: ${s.title}`}
-            aria-current={on ? "step" : undefined}
-            className="group absolute bottom-0 flex h-full w-10 -translate-x-1/2 flex-col items-center"
-            style={{ left: at(monthIndex(s.date)) }}
-          >
-            <span
-              className={`text-12 leading-none tabular-nums transition-colors ${
-                on ? "text-ink" : "text-faint group-hover:text-ink"
-              }`}
-            >
-              {s.date}
-            </span>
-            <span
-              className={`mt-[6px] size-[9px] rounded-full transition-colors ${
-                on ? "bg-ink" : "bg-faint/70 group-hover:bg-ink"
-              }`}
-            />
-            <span
-              className={`w-[1.5px] flex-1 transition-colors ${
-                on ? "bg-ink" : "bg-faint/70 group-hover:bg-ink"
-              }`}
-            />
-          </button>
-        );
-      })}
     </div>
+  );
+}
+
+/** A step on the ruler: its date over a pin (a dot on a 32px line, Figma's Line 396). */
+function Marker({ step, on, onClick }: { step: PivotStep; on: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`${step.date}: ${step.title}`}
+      aria-current={on ? "step" : undefined}
+      className="group absolute bottom-0 left-0 flex h-full w-9 -translate-x-1/2 flex-col items-center"
+    >
+      <span
+        className={`whitespace-nowrap text-12 leading-[14px] tabular-nums transition-colors ${
+          on ? "text-ink" : "text-faint group-hover:text-ink"
+        }`}
+      >
+        {step.date}
+      </span>
+      <span
+        className={`relative mt-2 w-0.5 flex-1 rounded-full transition-colors ${
+          on ? "bg-ink" : "bg-faint/70 group-hover:bg-ink"
+        }`}
+      >
+        <span className="absolute left-1/2 top-0 size-[10.67px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-inherit" />
+      </span>
+    </button>
   );
 }

@@ -4,16 +4,21 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { getLenis } from "@/components/SmoothScroll";
+import { EnterModeSwitch } from "@/components/Dock";
 import { MORPH, startOnEnter } from "@/lib/bgm";
-import { ENTER_KEY } from "@/lib/enter";
+import { ENTER_KEY, SPLASH_ENTER } from "@/lib/enter";
 
 /**
  * The /enter splash (Figma 8713:24303): the real home page, held back. Its hero clip
  * plays blurred and grained exactly where home shows it, with nothing else on
- * screen but Enter (8713:24285), centred on the clip. Enter morphs it into home in place, with no page
- * change: the same clip pulls into focus while the page rises in around it, the
- * music fades in from muffled to clear (lib/bgm), and the address quietly becomes
- * "/". The click also marks this browser session as entered.
+ * screen but Enter (8713:24285), centred on the clip, and the theme switch. Enter
+ * morphs it into home in place, with no page change: the same clip pulls into focus
+ * while the page rises in around it, the music fades in from muffled to clear
+ * (lib/bgm), and the address quietly becomes "/". The click also marks this browser
+ * session as entered.
+ *
+ * The 404 is the same splash with a `title` over Enter, so a dead link restarts the
+ * visit from home with the same morph.
  *
  * With a mouse, the clip starts to come into focus as the pointer nears Enter: the
  * blur eases from 100% to 75%, reaching 75% on the button itself, so the click
@@ -43,7 +48,18 @@ function noiseTile() {
   return `url(${c.toDataURL("image/png")})`;
 }
 
-export default function Splash({ children }: { children: React.ReactNode }) {
+export default function Splash({
+  title,
+  label = "Enter",
+  children,
+}: {
+  /** A line across the whole screen, in the dark band above the clip's bright orb (the
+      404's marquee). Outside the card, so it isn't cut off at the clip's edges. */
+  title?: React.ReactNode;
+  /** The button's word: Enter on /enter, Restart on the 404. */
+  label?: string;
+  children: React.ReactNode;
+}) {
   const [stage, setStage] = useState<Stage>("on");
   /** The hero card, where Enter sits (centred on the clip). */
   const [card, setCard] = useState<HTMLElement | null>(null);
@@ -57,6 +73,23 @@ export default function Splash({ children }: { children: React.ReactNode }) {
     el.style.setProperty("--splash-noise", noiseTile());
     setCard(el.querySelector<HTMLElement>(".hero-card"));
   }, []);
+
+  /** Where the title runs: 11% down the card, in the dark band above the orb (the middle
+      ~45% of the card), measured from the card's layout box (its rise's shift ignored). */
+  const [band, setBand] = useState<number | null>(null);
+  const hasTitle = title != null;
+  useEffect(() => {
+    if (!card || !hasTitle) return;
+    const measure = () => {
+      let y = 0;
+      for (let el: HTMLElement | null = card; el; el = el.offsetParent as HTMLElement | null) y += el.offsetTop;
+      setBand(y + card.offsetHeight * 0.11);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(card);
+    return () => ro.disconnect();
+  }, [card, hasTitle]);
 
   // Mouse only: the nearer the pointer to Enter, the less blur (100% far away, 75%
   // on the button), eased so it gathers pace as you close in. One update per frame.
@@ -122,6 +155,7 @@ export default function Splash({ children }: { children: React.ReactNode }) {
       // No storage: home may show the splash again on a reload, nothing worse.
     }
     startOnEnter();
+    window.dispatchEvent(new Event(SPLASH_ENTER));
     setStage("leaving");
     // Home, in place: the address changes without a reload, so the clip never stops.
     window.history.replaceState(null, "", "/");
@@ -130,34 +164,55 @@ export default function Splash({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div
-      ref={attach}
-      data-splash={stage === "on" ? "on" : "off"}
-      style={{ "--morph": `${MORPH}s` } as React.CSSProperties}
-    >
-      {children}
-      {card &&
-        stage !== "off" &&
-        createPortal(
-          // Above the card's grain (its ::after), centred on the clip both ways.
-          <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center">
-            <button
-              ref={button}
-              type="button"
-              onClick={enter}
-              disabled={stage !== "on"}
-              className={`pointer-events-auto flex h-[42px] items-center gap-2 rounded-full bg-[#262c38] py-[6px] pl-4 pr-1 text-[20px] leading-[1.5] text-white transition-[background-color,opacity,transform] duration-300 ease-out hover:bg-[#2f3645] ${
+    <>
+      <div
+        ref={attach}
+        data-splash={stage === "on" ? "on" : "off"}
+        style={{ "--morph": `${MORPH}s` } as React.CSSProperties}
+      >
+        {children}
+        {card &&
+          stage !== "off" &&
+          createPortal(
+            // Above the card's grain (its ::after), Enter centred on the clip both ways.
+            <div
+              className={`pointer-events-none absolute inset-0 z-10 grid place-items-center transition-[opacity,transform] duration-300 ease-out ${
                 stage === "on" ? "" : "scale-95 opacity-0"
               }`}
             >
-              Enter
-              <span className="flex h-8 items-center border-l border-[#303745] pl-[5px] pr-2">
-                <Image src="/media/enter/arrow-right.svg" alt="" width={16} height={16} />
-              </span>
-            </button>
-          </div>,
-          card,
-        )}
-    </div>
+              <button
+                ref={button}
+                type="button"
+                onClick={enter}
+                disabled={stage !== "on"}
+                className="pointer-events-auto flex h-[42px] items-center gap-2 rounded-full bg-[#262c38] py-[6px] pl-4 pr-1 text-[20px] leading-[1.5] text-white transition-colors duration-300 ease-out hover:bg-[#2f3645]"
+              >
+                {label}
+                <span className="flex h-8 items-center border-l border-[#303745] pl-[5px] pr-2">
+                  <Image src="/media/enter/arrow-right.svg" alt="" width={16} height={16} />
+                </span>
+              </button>
+            </div>,
+            card,
+          )}
+      </div>
+      {/* Fixed is fine: nothing scrolls while the splash is up. The inner .rise fades it up
+          as it appears; the outer opacity fades it out with the button on Enter. */}
+      {title && band !== null && stage !== "off" && (
+        <div
+          className={`pointer-events-none fixed inset-x-4 z-10 -translate-y-1/2 transition-opacity duration-300 ease-out ${
+            stage === "on" ? "" : "opacity-0"
+          }`}
+          style={{ top: band }}
+        >
+          <div style={{ "--i": 1 } as React.CSSProperties} className="rise">
+            {title}
+          </div>
+        </div>
+      )}
+      {/* The splash's one other control. Outside the wrapper: its .rise mustn't be held
+          back with the page's. The dock steps aside meanwhile (globals.css). */}
+      {stage === "on" && <EnterModeSwitch />}
+    </>
   );
 }

@@ -5,6 +5,8 @@
  */
 export const ENTER_KEY = "entered";
 export const ENTER_ROUTE = "/enter";
+/** Fired on window when a splash's Enter is clicked (/enter or the 404). */
+export const SPLASH_ENTER = "splash:enter";
 
 /**
  * Runs inline in <head>, before first paint: on home, if this session hasn't

@@ -1,9 +1,12 @@
 /**
- * Peetal's primitive colour ramps beside 003 (Figma 8697:25095): neutral, primary,
- * secondary and success, cropped by the frame and lit from below. Drawn on a
- * 1464 × 823.5 frame; every position and size is in container units against that
- * 1464px width, so it scales as one picture (the same treatment as TypeSpecimen).
+ * Peetal's primitive colour ramps beside 003 (Figma 8736:44262): neutral, primary,
+ * secondary and success, cropped by the frame, on the same surface as 004's specimen
+ * and fading darker at the foot. Up to 960 × 540 on the page; positions are drawn on a
+ * 1464 × 823.5 frame (the same picture, larger) in container units against that 1464px
+ * width, so it scales as one picture (the same treatment as TypeSpecimen).
  */
+
+import { FootShade } from "./ui";
 
 const cq = (px: number) => `${(px / 14.64).toFixed(4)}cqw`;
 
@@ -29,12 +32,12 @@ export default function TokenRamps({ className = "" }: { className?: string }) {
     <div
       role="img"
       aria-label="Peetal colour ramps: neutral, primary, secondary and success, steps 50 to 900"
-      className={`@container relative aspect-[1464/823.5] w-full max-w-[720px] overflow-hidden leading-[1.5] font-medium text-ink ${className}`}
+      className={`@container relative aspect-[1464/823.5] w-full max-w-[960px] overflow-hidden bg-surface light:bg-white leading-[1.5] font-medium text-ink ${className}`}
     >
       {RAMPS.map((r) => (
         <div
           key={r.name}
-          className="absolute border border-solid border-[rgba(169,172,177,0.16)] bg-bg"
+          className="absolute border border-solid border-[rgba(169,172,177,0.16)]"
           style={{ left: cq(r.left), top: cq(341.11), width: cq(389), height: cq(1128), borderRadius: cq(24) }}
         >
           {STEPS.map((step, i) => {
@@ -66,12 +69,7 @@ export default function TokenRamps({ className = "" }: { className?: string }) {
           })}
         </div>
       ))}
-      {/* Dark-mode lighting: lifts the bottom fifth a touch (exclusion against a
-          near-black ramp), as drawn. Not used in light mode. */}
-      <div
-        className="pointer-events-none absolute inset-0 mix-blend-exclusion light:hidden"
-        style={{ backgroundImage: "linear-gradient(to bottom, #000 0%, #000 80.206%, #131313 100%)" }}
-      />
+      <FootShade />
     </div>
   );
 }

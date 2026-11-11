@@ -4,18 +4,27 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { AnimatePresence, m, useMotionValueEvent, useScroll } from "framer-motion";
 import { EASE } from "@/lib/motion";
-import { BODY, CARD, Tag, rail } from "./ui";
+import { BODY, FootShade, LoopBar, Tag, rail } from "./ui";
 
 export type ScrollSlide = {
   tag: string;
-  src: string;
-  alt: string;
+  /** The image. Row slides may leave it out for a blank frame while media is to come;
+      stack slides need one. */
+  src?: string;
+  alt?: string;
   /** Intrinsic size of the image. */
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   copy: React.ReactNode;
   /** Row layout only: sit the copy at the media's foot instead of its top. */
   bottom?: boolean;
+  /**
+   * Row layout only: where the image sits in the white 960 × 540 frame, in Figma px
+   * (its height follows its ratio). Without it, the image is fitted and centred.
+   */
+  place?: { left: number; top: number; width: number };
+  /** Row layout only: live content for the white frame (positioned inside it) in place of an image. */
+  media?: React.ReactNode;
 };
 
 /**
@@ -26,9 +35,15 @@ export type ScrollSlide = {
  * in the scroll's direction. An invisible screen-tall marker per slide gives the
  * rail a target and scroll-spy.
  *
- * `stack`: media, then the tag and a centred caption under it.
- * `row`: media left, tag and copy in a 478px column on the right.
+ * `stack`: media (square, shaded at the foot like the row's frame), then the tag and a
+ * centred caption under it.
+ * `row` (Figma 8701:27836): the tag and copy in a 424px column on the left, 80px clear
+ *   of the media on the right: a white 960 × 540 frame, square and shaded at the foot
+ *   like 003 and 004's art, with the image fitted or placed inside it.
  */
+/** A placeholder frame's loop, until its media is in. */
+const PLACEHOLDER_LOOP = 6;
+
 export default function ScrollSlides({
   slides,
   idPrefix,
@@ -68,29 +83,65 @@ export default function ScrollSlides({
     },
   });
 
-  // The media is sized to fit the pinned screen (leaving room for the copy in a stack);
-  // stacked media (006) is capped at 904px wide.
-  const ratio = `${s.width} / ${s.height}`;
+  // Stack (006): the media sized to fit the pinned screen with room for the caption,
+  // capped at 904px wide.
+  const w = s.width ?? 16;
+  const h = s.height ?? 9;
+  const ratio = `${w} / ${h}`;
+  // Row: the image in a white 16:9 frame, placed (as a share of 960 × 540) or fitted.
+  const frame = (
+    <m.div
+      {...layer(96, 0)}
+      // Live media (005.1's form) sits on white; a placeholder takes the surface (dark) or
+      // white (light), like 003 and 004's art.
+      className={`relative aspect-video w-full overflow-hidden ${s.media ? "bg-white" : "bg-surface light:bg-white"}`}
+    >
+      {s.media}
+      {!s.media && s.src && (
+        <Image
+          src={s.src}
+          alt={s.alt ?? ""}
+          width={w}
+          height={h}
+          sizes="(min-width: 1512px) 960px, (min-width: 1024px) 64vw, 100vw"
+          className={s.place ? "absolute h-auto" : "absolute inset-0 h-full w-full object-contain"}
+          style={
+            s.place
+              ? {
+                  left: `${(s.place.left / 960) * 100}%`,
+                  top: `${(s.place.top / 540) * 100}%`,
+                  width: `${(s.place.width / 960) * 100}%`,
+                }
+              : undefined
+          }
+        />
+      )}
+      <FootShade />
+      {/* Live media brings its own bar, in step with it; a placeholder loops one. */}
+      {!s.media && <LoopBar seconds={PLACEHOLDER_LOOP} />}
+    </m.div>
+  );
   const media = (
     <m.div
       {...layer(96, 0)}
-      className={layout === "stack" ? CARD : "overflow-hidden rounded-[12px]"}
+      className={`relative overflow-hidden ${s.src ? "" : "bg-surface light:bg-white"}`}
       style={{
         aspectRatio: ratio,
-        width:
-          layout === "stack"
-            ? `min(100%, 904px, calc((100svh - 4rem - 11rem) * ${s.width} / ${s.height}))`
-            : "100%",
+        width: `min(100%, 904px, calc((100svh - 4rem - 11rem) * ${w} / ${h}))`,
       }}
     >
-      <Image
-        src={s.src}
-        alt={s.alt}
-        width={s.width}
-        height={s.height}
-        sizes={layout === "stack" ? "(min-width: 1512px) 1464px, 100vw" : "(min-width: 1024px) 60vw, 100vw"}
-        className="block h-full w-full"
-      />
+      {s.src && (
+        <Image
+          src={s.src}
+          alt={s.alt ?? ""}
+          width={w}
+          height={h}
+          sizes="(min-width: 1512px) 1464px, 100vw"
+          className="block h-full w-full"
+        />
+      )}
+      <FootShade />
+      {!s.src && <LoopBar seconds={PLACEHOLDER_LOOP} />}
     </m.div>
   );
 
@@ -122,19 +173,18 @@ export default function ScrollSlides({
             ) : (
               <div
                 key={s.tag}
-                className={`col-start-1 row-start-1 flex w-full flex-col gap-6 lg:flex-row lg:justify-between lg:gap-20 lg:px-6 ${
+                className={`col-start-1 row-start-1 grid w-full grid-cols-1 gap-6 lg:grid-cols-[minmax(0,424px)_minmax(0,960px)] lg:justify-between lg:gap-20 ${
                   s.bottom ? "lg:items-end" : "lg:items-start"
                 }`}
               >
-                {/* 720px wide on desktop (shrinks if the row is narrower), and capped so
-                    the row's height fits the pinned screen. */}
+                {/* Up to 960 wide, and capped so the frame's height fits the pinned screen. */}
                 <div
-                  className="min-w-0 flex-1 lg:grow-0 lg:basis-[720px]"
-                  style={{ maxWidth: `calc((100svh - 4rem - 4rem) * ${s.width} / ${s.height})` }}
+                  className="min-w-0 lg:order-2 lg:justify-self-end"
+                  style={{ width: "min(100%, calc((100svh - 4rem - 4rem) * 16 / 9))" }}
                 >
-                  {media}
+                  {frame}
                 </div>
-                <div className="flex shrink-0 flex-col justify-center gap-6 lg:w-[480px]">
+                <div className="flex min-w-0 flex-col justify-center gap-6 lg:order-1">
                   <m.div {...layer(48, 0.08)}>
                     <Tag>{s.tag}</Tag>
                   </m.div>

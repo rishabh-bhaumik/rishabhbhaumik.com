@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import "@/components/bk/anek.css";
 import CheckoutFlow from "./CheckoutFlow";
+import FormDemo from "./FormDemo";
 import PivotTimeline, { type PivotStep } from "./PivotTimeline";
 import ScrollSlides, { type ScrollSlide } from "./ScrollSlides";
 import TokenRamps from "./TokenRamps";
 import TypeSpecimen from "./TypeSpecimen";
-import { BODY, CARD, Stats, Tag, rail, type Stat } from "./ui";
+import { BODY, FootShade, Stats, Tag, rail, type Stat } from "./ui";
 
 // First-draft build of the Figma case-study page (Peetal DSL, node 8627:5701),
 // section by section. Colours are theme tokens (Figma values in dark), so the page
@@ -16,10 +17,8 @@ import { BODY, CARD, Stats, Tag, rail, type Stat } from "./ui";
 const FORM_ROWS: ScrollSlide[] = [
   {
     tag: "005.1",
-    src: "/media/draft/forms-chips.png",
-    width: 906,
-    height: 528,
-    alt: "Two Share Your Business Details forms: suggestion chips, and the Other chip opening a search field",
+    // The form, played through: Others, a pick from its dropdown, then Tenant.
+    media: <FormDemo />,
     copy: (
       <>
         <p>Two examples of simplifying forms:</p>
@@ -36,10 +35,7 @@ const FORM_ROWS: ScrollSlide[] = [
   },
   {
     tag: "005.2",
-    src: "/media/draft/forms-modal.png",
-    width: 906,
-    height: 528,
-    alt: "Confirm Last Few Details modal over the loading quote page",
+    // Media to come: a blank frame for now.
     copy: (
       <p>
         By showcasing a loading state of the Quote Page and asking no brainer questions in the form
@@ -50,10 +46,7 @@ const FORM_ROWS: ScrollSlide[] = [
   },
   {
     tag: "005.3",
-    src: "/media/draft/forms-otp.png",
-    width: 906,
-    height: 528,
-    alt: "Verify Your Number OTP sheet on an iPhone",
+    // Media to come: a blank frame for now.
     // Draft copy (005.3 had 005.2's text); the user to confirm or replace.
     copy: (
       <p>
@@ -68,37 +61,33 @@ const FORM_ROWS: ScrollSlide[] = [
 const FLOW_SLIDES: ScrollSlide[] = [
   {
     tag: "006.1",
-    src: "/media/draft/flow-1.png",
+    // Media to come: a placeholder frame at the shots' ratio for now.
     width: 1464,
     height: 850,
-    alt: "Quote page on desktop and mobile: a feed of insurer cards with filters and compare",
     copy:
       "The Quote Page acts as a feed - filtering and sorting coverage offerings based on the user’s needs. Each Card contains further details and available quotes can be compared.",
   },
   {
     tag: "006.2",
-    src: "/media/draft/flow-2.png",
+    // Media to come: a placeholder frame at the shots' ratio for now.
     width: 1464,
     height: 850,
-    alt: "Primary Details step on mobile and desktop, with a stepper and the price beside the button",
     copy:
       "Steppers help assess the user in how much or little work is pending. The Price is always shown next to the Button to encourage Further Movement and Constant Action.",
   },
   {
     tag: "006.3",
-    src: "/media/draft/flow-3.png",
+    // Media to come: a placeholder frame at the shots' ratio for now.
     width: 1464,
     height: 850,
-    alt: "Four Complete KYC screens showing tool-tip cues for each state",
     copy:
       "Contextual Cues via Tool Tips help reduce action, and thus increase movement in the flow.",
   },
   {
     tag: "006.4",
-    src: "/media/draft/flow-4.png",
+    // Media to come: a placeholder frame at the shots' ratio for now.
     width: 1464,
     height: 850,
-    alt: "Personal assistance page and a loading screen that bridge a failed insurer API",
     copy:
       "Insurance APIs are wonky - at any step should the API fail in anticipation of or during payment - contingency loaders and screens appear to bridge gaps.",
   },
@@ -188,7 +177,11 @@ const PIVOT_STEPS: PivotStep[] = [
   {
     date: "03.23",
     title: "Minimum Viable Product",
-    summary: "Aayra as Mascot, Tech Founder First, Recommendation Engine",
+    body: [
+      "Working only as a recommendation engine for the maturing tech-startup markets across Tier 1 India, BimaKavach had a young, adventurous and confident look to it while its first feature was a successful experiment.",
+      "This is the BimaKavach I saw and joined. Days into my journey, the brief was given for how this worked so far, the change at hand, and ideas for solutions.",
+    ],
+    points: ["Feature 1: Recommendation Engine", "Aayra as Mascot", "Tech Founder First"],
     screen: {
       src: "/media/draft/pivot-01-mvp.png",
       alt: "BimaKavach's 2023 mobile homepage: Complete Insurance for your business, with Aayra the mascot",
@@ -198,9 +191,13 @@ const PIVOT_STEPS: PivotStep[] = [
     },
   },
   {
-    date: "10.23",
+    date: "09.23",
     title: "The Gentle Nudge",
-    summary: "Dilip Joshi as Mascot, SME Inclusive, Quote Generation Available",
+    body: [
+      "Initial attempts to create quote generation resulted in a successful IRDAI License. We realized that the basic Product Landing Page (PLP) would require lead generation, Raters and APIs from Insurance Companies.",
+      "Exploring user personas validated the need of this to tier-2, SME first companies that are entering new stages in their growth. Bonus: Got to go to Mumbai and witness Dilip Joshi’s photoshoot which we directed.",
+    ],
+    points: ["Feature 2: Quote Generation", "Dilip Joshi as Mascot", "SME Inclusive"],
     screen: {
       src: "/media/draft/pivot-02-gentle-nudge.png",
       alt: "BimaKavach's late-2023 mobile homepage: Get a Business Insurance Quote in Minutes, with Dilip Joshi",
@@ -210,23 +207,51 @@ const PIVOT_STEPS: PivotStep[] = [
     },
   },
   {
-    date: "03.25",
-    title: "Platform as a Pivot",
-    summary: "No Mascot, Marketplace positioning, Online Checkout",
+    date: "11.24",
+    title: "Arc of Safety",
+    body: [
+      "Adding the ISMP License from IRDAI in late 2024, BimaKavach can now position itself as the best Insurance platform for Indian businesses to buy insurance from, directly.",
+      "Checkout creates new challenges, how can the customer be retained cross-sold and upsold smartly during renewals/policy expiries.",
+    ],
+    points: ["Feature 3: Online Checkout", "Marketplace Positioning", "Ditching Mascots - Initial Attempts at Generative AI"],
     screen: {
-      src: "/media/draft/pivot-03-platform.png",
-      alt: "BimaKavach's 2025 mobile homepage: India ka trusted business Kavach, quotes from 20+ insurers",
+      src: "/media/draft/pivot-03-arc.png",
+      alt: "BimaKavach's late-2024 mobile homepage: India ka trusted business Kavach, an arc of safety over a factory floor",
       width: 968,
       height: 1552,
       bg: "#ffffff",
     },
   },
   {
+    date: "06.25",
+    title: "Platform as a Pivot",
+    body: [
+      "2025 was the year of E-Commerce implementation & 2 Product Launches.",
+      "Pivoting away from a consultancy option to a self-checkout positioning came with the launch of our client Dashboard and a new App for India’s POS Agent Market.",
+    ],
+    points: ["Product Launch! Dashboard", "Product Launch! BimaSaathi", "E-Commerce for Business Insurance"],
+    screen: {
+      src: "/media/draft/pivot-04-platform.png",
+      alt: "BimaKavach's 2025 mobile homepage: Fast Insurance for Unstoppable Businesses, with instant-purchase product cards",
+      width: 484,
+      height: 776,
+      bg: "#ffffff",
+    },
+  },
+  {
     date: "06.26",
     title: "Orienting the Axis",
-    summary: "Re-Branding, Online Checkout, Underwriting Intelligence.",
+    body: [
+      "It’s 2026. Saathi, and by extension the POS Vertical brings us a third of revenue. Intelligence, Analysis, and Tech becomes the focus. And the cherry above the cake, a new layer of paint.",
+      "Can we create experiences for the customer that understands, then recommends? Can we automate servicing tasks, scale lead generation through Data & Automation pipelines? (WIP)",
+    ],
+    points: [
+      "Feature 4: BimaNetra (WIP)",
+      "Underwriting Intelligence: Agentic Risk Analysis",
+      "Indian Identity, Product Branding",
+    ],
     screen: {
-      src: "/media/draft/pivot-04-axis.png",
+      src: "/media/draft/pivot-05-axis.png",
       alt: "BimaKavach's 2026 mobile homepage: India's first AI driven Business Insurance Platform",
       width: 968,
       height: 1552,
@@ -236,6 +261,23 @@ const PIVOT_STEPS: PivotStep[] = [
 ];
 
 const ROW = "flex flex-col gap-6 px-6";
+
+/**
+ * 003 and 004's frame (Figma 8631:84086 / 8736:44262): the copy column capped at 480 and
+ * the art at 960 (480 + 24 + 960 fills the 1464 between the gutters at 1512). Narrower,
+ * the copy keeps its 480 while it can and the art takes the rest.
+ */
+const SPLIT = "grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,480px)_minmax(0,960px)]";
+
+/** Out to the Peetal deep-dive, from 003 and 004. */
+const PEETAL_LINK = (
+  <Link
+    href="/peetal"
+    className="w-fit text-14 text-ink underline decoration-ink/60 underline-offset-[2px] transition-colors hover:decoration-ink"
+  >
+    More on Peetal
+  </Link>
+);
 
 function SectionHead({
   tag,
@@ -283,11 +325,16 @@ export default function DraftContent() {
       {/* Cover + intro */}
       {/* Not in the rail while the title is hidden and the cover waits for the showreel. */}
       <section id="context" className="flex scroll-mt-16 flex-col items-center gap-6 px-6 py-[60px]">
-        {/* Cover media slot (showreel to come); capped at 1200px, centred. */}
-        <div className="relative aspect-[1512/850] w-full max-w-[1200px] bg-surface">
+        {/* Cover media slot (showreel to come, Figma 8627:5995): black, a 24% hairline,
+            4px corners; capped at 1200px, centred. On light: white, shaded at the foot
+            like 005's frames. */}
+        <div className="relative aspect-[1512/850] w-full max-w-[1200px] overflow-clip rounded-[4px] border border-[rgba(169,172,177,0.24)] bg-black light:bg-white">
           <p className="absolute left-1/2 top-[calc(50%-10.01px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
             MEDIA INCOMING...
           </p>
+          <span className="hidden light:contents">
+            <FootShade />
+          </span>
         </div>
         {/* Title and intro hidden for now; the h1 stays for screen readers. */}
         <div className="sr-only">
@@ -375,11 +422,13 @@ export default function DraftContent() {
       {/* 003 Design Systems and 004 Typography: copy left, media right; one block, no gap between */}
       <div className="flex flex-col">
         <section {...rail("design-systems", "003. Solutions - Design Systems")} className="scroll-mt-16 px-6 py-[60px]">
-          {/* Same frame as 004: two equal columns, the copy stretching to the art's height. */}
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {/* Same frame as 004 (SPLIT): copy and art, the copy stretching to the art's height. */}
+          <div className={SPLIT}>
             <SectionHead
               tag="003."
-              title={"Solutions -\u00a0Design Systems"}
+              // 440px against the 480 column's 432: on one line from lg, running 8px into
+              // the gutter, as in Figma.
+              title={<span className="lg:whitespace-nowrap">{"Solutions -\u00a0Design Systems"}</span>}
               foot={<Stats items={OUTCOMES.designSystems} />}
               className="min-w-0 justify-between"
             >
@@ -390,21 +439,16 @@ export default function DraftContent() {
                 Collaborative Structure and Usefulness to Developers, and UX4G’s scalability and
                 simplicity.
               </p>
-              <Link
-                href="/peetal"
-                className="w-fit text-14 text-ink underline decoration-ink/60 underline-offset-[2px] transition-colors hover:decoration-ink"
-              >
-                More on Peetal
-              </Link>
+              {PEETAL_LINK}
             </SectionHead>
             <TokenRamps className="min-w-0 lg:self-start" />
           </div>
         </section>
 
         <section {...rail("typography", "004. Solutions - Typography")} className="scroll-mt-16 px-6 py-[60px]">
-          {/* Two equal columns (720 each at 1512): the copy column stretches to the
-              specimen's height, its stats sinking to the foot above 24px of padding. */}
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {/* The copy column stretches to the specimen's height, its stats sinking to the
+              foot above 24px of padding. */}
+          <div className={SPLIT}>
             <SectionHead
               tag="004."
               title={"Solutions -\u00a0Typography"}
@@ -424,6 +468,7 @@ export default function DraftContent() {
                   offered in a variable font format.
                 </p>
               </div>
+              {PEETAL_LINK}
             </SectionHead>
             <TypeSpecimen className="min-w-0 lg:self-start" />
           </div>
@@ -441,7 +486,8 @@ export default function DraftContent() {
           </p>
           <Stats items={OUTCOMES.forms} />
         </SectionHead>
-        <div className={`flex h-[850px] flex-col items-center justify-end bg-white ${CARD}`}>
+        {/* Square and shaded at the foot, like the art frames in 003, 004 and 005.1-005.3. */}
+        <div className="relative flex h-[850px] flex-col items-center justify-end overflow-hidden bg-white">
           <Image
             src="/media/draft/quote-form-phone.png"
             alt="BimaKavach's Get Quotes in a Few Steps form on an iPhone"
@@ -449,6 +495,7 @@ export default function DraftContent() {
             height={720}
             className="block h-[720px] w-[448.73px] max-w-none"
           />
+          <FootShade />
         </div>
       </section>
 
@@ -482,7 +529,8 @@ export default function DraftContent() {
           </div>
         </div>
         {/* Phones: drawn at Figma's own 960px and scrolled sideways, so the labels stay legible. */}
-        <div className={`${CARD} max-sm:overflow-x-auto max-sm:overscroll-x-contain`}>
+        {/* Square, like the other art frames (the flow shades its own foot). */}
+        <div className="overflow-hidden max-sm:overflow-x-auto max-sm:overscroll-x-contain">
           <CheckoutFlow className="max-sm:w-[960px]" />
         </div>
       </section>

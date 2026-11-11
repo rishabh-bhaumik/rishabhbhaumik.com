@@ -31,7 +31,8 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 - `/enter` — splash, the front door: the home page held back (`components/enter/Splash.tsx`):
   the hero clip blurred and grained in place, one Enter button, and only the theme switch
-  (bottom right, every screen size; it follows the visitor's theme). Enter morphs it into home
+  (bottom right, every screen size; it follows the visitor's theme; Splash renders it, and the
+  dock hides while any `[data-splash="on"]` is up, `.site-dock` in globals.css). Enter morphs it into home
   with no page change (clip unblurs over `MORPH`, page rises in, music fades in muffled to
   clear, URL becomes `/` via replaceState) and marks the session entered; a fresh load of `/`
   goes here first (`ENTER_SCRIPT`, `lib/enter.ts`). Keep its tree in step with app/page.tsx.
@@ -41,7 +42,9 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - `/work` — work gallery (Header, WorkGallery, Footer)
 - `/about` — `AboutContent`
 - `/play` — Play gallery (Vimeo/SoundCloud embeds via oEmbed)
-- `app/not-found.tsx` — 404 for any unknown address: Header, "404 / 404 / 404 / 404", a Retry button
+- `app/not-found.tsx` — 404 for any unknown address: the same splash (`Splash` with a `title`):
+  a tiny "4 0 4  /" marquee (Figma 8736:43211) across the screen in the dark band above the
+  blurred clip, Restart on the clip (Enter's button, `label`); it morphs into home exactly as Enter does on /enter, so a dead link restarts the visit. Keep its tree in step too.
 - `/bima-saathi` — password-gated, vertical-scroll case study
 - `/bimakavach-identity` — password-gated, horizontal panel-snap-scroll case study (19 sections)
 
