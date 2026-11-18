@@ -1,0 +1,84 @@
+/* The home greeting's type (components/home/Greeting.tsx, words in HOME.greetings): one
+   family per script, each a WOFF2 cut down to just its greeting's letters, at Medium.
+   Anek for Bangla, Devanagari and Kannada; Noto for the rest (the Latin words use
+   the site's own Arial, so need nothing here). Made by
+   scripts/hello-fonts.py (public/media/hello/, ~38 KB in all). Only "Hello Bangla" is
+   needed for the first paint; Greeting fetches the others once the page has settled. */
+@font-face {
+  font-family: "Hello Bangla";
+  src: url("/media/hello/bangla.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Devanagari";
+  src: url("/media/hello/devanagari.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Kannada";
+  src: url("/media/hello/kannada.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Japanese";
+  src: url("/media/hello/japanese.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Arabic";
+  src: url("/media/hello/arabic.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Korean";
+  src: url("/media/hello/korean.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Greek Cyrillic";
+  src: url("/media/hello/greek-cyrillic.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Thai";
+  src: url("/media/hello/thai.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Chinese";
+  src: url("/media/hello/chinese.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Hebrew";
+  src: url("/media/hello/hebrew.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Sinhala";
+  src: url("/media/hello/sinhala.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Ethiopic";
+  src: url("/media/hello/ethiopic.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hello Georgian";
+  src: url("/media/hello/georgian.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}

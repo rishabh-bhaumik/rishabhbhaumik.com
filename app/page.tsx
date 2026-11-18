@@ -1,20 +1,15 @@
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
+import Sheet from "@/components/home/Sheet";
+import SelectedWork from "@/components/home/SelectedWork";
+import SheetContact from "@/components/home/SheetContact";
+import SheetHero, { HomeAside, HomeHeading } from "@/components/home/SheetHero";
 
-// Rebuilt hourly so the hero's version pill (lib/version.ts) ticks over on the 28th.
-export const revalidate = 3600;
-
+/** Home (Figma 8780:35610): the ruled sheet, its opening, Selected Work and contact. */
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main className="mx-auto w-full max-w-[var(--shell-max)] pt-2">
-        <div className="mx-auto max-w-[var(--content-max)]">
-          <Hero />
-        </div>
-      </main>
-      <Footer />
-    </>
+    <Sheet>
+      <SheetHero heading={<HomeHeading />} aside={<HomeAside />} />
+      <SelectedWork />
+      <SheetContact />
+    </Sheet>
   );
 }

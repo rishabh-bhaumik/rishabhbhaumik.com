@@ -19,11 +19,21 @@ const MAX_DRIFT = 0.1;
  * Posters paint straight from the server HTML. The files only load once the
  * page has loaded and gone idle, the visible one first, and play only while
  * on screen. Under reduced motion the posters stay.
+ *
+ * `active` (optional) adds a condition: the clip plays only while it's true and
+ * holds its frame otherwise (the contact block plays it on hover). Left out, it
+ * plays whenever it's on screen.
  */
-export default function HeroVideo({ dark, light }: { dark: Clip; light: Clip }) {
+export default function HeroVideo({ dark, light, active }: { dark: Clip; light: Clip; active?: boolean }) {
   const darkRef = useRef<HTMLVideoElement>(null);
   const lightRef = useRef<HTMLVideoElement>(null);
   const [mount, setMount] = useState<"none" | "lead" | "both">("none");
+  const activeRef = useRef(active ?? true);
+  const syncRef = useRef<() => void>(() => {});
+  useEffect(() => {
+    activeRef.current = active ?? true;
+    syncRef.current();
+  }, [active]);
 
   // Load after the page has settled; the clip on show first, then its partner.
   useEffect(() => {
@@ -58,7 +68,7 @@ export default function HeroVideo({ dark, light }: { dark: Clip; light: Clip }) 
 
     let onScreen = true;
     const sync = () => {
-      const run = onScreen && !document.hidden;
+      const run = onScreen && !document.hidden && activeRef.current;
       for (const v of [d, l]) {
         if (!v.src) continue;
         if (run) v.play().catch(() => {});
@@ -82,8 +92,10 @@ export default function HeroVideo({ dark, light }: { dark: Clip; light: Clip }) 
     document.addEventListener("visibilitychange", sync);
     d.addEventListener("timeupdate", align);
     l.addEventListener("timeupdate", align);
+    syncRef.current = sync;
     sync();
     return () => {
+      syncRef.current = () => {};
       io.disconnect();
       document.removeEventListener("visibilitychange", sync);
       d.removeEventListener("timeupdate", align);

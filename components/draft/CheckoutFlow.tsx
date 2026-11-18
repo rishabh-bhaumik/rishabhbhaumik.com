@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FootShade } from "./ui";
+import { FootShade, LIGHT, media } from "./ui";
 
 /**
  * 006's checkout flow (Figma 8701:54855): the quote page branching into the payment
@@ -195,6 +195,8 @@ function arrowhead([x, y, dir]: [number, number, "right" | "down"], a: number) {
 export default function CheckoutFlow({ className = "" }: { className?: string }) {
   return (
     <div
+      {...LIGHT}
+      {...media("flow")}
       role="img"
       aria-label="Checkout flow: pre payment, the quote page branches into online, offline and unavailable quotes. Online runs the payment flow (policy issuance, company registration, KYC verification, review, consent and payment) into the post-payment states (success, pending, failure), or to a payment failure; offline quotes fall back to a payment link or a quote by mail."
       className={`@container relative aspect-[960.3027/331.252] w-full overflow-hidden bg-surface font-medium leading-[1.5] light:bg-white ${className}`}

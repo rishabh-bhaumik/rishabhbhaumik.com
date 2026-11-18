@@ -15,6 +15,9 @@
   --color-nav-current: #363636;
   /* Quiet controls a step below faint (carousel arrows and counter). */
   --color-dim: #575757;
+  /* Home's ruled sheet (Figma 8780:35610): its hairlines, and its secondary labels. */
+  --color-rule: #1c1c1c;
+  --color-subtle: #6f7378;
 
   /* BimaKavach's violet, used only inside its Identity case study. The site
      itself is monochrome; the clock's status dot keeps its own colours in
@@ -27,7 +30,7 @@
   --font-mono: Arial, Helvetica, sans-serif;
   --font-display: Arial, Helvetica, sans-serif;
 
-  /* Type scale — the only font sizes on the site (text-10 … text-56). */
+  /* Type scale — the only font sizes on the site (text-10 … text-64). */
   --text-10: 10px;
   --text-12: 12px;
   --text-14: 14px;
@@ -42,6 +45,7 @@
   --text-44: 44px;
   --text-48: 48px;
   --text-56: 56px;
+  --text-64: 64px;
 
   /* Layout */
   --content-max: 832px; /* Home work column */
@@ -60,8 +64,12 @@
   :root {
     color-scheme: dark;
   }
-  :root[data-theme="light"] {
+  /* Also any element marked light: /draft's containers stay light in dark mode. */
+  :root[data-theme="light"],
+  [data-theme="light"] {
     color-scheme: light;
+    /* Text that doesn't set its own colour inherits the light ink, not the page's. */
+    color: var(--color-ink);
     --color-bg: #f5f3ef;
     --color-surface: #ebe7e0;
     --color-surface-2: #e2ddd4;
@@ -71,6 +79,18 @@
     --color-faint: #6b665e;
     --color-nav-current: #c4beb3;
     --color-dim: #a39d92;
+    --color-rule: #e2ddd4;
+    --color-subtle: #6b665e;
+  }
+}
+
+/* /draft: media containers open the lightbox (components/draft/MediaLightbox). */
+@layer base {
+  [data-media] {
+    cursor: pointer;
+  }
+  [data-lightbox] [data-media] {
+    cursor: auto;
   }
 }
 
@@ -272,6 +292,15 @@ html.lenis body {
 :root:has([data-splash="on"]) .site-dock {
   display: none;
 }
+/* Home's sheet nav carries the view controls itself, so the floating dock steps aside. */
+:root:has([data-sheet-nav]) .site-dock {
+  display: none;
+}
+/* Home's label marquee (components/home/TagMarquee) rests while pointed at. */
+.tag-marquee:hover > *,
+.tag-marquee:focus-within > * {
+  animation-play-state: paused;
+}
 /* The draft's loop bar (components/draft/ui.tsx LoopBar): pinned left, growing to full
    width as a loop plays. Used through an animate-[loop-bar…] class, so Tailwind keeps it
    (it drops keyframes no class names). */
@@ -295,6 +324,42 @@ html.lenis body {
 @keyframes flow-dash {
   to {
     stroke-dashoffset: -24.9675;
+  }
+}
+
+/* /radio (components/radio/RadioPlayer): the backdrop's slow drift, the pause dots'
+   breathing, and the scrubber (a thin white track, filled to --p). */
+@keyframes radio-drift {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes radio-breathe {
+  50% {
+    transform: scale(1.12);
+  }
+}
+@layer components {
+  .radio-scrub {
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(to right, rgb(255 255 255 / 0.75) var(--p), rgb(255 255 255 / 0.2) var(--p));
+    cursor: pointer;
+    transition: height 0.2s;
+  }
+  .radio-scrub:hover {
+    height: 10px;
+  }
+  .radio-scrub::-webkit-slider-thumb {
+    appearance: none;
+    width: 0;
+    height: 0;
+  }
+  .radio-scrub::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    border: 0;
   }
 }
 
@@ -332,6 +397,13 @@ html.lenis body {
   .rise,
   .rise-text {
     animation: none;
+  }
+  /* Project media frames (components/project/GrowMedia) stay full size. */
+  [data-grow] {
+    clip-path: none !important;
+  }
+  [data-grow-scale] {
+    transform: none !important;
   }
   *,
   *::before,

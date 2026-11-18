@@ -15,7 +15,20 @@ import {
  * that to a DB later and this updates for free), then "(local)". The dot sits
  * on the page's centre line. Display only: the theme switch lives in the dock.
  */
-export default function LocalClock() {
+export default function LocalClock({
+  timeZone,
+  label = "(local)",
+  compact = false,
+  dotFirst = false,
+}: {
+  /** Whose time: the visitor's by default, or a fixed zone (the home footer's India time). */
+  timeZone?: string;
+  label?: string;
+  /** Home's sheet nav and footer: one small row (10px), no centring grid. */
+  compact?: boolean;
+  /** Compact only: the dot leads ("● 01:52 AM (local)") instead of sitting between. */
+  dotFirst?: boolean;
+} = {}) {
   const [time, setTime] = useState<string | null>(null);
   const [schedule, setSchedule] = useState<AvailabilitySchedule | null>(null);
   const [status, setStatus] = useState<Status>("offline");
@@ -23,7 +36,7 @@ export default function LocalClock() {
   // Visitor's local time. The display only shows minutes, so it updates on
   // each minute boundary (not every second), and not at all in a hidden tab.
   useEffect(() => {
-    const fmt = new Intl.DateTimeFormat("en-US", { hour: "2-digit", minute: "2-digit", hour12: true });
+    const fmt = new Intl.DateTimeFormat("en-US", { hour: "2-digit", minute: "2-digit", hour12: true, timeZone });
     let id = 0;
     const update = () => {
       setTime(fmt.format(new Date()).toUpperCase());
@@ -39,7 +52,7 @@ export default function LocalClock() {
       window.clearTimeout(id);
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, []);
+  }, [timeZone]);
 
   // Load availability schedule once (the future DB seam).
   useEffect(() => {
@@ -65,6 +78,32 @@ export default function LocalClock() {
   }, [schedule]);
 
   const meta = STATUS_META[status];
+
+  const dot = (
+    <span className="relative inline-flex size-1.5 shrink-0" aria-hidden="true">
+      {status === "online" && (
+        <span
+          className="absolute inline-flex size-full animate-ping rounded-full opacity-60 motion-reduce:hidden"
+          style={{ backgroundColor: meta.color }}
+        />
+      )}
+      <span className="relative inline-flex size-1.5 rounded-full" style={{ backgroundColor: meta.color }} />
+    </span>
+  );
+
+  if (compact) {
+    return (
+      <span className="flex items-center gap-1 whitespace-nowrap text-10 leading-none text-faint" title={meta.label}>
+        {dotFirst && dot}
+        <span suppressHydrationWarning className="tabular-nums">
+          {time ?? "--:-- --"}
+        </span>
+        {!dotFirst && dot}
+        <span>{label}</span>
+        <span className="sr-only">{meta.label}</span>
+      </span>
+    );
+  }
 
   return (
     // Three columns, the outer two always equal, so the dot is the row's exact centre.
@@ -92,7 +131,7 @@ export default function LocalClock() {
           }}
         />
       </span>
-      <span className="justify-self-start font-mono text-12 leading-none text-faint/70">(local)</span>
+      <span className="justify-self-start font-mono text-12 leading-none text-faint/70">{label}</span>
       <span className="sr-only">{meta.label}</span>
     </span>
   );

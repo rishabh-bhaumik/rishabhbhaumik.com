@@ -42,13 +42,25 @@ function monthIndex(date: string) {
  * go. Previous, Next and the ruler scroll to a step rather than set it, so the
  * two never disagree.
  */
+/** The date's roll: in from below and out the top going forward, mirrored going back. */
+const ROLL = {
+  enter: (d: number) => ({ y: d > 0 ? "100%" : "-100%" }),
+  center: { y: "0%" },
+  exit: (d: number) => ({ y: d > 0 ? "-100%" : "100%" }),
+};
+
 export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  /** 1 walking forward, -1 back: which way the date rolls. */
+  const [dir, setDir] = useState(1);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
   useMotionValueEvent(scrollYProgress, "change", (p) => {
-    setActive(Math.min(steps.length - 1, Math.max(0, Math.floor(p * steps.length))));
+    const next = Math.min(steps.length - 1, Math.max(0, Math.floor(p * steps.length)));
+    if (next === active) return;
+    setDir(next > active ? 1 : -1);
+    setActive(next);
   });
 
   /** Scrolls to the middle of step `i`'s stretch. */
@@ -118,7 +130,24 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
               pinned card never overflows on shorter screens. */}
           <div className="@container flex flex-col gap-6 px-6 pb-6 pt-8 lg:gap-0 lg:pb-[6.5%] lg:pl-[6%] lg:pr-[8.75%] lg:pt-[16%] [@container_pivot-card_(max-height:560px)]:gap-4 [@container_pivot-card_(max-height:560px)]:pt-6">
             <div className="flex items-baseline justify-between text-12 text-faint">
-              <span className="tabular-nums">{step.date}</span>
+              {/* An odometer: the dates stacked in a one-line slot. Going forward this one
+                  rises out of the top as the next comes up from below; back, the reverse. */}
+              <span className="relative inline-grid overflow-hidden tabular-nums">
+                <AnimatePresence initial={false} custom={dir}>
+                  <m.span
+                    key={step.date}
+                    custom={dir}
+                    variants={ROLL}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.45, ease: EASE }}
+                    className="[grid-area:1/1]"
+                  >
+                    {step.date}
+                  </m.span>
+                </AnimatePresence>
+              </span>
               {/* Previous joins after the first step; the last step restarts. */}
               <div className="flex items-baseline gap-4">
                 {active > 0 && (

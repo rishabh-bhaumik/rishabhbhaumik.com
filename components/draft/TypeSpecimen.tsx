@@ -1,4 +1,4 @@
-import { FootShade } from "./ui";
+import { FootShade, LIGHT, media } from "./ui";
 
 /**
  * The Anek type specimen beside 004 (Figma 8734:41473): the system's typographic
@@ -83,6 +83,8 @@ function RampGlyphs({ ramp, x, side }: { ramp: Ramp; x: number; side: "left" | "
 export default function TypeSpecimen({ className = "" }: { className?: string }) {
   return (
     <div
+      {...LIGHT}
+      {...media("type")}
       className={`@container relative aspect-[720/405] w-full max-w-[696px] overflow-hidden bg-surface light:bg-white leading-none text-ink ${className}`}
     >
       {RULES.map((r) => (

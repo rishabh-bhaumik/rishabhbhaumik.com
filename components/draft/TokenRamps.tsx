@@ -6,7 +6,7 @@
  * width, so it scales as one picture (the same treatment as TypeSpecimen).
  */
 
-import { FootShade } from "./ui";
+import { FootShade, LIGHT, media } from "./ui";
 
 const cq = (px: number) => `${(px / 14.64).toFixed(4)}cqw`;
 
@@ -30,6 +30,8 @@ const TEXT = {
 export default function TokenRamps({ className = "" }: { className?: string }) {
   return (
     <div
+      {...LIGHT}
+      {...media("ramps")}
       role="img"
       aria-label="Peetal colour ramps: neutral, primary, secondary and success, steps 50 to 900"
       className={`@container relative aspect-[1464/823.5] w-full max-w-[696px] overflow-hidden bg-surface light:bg-white leading-[1.5] font-medium text-ink ${className}`}

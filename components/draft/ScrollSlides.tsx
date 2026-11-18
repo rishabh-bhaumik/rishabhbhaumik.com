@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { AnimatePresence, m, useMotionValueEvent, useScroll } from "framer-motion";
 import { EASE } from "@/lib/motion";
-import { BODY, FootShade, LoopBar, Tag, rail } from "./ui";
+import { BODY, FootShade, LIGHT, LoopBar, Tag, media as mediaTag, rail } from "./ui";
 
 export type ScrollSlide = {
   tag: string;
@@ -28,7 +28,7 @@ export type ScrollSlide = {
 };
 
 /**
- * Sub-points (005.1…, 006.1…) that swap in place while you scroll: the block pins
+ * Sub-points (006.1…, 007.1…) that swap in place while you scroll: the block pins
  * under the header for one screen of scrolling per slide, and the scroll position
  * picks which slide shows. Each change runs a short parallax stagger: the media
  * travels furthest, the tag and copy follow a beat later over shorter distances,
@@ -92,8 +92,10 @@ export default function ScrollSlides({
   const frame = (
     <m.div
       {...layer(96, 0)}
-      // Live media (005.1's form) sits on white; a placeholder takes the surface (dark) or
+      // Live media (006.1's form) sits on white; a placeholder takes the surface (dark) or
       // white (light), like 003 and 004's art.
+      {...LIGHT}
+      {...mediaTag(`${idPrefix}-${index + 1}`)}
       className={`relative aspect-video w-full overflow-hidden ${s.media ? "bg-white" : "bg-surface light:bg-white"}`}
     >
       {s.media}
@@ -124,6 +126,8 @@ export default function ScrollSlides({
   const media = (
     <m.div
       {...layer(96, 0)}
+      {...LIGHT}
+      {...mediaTag(`${idPrefix}-${index + 1}`)}
       className={`relative overflow-hidden ${s.src ? "" : "bg-surface light:bg-white"}`}
       style={{
         aspectRatio: ratio,

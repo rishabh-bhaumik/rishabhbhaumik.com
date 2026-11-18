@@ -9,7 +9,6 @@ import MotionProvider from "@/components/MotionProvider";
 import ThemeSync from "@/components/ThemeSync";
 import { SITE } from "@/data/site";
 import { THEME_SCRIPT } from "@/lib/theme-script";
-import { ENTER_SCRIPT } from "@/lib/enter";
 
 export const metadata: Metadata = {
   title: `${SITE.name} - ${SITE.role}`,
@@ -31,7 +30,6 @@ export default function RootLayout({
     // differ from what the client hydrates over.
     <html lang="en" data-theme="dark" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: ENTER_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>

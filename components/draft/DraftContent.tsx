@@ -1,22 +1,23 @@
-import Image from "next/image";
 import Link from "next/link";
 import "@/components/bk/anek.css";
 import CheckoutFlow from "./CheckoutFlow";
+import { BrandingFrame, CoverFrame, QuotePhoneFrame } from "./frames";
+import MediaLightbox from "./MediaLightbox";
 import FormDemo from "./FormDemo";
 import PivotTimeline, { type PivotStep } from "./PivotTimeline";
 import ScrollSlides, { type ScrollSlide } from "./ScrollSlides";
 import TokenRamps from "./TokenRamps";
 import TypeSpecimen from "./TypeSpecimen";
-import { BODY, FootShade, Stats, Tag, rail, type Stat } from "./ui";
+import { BODY, Stats, Tag, rail, type Stat } from "./ui";
 
 // First-draft build of the Figma case-study page (Peetal DSL, node 8627:5701),
 // section by section. Colours are theme tokens (Figma values in dark), so the page
 // follows light mode; the exported images stay as rendered.
 
-/** 005.1 - 005.3: media left, copy right, one at a time (ScrollSlides). Copy tops align with the media. */
+/** 006.1 - 006.3: media left, copy right, one at a time (ScrollSlides). Copy tops align with the media. */
 const FORM_ROWS: ScrollSlide[] = [
   {
-    tag: "005.1",
+    tag: "006.1",
     // The form, played through: Others, a pick from its dropdown, then Tenant.
     media: <FormDemo />,
     copy: (
@@ -34,7 +35,7 @@ const FORM_ROWS: ScrollSlide[] = [
     ),
   },
   {
-    tag: "005.2",
+    tag: "006.2",
     // Media to come: a blank frame for now.
     copy: (
       <p>
@@ -45,9 +46,9 @@ const FORM_ROWS: ScrollSlide[] = [
     ),
   },
   {
-    tag: "005.3",
+    tag: "006.3",
     // Media to come: a blank frame for now.
-    // Draft copy (005.3 had 005.2's text); the user to confirm or replace.
+    // Draft copy (006.3 had 006.2's text); the user to confirm or replace.
     copy: (
       <p>
         Verification comes last, once the quotes are already waiting - the sheet says so. Asking for
@@ -57,10 +58,10 @@ const FORM_ROWS: ScrollSlide[] = [
   },
 ];
 
-/** 006.1 - 006.4: one at a time, swapped by scrolling (FlowSlides). */
+/** 007.1 - 007.4: one at a time, swapped by scrolling (FlowSlides). */
 const FLOW_SLIDES: ScrollSlide[] = [
   {
-    tag: "006.1",
+    tag: "007.1",
     // Media to come: a placeholder frame at the shots' ratio for now.
     width: 1464,
     height: 850,
@@ -68,7 +69,7 @@ const FLOW_SLIDES: ScrollSlide[] = [
       "The Quote Page acts as a feed - filtering and sorting coverage offerings based on the user’s needs. Each Card contains further details and available quotes can be compared.",
   },
   {
-    tag: "006.2",
+    tag: "007.2",
     // Media to come: a placeholder frame at the shots' ratio for now.
     width: 1464,
     height: 850,
@@ -76,7 +77,7 @@ const FLOW_SLIDES: ScrollSlide[] = [
       "Steppers help assess the user in how much or little work is pending. The Price is always shown next to the Button to encourage Further Movement and Constant Action.",
   },
   {
-    tag: "006.3",
+    tag: "007.3",
     // Media to come: a placeholder frame at the shots' ratio for now.
     width: 1464,
     height: 850,
@@ -84,7 +85,7 @@ const FLOW_SLIDES: ScrollSlide[] = [
       "Contextual Cues via Tool Tips help reduce action, and thus increase movement in the flow.",
   },
   {
-    tag: "006.4",
+    tag: "007.4",
     // Media to come: a placeholder frame at the shots' ratio for now.
     width: 1464,
     height: 850,
@@ -161,6 +162,7 @@ const OUTCOMES: Record<string, Stat[]> = {
     { value: "680", label: "Tokens Scoped" },
     { value: "86%", label: "Reduction in Development Timelines" },
   ],
+  branding: [{ value: "55 Days", label: "Completion Time" }],
   forms: [
     { value: "x%", label: "fewer drop-offs on the quote form" },
     { value: "<2 Mins", label: "to a first quote" },
@@ -231,10 +233,10 @@ const PIVOT_STEPS: PivotStep[] = [
     ],
     points: ["Product Launch! Dashboard", "Product Launch! BimaSaathi", "E-Commerce for Business Insurance"],
     screen: {
-      src: "/media/draft/pivot-04-platform.png",
-      alt: "BimaKavach's 2025 mobile homepage: Fast Insurance for Unstoppable Businesses, with instant-purchase product cards",
-      width: 484,
-      height: 776,
+      src: "/media/draft/pivot-04-platform-v2.png",
+      alt: "BimaKavach's 2025 mobile homepage: Fast Insurance for Unstoppable Businesses, with policies sold, Google rating, total sum insured and immediate-purchase product cards",
+      width: 968,
+      height: 1552,
       bg: "#ffffff",
     },
   },
@@ -322,21 +324,14 @@ function SectionHead({
 
 export default function DraftContent() {
   return (
+    // Any media container opens the lightbox at itself (MediaLightbox).
+    <MediaLightbox>
     <main className="flex w-full min-w-0 flex-col gap-20">
       {/* Cover + intro */}
       {/* Not in the rail while the title is hidden and the cover waits for the showreel. */}
       <section id="context" className="flex scroll-mt-16 flex-col items-center gap-6 px-6 py-[60px]">
-        {/* Cover media slot (showreel to come, Figma 8627:5995): black, a 24% hairline,
-            4px corners; capped at 1200px, centred. On light: white, shaded at the foot
-            like 005's frames. */}
-        <div className="relative aspect-[1512/850] w-full max-w-[1200px] overflow-clip rounded-[4px] border border-[rgba(169,172,177,0.24)] bg-black light:bg-white">
-          <p className="absolute left-1/2 top-[calc(50%-10.01px)] -translate-x-1/2 whitespace-nowrap text-center text-12 leading-[normal] text-faint">
-            MEDIA INCOMING...
-          </p>
-          <span className="hidden light:contents">
-            <FootShade />
-          </span>
-        </div>
+        {/* Cover media slot (showreel to come): capped at 1200px, centred. */}
+        <CoverFrame className="max-w-[1200px]" />
         {/* Title and intro hidden for now; the h1 stays for screen readers. */}
         <div className="sr-only">
           <h1 className="text-[40px] font-normal leading-[1.3] text-ink">For Your Consideration</h1>
@@ -472,49 +467,70 @@ export default function DraftContent() {
             <TypeSpecimen className="min-w-0 lg:self-start" />
           </div>
         </section>
+
+        {/* 005 Branding (Figma 8762:48167): 004's frame, a merch shot for art. */}
+        <section {...rail("branding", "005. Solutions - Branding")} className="scroll-mt-16 px-6 py-[60px]">
+          <div className={SPLIT}>
+            <SectionHead
+              tag="005."
+              title={"Solutions - Branding"}
+              foot={<Stats items={OUTCOMES.branding} />}
+              className="min-w-0 justify-between"
+            >
+              {/* Figma's draft copy, the same as 004's for now. */}
+              <div className={`${BODY} flex flex-col gap-[1.7em]`}>
+                <p>
+                  In order to cater to the multicultural hyperlocal nature of Tier 2 &amp; Tier 3
+                  Businesses, we started with Foundational Typography. We had decided that Anek
+                  Variable would be the typeface of choice.
+                </p>
+                <p>
+                  Anek is a contemporary, multi-script, open-source typeface family created by the
+                  Indian foundry Ek Type (in collaboration with Google). It supports multiple Indian
+                  scripts (including Devanagari, Tamil, Bengali, etc.) as well as Latin, and it’s
+                  offered in a variable font format.
+                </p>
+              </div>
+              <Link
+                href="/bimakavach-identity"
+                className="w-fit text-14 text-ink underline decoration-ink/60 underline-offset-[2px] transition-colors hover:decoration-ink"
+              >
+                More on Branding
+              </Link>
+            </SectionHead>
+            {/* 696 x 392, the shot anchored to its top and cropped at the foot. */}
+            <BrandingFrame className="lg:self-start" />
+          </div>
+        </section>
       </div>
 
-      {/* 005 · Forms & Modals */}
+      {/* 006 · Forms & Modals */}
       <section
-        {...rail("forms", "005. Solutions - Forms & Modals for Discovery & Quote Generation")}
+        {...rail("forms", "006. Solutions - Quote Generation")}
         className={`scroll-mt-16 ${ROW}`}>
-        <SectionHead tag="005." title={"Solutions -\u00a0Forms & Modals for Discovery & Quote Generation"}>
+        <SectionHead tag="006." title={"Solutions -\u00a0Quote Generation"}>
           <p className={BODY}>
             Redesigning Forms &amp; Modals in order to boost discovery, expedite Quote Generation,
             and build intuitive journeys towards Quote Generation was the next task.
           </p>
           <Stats items={OUTCOMES.forms} />
         </SectionHead>
-        {/* Square and shaded at the foot, like the art frames in 003, 004 and 005.1-005.3. */}
-        <div className="relative flex h-[850px] flex-col items-center justify-end overflow-hidden bg-white">
-          <Image
-            src="/media/draft/quote-form-phone.png"
-            alt="BimaKavach's Get Quotes in a Few Steps form on an iPhone"
-            width={449}
-            height={720}
-            className="block h-[720px] w-[448.73px] max-w-none"
-          />
-          <FootShade />
-        </div>
+        {/* Square and shaded at the foot, like the art frames in 003, 004 and 006.1-006.3. */}
+        <QuotePhoneFrame className="mx-auto max-w-[1400px]" />
       </section>
 
-      {/* 005.1 - 005.3: pinned, one at a time */}
+      {/* 006.1 - 006.3: pinned, one at a time */}
       <ScrollSlides slides={FORM_ROWS} idPrefix="forms" layout="row" />
 
-      {/* 006 · Flows - Checkout & Payment: copy left and outcomes right, over the flowchart */}
+      {/* 007 · Immediate Purchase (checkout & payment): copy left and outcomes right, over the flowchart */}
       <section
-        {...rail("flows", "006. Flows - Checkout & Payment")}
+        {...rail("flows", "007. Solutions - Immediate Purchase")}
         className={`scroll-mt-16 ${ROW}`}
       >
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
           <SectionHead
-            tag="006."
-            title={
-              <>
-                Flows - Checkout
-                <br />& Payment
-              </>
-            }
+            tag="007."
+            title={"Solutions -\u00a0Immediate Purchase"}
             className="lg:flex-1"
           >
             <p className={`${BODY} max-w-[432px]`}>
@@ -534,7 +550,7 @@ export default function DraftContent() {
         </div>
       </section>
 
-      {/* 006.1 - 006.4: pinned, one slide at a time */}
+      {/* 007.1 - 007.4: pinned, one slide at a time */}
       <ScrollSlides slides={FLOW_SLIDES} idPrefix="flows" layout="stack" />
 
       {/* Companion links: the same set that goes out with the resume */}
@@ -560,5 +576,6 @@ export default function DraftContent() {
         </div>
       </section>
     </main>
+    </MediaLightbox>
   );
 }

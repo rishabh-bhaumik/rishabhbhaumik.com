@@ -1,5 +1,20 @@
 // Shared bits of the draft page (server and client sections both use them).
 
+/**
+ * Hard rule on /draft: every container (art frame, placeholder, diagram) renders as
+ * it does in light mode, whichever theme the page is in. Spread onto the container's
+ * root: the light tokens and `light:` utilities then apply inside it.
+ */
+export const LIGHT = { "data-theme": "light" } as const;
+
+/**
+ * Marks a container as media: clicking it (or Enter / Space on it) opens the lightbox
+ * at that container (MediaLightbox). `id` must match an entry in its SLIDES.
+ */
+export function media(id: string) {
+  return { "data-media": id, tabIndex: 0, "aria-haspopup": "dialog" } as const;
+}
+
 export const CARD = "overflow-hidden rounded-[16px] border-[0.5px] border-ink/25";
 /**
  * The shade over the draft's art frames (Figma's "filter", 8736:45045 / 8736:45215): black
@@ -51,7 +66,7 @@ export function Tag({ children }: { children: React.ReactNode }) {
 /**
  * Marks an element as a rail entry. DraftRail reads these from the page in order,
  * so adding, removing or renumbering a section updates the rail by itself.
- * Level 2 entries (005.1, 006.3, …) sit indented under the one before.
+ * Level 2 entries (006.1, 007.3, …) sit indented under the one before.
  */
 export function rail(id: string, label: string, level: 1 | 2 = 1) {
   return { id, "data-rail": label, "data-rail-level": String(level) };

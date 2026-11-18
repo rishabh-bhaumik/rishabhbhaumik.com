@@ -1,53 +1,38 @@
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import Footer from "@/components/Footer";
-import Splash from "@/components/enter/Splash";
+import Link from "next/link";
+import Sheet from "@/components/home/Sheet";
+import SheetHero from "@/components/home/SheetHero";
 
-/** One beat of the marquee, as set in Figma (8736:43211): spaced digits, a spaced slash. */
-const BEAT = "4 0 4  /  ";
-/** A run wide enough to cover a 4K-wide screen on its own (~40px a beat). */
-const RUN = BEAT.repeat(100);
+/** The marquee's words on the 404, in place of the home's labels. */
+const LOST = ["4 0 4", "Page not found", "4 0 4", "Off the map", "4 0 4", "Page not found", "4 0 4", "Off the map"];
 
 /**
- * Any address that doesn't exist: the /enter splash again, with a tiny "4 0 4 /"
- * marquee running across the screen above the blurred clip, and Restart in Enter's
- * place. A dead or retired link restarts the visit: Restart morphs straight into
- * home, in place (components/enter/Splash). Keep the tree in step with app/page.tsx.
+ * Any address that doesn't exist: the home's sheet and opening, with a headline saying
+ * so, a way back beside it, and the marquee spelling out 404.
  */
 export default function NotFound() {
   return (
-    <Splash
-      label="Restart"
-      title={
-        <>
-          <h1 className="sr-only">404 - page not found</h1>
-          {/* Two identical runs side by side; the track slides left by one run and loops.
-              Still (the start of the line) under reduced motion. Edges fade out. */}
-          <div
-            aria-hidden
-            className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_32px,black_calc(100%-32px),transparent)]"
-          >
-            <div className="flex w-max animate-[marquee_100s_linear_infinite] motion-reduce:animate-none">
-              {[0, 1].map((i) => (
-                <span
-                  key={i}
-                  className="whitespace-pre text-12 leading-[1.1] tracking-[-0.02em] text-ink"
-                >
-                  {RUN}
-                </span>
-              ))}
-            </div>
+    <Sheet>
+      <SheetHero
+        heading={
+          <>
+            <span className="sr-only">404: </span>This page is off the map.
+          </>
+        }
+        aside={
+          <div className="flex flex-col items-start gap-4">
+            <p className="text-16 leading-6 tracking-[-0.01em] text-subtle">
+              The link may be old or mistyped. The work is still where it was.
+            </p>
+            <Link
+              href="/"
+              className="flex h-8 items-center rounded-[8px] border-[0.5px] border-rule bg-bg px-3 text-12 leading-none text-ink transition-colors hover:border-faint/40"
+            >
+              Back to home
+            </Link>
           </div>
-        </>
-      }
-    >
-      <Header />
-      <main className="mx-auto w-full max-w-[var(--shell-max)] pt-2">
-        <div className="mx-auto max-w-[var(--content-max)]">
-          <Hero />
-        </div>
-      </main>
-      <Footer />
-    </Splash>
+        }
+        marquee={LOST}
+      />
+    </Sheet>
   );
 }

@@ -154,6 +154,133 @@ export const PROJECTS: Project[] = [
   },
 ];
 
+/**
+ * Home (Figma 8780:35610): the ruled 1200px sheet. Greeting in Bangla over the
+ * headline, a short intro beside it, then the label marquee.
+ */
+export const HOME = {
+  /**
+   * The greeting over the headline rolls through these (components/home/Greeting.tsx):
+   * the languages I speak, where I'm from, then the world, mixed so neighbours look
+   * different. The first is painted on load, held longest, and is the one that stays
+   * under reduced motion. `font` is a family in components/home/hello.css, cut down to
+   * its word by scripts/hello-fonts.py: a new word needs its letters added there. The
+   * Latin words have none: they're in the site's own sans (Arial).
+   */
+  greetings: [
+    { text: "নমস্কার", lang: "bn", font: "Hello Bangla" },
+    { text: "Hello", lang: "en" },
+    { text: "नमस्ते", lang: "hi", font: "Hello Devanagari" },
+    { text: "ನಮಸ್ಕಾರ", lang: "kn", font: "Hello Kannada" },
+    { text: "こんにちは", lang: "ja", font: "Hello Japanese" },
+    { text: "Enchanté", lang: "fr" },
+    { text: "مرحبا", lang: "ar", font: "Hello Arabic", rtl: true },
+    { text: "안녕하세요", lang: "ko", font: "Hello Korean" },
+    { text: "Γεια σου", lang: "el", font: "Hello Greek Cyrillic" },
+    { text: "สวัสดี", lang: "th", font: "Hello Thai" },
+    { text: "Привет", lang: "ru", font: "Hello Greek Cyrillic" },
+    { text: "你好", lang: "zh-Hans", font: "Hello Chinese" },
+    { text: "שלום", lang: "he", font: "Hello Hebrew", rtl: true },
+    { text: "ආයුබෝවන්", lang: "si", font: "Hello Sinhala" },
+    { text: "Ciao", lang: "it" },
+    { text: "ሰላም", lang: "am", font: "Hello Ethiopic" },
+    { text: "გამარჯობა", lang: "ka", font: "Hello Georgian" },
+  ],
+  /** One string per line on wide screens; they run together and wrap below that. */
+  headline: [
+    "I’m Rishabh, Product and Visual",
+    "Designer for complex, secure, and",
+    "AI-first products.",
+  ],
+  intro:
+    "Product Designer with 6+ years across product, brand and film, for Vedantu, UNICEF and fashion labels.",
+  /** The marquee under the orbit, most important first. */
+  tags: [
+    "Product Design",
+    "Visual Design",
+    "Design Systems",
+    "Fintech",
+    "B2B SaaS",
+    "Brand Identity",
+    "AI Prototyping",
+    "Insurtech",
+    "Typography",
+    "Film & Photography",
+  ],
+  email: "rishabh.bhaumik@gmail.com",
+  /** The footer's row of links. */
+  links: [
+    { label: "LinkedIn", href: "https://linkedin.com/in/rishabh-bhaumik" },
+    { label: "Instagram", href: "https://instagram.com/rishabhbhaumik" },
+    { label: "x", href: "https://x.com/RishabhBhaumik" },
+    { label: "GitHub", href: "https://github.com/rishabh-bhaumik" },
+  ],
+} as const;
+
+/**
+ * Home's Selected Work (Figma 8785:37079), in order. `href` is where Overview goes;
+ * without one the card shows "Work in progress" instead. `media` is optional art
+ * for the 16:9 frame, shown whole (the work images are cut-outs on transparent
+ * backgrounds, as on /work); without it the frame stays empty.
+ */
+export type SelectedWork = {
+  slug: string;
+  heading: string[];
+  body: string;
+  year: string;
+  kind: string;
+  href?: string;
+  media?: string;
+};
+
+export const SELECTED_WORK: SelectedWork[] = [
+  {
+    slug: "peetal",
+    heading: [
+      "Designing the first principles for scaling a design system built for",
+      "marketing, tech & product.",
+    ],
+    body: "Peetal WIP Body Copy. Feature 1 with Impact.",
+    year: "2025",
+    kind: "mobile app",
+    href: "/peetal",
+    media: "/media/work/design.system.png",
+  },
+  {
+    slug: "bima-netra",
+    heading: ["BimaNetra: India’s first agentic infrastructure solution", "for a 200 year old problem"],
+    body: "Netra WIP Body Copy. Feature 1 with Impact.",
+    year: "2025",
+    kind: "consumer",
+    href: "/netra",
+  },
+  {
+    slug: "bimakavach-identity",
+    heading: ["Giving Agentic Insurance a visual language"],
+    body: "BimaKavach Identity WIP Body Copy. Feature 1 with Impact.",
+    year: "2025",
+    kind: "brand identity",
+    href: "/bimakavach-identity",
+    media: "/media/work/bimakavach.branding.webp",
+  },
+  {
+    slug: "bima-saathi",
+    heading: ["Designing the product that turned 1,000 agents into BimaKavach's", "second-largest revenue channel."],
+    body: "BimaSaathi WIP Body Copy. Feature 1 with Impact.",
+    year: "2026",
+    kind: "mobile app",
+    media: "/media/work/bima.saathi.webp",
+  },
+  {
+    slug: "bima-kendra",
+    heading: ["A centralized Commercial Insurance", "Management Software"],
+    body: "bimakendra WIP Body Copy. Feature 1 with Impact.",
+    year: "2026",
+    kind: "SaaS",
+    media: "/media/work/bima.kendra.png",
+  },
+];
+
 export interface SocialLink {
   handle: string;
   href: string;

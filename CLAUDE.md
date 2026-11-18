@@ -29,22 +29,34 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 ## Routes
 
-- `/enter` — splash, the front door: the home page held back (`components/enter/Splash.tsx`):
-  the hero clip blurred and grained in place, one Enter button, and only the theme switch
-  (bottom right, every screen size; it follows the visitor's theme; Splash renders it, and the
-  dock hides while any `[data-splash="on"]` is up, `.site-dock` in globals.css). Enter morphs it into home
-  with no page change (clip unblurs over `MORPH`, page rises in, music fades in muffled to
-  clear, URL becomes `/` via replaceState) and marks the session entered; a fresh load of `/`
-  goes here first (`ENTER_SCRIPT`, `lib/enter.ts`). Keep its tree in step with app/page.tsx.
-  The WebGPU shader host (`components/enter/ShaderVideo.tsx`, modules in `lib/custom-effects/`)
-  is kept but not mounted while Figma's shaders are hidden.
-- `/` — home (Header, Hero, Footer)
+- `/` — home on the **ruled sheet** (Figma 8780:35610, `components/home/`): one 1200px column with
+  `rule` hairlines down both sides (`Sheet.tsx`), its own sticky nav (`SheetNav`: mark, name, local
+  time, links, and the dock's controls, so the floating dock hides while `[data-sheet-nav]` is up),
+  the greeting over the headline (`Greeting`: hello in 17 languages from `HOME.greetings`, rolling
+  up one at a time from "নমস্কার", which is server-rendered and stays under reduced motion; each
+  non-Latin script has its own tiny font cut to its word, `components/home/hello.css`, made by
+  `scripts/hello-fonts.py`, ~38 KB in all; Hello, Enchanté and Ciao are in the site's Arial;
+  `GreetingRoll` also fills the contact block's "Say …"), the orbit clip (at every width only its top half shows,
+  sitting on the marquee, which cuts the planet through its middle; from lg up it sits under the
+  text, 162px down, so the hero is 560px as in Figma; narrower, text and strip stack), the label marquee
+  (`TagMarquee`), Selected Work (`SelectedWork`, Figma 8785:37079; Overview links to each project,
+  "Work in progress" where there's no page yet), contact (`ContactOrbit`: the same clip on its
+  still, played while the pointer is over the block) and footer. Copy in `HOME` / `SELECTED_WORK`
+  (`data/site.ts`). Other pages still use the old `Header` / `Footer`.
+- `app/not-found.tsx` — 404 on the same sheet: `SheetHero` with its own headline, a way home, and the
+  marquee spelling out 404.
+- `/enter` — retired: the splash is no longer reached (the `ENTER_SCRIPT` redirect is gone from the
+  root layout); its files (`components/enter/`, `lib/enter.ts`) are kept but unused.
+- `/netra` — the BimaNetra project (Figma 8818:32660) on the ruled sheet (`components/netra/`, copy in
+  `data/bima-netra.ts`). Built from `components/project/`, shared by project pages to come: `GrowMedia` (a
+  1200×675 media frame whose media starts at 1000×526, grows to full size once the frame is on screen and
+  shrinks back as it leaves; clip plus scale in step, so nothing re-lays out; full size under reduced
+  motion), `NextProject` (the orbit clip behind the next project's title, played on hover as in the
+  contact block) and `Tags` / `Rich`. Media slots show their label until a file is added. Not indexed
+  while it has placeholders.
 - `/work` — work gallery (Header, WorkGallery, Footer)
 - `/about` — `AboutContent`
 - `/play` — Play gallery (Vimeo/SoundCloud embeds via oEmbed)
-- `app/not-found.tsx` — 404 for any unknown address: the same splash (`Splash` with a `title`):
-  a tiny "4 0 4  /" marquee (Figma 8736:43211) across the screen in the dark band above the
-  blurred clip, Restart on the clip (Enter's button, `label`); it morphs into home exactly as Enter does on /enter, so a dead link restarts the visit. Keep its tree in step too.
 - `/bima-saathi` — password-gated, vertical-scroll case study
 - `/bimakavach-identity` — password-gated, horizontal panel-snap-scroll case study (19 sections)
 
@@ -67,6 +79,13 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - Media: muted clips go through `components/LazyVideo.tsx` (poster, fetched
   near the viewport, plays only while visible). Sounds are small MP3s played
   through the shared Web Audio context in `lib/sfx.tsx`.
+- /draft containers are always light (hard rule): every art frame, placeholder and
+  diagram on /draft renders as in light mode, in either theme. Spread `LIGHT`
+  (`components/draft/ui.tsx`, i.e. `data-theme="light"`) onto a new container's root;
+  the light tokens in globals.css and the `light:` variant then apply inside it.
+  Each container also takes `media(id)` and gets a slide in `SLIDES`
+  (`components/draft/MediaLightbox.tsx`): clicking one opens a lightbox carousel of
+  only the media, at that one.
 - Theme: three modes, dark / auto / light (auto = light 06:00-18:00 local, dark otherwise),
   `DEFAULT_MODE` in `lib/theme-script.ts` (dark for now). The dock's mode control switches
   dark/light only (auto is built but not offered); the header clock is display only.
@@ -84,7 +103,11 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - Home hero: `HeroVideo` stacks a dark and a light clip (`SITE.heroVideo`,
   `public/media/home/orbit-*.mp4`, 12 fps) that match frame for frame; CSS shows
   the one for the theme and the hidden one is kept in step. The light clip is
-  rendered by a script in `<IGNORE>/media-sources/orbitting-light/`.
+  the dark one's negative (dark orbs, ink on the page colour; only lightness is
+  inverted, so the dark clip's faint teal edge and rose stay where they are), made frame by
+  frame from the dark master by `<IGNORE>/media-sources/orbitting-negative/make.py`
+  (encode with `-tune grain` or x264 smooths the grain away). The earlier white
+  "studio" render lives on in `<IGNORE>/media-sources/orbitting-light/`.
 - Cursor: the system default everywhere. The custom crosshair cursor was
   removed; don't hide or replace the pointer.
 - Availability/online-status logic is isolated in `lib/availability.ts`

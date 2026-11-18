@@ -1,41 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { m } from "framer-motion";
 import { EASE } from "@/lib/motion";
 import { LoopBar } from "./ui";
 
 /**
- * 005.1's form, played through (Figma 8701:48309 → 51501 → 51835 → 52095): a cursor
+ * 006.1's form, played through (Figma 8701:48309 → 51501 → 51835 → 52095): a cursor
  * picks Others, which opens a searchable dropdown. It scrolls the list, doesn't find
  * its business, so it clicks Search by Keyword and types "Foundry"; the list narrows to
  * the one match (scrolled out of view a moment ago), which it picks. Then it taps
  * Tenant, and the loop starts over.
  *
- * The four states are 442px-wide exports (596 tall at rest, 712 once Others opens its
- * field), shown at one width and top-aligned, so the form grows downwards as it would.
+ * The four states are 442px-wide exports, shown at one width and top-aligned, so the
+ * form grows downwards as fields appear. Continue is there throughout, disabled until
+ * Tenant completes the form, when it lights up.
  * While the dropdown is open, its list and the search field are live HTML laid over the
  * export at Figma's positions (8701:51750, 8701:51663), so they can scroll and type.
  * Reduced motion: the last state, still, with no cursor.
  */
+/** The four states; `px` is each export's height at 3x. */
 const STATES = [
-  {
-    src: "/media/draft/forms-anim/state-1.png",
-    h: 596,
-    alt: "Share Your Business Details form at rest: property types as suggestion chips",
-  },
-  {
-    src: "/media/draft/forms-anim/state-2.png",
-    h: 712,
-    alt: "Others picked: a searchable dropdown of business types opens",
-  },
-  {
-    src: "/media/draft/forms-anim/state-3.png",
-    h: 712,
-    alt: "A business type chosen from the dropdown; Owner or Tenant as picture cards",
-  },
-  { src: "/media/draft/forms-anim/state-4.png", h: 712, alt: "Tenant picked and Continue lit" },
+  { src: "/media/draft/forms-anim/dis-a.png", px: 1788, alt: "Share Your Business Details form at rest: property types as suggestion chips, Continue disabled" },
+  { src: "/media/draft/forms-anim/dis-b.png", px: 2136, alt: "Others picked: a searchable dropdown of business types opens" },
+  { src: "/media/draft/forms-anim/dis-c.png", px: 2136, alt: "A business type chosen from the dropdown; Owner or Tenant as picture cards" },
+  { src: "/media/draft/forms-anim/dis-d.png", px: 2136, alt: "Tenant picked: the form is complete and Continue is enabled" },
 ];
 const W = 442;
 const cq = (px: number) => `${((px / W) * 100).toFixed(4)}cqw`;
@@ -178,6 +168,9 @@ function Option({ label }: { label: string }) {
 
 export default function FormDemo() {
   const [state, setState] = useState(0);
+  /** The state being left, so the new one can fade in over it (no see-through blink). */
+  const [prev, setPrev] = useState(0);
+  const current = useRef(0);
   const [cursor, setCursor] = useState<[number, number]>(REST);
   const [tap, setTap] = useState<"idle" | "lift" | "down">("idle");
   const [active, setActive] = useState(false);
@@ -204,7 +197,11 @@ export default function FormDemo() {
       setLoops((n) => n + 1);
       timers = BEATS.map((b) =>
         window.setTimeout(() => {
-          if (b.state !== undefined) setState(b.state);
+          if (b.state !== undefined && b.state !== current.current) {
+            setPrev(current.current);
+            current.current = b.state;
+            setState(b.state);
+          }
           if (b.cursor) setCursor(b.cursor);
           if (b.tap) setTap(b.tap);
           if (b.tap === "down" && b.ripple !== false) setRings((n) => n + 1);
@@ -222,6 +219,17 @@ export default function FormDemo() {
   }, []);
 
   const open = state === 1;
+  const layer = (i: number) => {
+    const forward = state > prev;
+    if (i === state) {
+      return forward ? "opacity-100 transition-opacity duration-500 ease-out" : "opacity-100";
+    }
+    if (i === prev) {
+      // Below the new state: hold until covered. Above it (the loop back): fade off.
+      return forward ? "opacity-0 transition-opacity delay-500 duration-0" : "opacity-0 transition-opacity duration-500 ease-out";
+    }
+    return "opacity-0";
+  };
   // Filtered as you type, a letter at a time: F, Fo, Fou… down to the one match.
   const query = QUERY.slice(0, typed).toLowerCase();
   const filtered = typed > 0;
@@ -258,12 +266,13 @@ export default function FormDemo() {
               alt={i === state ? s.alt : ""}
               aria-hidden={i !== state}
               width={W * 3}
-              height={s.h * 3}
+              height={s.px}
               sizes="(min-width: 1512px) 310px, 21vw"
               priority={i === 0}
-              className={`absolute left-0 top-0 h-auto w-full transition-opacity duration-500 ease-out ${
-                i === state ? "opacity-100" : "opacity-0"
-              }`}
+              // No cross-fade blink: the state arriving fades in over the one it replaces,
+              // which stays opaque underneath until it's covered (going back to the start,
+              // the outgoing top layer fades off a ready one).
+              className={`absolute left-0 top-0 h-auto w-full ${layer(i)}`}
             />
           ))}
 
@@ -273,7 +282,13 @@ export default function FormDemo() {
               aria-hidden
               // In only once the dropdown's export has faded up (no ghost over the resting form).
               className={`transition-opacity ease-out ${open ? "opacity-100 delay-500 duration-200" : "opacity-0 duration-300"}`}
-              style={{ fontFamily: '"Anek Latin"', fontVariationSettings: '"wdth" 100' }}
+              // Anek Latin Medium throughout, as in Figma (body/200).
+              style={{
+                fontFamily: '"Anek Latin"',
+                fontVariationSettings: '"wdth" 100',
+                fontWeight: 500,
+                fontFeatureSettings: '"dlig" 1',
+              }}
             >
               <div
                 className="absolute overflow-hidden bg-white text-[#6F7378]"
