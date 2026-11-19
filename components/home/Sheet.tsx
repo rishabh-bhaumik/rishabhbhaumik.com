@@ -3,8 +3,8 @@ import SheetNav from "./SheetNav";
 
 /**
  * The ruled sheet (Figma 8780:35610): one 1200px column with hairlines down both
- * sides, the nav stuck to its top and the footer at its foot. Home and the 404 sit
- * on it.
+ * sides, the nav stuck to its top and the footer at its foot. Home, the 404, the
+ * projects, About, Work and Play sit on it.
  */
 export default function Sheet({ children }: { children: React.ReactNode }) {
   return (

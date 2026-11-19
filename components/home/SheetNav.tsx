@@ -15,7 +15,8 @@ import LocalClock from "../LocalClock";
  * The ruled sheet's top bar (Figma 8780:36250): the mark, name and the visitor's local
  * time on the left; the page links and the view controls (the dock's settings, which
  * step out of the corner while this bar is up) on the right. Sticks to the top. On
- * phones the links fold into a menu.
+ * phones the links fold into a menu. The site's one nav: on pages off the sheet it runs
+ * full width with its contents in the same 1200px column.
  */
 export default function SheetNav() {
   const pathname = usePathname();
@@ -40,7 +41,7 @@ export default function SheetNav() {
 
   return (
     <header data-sheet-nav className="sticky top-0 z-50 border-b border-rule bg-bg">
-      <div className="flex items-center justify-between px-4 py-2 sm:px-6">
+      <div className="mx-auto flex w-full max-w-[var(--shell-max)] items-center justify-between px-4 py-2 sm:px-6">
         <Link href="/" aria-label={`${SITE.name}, home`} className="flex items-center gap-0.5">
           <span className="grid size-11 place-items-center">
             <Image src="/media/logo-mark.svg" alt="" width={32} height={32} className="light:invert" />

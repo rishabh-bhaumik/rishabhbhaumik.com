@@ -269,6 +269,7 @@ export const SELECTED_WORK: SelectedWork[] = [
     body: "BimaSaathi WIP Body Copy. Feature 1 with Impact.",
     year: "2026",
     kind: "mobile app",
+    href: "/bima-saathi",
     media: "/media/work/bima.saathi.webp",
   },
   {

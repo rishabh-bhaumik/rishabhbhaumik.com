@@ -83,7 +83,7 @@ export const BIMA_NETRA = {
     ] satisfies Media[],
   },
 
-  /** Full width from the start, as drawn, over the takeaways. */
+  /** The frame over the takeaways. */
   showcase: { label: "Onboarding flow - Mobile Screen of Netra Folder Going up and down!!!!!" } satisfies Media,
   takeaways: {
     tag: "key takeaways",
@@ -125,5 +125,4 @@ export const BIMA_NETRA = {
     ],
   },
 
-  next: { href: "/bimakavach-identity", title: "Giving Agentic Insurance a visual language" },
 } as const;

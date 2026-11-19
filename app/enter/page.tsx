@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
+import SheetNav from "@/components/home/SheetNav";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import Splash from "@/components/enter/Splash";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function EnterPage() {
   return (
     <Splash>
-      <Header />
+      <SheetNav />
       <main className="mx-auto w-full max-w-[var(--shell-max)] pt-2">
         <div className="mx-auto max-w-[var(--content-max)]">
           <Hero />

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Sheet from "@/components/home/Sheet";
 import PlaySection from "@/components/play/PlaySection";
 import { SITE } from "@/data/site";
 
@@ -10,14 +9,13 @@ export const metadata: Metadata = {
     "Films, experiments, and audio - the creative side of Rishabh Bhaumik.",
 };
 
+/** The Play gallery, on the ruled sheet like home and the projects. */
 export default function PlayPage() {
   return (
-    <>
-      <Header />
-      <main className="w-full pb-20 pt-2">
+    <Sheet>
+      <div className="w-full pb-20 pt-2">
         <PlaySection />
-      </main>
-      <Footer />
-    </>
+      </div>
+    </Sheet>
   );
 }

@@ -2,8 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Sheet from "@/components/home/Sheet";
 import PasswordInput from "@/components/PasswordInput";
 
 /**
@@ -46,30 +45,26 @@ export default function PasswordGate({
   }
 
   return (
-    // At least a screen tall, with the main column taking the slack, so the footer
-    // sits at the bottom of the window however short the gate is.
-    <div className="flex min-h-svh flex-col">
-      <Header />
-      <main className="mx-auto w-full max-w-[var(--reading-max)] flex-1 pt-2">
-        <section className="flex flex-col gap-6 px-4 pb-24 pt-16 sm:px-6 sm:pt-24">
-          <h1 className="font-display text-32 leading-none text-ink">
-            Confirm Entry for &ldquo;{project}&rdquo;
-          </h1>
-          <div className="flex flex-col gap-1.5" onFocusCapture={() => void LOADERS[content]()}>
-            <span className="text-14 leading-[1.4] text-ink">Password</span>
-            <PasswordInput
-              placeholder={`Enter password for "${project}"`}
-              minLength={password.length}
-              onSubmit={(v) => {
-                const ok = v === password;
-                if (ok) setAuthed(true);
-                return ok;
-              }}
-            />
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+    // On the ruled sheet, like the project pages it opens; the sheet is at least a
+    // screen tall, so its footer sits at the bottom of the window.
+    <Sheet>
+      <section className="flex flex-col gap-6 px-4 pb-24 pt-16 sm:px-6 sm:pt-[120px]">
+        <h1 className="text-28 leading-[1.3] tracking-[-0.015em] text-ink sm:text-40 lg:text-48">
+          Confirm Entry for &ldquo;{project}&rdquo;
+        </h1>
+        <div className="flex max-w-[520px] flex-col gap-1.5" onFocusCapture={() => void LOADERS[content]()}>
+          <span className="text-14 leading-[1.4] text-ink">Password</span>
+          <PasswordInput
+            placeholder={`Enter password for "${project}"`}
+            minLength={password.length}
+            onSubmit={(v) => {
+              const ok = v === password;
+              if (ok) setAuthed(true);
+              return ok;
+            }}
+          />
+        </div>
+      </section>
+    </Sheet>
   );
 }

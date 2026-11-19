@@ -24,8 +24,8 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   (warm off-white `--color-bg #f5f3ef`). Use tokens (`text-ink`, `border-ink/10`),
   not `white`/`black`, for chrome; `light:` is a variant for the rare
   light-only tweak (e.g. `invert light:invert-0` on icons)
-- Layout widths: `--reading-max` (700px: About, Saathi, resume, gate), `--content-max` (832px: home hero column, list views), `--shell-max` (1200px: Work and Play grids). Header and footer run full width.
-- Hairlines: header bottom, footer top and resume dividers are `0.5px` at `white/10`
+- Layout widths: `--reading-max` (700px: About, resume), `--content-max` (832px: home hero column, list views), `--shell-max` (1200px: the ruled sheet, Work and Play grids). The nav (`SheetNav`) is the same on every page: inside the sheet on sheet pages, full width with its contents in the 1200px column elsewhere.
+- Hairlines: the old footer's top and resume dividers are `0.5px` at `white/10`; the sheet's rules are `border-rule`
 
 ## Routes
 
@@ -42,7 +42,7 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   (`TagMarquee`), Selected Work (`SelectedWork`, Figma 8785:37079; Overview links to each project,
   "Work in progress" where there's no page yet), contact (`ContactOrbit`: the same clip on its
   still, played while the pointer is over the block) and footer. Copy in `HOME` / `SELECTED_WORK`
-  (`data/site.ts`). Other pages still use the old `Header` / `Footer`.
+  (`data/site.ts`). Every page uses `SheetNav` (the old `Header` is gone); pages off the sheet (/resume, /draft, /enter) still use the old `Footer`.
 - `app/not-found.tsx` — 404 on the same sheet: `SheetHero` with its own headline, a way home, and the
   marquee spelling out 404.
 - `/enter` — retired: the splash is no longer reached (the `ENTER_SCRIPT` redirect is gone from the
@@ -54,10 +54,12 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   motion), `NextProject` (the orbit clip behind the next project's title, played on hover as in the
   contact block) and `Tags` / `Rich`. Media slots show their label until a file is added. Not indexed
   while it has placeholders.
-- `/work` — work gallery (Header, WorkGallery, Footer)
-- `/about` — `AboutContent`
-- `/play` — Play gallery (Vimeo/SoundCloud embeds via oEmbed)
-- `/bima-saathi` — password-gated, vertical-scroll case study
+- `/work` — work gallery (`WorkGallery`) on the ruled sheet
+- `/about` — `AboutContent`, on the ruled sheet
+- `/play` — Play gallery (Vimeo/SoundCloud embeds via oEmbed), on the ruled sheet
+- `/bima-saathi` — password-gated; the gate and the case study (`components/saathi/SaathiContent.tsx`) both sit on
+  the ruled sheet, built from `components/project/` like /netra. `/peetal` (unlisted) is the same, copy in
+  `components/peetal/PeetalContent.tsx`. Next Project on each follows Selected Work's order.
 - `/bimakavach-identity` — password-gated, horizontal panel-snap-scroll case study (19 sections)
 
 ## Conventions
@@ -120,8 +122,8 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   BimaKavach Identity ASCII video field
 - `components/bk/IdentityContent.tsx` — the horizontal, panel-snap scroll
   stage and its stagger + blur-in reveal system
-- `components/saathi/SaathiContent.tsx` — the vertical-scroll case study and
-  its own stagger + blur-in reveal system
+- `components/project/` — the project-page kit (GrowMedia's scroll-grown frames, NextProject,
+  ProjectHero / ProjectSection / Numbered / Stats) behind /netra, /bima-saathi and /peetal
 - `components/PasswordGate.tsx` — soft client-side gate for both case studies
   (password lives in the page component's props — not real security)
 - `lib/availability.ts` — weekly schedule + `resolveStatus()` behind the

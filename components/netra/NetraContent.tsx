@@ -2,10 +2,7 @@ import { BIMA_NETRA as P } from "@/data/bima-netra";
 import TagMarquee from "../home/TagMarquee";
 import GrowMedia from "../project/GrowMedia";
 import NextProject from "../project/NextProject";
-import { Rich, Tags } from "../project/parts";
-
-const heading = "text-28 leading-[1.3] tracking-[-0.015em] text-ink";
-const body = "text-16 leading-[1.8] tracking-[-0.015em] text-subtle";
+import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../project/parts";
 
 /**
  * The BimaNetra project (Figma 8818:32660), on the ruled sheet: the opening, the band
@@ -14,33 +11,14 @@ const body = "text-16 leading-[1.8] tracking-[-0.015em] text-subtle";
  * data/bima-netra.ts.
  */
 export default function NetraContent() {
-  const at = (i: number) => ({ "--i": i }) as React.CSSProperties;
   return (
     <article className="flex flex-col">
-      <section className="flex flex-col items-end px-4 pb-20 pt-16 sm:px-6 sm:pt-[120px]">
-        <Tags items={P.tags} style={at(0)} className="rise-text" />
-        <h1
-          style={at(1)}
-          className="rise-text w-full text-28 leading-[1.3] tracking-[-0.015em] text-ink sm:text-40 lg:text-48"
-        >
-          {P.title.map((line, i) => (
-            <span key={i} className="lg:block">
-              {line}
-              {i < P.title.length - 1 && " "}
-            </span>
-          ))}
-        </h1>
-        <p style={at(2)} className="rise-text w-full pt-5">
-          <span className="block max-w-[520px] text-16 leading-6 tracking-[-0.01em] text-subtle">
-            {P.intro}
-          </span>
-        </p>
-      </section>
+      <ProjectHero tags={P.tags} title={P.title} intro={P.intro} />
       <TagMarquee items={P.marquee} />
 
       {/* Overview */}
       <div className="flex flex-col pt-20">
-        <GrowMedia media={P.splash} still />
+        <GrowMedia media={P.splash} />
         <section
           aria-label="Overview"
           className="flex flex-col items-end px-4 pb-6 pt-[88px] sm:px-6"
@@ -149,7 +127,7 @@ export default function NetraContent() {
 
       {/* Showcase, then the takeaways */}
       <div className="pt-40">
-        <GrowMedia media={P.showcase} still />
+        <GrowMedia media={P.showcase} />
       </div>
       <div className="py-20">
         <section
@@ -216,7 +194,7 @@ export default function NetraContent() {
         </section>
       </div>
 
-      <NextProject href={P.next.href} title={P.next.title} />
+      <NextProject after="bima-netra" />
     </article>
   );
 }

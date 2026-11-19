@@ -3,20 +3,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { SITE } from "@/data/site";
+import { SELECTED_WORK, SITE } from "@/data/site";
 import HeroVideo from "../HeroVideo";
 
 /**
  * The banner at a project's foot that opens the next one (Figma 8818:33454): the
  * orbit clip resting on its still behind the next project's title, its top fading
- * into the page. Pointing at the banner (or tabbing to it) plays the clip, as on
- * home's contact block; leaving holds the frame it reached. Touch keeps the still.
+ * into the page. "Next" follows home's Selected Work, skipping projects without a
+ * page and wrapping round. Pointing at the banner (or tabbing to it) plays the clip,
+ * as on home's contact block; leaving holds the frame it reached. Touch keeps the still.
  */
-export default function NextProject({ href, title }: { href: string; title: string }) {
+export default function NextProject({ after }: { after: string }) {
   const [active, setActive] = useState(false);
+  const i = SELECTED_WORK.findIndex((w) => w.slug === after);
+  const next = [...SELECTED_WORK.slice(i + 1), ...SELECTED_WORK.slice(0, i)].find((w) => w.href);
+  if (!next?.href) return null;
+
   return (
     <Link
-      href={href}
+      href={next.href}
       onPointerEnter={(e) => e.pointerType !== "touch" && setActive(true)}
       onPointerLeave={() => setActive(false)}
       onFocus={() => setActive(true)}
@@ -47,7 +52,9 @@ export default function NextProject({ href, title }: { href: string; title: stri
           </span>
         </span>
       </span>
-      <h2 className="pt-4 text-28 leading-[1.3] tracking-[-0.015em] text-ink sm:text-40 lg:text-48">{title}</h2>
+      <h2 className="pt-4 text-28 leading-[1.3] tracking-[-0.015em] text-ink sm:text-40 lg:text-48">
+        {next.heading.join(" ")}
+      </h2>
     </Link>
   );
 }

@@ -6,7 +6,16 @@ import { m, useScroll, useTransform } from "framer-motion";
 import LazyVideo from "../LazyVideo";
 
 /** What a frame shows: `label` until there's a file, then `src` (an image, or an .mp4 with its `poster`). */
-export type Media = { readonly label: string; readonly src?: string; readonly poster?: string };
+export type Media = {
+  readonly label: string;
+  readonly src?: string;
+  readonly poster?: string;
+  readonly alt?: string;
+  /** The frame's width over height, when it isn't 16:9 (an image shown at its own shape). */
+  readonly aspect?: number;
+  /** "contain" for cut-outs on transparent backgrounds; otherwise the media fills the frame. */
+  readonly fit?: "cover" | "contain";
+};
 
 /** The frame at its smallest (Figma 8818:33296): 1000×526 inside the 1200×675 container. */
 const FROM_W = 1000 / 1200;
@@ -18,8 +27,8 @@ const FROM_H = 526 / 675;
  * once the whole frame is on screen) and shrinks back as it scrolls away above.
  * - The frame is clipped, and the media inside scaled, in step: together that equals
  *   the media covering a box of the clipped size, without laying anything out again.
- * - `still` keeps it full size throughout (the page's opening clip and the full-width
- *   showcase are drawn that way).
+ * - `still` keeps it full size throughout (no frame uses it at present; every frame,
+ *   the opening one included, grows).
  * - Under reduced motion every frame stays full size (globals.css).
  * - Until a file is added it shows its label on the empty frame.
  */
@@ -38,14 +47,20 @@ export default function GrowMedia({ media, still = false }: { media: Media; stil
   const scale = useTransform(grow, (g) => FROM_W + (1 - FROM_W) * g);
 
   return (
-    <div ref={ref} className="relative aspect-[1200/675] w-full overflow-hidden">
+    <div ref={ref} style={{ aspectRatio: media.aspect ?? 1200 / 675 }} className="relative w-full overflow-hidden">
       <m.div data-grow style={still ? undefined : { clipPath }} className="absolute inset-0 bg-surface">
         {media.src && (
           <m.div data-grow-scale style={still ? undefined : { scale }} className="absolute inset-0 will-change-transform">
             {media.src.endsWith(".mp4") ? (
               <LazyVideo src={media.src} poster={media.poster ?? ""} className="h-full w-full object-cover" />
             ) : (
-              <Image src={media.src} alt="" fill sizes="(min-width: 1200px) 1200px, 100vw" className="object-cover" />
+              <Image
+                src={media.src}
+                alt={media.alt ?? ""}
+                fill
+                sizes="(min-width: 1200px) 1200px, 100vw"
+                className={media.fit === "contain" ? "object-contain" : "object-cover"}
+              />
             )}
           </m.div>
         )}

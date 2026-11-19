@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
+import SheetNav from "@/components/home/SheetNav";
 import Footer from "@/components/Footer";
 import DraftContent from "@/components/draft/DraftContent";
 import DraftShell from "@/components/draft/DraftShell";
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function DraftPage() {
   return (
     <>
-      <Header />
+      <SheetNav />
       {/* Rail and page side by side: hovering the left edge opens the rail and the page moves over. */}
       <DraftShell>
         <DraftContent />

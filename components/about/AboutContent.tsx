@@ -1,7 +1,6 @@
 "use client";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Sheet from "@/components/home/Sheet";
 import Reveal from "@/components/Reveal";
 import HeroCoin from "@/components/about/HeroCoin";
 import PhotoCarousel from "@/components/about/PhotoCarousel";
@@ -12,9 +11,10 @@ const at = (i: number) => ({ "--i": i }) as React.CSSProperties;
 export default function AboutContent() {
 
   return (
-    <>
-      <Header />
-      <main className="w-full pb-20">
+    // On the ruled sheet, like home and the projects: the 1200px column with its side
+    // rules, the nav and the sheet's footer.
+    <Sheet>
+      <div className="w-full pb-20">
         {/* Hero — flipping coin box + heading + intro. A CSS entrance (.rise), so it paints before hydration. */}
         <section className="flex flex-col gap-10 pt-2">
           {/* Same box as the home hero's showreel: 16:9, rounded, black (page colour in light mode), in the content column. */}
@@ -93,8 +93,7 @@ export default function AboutContent() {
             </Reveal>
           </div>
         </section>
-      </main>
-      <Footer />
-    </>
+      </div>
+    </Sheet>
   );
 }

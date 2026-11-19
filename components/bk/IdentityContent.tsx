@@ -13,7 +13,7 @@ import React, {
 } from "react";
 import Image from "next/image";
 import { m, useReducedMotion } from "framer-motion";
-import Header from "@/components/Header";
+import SheetNav from "@/components/home/SheetNav";
 import AsciiDither from "@/components/bk/AsciiDither";
 import { useTheme } from "@/lib/theme";
 import "./anek.css";
@@ -642,7 +642,7 @@ export default function IdentityContent() {
   return (
     <ScrollRootCtx.Provider value={stageRef}>
       <ScrollDirCtx.Provider value={dirRef}>
-        <Header />
+        <SheetNav />
         <div
           ref={stageRef}
           data-lenis-prevent

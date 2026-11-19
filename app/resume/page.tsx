@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Header from "@/components/Header";
+import SheetNav from "@/components/home/SheetNav";
 import Footer from "@/components/Footer";
 import ResumeContent from "@/components/resume/ResumeContent";
 import ResumeNav from "@/components/resume/ResumeNav";
@@ -26,7 +26,7 @@ export default function ResumePage() {
   if (!RESUME_LIVE && process.env.NODE_ENV === "production") notFound();
   return (
     <>
-      <Header />
+      <SheetNav />
       {/* The Bima Saathi layout: from md up, the chapter rail, the 700px column, and an
           empty column mirroring the rail so the column stays centred. */}
       <div className="w-full px-4 sm:px-6 md:grid md:grid-cols-[minmax(10rem,1fr)_minmax(0,var(--reading-max))_1fr] md:gap-8">
