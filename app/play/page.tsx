@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 /** The Play gallery, on the ruled sheet like home and the projects. */
 export default function PlayPage() {
   return (
-    <Sheet>
-      <div className="w-full pb-20 pt-2">
+    <Sheet contact>
+      <div className="w-full pt-2">
         <PlaySection />
       </div>
     </Sheet>

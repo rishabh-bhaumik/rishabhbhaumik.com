@@ -312,6 +312,34 @@ html.lenis body {
     transform: scaleX(1);
   }
 }
+/* /netra's splash (components/netra/NetraSplash): the D&O page's ticker (one phrase pair
+   per cycle, 174.6px on the stage), its CTA chevron's nudge and the button's sheen. */
+@keyframes netra-ticker {
+  to {
+    transform: translateX(-174.6px);
+  }
+}
+@keyframes netra-nudge {
+  0%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-1.2px);
+  }
+  27% {
+    transform: translateX(3.1px);
+  }
+}
+@keyframes netra-sheen {
+  from {
+    transform: translateX(-100%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(286%) skewX(-18deg);
+  }
+}
 /* The 404's marquee (app/not-found.tsx): the track holds two identical runs, so moving
    it half its width loops seamlessly. */
 @keyframes marquee {

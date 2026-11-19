@@ -133,6 +133,14 @@ export const PROJECTS: Project[] = [
     cover: true,
   },
   {
+    slug: "bima-netra",
+    title: "BimaNetra",
+    tag: "live 2026",
+    description:
+      "India's first agentic infrastructure solution for a 200 year old problem: how BimaKavach prices risk, underwrites smartly and surfaces gaps in a business.",
+    href: "/netra",
+  },
+  {
     slug: "bima-kendra",
     title: "bima kendra",
     tag: "live 2026",

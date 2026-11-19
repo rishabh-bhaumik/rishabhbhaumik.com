@@ -6,7 +6,7 @@ Source: `components/bk/IdentityContent.tsx` (`SCRIPTS`, `toGraphemes`,
 
 ## Where it renders
 
-`section-work-5` of `/bimakavach-identity` — the last panel in the horizontal
+`section-work-5` of `/bimakavach-identity` — the last content panel in the horizontal
 carousel, titled "A Typeface for All India" — renders `VariableWidthType`
 inside a `Shell manual` block:
 

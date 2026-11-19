@@ -14,6 +14,8 @@ import React, {
 import Image from "next/image";
 import { m, useReducedMotion } from "framer-motion";
 import SheetNav from "@/components/home/SheetNav";
+import SheetFooter from "@/components/home/SheetFooter";
+import NextProject from "@/components/project/NextProject";
 import AsciiDither from "@/components/bk/AsciiDither";
 import { useTheme } from "@/lib/theme";
 import "./anek.css";
@@ -1260,6 +1262,18 @@ export default function IdentityContent() {
                   </Body>
                 </StaggerItem>
               </Shell>
+            </section>
+
+            {/* 19 — the foot: the next project and the sheet's footer, on the sheet's
+                ruled 1200px column, as at the end of every other project. */}
+            <section
+              id="section-next"
+              className="relative flex h-full w-screen shrink-0 justify-center bg-bg"
+            >
+              <div className="flex h-full w-full max-w-[var(--shell-max)] flex-col justify-end overflow-y-auto border-rule min-[1201px]:border-x">
+                <NextProject after="bimakavach-identity" />
+                <SheetFooter />
+              </div>
             </section>
           </div>
         </div>

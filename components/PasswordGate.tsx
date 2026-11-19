@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import Sheet from "@/components/home/Sheet";
 import PasswordInput from "@/components/PasswordInput";
+import NextProject from "@/components/project/NextProject";
 
 /**
  * Soft client-side gate for case-study pages. Re-prompts on every visit (the
@@ -27,6 +28,8 @@ const CONTENT = {
   identity: dynamic(LOADERS.identity),
 };
 type GatedContent = keyof typeof CONTENT;
+/** Each study's slug in SELECTED_WORK, so the gate can offer the project after it. */
+const SLUG: Record<GatedContent, string> = { saathi: "bima-saathi", identity: "bimakavach-identity" };
 
 export default function PasswordGate({
   project,
@@ -65,6 +68,8 @@ export default function PasswordGate({
           />
         </div>
       </section>
+      {/* The way on is open before the password too, as it is at the study's foot. */}
+      <NextProject after={SLUG[content]} />
     </Sheet>
   );
 }

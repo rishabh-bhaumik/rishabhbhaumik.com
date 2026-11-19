@@ -11,7 +11,7 @@ const LOST = ["4 0 4", "Page not found", "4 0 4", "Off the map", "4 0 4", "Page 
  */
 export default function NotFound() {
   return (
-    <Sheet>
+    <Sheet contact>
       <SheetHero
         heading={
           <>

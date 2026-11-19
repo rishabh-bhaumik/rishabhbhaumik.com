@@ -42,7 +42,7 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   (`TagMarquee`), Selected Work (`SelectedWork`, Figma 8785:37079; Overview links to each project,
   "Work in progress" where there's no page yet), contact (`ContactOrbit`: the same clip on its
   still, played while the pointer is over the block) and footer. Copy in `HOME` / `SELECTED_WORK`
-  (`data/site.ts`). Every page uses `SheetNav` (the old `Header` is gone); pages off the sheet (/resume, /draft, /enter) still use the old `Footer`.
+  (`data/site.ts`). Every page uses `SheetNav` (the old `Header` is gone); pages off the sheet (/resume, /draft, /enter) still use the old `Footer`. Pages that aren't projects (home, About, Play, the 404) end on the contact block over the footer (`<Sheet contact>`); projects end on `NextProject`, and /draft (project 999) has one too, wrapping to the first project.
 - `app/not-found.tsx` — 404 on the same sheet: `SheetHero` with its own headline, a way home, and the
   marquee spelling out 404.
 - `/enter` — retired: the splash is no longer reached (the `ENTER_SCRIPT` redirect is gone from the
@@ -52,7 +52,20 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   1200×675 media frame whose media starts at 1000×526, grows to full size once the frame is on screen and
   shrinks back as it leaves; clip plus scale in step, so nothing re-lays out; full size under reduced
   motion), `NextProject` (the orbit clip behind the next project's title, played on hover as in the
-  contact block) and `Tags` / `Rich`. Media slots show their label until a file is added. Not indexed
+  contact block) and `Tags` / `Rich`. Media slots show their label until a file is added; a GrowMedia can
+  instead hold its own scene as children, reading the growth with `useGrow()`. The opening frame is
+  one: `NetraSplash` (storyboard Figma 8831:35640), a live 1200×675 stage scaled to the frame. BimaKavach's
+  curtain with the logo scrubbed by the growth, then at full size a ~14s loop on the D&O page (Netra's
+  own fonts, colours and gavel clip, in `public/media/netra/`; its D&O icon is drawn live by `NetraArcs`,
+  15 stacked ogee rings, and hands over from the bottom left to under the column rather than moving:
+  one collapses away down-left as another forms from below, both through an #ff7700 Bayer dither, as
+  Netra's DitherWash): camera to the quote column, a
+  pointer types "Pepe", picks the MCA record, hovers the CTA (the camera closes in, storyboard 07.1:
+  the gavel lifts away, the icon stays), then heads for Know More as the field and CTA dissolve (07.2), clicks it, and
+  the curtain rises back to the logo. NetraBot sits beside Know More as the visitor's stand-in, its states,
+  reactions and gaze (on the fake pointer, the field, the icon…) scripted per beat. Resets when off screen;
+  one still under reduced motion. NetraBot itself is ported from BimaNetra into `components/netrabot/` +
+  `lib/netrabot/` (data, player, renderer; plus a `getGaze` prop so a script can aim its eyes). Not indexed
   while it has placeholders.
 - `/work` — work gallery (`WorkGallery`) on the ruled sheet
 - `/about` — `AboutContent`, on the ruled sheet
@@ -60,7 +73,7 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 - `/bima-saathi` — password-gated; the gate and the case study (`components/saathi/SaathiContent.tsx`) both sit on
   the ruled sheet, built from `components/project/` like /netra. `/peetal` (unlisted) is the same, copy in
   `components/peetal/PeetalContent.tsx`. Next Project on each follows Selected Work's order.
-- `/bimakavach-identity` — password-gated, horizontal panel-snap-scroll case study (19 sections)
+- `/bimakavach-identity` — password-gated, horizontal panel-snap-scroll case study (19 sections, then a last panel with Next Project and the footer). Both gates show Next Project and the footer under the password too
 
 ## Conventions
 

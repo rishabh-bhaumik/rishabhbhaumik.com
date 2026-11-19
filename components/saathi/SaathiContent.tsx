@@ -55,6 +55,7 @@ export default function SaathiContent() {
     <Sheet>
       <article className="flex flex-col">
         <ProjectHero
+          href="/bima-saathi"
           tags={[WORK.year, WORK.kind]}
           title={WORK.heading}
           intro="Saathi is India’s smartest business insurance partner app, allowing BimaKavach to offer insurance products beyond life, health, and motor to partners, who can reach customers even we normally can’t."

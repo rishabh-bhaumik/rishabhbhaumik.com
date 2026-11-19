@@ -2,6 +2,7 @@ import { BIMA_NETRA as P } from "@/data/bima-netra";
 import TagMarquee from "../home/TagMarquee";
 import GrowMedia from "../project/GrowMedia";
 import NextProject from "../project/NextProject";
+import NetraSplash from "./NetraSplash";
 import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../project/parts";
 
 /**
@@ -13,12 +14,14 @@ import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../pr
 export default function NetraContent() {
   return (
     <article className="flex flex-col">
-      <ProjectHero tags={P.tags} title={P.title} intro={P.intro} />
+      <ProjectHero href="/netra" tags={P.tags} title={P.title} intro={P.intro} />
       <TagMarquee items={P.marquee} />
 
       {/* Overview */}
       <div className="flex flex-col pt-20">
-        <GrowMedia media={P.splash} />
+        <GrowMedia media={P.splash}>
+          <NetraSplash label={P.splash.alt} />
+        </GrowMedia>
         <section
           aria-label="Overview"
           className="flex flex-col items-end px-4 pb-6 pt-[88px] sm:px-6"

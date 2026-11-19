@@ -10,7 +10,7 @@ import ViewToggle from "./ViewToggle";
 type View = "grid" | "list";
 
 export default function WorkGallery({ projects }: { projects: Project[] }) {
-  const [view, setView] = useState<View>("grid");
+  const [view, setView] = useState<View>("list");
 
   // Staggered in as the list scrolls into view (not all at once on mount).
   const listProps = {

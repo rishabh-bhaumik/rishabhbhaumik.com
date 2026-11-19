@@ -1,0 +1,19 @@
+/* Zero-size origin at the centre of the positioned parent. */
+.burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Dithered sparks: one canvas centred on the origin, crisp cells. */
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  image-rendering: pixelated;
+}

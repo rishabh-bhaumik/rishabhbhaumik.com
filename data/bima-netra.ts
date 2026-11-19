@@ -7,7 +7,7 @@ import type { Media } from "@/components/project/GrowMedia";
 import type { RichText } from "@/components/project/parts";
 
 export const BIMA_NETRA = {
-  tags: ["2025", "mobile app"],
+  tags: ["2026", "ai saas"],
   /** The headline, broken as in Figma on wide screens. */
   title: ["BimaNetra™: India’s first agentic infrastructure solution", "for a 200 year old problem"],
   intro: "BimaNetra™ is how BimaKavach can price risk, underwrite smartly, and surface gaps in their business.",
@@ -23,7 +23,11 @@ export const BIMA_NETRA = {
     "figma, Figjam, claude co-work, claude Code",
   ],
 
-  splash: { label: "Splash video: Netra in action" } satisfies Media,
+  // Drawn live by components/netra/NetraSplash; the alt describes what it plays.
+  splash: {
+    label: "Splash video: Netra in action",
+    alt: "BimaKavach's curtain lifts on the D&O insurance page. A pointer types Pepe into the company field, picks Pepe Jeans Innerfashion Private Limited from the MCA records, hovers Get My Quote, then clicks Know More, and the curtain falls back to the logo.",
+  } satisfies Media,
   overview: {
     tag: "overview",
     lead: "Smart Underwriting, engineered. profiling, quote generation, and checkout, in a matter of minutes",

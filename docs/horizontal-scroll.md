@@ -10,7 +10,8 @@ The entire `/bimakavach-identity` page is one horizontal, panel-snap carousel:
 19 full-viewport `<section>`s in a row — Hero, 11 story sections
 (`section-story-0` through `section-story-10`), one brand-positioning section,
 and 6 work sections (`section-work-0` through `section-work-5`, the last of
-which is the typography-hover panel documented in `docs/typography-hover.md`).
+which is the typography-hover panel documented in `docs/typography-hover.md`),
+then `section-next`: Next Project and the sheet footer on the 1200px column.
 Instead of scrolling down the page, the visitor scrolls or wheels right
 through it.
 

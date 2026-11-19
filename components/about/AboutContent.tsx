@@ -13,8 +13,8 @@ export default function AboutContent() {
   return (
     // On the ruled sheet, like home and the projects: the 1200px column with its side
     // rules, the nav and the sheet's footer.
-    <Sheet>
-      <div className="w-full pb-20">
+    <Sheet contact>
+      <div className="w-full">
         {/* Hero — flipping coin box + heading + intro. A CSS entrance (.rise), so it paints before hydration. */}
         <section className="flex flex-col gap-10 pt-2">
           {/* Same box as the home hero's showreel: 16:9, rounded, black (page colour in light mode), in the content column. */}

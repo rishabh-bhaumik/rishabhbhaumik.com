@@ -106,6 +106,7 @@ export default function PeetalContent() {
   return (
     <article className="flex flex-col">
       <ProjectHero
+          href="/peetal"
         tags={[WORK.year, WORK.kind]}
         title={["One source of truth for designers, developers and the agents that build with them."]}
         intro="Peetal is BimaKavach’s in-house design system library: the tokens, components and documentation behind its web journeys, its POS app “Saathi”, and the base for handing work to developers and to AI agents."

@@ -10,7 +10,8 @@ import HeroVideo from "../HeroVideo";
  * The banner at a project's foot that opens the next one (Figma 8818:33454): the
  * orbit clip resting on its still behind the next project's title, its top fading
  * into the page. "Next" follows home's Selected Work, skipping projects without a
- * page and wrapping round. Pointing at the banner (or tabbing to it) plays the clip,
+ * page and wrapping round; a page that isn't in the list (Draft, project 999) gets the
+ * first. Pointing at the banner (or tabbing to it) plays the clip,
  * as on home's contact block; leaving holds the frame it reached. Touch keeps the still.
  */
 export default function NextProject({ after }: { after: string }) {
