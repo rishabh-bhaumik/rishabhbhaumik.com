@@ -13,7 +13,7 @@ type View = "grid" | "list";
 /**
  * Home's Selected Work (Figma 8785:37079): a heading, the grid/list switch, then one
  * card per project. List (the default, as in Figma) stacks full-width cards; grid sets
- * them two up. Each card's Overview opens the project; projects without a page yet
+ * them two up. A card with a page opens it wherever it's clicked; projects without one yet
  * say "Work in progress" instead.
  */
 export default function SelectedWork() {
@@ -52,16 +52,18 @@ export default function SelectedWork() {
 
 function WorkCard({ work, compact }: { work: Work; compact: boolean }) {
   return (
-    <article className="flex flex-col gap-8 pb-12 pt-4 sm:pb-20">
+    // With a page, the whole card opens it: the heading's link stretches over the card
+    // (its ::after), and Overview is the cue that reacts while the card is pointed at.
+    <article className="group relative flex flex-col gap-8 pb-12 pt-4 sm:pb-20">
       <div className="relative aspect-[1200/675.5] overflow-hidden bg-surface">
         {work.media && (
           <Image src={work.media} alt="" fill sizes="(min-width: 1200px) 1200px, 100vw" className="object-contain" />
         )}
         <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
           {work.href ? (
-            <Link
-              href={work.href}
-              className="group flex h-8 items-center gap-2 rounded-[8px] border-[0.5px] border-rule bg-bg pl-3 pr-1 text-12 leading-none text-ink transition-colors hover:border-faint/40"
+            <span
+              aria-hidden
+              className="flex h-8 items-center gap-2 rounded-[8px] border-[0.5px] border-rule bg-bg pl-3 pr-1 text-12 leading-none text-ink transition-colors group-hover:border-faint/40"
             >
               Overview
               <span className="flex h-[18px] items-center border-l border-rule pl-[5px] pr-2">
@@ -73,8 +75,7 @@ function WorkCard({ work, compact }: { work: Work; compact: boolean }) {
                   className="transition-transform duration-300 group-hover:rotate-90 light:invert"
                 />
               </span>
-              <span className="sr-only">: {work.heading.join(" ")}</span>
-            </Link>
+            </span>
           ) : (
             <span className="flex h-8 items-center rounded-[8px] border-[0.5px] border-rule bg-bg px-3 text-12 uppercase leading-none tracking-[0.005em] text-ink">
               Work in progress
@@ -88,12 +89,16 @@ function WorkCard({ work, compact }: { work: Work; compact: boolean }) {
           <h3
             className={`pt-3 leading-[1.4] tracking-[-0.015em] text-ink ${compact ? "text-20" : "text-20 sm:text-28"}`}
           >
-            {work.heading.map((line, i) => (
-              <span key={i} className={compact ? "" : "lg:block"}>
-                {line}
-                {i < work.heading.length - 1 && " "}
-              </span>
-            ))}
+            {work.href ? (
+              <Link
+                href={work.href}
+                className="outline-none after:absolute after:inset-0 focus-visible:after:outline focus-visible:after:outline-1 focus-visible:after:-outline-offset-1 focus-visible:after:outline-ink/40"
+              >
+                <Lines work={work} compact={compact} />
+              </Link>
+            ) : (
+              <Lines work={work} compact={compact} />
+            )}
           </h3>
           <p className="max-w-[560px] pt-2 text-12 leading-[1.8] tracking-[-0.015em] text-subtle">{work.body}</p>
         </div>
@@ -110,4 +115,14 @@ function WorkCard({ work, compact }: { work: Work; compact: boolean }) {
       </div>
     </article>
   );
+}
+
+/** A card's heading lines: broken as in Figma on wide list cards, running text otherwise. */
+function Lines({ work, compact }: { work: Work; compact: boolean }) {
+  return work.heading.map((line, i) => (
+    <span key={i} className={compact ? "" : "lg:block"}>
+      {line}
+      {i < work.heading.length - 1 && " "}
+    </span>
+  ));
 }
