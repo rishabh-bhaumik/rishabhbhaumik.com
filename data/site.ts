@@ -196,9 +196,9 @@ export const HOME = {
   ],
   /** One string per line on wide screens; they run together and wrap below that. */
   headline: [
-    "I’m Rishabh, Product and Visual",
-    "Designer for complex, secure, and",
-    "AI-first products.",
+    "I’m Rishabh. I design brands and",
+    "products for 0 to 1 startups, with",
+    "instinct and a playbook behind it.",
   ],
   intro:
     "Product Designer with 6+ years across product, brand and film, for Vedantu, UNICEF and fashion labels.",
@@ -392,3 +392,16 @@ export const PLAY: PlayItem[] = [
       "https://player.vimeo.com/video/532172140?h=81618c0b21&autoplay=1&title=0&byline=0&portrait=0",
   },
 ];
+
+/** The openings of /work and /play (PageHero, then the marquee under it). */
+export const WORK_PAGE = {
+  title: ["Products, systems and brands,", "taken from zero to one."],
+  intro: "Case studies in AI tools, SaaS dashboards and apps, and the design systems that hold them together.",
+  marquee: ["AI", "SaaS", "Dashboard", "Digital Product", "App", "Design System"],
+} as const;
+
+export const PLAY_PAGE = {
+  title: ["Films, photographs and", "things made for the joy of it."],
+  intro: "The work away from product: short films, music, photography and creative direction.",
+  marquee: ["Filmmaker", "Photographer", "Creative Director", "Editor", "Storyteller", "Motion"],
+} as const;

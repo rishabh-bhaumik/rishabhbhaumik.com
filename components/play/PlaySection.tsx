@@ -17,7 +17,7 @@ export default async function PlaySection() {
   return (
     <section
       id="play"
-      className="mx-auto w-full max-w-[var(--shell-max)] scroll-mt-24 px-4 pt-24 sm:px-6"
+      className="mx-auto w-full max-w-[var(--shell-max)] scroll-mt-24 px-4 sm:px-6"
     >
       <PlayGallery items={items} />
     </section>

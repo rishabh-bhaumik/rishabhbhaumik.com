@@ -30,7 +30,9 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 ## Routes
 
 - `/` — home on the **ruled sheet** (Figma 8780:35610, `components/home/`): one 1200px column with
-  `rule` hairlines down both sides (`Sheet.tsx`), its own sticky nav (`SheetNav`: mark, name, local
+  `rule` hairlines down both sides (`Sheet.tsx`; outside them the gutters carry the orbit clip's starfield: `SheetGutters`,
+  two fixed canvases whose stars stream out from the screen's middle at the clip's measured rate, density, lifetimes and
+  pop-in/blink-out, stepping at its 12fps; ink-coloured; one still field under reduced motion), its own sticky nav (`SheetNav`: mark, name, local
   time, links, and the dock's controls, so the floating dock hides while `[data-sheet-nav]` is up),
   the greeting over the headline (`Greeting`: hello in 17 languages from `HOME.greetings`, rolling
   up one at a time from "নমস্কার", which is server-rendered and stays under reduced motion; each
@@ -39,12 +41,17 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   `GreetingRoll` also fills the contact block's "Say …"), the orbit clip (at every width only its top half shows,
   sitting on the marquee, which cuts the planet through its middle; from lg up it sits under the
   text, 162px down, so the hero is 560px as in Figma; narrower, text and strip stack), the label marquee
-  (`TagMarquee`), Selected Work (`SelectedWork`, Figma 8785:37079; Overview links to each project,
+  (`TagMarquee`; the whole opening, greeting to marquee, stays pinned under the nav while the rest scrolls up over it: `<Sheet hero>` →
+  `SheetPin`, measured, pinned lower when taller than the screen; Work and Play pin theirs the same way, and so do the projects (BimaNetra, Bima Saathi, Peetal: `SheetPin`
+  round `ProjectHero` + marquee inside their article, the rest in a `relative z-10 bg-bg` layer)), Selected Work (`SelectedWork`, Figma 8785:37079; Overview links to each project,
   "Work in progress" where there's no page yet), contact (`ContactOrbit`: the same clip on its
-  still, played while the pointer is over the block) and footer. Copy in `HOME` / `SELECTED_WORK`
-  (`data/site.ts`). Every page uses `SheetNav` (the old `Header` is gone); pages off the sheet (/resume, /draft, /enter) still use the old `Footer`. Pages that aren't projects (home, About, Play, the 404) end on the contact block over the footer (`<Sheet contact>`); projects end on `NextProject`, and /draft (project 999) has one too, wrapping to the first project.
-- `app/not-found.tsx` — 404 on the same sheet: `SheetHero` with its own headline, a way home, and the
-  marquee spelling out 404.
+  still, played while the pointer is over the block) and footer. On every sheet page the page holds once its end is on
+  screen and the whole footer (contact card included, where there is one) slides up into the room left for it (`SheetMain`:
+  sticky main, measured height, footer-high padding, plus the usual 80px before a contact footer). Copy in `HOME` / `SELECTED_WORK`
+  (`data/site.ts`). Every page uses `SheetNav` (the old `Header` is gone); pages off the sheet (/resume, /draft, /enter) still use the old `Footer`. Pages that aren't projects (home, Work, About, Play) have a footer that opens on the contact block (`<Sheet contact>`: contact card, then the four links, then the note; one block); projects' footers are just the links and note, and the page ends on `NextProject` (the last thing in the page, above the plain footer; also on their password gates), and /draft (project 999) has one too, wrapping to the first project.
+- `app/not-found.tsx` — 404 on the same sheet: `SheetHero` with its own headline, "Surprise me" (`SurpriseMe`, the
+  Overview button's style with Peetal's sparkle icon, opening a random case study), and the marquee spelling out 404;
+  no footer (`<Sheet footer={false}>`).
 - `/enter` — retired: the splash is no longer reached (the `ENTER_SCRIPT` redirect is gone from the
   root layout); its files (`components/enter/`, `lib/enter.ts`) are kept but unused.
 - `/netra` — the BimaNetra project (Figma 8818:32660) on the ruled sheet (`components/netra/`, copy in
@@ -67,9 +74,11 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   one still under reduced motion. NetraBot itself is ported from BimaNetra into `components/netrabot/` +
   `lib/netrabot/` (data, player, renderer; plus a `getGaze` prop so a script can aim its eyes). Not indexed
   while it has placeholders.
-- `/work` — work gallery (`WorkGallery`) on the ruled sheet
+- `/work` — work gallery (`WorkGallery`) on the ruled sheet, opening like a project (`PageHero` in `components/project/parts.tsx`:
+  breadcrumb home // work, title, note; copy and marquee words in `WORK_PAGE`); list view (the default) gives each card a sheet-wide 1200×675 frame that grows like GrowMedia's (`useGrowFrame`, rounded while small), grid view keeps static rounded cards
 - `/about` — `AboutContent`, on the ruled sheet
-- `/play` — Play gallery (Vimeo/SoundCloud embeds via oEmbed), on the ruled sheet
+- `/play` — Play gallery (Vimeo/SoundCloud embeds via oEmbed), on the ruled sheet, opening with `PageHero` (home // play) and its
+  marquee (`PLAY_PAGE`)
 - `/bima-saathi` — password-gated; the gate and the case study (`components/saathi/SaathiContent.tsx`) both sit on
   the ruled sheet, built from `components/project/` like /netra. `/peetal` (unlisted) is the same, copy in
   `components/peetal/PeetalContent.tsx`. Next Project on each follows Selected Work's order.

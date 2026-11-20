@@ -1,7 +1,8 @@
 import { BIMA_NETRA as P } from "@/data/bima-netra";
+import NextProject from "../project/NextProject";
+import SheetPin from "../home/SheetPin";
 import TagMarquee from "../home/TagMarquee";
 import GrowMedia from "../project/GrowMedia";
-import NextProject from "../project/NextProject";
 import NetraSplash from "./NetraSplash";
 import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../project/parts";
 
@@ -14,8 +15,12 @@ import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../pr
 export default function NetraContent() {
   return (
     <article className="flex flex-col">
+      {/* The opening and its marquee stay put while the page scrolls up over them. */}
+      <SheetPin>
       <ProjectHero href="/netra" tags={P.tags} title={P.title} intro={P.intro} />
       <TagMarquee items={P.marquee} />
+      </SheetPin>
+      <div className="relative z-10 flex flex-col bg-bg">
 
       {/* Overview */}
       <div className="flex flex-col pt-20">
@@ -198,6 +203,7 @@ export default function NetraContent() {
       </div>
 
       <NextProject after="bima-netra" />
+      </div>
     </article>
   );
 }

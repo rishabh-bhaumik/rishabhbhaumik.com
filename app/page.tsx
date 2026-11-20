@@ -5,8 +5,7 @@ import SheetHero, { HomeAside, HomeHeading } from "@/components/home/SheetHero";
 /** Home (Figma 8780:35610): the ruled sheet, its opening, Selected Work and contact. */
 export default function Home() {
   return (
-    <Sheet contact>
-      <SheetHero heading={<HomeHeading />} aside={<HomeAside />} />
+    <Sheet contact hero={<SheetHero heading={<HomeHeading />} aside={<HomeAside />} />}>
       <SelectedWork />
     </Sheet>
   );

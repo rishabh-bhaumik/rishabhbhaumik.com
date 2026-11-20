@@ -1,7 +1,8 @@
 import Link from "next/link";
+import NextProject from "@/components/project/NextProject";
+import SheetPin from "@/components/home/SheetPin";
 import TagMarquee from "@/components/home/TagMarquee";
 import GrowMedia from "@/components/project/GrowMedia";
-import NextProject from "@/components/project/NextProject";
 import {
   Bullets,
   Figure,
@@ -105,6 +106,8 @@ const NEXT = [
 export default function PeetalContent() {
   return (
     <article className="flex flex-col">
+      {/* The opening and its marquee stay put while the page scrolls up over them. */}
+      <SheetPin>
       <ProjectHero
           href="/peetal"
         tags={[WORK.year, WORK.kind]}
@@ -112,6 +115,8 @@ export default function PeetalContent() {
         intro="Peetal is BimaKavach’s in-house design system library: the tokens, components and documentation behind its web journeys, its POS app “Saathi”, and the base for handing work to developers and to AI agents."
       />
       <TagMarquee items={MARQUEE} />
+      </SheetPin>
+      <div className="relative z-10 flex flex-col bg-bg">
       {/* Cover to come (the Figma cover is saved at /media/peetal/cover.png). */}
       <div className="pt-20">
         <GrowMedia media={{ label: "Media pending..." }} />
@@ -328,6 +333,7 @@ export default function PeetalContent() {
       </ProjectSection>
 
       <NextProject after="peetal" />
+      </div>
     </article>
   );
 }

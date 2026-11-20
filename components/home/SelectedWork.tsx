@@ -2,33 +2,24 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { LayoutGroup, m } from "framer-motion";
 import { SELECTED_WORK, type SelectedWork as Work } from "@/data/site";
 import { revealMedia, staggerContainer } from "@/lib/motion";
-import ViewToggle from "../ViewToggle";
-
-type View = "grid" | "list";
 
 /**
  * Home's Selected Work (Figma 8785:37079): a heading, the grid/list switch, then one
- * card per project. List (the default, as in Figma) stacks full-width cards; grid sets
- * them two up. A card with a page opens it wherever it's clicked; projects without one yet
+ * card per project, stacked full width (the list, as in Figma). Home has no grid/list
+ * switch; WorkCard's `compact` (the two-up grid card) is kept for later. A card with a page opens it wherever it's clicked; projects without one yet
  * say "Work in progress" instead.
  */
 export default function SelectedWork() {
-  const [view, setView] = useState<View>("list");
   return (
     <section aria-labelledby="selected-work" className="flex flex-col">
       <div className="flex flex-col border-t border-rule px-4 pb-6 pt-10 sm:px-6">
         <p className="text-12 uppercase leading-none tracking-[-0.01em] text-subtle">Selected Work</p>
         <h2 id="selected-work" className="pt-4 text-28 leading-none tracking-[-0.015em] text-ink sm:text-36">
-          Work I stand behind
+          Made with intent
         </h2>
-      </div>
-
-      <div className="flex justify-end px-8">
-        <ViewToggle view={view} onViewChange={setView} layoutId="home-work-view" />
       </div>
 
       <LayoutGroup>
@@ -37,11 +28,11 @@ export default function SelectedWork() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "0px 0px -8% 0px" }}
-          className={view === "grid" ? "grid grid-cols-1 sm:grid-cols-2" : "flex flex-col"}
+          className="flex flex-col"
         >
           {SELECTED_WORK.map((w) => (
             <m.li key={w.slug} layout variants={revealMedia} transition={{ layout: { duration: 0.4 } }}>
-              <WorkCard work={w} compact={view === "grid"} />
+              <WorkCard work={w} compact={false} />
             </m.li>
           ))}
         </m.ul>

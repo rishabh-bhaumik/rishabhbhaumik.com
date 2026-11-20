@@ -57,39 +57,49 @@ export function Rich({ parts }: { parts: RichText }) {
   );
 }
 
-/**
- * Where a project sits: home // work // its number in Selected Work and slug
- * ("002.bima-netra"), the number following SELECTED_WORK's order.
- */
-function Crumbs({ href }: { href: string }) {
-  const n = SELECTED_WORK.findIndex((w) => w.href === href);
-  const here = n < 0 ? href.slice(1) : `${String(n + 1).padStart(3, "0")}.${SELECTED_WORK[n].slug}`;
-  const sep = <span aria-hidden className="text-faint/50">{"//"}</span>;
+type Crumb = { readonly label: string; readonly href?: string };
+
+/** home // … // here: every step but the last is a link. */
+function Crumbs({ trail }: { trail: readonly Crumb[] }) {
   return (
     <nav aria-label="Breadcrumb" className="flex items-center gap-5 text-12 uppercase leading-none tracking-[0.01em] text-subtle">
-      <Link href="/" className="transition-colors hover:text-ink">home</Link>
-      {sep}
-      <Link href="/work" className="transition-colors hover:text-ink">work</Link>
-      {sep}
-      <span aria-current="page">{here}</span>
+      {trail.map((c, i) => (
+        <span key={c.label} className="flex items-center gap-5">
+          {i > 0 && <span aria-hidden className="text-faint/50">{"//"}</span>}
+          {c.href ? (
+            <Link href={c.href} className="transition-colors hover:text-ink">{c.label}</Link>
+          ) : (
+            <span aria-current="page">{c.label}</span>
+          )}
+        </span>
+      ))}
     </nav>
   );
 }
 
 /**
- * A project's opening (Figma 8818:33249): a 56px row with the breadcrumb at the left
- * and its tags at the right, the headline (broken line by line on wide screens) and a
+ * Where a project sits: home // work // its number in Selected Work and slug
+ * ("002.bima-netra"), the number following SELECTED_WORK's order.
+ */
+function projectTrail(href: string): Crumb[] {
+  const n = SELECTED_WORK.findIndex((w) => w.href === href);
+  const here = n < 0 ? href.slice(1) : `${String(n + 1).padStart(3, "0")}.${SELECTED_WORK[n].slug}`;
+  return [{ label: "home", href: "/" }, { label: "work", href: "/work" }, { label: here }];
+}
+
+/**
+ * A page's opening (Figma 8818:33249): a 56px row with the breadcrumb at the left
+ * and any tags at the right, the headline (broken line by line on wide screens) and a
  * short note. It rises in with CSS before any JavaScript.
  */
-export function ProjectHero({
-  href,
+function Opening({
+  trail,
   tags,
   title,
   intro,
 }: {
-  /** The project's route, for the breadcrumb. */
-  href: string;
-  tags: readonly string[];
+  trail: readonly Crumb[];
+  tags?: readonly string[];
   title: readonly string[];
   intro: React.ReactNode;
 }) {
@@ -97,8 +107,8 @@ export function ProjectHero({
   return (
     <section className="flex flex-col items-end px-4 pb-20 pt-16 sm:px-6 sm:pt-[120px]">
       <div style={at(0)} className="rise-text flex min-h-14 w-full flex-wrap items-center justify-between gap-x-4">
-        <Crumbs href={href} />
-        <Tags items={tags} className="-mx-3" />
+        <Crumbs trail={trail} />
+        {tags && <Tags items={tags} className="-mx-3" />}
       </div>
       <h1 style={at(1)} className="rise-text w-full text-28 leading-[1.3] tracking-[-0.015em] text-ink sm:text-40 lg:text-48">
         {title.map((line, i) => (
@@ -113,6 +123,27 @@ export function ProjectHero({
       </p>
     </section>
   );
+}
+
+/** A project's opening: home // work // 00n.slug, with its tags at the right. */
+export function ProjectHero({
+  href,
+  tags,
+  title,
+  intro,
+}: {
+  /** The project's route, for the breadcrumb. */
+  href: string;
+  tags: readonly string[];
+  title: readonly string[];
+  intro: React.ReactNode;
+}) {
+  return <Opening trail={projectTrail(href)} tags={tags} title={title} intro={intro} />;
+}
+
+/** A section page's opening (Work, Play): home // its name, and no tags. */
+export function PageHero({ page, title, intro }: { page: string; title: readonly string[]; intro: React.ReactNode }) {
+  return <Opening trail={[{ label: "home", href: "/" }, { label: page }]} title={title} intro={intro} />;
 }
 
 /**

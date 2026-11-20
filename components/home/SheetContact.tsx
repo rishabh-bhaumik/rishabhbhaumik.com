@@ -6,11 +6,11 @@ import "./hello.css";
 /**
  * The sheet's contact block (Figma 8780:36154): the orbit on the left (its still, played
  * on hover; ContactOrbit), "Say" with the hero's rolling greeting, and the email on the
- * right. Stacks on phones.
+ * right. Stacks on phones. The top of the footer it opens (SheetFooter) carries its top rule.
  */
 export default function SheetContact() {
   return (
-    <section aria-labelledby="contact" className="grid border-y border-rule md:grid-cols-2">
+    <section aria-labelledby="contact" className="grid border-b border-rule md:grid-cols-2">
       <ContactOrbit />
       <div className="flex flex-col justify-center border-rule max-md:border-t md:border-l">
         <div className="flex flex-col px-4 pb-5 pt-7 sm:px-6">

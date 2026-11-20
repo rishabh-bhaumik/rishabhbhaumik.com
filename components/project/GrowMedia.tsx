@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useRef, type RefObject } from "react";
 import { m, motionValue, useScroll, useTransform, type MotionValue } from "framer-motion";
 import LazyVideo from "../LazyVideo";
 
@@ -27,6 +27,28 @@ const FROM_W = 1000 / 1200;
 const FROM_H = 526 / 675;
 
 /**
+ * The growth behind GrowMedia, for any frame that should grow the same way (the /work
+ * list's cards use it too). Put `ref` on the frame, `clipPath` on a layer filling it
+ * (mark it `data-grow`) and `scale` on the media inside (`data-grow-scale`), so reduced
+ * motion keeps both full size. `radius` rounds the corners while the frame is small,
+ * squaring off as it reaches full size.
+ */
+export function useGrowFrame(ref: RefObject<HTMLElement | null>, radius = 0) {
+  // Arriving: 0 when the frame's top meets the bottom of the screen, 1 when it's all in.
+  const { scrollYProgress: arrive } = useScroll({ target: ref, offset: ["start end", "end end"] });
+  // Leaving: 0 when its top reaches the top of the screen, 1 when it's gone.
+  const { scrollYProgress: leave } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const grow = useTransform([arrive, leave], ([a, l]: number[]) => a * (1 - l));
+  const clipPath = useTransform(grow, (g) => {
+    const x = ((1 - FROM_W) / 2) * (1 - g) * 100;
+    const y = ((1 - FROM_H) / 2) * (1 - g) * 100;
+    return `inset(${y}% ${x}%${radius ? ` round ${radius * (1 - g)}px` : ""})`;
+  });
+  const scale = useTransform(grow, (g) => FROM_W + (1 - FROM_W) * g);
+  return { grow, clipPath, scale };
+}
+
+/**
  * A project page's media frame: a 1200×675 container (the sheet's full width) whose
  * media starts at 1000×526, grows to fill it as the frame comes into view (full size
  * once the whole frame is on screen) and shrinks back as it scrolls away above.
@@ -49,17 +71,7 @@ export default function GrowMedia({
   children?: React.ReactNode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  // Arriving: 0 when the frame's top meets the bottom of the screen, 1 when it's all in.
-  const { scrollYProgress: arrive } = useScroll({ target: ref, offset: ["start end", "end end"] });
-  // Leaving: 0 when its top reaches the top of the screen, 1 when it's gone.
-  const { scrollYProgress: leave } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const grow = useTransform([arrive, leave], ([a, l]: number[]) => a * (1 - l));
-  const clipPath = useTransform(grow, (g) => {
-    const x = ((1 - FROM_W) / 2) * (1 - g) * 100;
-    const y = ((1 - FROM_H) / 2) * (1 - g) * 100;
-    return `inset(${y}% ${x}%)`;
-  });
-  const scale = useTransform(grow, (g) => FROM_W + (1 - FROM_W) * g);
+  const { grow, clipPath, scale } = useGrowFrame(ref);
 
   return (
     <div ref={ref} style={{ aspectRatio: media.aspect ?? 1200 / 675 }} className="relative w-full overflow-hidden">

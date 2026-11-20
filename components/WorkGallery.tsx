@@ -22,15 +22,18 @@ export default function WorkGallery({ projects }: { projects: Project[] }) {
 
   return (
     <div className="flex flex-col gap-8">
-      <ViewToggle view={view} onViewChange={setView} layoutId="work-view-pill" />
+      <div className="hidden px-6 sm:block">
+        <ViewToggle view={view} onViewChange={setView} layoutId="work-view-pill" />
+      </div>
 
       <LayoutGroup>
         <m.div
           {...listProps}
           className={
             view === "grid"
-              ? "grid grid-cols-1 gap-x-16 gap-y-14 sm:grid-cols-2"
-              : "mx-auto flex w-full max-w-[var(--content-max)] flex-col gap-24"
+              ? "grid grid-cols-1 gap-x-16 gap-y-14 px-4 sm:grid-cols-2 sm:px-6"
+              : // Full sheet width: each card's frame grows to 1200px (see ProjectCard).
+                "flex w-full flex-col gap-24"
           }
         >
           {projects.map((project, index) => (

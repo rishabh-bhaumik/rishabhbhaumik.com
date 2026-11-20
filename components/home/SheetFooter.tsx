@@ -1,15 +1,22 @@
 import Image from "next/image";
 import { FOOTER, HOME, SITE } from "@/data/site";
 import LocalClock from "../LocalClock";
+import SheetContact from "./SheetContact";
 
 /**
- * The sheet's foot (Figma 8780:36213): a row of four links in ruled cells, then the
- * note on the site and, at the right, the mark, name and the time in India.
+ * The sheet's foot (Figma 8780:36213), one block that slides up over the page as it
+ * ends (Sheet / SheetMain): with `contact` (home, Work, About, Play), the contact card
+ * (orbit, "Say …", email) first; then a row of four links in ruled cells, then the
+ * note on the site and, at the right, the mark, name and the time in India. Projects'
+ * footers have no card: their Next Project banner stays the page's last block.
  */
-export default function SheetFooter() {
+export default function SheetFooter({ contact = false }: { contact?: boolean }) {
   const inline = "text-subtle underline decoration-from-font underline-offset-2 transition-colors hover:text-ink";
   return (
-    <footer className="flex flex-col">
+    // Over the page, which holds at its end while this slides up (Sheet / SheetMain): opaque,
+    // with its own top rule, which lands on the line above it (SheetMain leaves a pixel short).
+    <footer className="relative z-10 flex flex-col border-t border-rule bg-bg">
+      {contact && <SheetContact />}
       {/* The rules between cells are the list's own colour showing through 1px gaps. */}
       <ul className="grid grid-cols-2 gap-px border-b border-rule bg-rule sm:grid-cols-4">
         {HOME.links.map((l) => (

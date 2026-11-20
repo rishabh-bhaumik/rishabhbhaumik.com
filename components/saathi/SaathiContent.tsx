@@ -1,7 +1,8 @@
 import Sheet from "@/components/home/Sheet";
+import SheetPin from "@/components/home/SheetPin";
 import TagMarquee from "@/components/home/TagMarquee";
-import GrowMedia from "@/components/project/GrowMedia";
 import NextProject from "@/components/project/NextProject";
+import GrowMedia from "@/components/project/GrowMedia";
 import { Callout, Numbered, ProjectHero, ProjectSection, Prose, Subhead } from "@/components/project/parts";
 import { PROJECTS, SELECTED_WORK } from "@/data/site";
 
@@ -54,6 +55,8 @@ export default function SaathiContent() {
   return (
     <Sheet>
       <article className="flex flex-col">
+        {/* The opening and its marquee stay put while the page scrolls up over them. */}
+        <SheetPin>
         <ProjectHero
           href="/bima-saathi"
           tags={[WORK.year, WORK.kind]}
@@ -61,6 +64,8 @@ export default function SaathiContent() {
           intro="Saathi is India’s smartest business insurance partner app, allowing BimaKavach to offer insurance products beyond life, health, and motor to partners, who can reach customers even we normally can’t."
         />
         <TagMarquee items={MARQUEE} />
+        </SheetPin>
+        <div className="relative z-10 flex flex-col bg-bg">
         <div className="pt-20">
           <GrowMedia
             media={{
@@ -181,6 +186,7 @@ export default function SaathiContent() {
         </ProjectSection>
 
         <NextProject after="bima-saathi" />
+        </div>
       </article>
     </Sheet>
   );

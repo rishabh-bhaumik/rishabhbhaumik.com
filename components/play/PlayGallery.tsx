@@ -12,7 +12,7 @@ export type PlayCardData = PlayItem & { thumb: string | null };
 type View = "grid" | "list";
 
 export default function PlayGallery({ items }: { items: PlayCardData[] }) {
-  const [view, setView] = useState<View>("list");
+  const [view, setView] = useState<View>("grid");
 
   const listProps = {
     variants: staggerContainer(0.08),
