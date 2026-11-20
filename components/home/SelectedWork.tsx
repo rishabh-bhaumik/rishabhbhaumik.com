@@ -46,7 +46,7 @@ function WorkCard({ work, compact }: { work: Work; compact: boolean }) {
     // With a page, the whole card opens it: the heading's link stretches over the card
     // (its ::after), and Overview is the cue that reacts while the card is pointed at.
     <article className="group relative flex flex-col gap-8 pb-12 pt-4 sm:pb-20">
-      <div className="relative aspect-[1200/675.5] overflow-hidden bg-surface">
+      <div className="relative aspect-[1200/675.5] overflow-hidden bg-gradient-to-br from-surface to-bg">
         {work.media && (
           <Image src={work.media} alt="" fill sizes="(min-width: 1200px) 1200px, 100vw" className="object-contain" />
         )}
