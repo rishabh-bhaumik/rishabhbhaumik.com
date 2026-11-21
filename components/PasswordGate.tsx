@@ -51,7 +51,7 @@ export default function PasswordGate({
     // On the ruled sheet, like the project pages it opens; the sheet is at least a
     // screen tall, so its footer sits at the bottom of the window.
     <Sheet>
-      <section className="flex flex-col gap-6 px-4 pb-24 pt-16 sm:px-6 sm:pt-[120px]">
+      <section className="flex flex-col gap-6 px-4 pb-24 sm:px-6 pt-[var(--sheet-top-phone)] sm:pt-[var(--sheet-top)]">
         <h1 className="text-28 leading-[1.3] tracking-[-0.015em] text-ink sm:text-40 lg:text-48">
           Confirm Entry for &ldquo;{project}&rdquo;
         </h1>

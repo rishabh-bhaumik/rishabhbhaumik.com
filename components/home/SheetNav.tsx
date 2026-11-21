@@ -48,7 +48,7 @@ export default function SheetNav() {
           </span>
           <span className="flex flex-col items-start gap-1">
             <span className="text-12 leading-none text-faint">{SITE.name}</span>
-            <LocalClock compact dotFirst />
+            <LocalClock compact dotFirst timeZone="Asia/Kolkata" label="(INDIA)" />
           </span>
         </Link>
 

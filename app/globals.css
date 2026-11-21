@@ -51,6 +51,12 @@
   --content-max: 832px; /* Home work column */
   --reading-max: 700px; /* narrow reading column: About text, Saathi, gate, footer */
   --shell-max: 1200px; /* Play gallery */
+  /* Space above a page's opening, under the nav: home, the 404, Work, Play, the projects
+     and their password gates (pt-[var(--sheet-top-phone)] sm:pt-[var(--sheet-top)]).
+     About opens on its coin box instead; home's hero overrides it from lg (72px) so its
+     headline clears the orbit. */
+  --sheet-top: 120px;
+  --sheet-top-phone: 64px;
 }
 
 /* `light:` utilities apply only while the light theme is on (lib/theme.ts). */

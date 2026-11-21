@@ -26,9 +26,9 @@ export default function SheetHero({
           the marquee). Narrower, the text runs full width and would cross the planet, so
           the two stack. */}
       <div className="grid">
-        {/* 72px from lg (120px narrower): over the orbit, the headline's last line has to clear
+        {/* The sheet's top space (--sheet-top), but 72px from lg: over the orbit, the headline's last line has to clear
             the big planet, whose top sits ~326px down the hero, to stay readable. */}
-        <div className="relative z-10 flex flex-col px-4 pb-12 pt-16 sm:px-6 sm:pb-20 sm:pt-[120px] lg:pt-[72px] lg:[grid-area:1/1]">
+        <div className="relative z-10 flex flex-col px-4 pb-12 sm:px-6 sm:pb-20 pt-[var(--sheet-top-phone)] sm:pt-[var(--sheet-top)] lg:pt-[72px] lg:[grid-area:1/1]">
           <Greeting
             style={at(0)}
             className="rise-text text-36 font-medium leading-[1.25] tracking-[-0.015em] text-ink sm:text-48"

@@ -105,7 +105,7 @@ function Opening({
 }) {
   const at = (i: number) => ({ "--i": i }) as React.CSSProperties;
   return (
-    <section className="flex flex-col items-end px-4 pb-20 pt-16 sm:px-6 sm:pt-[120px]">
+    <section className="flex flex-col items-end px-4 pb-20 sm:px-6 pt-[var(--sheet-top-phone)] sm:pt-[var(--sheet-top)]">
       <div style={at(0)} className="rise-text flex min-h-14 w-full flex-wrap items-center justify-between gap-x-4">
         <Crumbs trail={trail} />
         {tags && <Tags items={tags} className="-mx-3" />}
