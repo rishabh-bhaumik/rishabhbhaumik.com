@@ -3,6 +3,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ClickSFX from "@/components/ClickSFX";
 import Dock from "@/components/Dock";
+import PageCurtain from "@/components/PageCurtain";
 import PageRevealSFX from "@/components/PageRevealSFX";
 import { SfxProvider } from "@/lib/sfx";
 import MotionProvider from "@/components/MotionProvider";
@@ -39,6 +40,7 @@ export default function RootLayout({
             <PageRevealSFX />
             <ClickSFX />
             <Dock />
+            <PageCurtain />
             <SmoothScroll>{children}</SmoothScroll>
           </SfxProvider>
         </MotionProvider>

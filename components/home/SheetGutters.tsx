@@ -23,6 +23,22 @@ const BIRTH = 0.56; // of peak, on its first frame
 const DEATH = 0.76; // of peak, on its last
 const TWINKLE = 0.33;
 const PEAK: [number, number] = [0.55, 0.95];
+/**
+ * Around the page curtain (components/PageCurtain), a loop: as it starts, stars burst
+ * out of the sheet's edges and rush outward across the gutters while the curtain comes
+ * up; as it leaves, the gutters are revealed full of stars, which rush back in toward
+ * the sheet and vanish at its rules, drawing the eye to the column, before the field
+ * thins back and resumes its drift.
+ */
+export const CURTAIN_START_EVENT = "page-curtain:start";
+export const CURTAIN_RISE_EVENT = "page-curtain:rise";
+/** The outward burst: peak speed (per second of distance from the centre), as a sine bump over the curtain's way in. */
+const BURST_RATE = 0.55;
+const RUSH_FILL = 4; // extra stars, as a multiple of the usual count
+const RUSH_AFTER = 0.6; // the rush starts this far into the curtain's rise
+const RUSH_MS = 1200;
+/** Peak inward speed, per second of distance from the centre; it eases up from 0 and back (a sine bump). */
+const RUSH_RATE = 0.42;
 /** The sheet's width (--shell-max); the gutters are what's left either side. */
 const SHEET = 1200;
 
@@ -60,6 +76,12 @@ export default function SheetGutters() {
     let ink = "#fff";
     let frame = 0;
     let last = 0;
+    let lastPaint = 0;
+    /** When the inward rush starts (0: none pending). Until then a fresh fill holds still. */
+    let rushAt = 0;
+    /** The rush's direction (-1 in toward the sheet, +1 out) and length (ms). */
+    let rushDir = -1;
+    let rushMs = RUSH_MS;
     // Stars live in viewport coordinates, centred on the screen's middle.
     let stars: Star[] = [];
     let target = 0;
@@ -102,21 +124,32 @@ export default function SheetGutters() {
       stars = Array.from({ length: target }, () => spawn(now, true));
     };
 
-    const paint = (now: number, step: boolean) => {
+    /** How fast the field grows (per second): the drift outward, or the rush inward after the curtain. */
+    const rate = (now: number) => {
+      if (!rushAt) return EXPAND;
+      if (now < rushAt) return 0;
+      const p = (now - rushAt) / rushMs;
+      if (p >= 1) {
+        rushAt = 0;
+        return EXPAND;
+      }
+      return rushDir * (rushDir < 0 ? RUSH_RATE : BURST_RATE) * Math.sin(Math.PI * p);
+    };
+
+    /** `dt`: seconds since the last paint (0 for a still frame); `step`: a 12fps beat, when stars twinkle. */
+    const paint = (now: number, dt: number, step: boolean) => {
       const [l, r] = ctxs as CanvasRenderingContext2D[];
       l.clearRect(0, 0, gutter, vh);
       r.clearRect(0, 0, gutter, vh);
       l.fillStyle = r.fillStyle = ink;
       const cx = vw / 2;
       const cy = vh / 2;
-      const grow = step ? Math.exp(EXPAND / FPS) : 1;
+      const grow = Math.exp(rate(now) * dt);
       const rightEdge = vw - gutter;
       stars = stars.filter((s) => {
-        if (step) {
-          s.x = cx + (s.x - cx) * grow;
-          s.y = cy + (s.y - cy) * grow;
-          s.spark = 1 + (Math.random() * 2 - 1) * TWINKLE;
-        }
+        s.x = cx + (s.x - cx) * grow;
+        s.y = cy + (s.y - cy) * grow;
+        if (step) s.spark = 1 + (Math.random() * 2 - 1) * TWINKLE;
         const age = (now - s.born) / 1000 / s.life;
         if (age >= 1 || s.y < -2 || s.y > vh + 2) return false;
         // Pops in at about half its peak, brightens as it goes, gone at about three quarters.
@@ -139,16 +172,63 @@ export default function SheetGutters() {
 
     const tick = (now: number) => {
       frame = requestAnimationFrame(tick);
-      if (now - last < 1000 / FPS) return;
-      last = now;
-      paint(now, true);
+      // The rush runs at the full frame rate (big moves would jump at 12fps); the drift steps at the clip's 12.
+      const rushing = rushAt && now >= rushAt;
+      const step = now - last >= 1000 / FPS;
+      if (!rushing && !step) return;
+      if (step) last = now;
+      const dt = lastPaint ? Math.min(0.1, (now - lastPaint) / 1000) : 1 / FPS;
+      lastPaint = now;
+      paint(now, dt, step);
     };
+
+    /** The curtain is rising: fill the gutters, hold, then rush in as it clears. */
+    const onRise = (e: Event) => {
+      if (motion.matches || gutter < 1) return;
+      const rise = (e as CustomEvent<{ duration: number }>).detail?.duration ?? 700;
+      const now = performance.now();
+      rushAt = now + rise * RUSH_AFTER;
+      rushDir = -1;
+      rushMs = RUSH_MS;
+      const extra = Math.round(target * RUSH_FILL);
+      for (let i = 0; i < extra; i++) {
+        const s = spawn(now, false);
+        // Spread evenly across the gutter (not bunched at the sheet) and lit from the start.
+        const side = s.x < vw / 2 ? -1 : 1;
+        s.x = vw / 2 + side * (SHEET / 2 + gutter * Math.random());
+        s.born = now - rand(0.05, 0.25) * 1000;
+        s.life = rand(1.3, 2.2);
+        stars.push(s);
+      }
+    };
+    window.addEventListener(CURTAIN_RISE_EVENT, onRise);
+
+    /** The curtain is starting: stars burst out of the sheet's edges and rush outward as it comes up. */
+    const onStart = (e: Event) => {
+      if (motion.matches || gutter < 1) return;
+      const rise = (e as CustomEvent<{ duration: number }>).detail?.duration ?? 900;
+      const now = performance.now();
+      rushAt = now;
+      rushDir = 1;
+      rushMs = rise;
+      const extra = Math.round(target * RUSH_FILL);
+      for (let i = 0; i < extra; i++) {
+        const s = spawn(now, false);
+        // Packed against the sheet's rules, so they pour out of it.
+        const side = s.x < vw / 2 ? -1 : 1;
+        s.x = vw / 2 + side * (SHEET / 2 + gutter * 0.35 * Math.random() ** 2);
+        s.born = now - rand(0, 0.1) * 1000;
+        s.life = rand(1.2, 2);
+        stars.push(s);
+      }
+    };
+    window.addEventListener(CURTAIN_START_EVENT, onStart);
 
     const start = () => {
       cancelAnimationFrame(frame);
       if (gutter < 1) return;
       if (motion.matches) {
-        paint(performance.now(), false); // one still field
+        paint(performance.now(), 0, false); // one still field
         return;
       }
       if (!document.hidden) frame = requestAnimationFrame(tick);
@@ -175,6 +255,8 @@ export default function SheetGutters() {
       cancelAnimationFrame(frame);
       themeWatch.disconnect();
       window.removeEventListener("resize", onResize);
+      window.removeEventListener(CURTAIN_RISE_EVENT, onRise);
+      window.removeEventListener(CURTAIN_START_EVENT, onStart);
       document.removeEventListener("visibilitychange", start);
       motion.removeEventListener("change", start);
     };

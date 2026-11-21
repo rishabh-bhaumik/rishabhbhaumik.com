@@ -228,8 +228,9 @@ export const HOME = {
 /**
  * Home's Selected Work (Figma 8785:37079), in order. `href` is where Overview goes;
  * without one the card shows "Work in progress" instead. `media` is optional art
- * for the 16:9 frame, shown whole (the work images are cut-outs on transparent
- * backgrounds, as on /work); without it the frame stays empty.
+ * for the 16:9 frame, filling it edge to edge (cropped top and bottom); without it the
+ * frame stays empty. `whole` shows all of it instead, at full height, its left and
+ * right edges fading into the card: for art cut off at its own sides (Identity's shirt).
  */
 export type SelectedWork = {
   slug: string;
@@ -239,6 +240,7 @@ export type SelectedWork = {
   kind: string;
   href?: string;
   media?: string;
+  whole?: boolean;
 };
 
 export const SELECTED_WORK: SelectedWork[] = [
@@ -270,6 +272,7 @@ export const SELECTED_WORK: SelectedWork[] = [
     kind: "brand identity",
     href: "/bimakavach-identity",
     media: "/media/work/bimakavach.branding.webp",
+    whole: true,
   },
   {
     slug: "bima-saathi",

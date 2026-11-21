@@ -132,6 +132,18 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   frame from the dark master by `<IGNORE>/media-sources/orbitting-negative/make.py`
   (encode with `-tune grain` or x264 smooths the grain away). The earlier white
   "studio" render lives on in `<IGNORE>/media-sources/orbitting-light/`.
+- Page curtain (`components/PageCurtain.tsx`, in the root layout): links between the front pages (home, Work, About,
+  Play) bring a curtain down from the top: a neutral cinematic gradient (graphite to black in dark, off-white to soft
+  grey in light, glow, vignette, grain; `SURFACE`), with the logo coin on it (the lab's
+  `#m=default&mo=flip&lp=1&f=dither:1.00`, written out as constants) making a full flip a beat behind (`LAG` 120ms),
+  landing face on just after it covers the screen; the page changes underneath, then the curtain carries on down and
+  off the bottom, the coin flipping again a beat after (0.7s in, 0.08s+ covered, 0.7s out). The coin is the lab's
+  renderer, warmed while idle, its backdrop the gradient's mid colour; CSS-flipped mark as the fallback; off under
+  reduced motion; back/forward and new-tab clicks skip it. The gutters loop with it: on `page-curtain:start` stars
+  burst out of the sheet's edges and rush outward; on `page-curtain:rise`, as it leaves, the gutters (SheetGutters)
+  are revealed packed with stars (x4), which ease in toward the sheet over 1.2s and vanish at its rules. The new
+  page's `.rise` entrance is held (`data-curtain="on"` on <html>, rule inlined in PageCurtain) and replayed 30% into
+  the curtain's way out, so the opening staggers in as the top clears.
 - Cursor: the system default everywhere. The custom crosshair cursor was
   removed; don't hide or replace the pointer.
 - Availability/online-status logic is isolated in `lib/availability.ts`

@@ -47,9 +47,22 @@ function WorkCard({ work, compact }: { work: Work; compact: boolean }) {
     // (its ::after), and Overview is the cue that reacts while the card is pointed at.
     <article className="group relative flex flex-col gap-8 pb-12 pt-4 sm:pb-20">
       <div className="relative aspect-[1200/675.5] overflow-hidden bg-gradient-to-br from-surface to-bg">
-        {work.media && (
-          <Image src={work.media} alt="" fill sizes="(min-width: 1200px) 1200px, 100vw" className="object-contain" />
-        )}
+        {work.media &&
+          (work.whole ? (
+            // All of it, at full height (the image's own shape, 1400x952), centred; its sides,
+            // where the photo is cut, fade into the card so the shirt doesn't stop at a hard edge.
+            <div
+              className="absolute inset-y-0 left-1/2 aspect-[1400/952] h-full -translate-x-1/2"
+              style={{
+                maskImage: "linear-gradient(to right, transparent, #000 18%, #000 82%, transparent)",
+                WebkitMaskImage: "linear-gradient(to right, transparent, #000 18%, #000 82%, transparent)",
+              }}
+            >
+              <Image src={work.media} alt="" fill sizes="(min-width: 1200px) 1000px, 85vw" className="object-cover" />
+            </div>
+          ) : (
+            <Image src={work.media} alt="" fill sizes="(min-width: 1200px) 1200px, 100vw" className="object-cover" />
+          ))}
         <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
           {work.href ? (
             <span
