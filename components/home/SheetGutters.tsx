@@ -24,27 +24,42 @@ const DEATH = 0.76; // of peak, on its last
 const TWINKLE = 0.33;
 const PEAK: [number, number] = [0.55, 0.95];
 /**
- * Around the page curtain (components/PageCurtain), a loop: as it starts, stars burst
- * out of the sheet's edges and rush outward across the gutters while the curtain comes
- * up; as it leaves, the gutters are revealed full of stars, which rush back in toward
- * the sheet and vanish at its rules, drawing the eye to the column, before the field
- * thins back and resumes its drift.
+ * Around the page curtain (components/PageCurtain), an exact mirror, centred on the
+ * moment the curtain covers the screen:
+ * - As the curtain leaves (CURTAIN_RISE_EVENT, for as long as it takes to leave), the
+ *   gutters are revealed evenly packed with stars, which are drawn in toward the sheet
+ *   and vanish at its rules.
+ * - As it comes (CURTAIN_START_EVENT, for as long as it takes to come), the same thing
+ *   played backwards: stars emerge from the sheet's rules and spread out until the
+ *   gutters are evenly packed just as the curtain covers them. The extra stars are placed
+ *   where the inward rush would have come from, worked back through the same motion.
+ * Both move at the same speed (a sine bump, RATE at its peak) and the extra stars hold a
+ * steady brightness, so neither half fades differently from the other.
  */
 export const CURTAIN_START_EVENT = "page-curtain:start";
 export const CURTAIN_RISE_EVENT = "page-curtain:rise";
-/** The outward burst: peak speed (per second of distance from the centre), as a sine bump over the curtain's way in. */
-const BURST_RATE = 0.55;
 const RUSH_FILL = 4; // extra stars, as a multiple of the usual count
-const RUSH_AFTER = 0.6; // the rush starts this far into the curtain's rise
-const RUSH_MS = 1200;
-/** Peak inward speed, per second of distance from the centre; it eases up from 0 and back (a sine bump). */
-const RUSH_RATE = 0.42;
+/** Peak speed of the burst and the rush, per second of distance from the centre (a sine bump over the curtain's move). */
+const RATE = 0.48;
 /** The sheet's width (--shell-max); the gutters are what's left either side. */
 const SHEET = 1200;
 
-type Star = { x: number; y: number; born: number; life: number; peak: number; size: number; spark: number };
+type Star = {
+  x: number;
+  y: number;
+  born: number;
+  life: number;
+  peak: number;
+  size: number;
+  spark: number;
+  /** An extra star of the burst or rush: steady brightness, gone at `until`. */
+  until?: number;
+  /** A burst star still inside the sheet's column: kept (not drawn) until it emerges. */
+  ghost?: boolean;
+};
 
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
+const clamp01 = (p: number) => Math.min(1, Math.max(0, p));
 /** Lifetimes skew long (lognormal): median 1.75s, the middle half 1.1-3.6s. */
 const lifetime = () => {
   const n = Math.sqrt(-2 * Math.log(1 - Math.random())) * Math.cos(2 * Math.PI * Math.random());
@@ -77,11 +92,10 @@ export default function SheetGutters() {
     let frame = 0;
     let last = 0;
     let lastPaint = 0;
-    /** When the inward rush starts (0: none pending). Until then a fresh fill holds still. */
+    /** When the burst or rush started (0: none), its direction (+1 out, -1 in) and length (ms). */
     let rushAt = 0;
-    /** The rush's direction (-1 in toward the sheet, +1 out) and length (ms). */
     let rushDir = -1;
-    let rushMs = RUSH_MS;
+    let rushMs = 950;
     // Stars live in viewport coordinates, centred on the screen's middle.
     let stars: Star[] = [];
     let target = 0;
@@ -124,16 +138,15 @@ export default function SheetGutters() {
       stars = Array.from({ length: target }, () => spawn(now, true));
     };
 
-    /** How fast the field grows (per second): the drift outward, or the rush inward after the curtain. */
+    /** How fast the field grows (per second): the drift outward, or the burst / rush around the curtain. */
     const rate = (now: number) => {
       if (!rushAt) return EXPAND;
-      if (now < rushAt) return 0;
       const p = (now - rushAt) / rushMs;
       if (p >= 1) {
         rushAt = 0;
         return EXPAND;
       }
-      return rushDir * (rushDir < 0 ? RUSH_RATE : BURST_RATE) * Math.sin(Math.PI * p);
+      return rushDir * RATE * Math.sin(Math.PI * clamp01(p));
     };
 
     /** `dt`: seconds since the last paint (0 for a still frame); `step`: a 12fps beat, when stars twinkle. */
@@ -150,11 +163,20 @@ export default function SheetGutters() {
         s.x = cx + (s.x - cx) * grow;
         s.y = cy + (s.y - cy) * grow;
         if (step) s.spark = 1 + (Math.random() * 2 - 1) * TWINKLE;
-        const age = (now - s.born) / 1000 / s.life;
-        if (age >= 1 || s.y < -2 || s.y > vh + 2) return false;
-        // Pops in at about half its peak, brightens as it goes, gone at about three quarters.
-        const level = BIRTH + (1 - BIRTH) * Math.min(1, age / 0.8) - (age > 0.8 ? (1 - DEATH) * ((age - 0.8) / 0.2) : 0);
+        let level: number;
+        if (s.until !== undefined) {
+          // A burst or rush star: steady, until its run is over.
+          if (now > s.until) return false;
+          level = 1;
+        } else {
+          const age = (now - s.born) / 1000 / s.life;
+          if (age >= 1) return false;
+          // Pops in at about half its peak, brightens as it goes, gone at about three quarters.
+          level = BIRTH + (1 - BIRTH) * Math.min(1, age / 0.8) - (age > 0.8 ? (1 - DEATH) * ((age - 0.8) / 0.2) : 0);
+        }
+        if (!s.ghost && (s.y < -2 || s.y > vh + 2)) return false;
         const alpha = Math.max(0, Math.min(1, s.peak * level * s.spark));
+        if (s.x < gutter || s.x >= rightEdge) s.ghost = false;
         if (s.x < gutter) {
           l.globalAlpha = alpha;
           l.fillRect(Math.round(s.x), Math.round(s.y), s.size, s.size);
@@ -165,7 +187,8 @@ export default function SheetGutters() {
           r.fillRect(Math.round(s.x - rightEdge), Math.round(s.y), s.size, s.size);
           return s.x < vw + 2;
         }
-        return false; // a resize left it over the sheet
+        // Over the sheet: a burst star yet to emerge waits there; anything else is gone (into the sheet).
+        return !!s.ghost;
       });
       while (stars.length < target) stars.push(spawn(now, false));
     };
@@ -182,43 +205,50 @@ export default function SheetGutters() {
       paint(now, dt, step);
     };
 
-    /** The curtain is rising: fill the gutters, hold, then rush in as it clears. */
-    const onRise = (e: Event) => {
-      if (motion.matches || gutter < 1) return;
-      const rise = (e as CustomEvent<{ duration: number }>).detail?.duration ?? 700;
-      const now = performance.now();
-      rushAt = now + rise * RUSH_AFTER;
-      rushDir = -1;
-      rushMs = RUSH_MS;
+    /** Extra stars spread evenly across both gutters (where they are when the curtain covers / starts to leave). */
+    const evenly = (now: number, until: number) => {
       const extra = Math.round(target * RUSH_FILL);
-      for (let i = 0; i < extra; i++) {
+      return Array.from({ length: extra }, () => {
         const s = spawn(now, false);
-        // Spread evenly across the gutter (not bunched at the sheet) and lit from the start.
         const side = s.x < vw / 2 ? -1 : 1;
         s.x = vw / 2 + side * (SHEET / 2 + gutter * Math.random());
-        s.born = now - rand(0.05, 0.25) * 1000;
-        s.life = rand(1.3, 2.2);
-        stars.push(s);
-      }
+        s.until = until;
+        return s;
+      });
+    };
+
+    /** The curtain is leaving: the gutters are revealed evenly packed, and the stars are drawn in toward the sheet. */
+    const onRise = (e: Event) => {
+      if (motion.matches || gutter < 1) return;
+      const ms = (e as CustomEvent<{ duration: number }>).detail?.duration ?? 950;
+      const now = performance.now();
+      rushAt = now;
+      rushDir = -1;
+      rushMs = ms;
+      stars.push(...evenly(now, now + ms));
     };
     window.addEventListener(CURTAIN_RISE_EVENT, onRise);
 
-    /** The curtain is starting: stars burst out of the sheet's edges and rush outward as it comes up. */
+    /**
+     * The curtain is coming: the rush backwards. The extra stars start where the inward
+     * rush would have taken them (inside the sheet's column, hidden), and the same motion
+     * reversed carries them out until they lie evenly across the gutters as it covers them.
+     */
     const onStart = (e: Event) => {
       if (motion.matches || gutter < 1) return;
-      const rise = (e as CustomEvent<{ duration: number }>).detail?.duration ?? 900;
+      const ms = (e as CustomEvent<{ duration: number }>).detail?.duration ?? 950;
       const now = performance.now();
       rushAt = now;
       rushDir = 1;
-      rushMs = rise;
-      const extra = Math.round(target * RUSH_FILL);
-      for (let i = 0; i < extra; i++) {
-        const s = spawn(now, false);
-        // Packed against the sheet's rules, so they pour out of it.
-        const side = s.x < vw / 2 ? -1 : 1;
-        s.x = vw / 2 + side * (SHEET / 2 + gutter * 0.35 * Math.random() ** 2);
-        s.born = now - rand(0, 0.1) * 1000;
-        s.life = rand(1.2, 2);
+      rushMs = ms;
+      // The whole move shrinks distances from the centre by exp(-RATE * T * 2/pi) (the sine bump's area).
+      const shrink = Math.exp(-RATE * (ms / 1000) * (2 / Math.PI));
+      const cx = vw / 2;
+      const cy = vh / 2;
+      for (const s of evenly(now, now + ms)) {
+        s.x = cx + (s.x - cx) * shrink;
+        s.y = cy + (s.y - cy) * shrink;
+        s.ghost = true;
         stars.push(s);
       }
     };

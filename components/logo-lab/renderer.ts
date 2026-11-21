@@ -98,7 +98,11 @@ export class LogoRenderer {
   /** Colour (0..1 RGB) the empty backdrop is drawn in. Black unless a host page says otherwise. */
   background: [number, number, number] = [0, 0, 0];
 
-  constructor(readonly canvas: HTMLCanvasElement) {
+  /** `powerPreference`: the lab wants the discrete GPU; a small embedded coin (the page curtain) asks for low power. */
+  constructor(
+    readonly canvas: HTMLCanvasElement,
+    { powerPreference = "high-performance" }: { powerPreference?: WebGLPowerPreference } = {}
+  ) {
     const gl = canvas.getContext("webgl2", {
       antialias: false,
       alpha: false,
@@ -106,7 +110,7 @@ export class LogoRenderer {
       stencil: false,
       premultipliedAlpha: false,
       preserveDrawingBuffer: false,
-      powerPreference: "high-performance",
+      powerPreference,
     });
     if (!gl) throw new Error("WebGL2 is not available in this browser.");
     this.gl = gl;

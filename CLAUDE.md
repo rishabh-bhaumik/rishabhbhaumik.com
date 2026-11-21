@@ -139,13 +139,21 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   Play) bring a curtain down from the top: a neutral cinematic gradient (graphite to black in dark, off-white to soft
   grey in light, vignette in dark, grain; `SURFACE`), its edges dissolving in Bayer dither (`BAND`, 55% of the screen
   at each end, 4px cells, masks drawn once per height and moving with it; both bands off screen while it covers), with the logo coin on it (the lab's
-  `#m=default&mo=flip&lp=1&f=dither:1.00`, written out as constants) making a full flip a beat behind (`LAG` 120ms),
-  landing face on just after it covers the screen; the page changes underneath, then the curtain carries on down and
-  off the bottom, the coin flipping again a beat after (0.95s in, 0.65s+ covered, 0.95s out). The coin is the lab's
+  `#m=default&mo=flip&lp=1&f=dither:1.00`, written out as constants) turning as it is carried onto the screen and
+  nodding into place as it covers it (a damped spring from rest: just past face on, back and forth, settling); the
+  page is pushed once that nod is done, so the new page's heavy first frames fall in the float, not a nod; the page changes underneath, the coin floats (a slow
+  turn and tilt, as the About coin does between flips, `FLOAT_YAW`/`FLOAT_PITCH`), winds up (the landing nod's damped spring played backwards, `NOD`), and turns once
+  more as the curtain carries on down and off the bottom. Both turns are keyed to the coin's own travel (`edge`,
+  `TRAVEL`), so they are always seen whatever the frame rate (0.95s in, 1.0s+ covered, 0.95s out; the curtain only
+  travels far enough to clear the screen). A click while it leaves runs next; back/forward mid-run is honoured; the
+  page can't scroll while covered; WebGL loss falls back to the CSS mark; the renderer asks for the low-power GPU. The coin is the lab's
   renderer, warmed while idle, its backdrop the gradient's mid colour; CSS-flipped mark as the fallback; off under
-  reduced motion; back/forward and new-tab clicks skip it. The gutters loop with it: on `page-curtain:start` stars
-  burst out of the sheet's edges and rush outward; on `page-curtain:rise`, as it leaves, the gutters (SheetGutters)
-  are revealed packed with stars (x4), which ease in toward the sheet over 1.2s and vanish at its rules. The new
+  reduced motion; back/forward and new-tab clicks skip it. The whole transition mirrors about the middle of
+  the covered rest: curtain in/out (same time, ease, travel), coin turns (keyed to its travel; the landing nod mirrors
+  the wind-up), dither edges (the bottom band is the top band flipped), and the gutter stars: on `page-curtain:rise`
+  (as it leaves, for OUT) the gutters are revealed evenly packed (x4) and drawn in toward the sheet; on
+  `page-curtain:start` (as it comes, for IN) the same played backwards, stars emerging from the sheet's rules until
+  the gutters are evenly packed as it covers them (same `RATE`, steady brightness). The new
   page's `.rise` entrance is held (`data-curtain="on"` on <html>, rule inlined in PageCurtain) and replayed 30% into
   the curtain's way out, so the opening staggers in as the top clears. A fresh load of a front page (typed address,
   outside link, reload) opens on the curtain, drawn in the server HTML (`data-intro`) so the page never flashes: the
