@@ -79,12 +79,12 @@ export default function PivotTimeline({ steps }: { steps: PivotStep[] }) {
 
   return (
     <div ref={ref} className="relative" style={{ height: `${steps.length * 100}svh` }}>
-      <div className="sticky top-16 flex h-[calc(100svh-4rem)] items-center">
+      <div className="sticky top-[61px] flex h-[calc(100svh-61px)] items-center">
         {/* Capped so the card's height fits the pinned screen. Stacked (below lg) it fills
             the screen and the phone takes whatever height the copy leaves. */}
         <div
           className={`${CARD} mx-auto grid w-full max-lg:h-[calc(100svh-6rem)] max-lg:grid-rows-[minmax(0,1fr)_auto] max-lg:[container:pivot-card/size] lg:aspect-[1000/548] lg:grid-cols-2`}
-          style={{ maxWidth: "calc((100svh - 4rem - 3rem) * 1000 / 548)" }}
+          style={{ maxWidth: "calc((100svh - 61px - 3rem) * 1000 / 548)" }}
         >
           {/* Phone, cropped at the card's foot. A size container, so on a short phone
               where the copy leaves under 96px it steps aside rather than show a sliver of bezel. */}

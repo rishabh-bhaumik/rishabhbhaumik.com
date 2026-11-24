@@ -1093,32 +1093,28 @@ function PointerLayer({ shot }: { shot: Shot }) {
   );
 }
 
-/** A plain arrow, an I-beam over the field and a pointing hand over things to click; each drawn so its hot spot sits at 0,0. */
-function Glyph({ kind }: { kind: Kind }) {
-  const shadow = { filter: "drop-shadow(0 1px 1.5px rgba(0,0,0,0.25))" };
-  if (kind === "text")
-    return (
-      <svg width="9" height="20" viewBox="0 0 9 20" className="absolute" style={{ left: -4.5, top: -10, ...shadow }}>
-        <path d="M1.5 1.5h2.2c.5 0 .8.4.8.8m3-.8H5.3c-.5 0-.8.4-.8.8v15.4c0 .4-.3.8-.8.8H1.5m6 0H5.3c-.5 0-.8-.4-.8-.8" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" />
-        <path d="M1.5 1.5h2.2c.5 0 .8.4.8.8m3-.8H5.3c-.5 0-.8.4-.8.8v15.4c0 .4-.3.8-.8.8H1.5m6 0H5.3c-.5 0-.8-.4-.8-.8" stroke="#111" strokeWidth="1.2" fill="none" strokeLinecap="round" />
-      </svg>
-    );
-  if (kind === "hand")
-    return (
-      <svg width="17" height="21" viewBox="0 0 17 21" className="absolute" style={{ left: -5.6, top: -0.8, ...shadow }}>
-        <path
-          d="M5.6 1.9c0-.8.6-1.4 1.4-1.4s1.4.6 1.4 1.4v6.2l.1-.6c.1-.7.7-1.2 1.4-1.1.7.1 1.2.7 1.1 1.4l-.1 1.2.2-.6c.2-.7.9-1 1.6-.8.6.2 1 .9.8 1.5l-.2.9.3-.3c.5-.5 1.3-.4 1.7.1.4.5.4 1.1 0 1.6l-1.6 2.9c-.3 2.4-1.4 4.6-3.6 5.3l-.1 1.6H5.8v-1.9c-.9-.6-1.6-1.4-2.2-2.4L1 11.7c-.4-.7-.2-1.5.4-1.9.6-.4 1.4-.2 1.8.3l2.4 2.9V1.9Z"
-          fill="#fff"
-          stroke="#111"
-          strokeWidth="1.1"
-          strokeLinejoin="round"
-        />
-        <path d="M8.4 12.3v3.2m2.3-3.4v3.4m2.2-3.1v3" stroke="#111" strokeWidth="0.9" strokeLinecap="round" />
-      </svg>
-    );
+/**
+ * The scripted pointer, drawn as a simple circle centred on its hot spot (0,0) rather
+ * than an OS cursor: a small ink dot with a white rim while moving; a slimmer dot over a
+ * text field; and, over something to click, a larger soft ring with a dot at its centre.
+ * It eases between the three. Shared with NetraQuoteModal.
+ */
+export function Glyph({ kind }: { kind: "arrow" | "text" | "hand" }) {
+  const size = kind === "hand" ? 30 : kind === "text" ? 10 : 14;
   return (
-    <svg width="15" height="22" viewBox="0 0 15 22" className="absolute" style={{ left: -1, top: -1, ...shadow }}>
-      <path d="M1 1v17.2l4.3-4.1 2.9 6.6 2.8-1.2-2.9-6.5h6L1 1Z" fill="#111" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
-    </svg>
+    <span
+      className="absolute grid place-items-center rounded-full transition-[width,height,margin,background-color,border-color] duration-200 ease-out"
+      style={{
+        width: size,
+        height: size,
+        marginLeft: -size / 2,
+        marginTop: -size / 2,
+        background: kind === "hand" ? "rgba(65,0,207,0.12)" : "rgba(28,29,31,0.85)",
+        border: kind === "hand" ? "1.2px solid rgba(65,0,207,0.55)" : "1.5px solid #fff",
+        boxShadow: "0 1px 3px rgba(0,0,0,0.22)",
+      }}
+    >
+      {kind === "hand" && <span className="size-[6px] rounded-full bg-[#4100cf]" />}
+    </span>
   );
 }

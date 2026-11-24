@@ -113,14 +113,12 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    slug: "bima-saathi",
-    title: "bima saathi",
+    slug: "bima-netra",
+    title: "BimaNetra",
     tag: "live 2026",
     description:
-      "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
-    href: "/bima-saathi",
-    media: "/media/work/bima.saathi.webp",
-    cover: true,
+      "India's first agentic infrastructure solution for a 200 year old problem: how BimaKavach prices risk, underwrites smartly and surfaces gaps in a business.",
+    href: "/netra",
   },
   {
     slug: "bimakavach-identity",
@@ -133,12 +131,24 @@ export const PROJECTS: Project[] = [
     cover: true,
   },
   {
-    slug: "bima-netra",
-    title: "BimaNetra",
+    slug: "peetal",
+    title: "Peetal",
+    tag: "live 2024",
+    description:
+      "Nunc blandit sed purus commodo purus. Mattis bibendum augue urna dictumst tempor tincidunt. Mauris vestibulum nec enim posuere ornare.",
+    href: "/peetal",
+    media: "/media/work/design.system.png",
+    cover: true,
+  },
+  {
+    slug: "bima-saathi",
+    title: "bima saathi",
     tag: "live 2026",
     description:
-      "India's first agentic infrastructure solution for a 200 year old problem: how BimaKavach prices risk, underwrites smartly and surfaces gaps in a business.",
-    href: "/netra",
+      "Designing the product that turned 1,000 agents into BimaKavach's second-largest revenue channel.",
+    href: "/bima-saathi",
+    media: "/media/work/bima.saathi.webp",
+    cover: true,
   },
   {
     slug: "bima-kendra",
@@ -148,16 +158,6 @@ export const PROJECTS: Project[] = [
       "Creating the foundations for India's first centralized Commercial Insurance Management Software.",
     href: "#",
     media: "/media/work/bima.kendra.png",
-    cover: true,
-  },
-  {
-    slug: "peetal",
-    title: "Peetal",
-    tag: "live 2024",
-    description:
-      "Nunc blandit sed purus commodo purus. Mattis bibendum augue urna dictumst tempor tincidunt. Mauris vestibulum nec enim posuere ornare.",
-    href: "/peetal",
-    media: "/media/work/design.system.png",
     cover: true,
   },
 ];
@@ -198,10 +198,10 @@ export const HOME = {
   headline: [
     "I’m Rishabh. I design brands and",
     "products for 0 to 1 startups, with",
-    "instinct and a playbook behind it.",
+    "instinct and field notes.",
   ],
   intro:
-    "Product Designer with 6+ years across product, brand and film, for Vedantu, UNICEF and fashion labels.",
+    "Designer with 6+ years across product, brand and film. Previously I’ve worked with Vedantu, 145 East, Nymbl, UNICEF, iterating craft and chasing ideas.",
   /** The marquee under the orbit, most important first. */
   tags: [
     "Product Design",
@@ -241,9 +241,30 @@ export type SelectedWork = {
   href?: string;
   media?: string;
   whole?: boolean;
+  /** A live NetraBot in the card's frame instead of an image (BimaNetra): NetraCardBot. */
+  bot?: boolean;
 };
 
 export const SELECTED_WORK: SelectedWork[] = [
+  {
+    slug: "bima-netra",
+    heading: ["BimaNetra: India’s first agentic infrastructure solution", "for a 200 year old problem"],
+    body: "Netra WIP Body Copy. Feature 1 with Impact.",
+    year: "2025",
+    kind: "consumer",
+    href: "/netra",
+    bot: true,
+  },
+  {
+    slug: "bimakavach-identity",
+    heading: ["Giving Agentic Insurance a visual language"],
+    body: "BimaKavach Identity WIP Body Copy. Feature 1 with Impact.",
+    year: "2025",
+    kind: "brand identity",
+    href: "/bimakavach-identity",
+    media: "/media/work/bimakavach.branding.webp",
+    whole: true,
+  },
   {
     slug: "peetal",
     heading: [
@@ -255,24 +276,6 @@ export const SELECTED_WORK: SelectedWork[] = [
     kind: "mobile app",
     href: "/peetal",
     media: "/media/work/design.system.png",
-  },
-  {
-    slug: "bima-netra",
-    heading: ["BimaNetra: India’s first agentic infrastructure solution", "for a 200 year old problem"],
-    body: "Netra WIP Body Copy. Feature 1 with Impact.",
-    year: "2025",
-    kind: "consumer",
-    href: "/netra",
-  },
-  {
-    slug: "bimakavach-identity",
-    heading: ["Giving Agentic Insurance a visual language"],
-    body: "BimaKavach Identity WIP Body Copy. Feature 1 with Impact.",
-    year: "2025",
-    kind: "brand identity",
-    href: "/bimakavach-identity",
-    media: "/media/work/bimakavach.branding.webp",
-    whole: true,
   },
   {
     slug: "bima-saathi",

@@ -73,5 +73,5 @@ export function HomeHeading() {
 
 /** The note beside the home headline. */
 export function HomeAside() {
-  return <p className="text-16 leading-6 tracking-[-0.01em] text-subtle">{HOME.intro}</p>;
+  return <p className="text-12 leading-[18px] text-subtle">{HOME.intro}</p>;
 }

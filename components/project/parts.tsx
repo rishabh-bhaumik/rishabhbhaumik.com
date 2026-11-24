@@ -81,9 +81,9 @@ function Crumbs({ trail }: { trail: readonly Crumb[] }) {
  * Where a project sits: home // work // its number in Selected Work and slug
  * ("002.bima-netra"), the number following SELECTED_WORK's order.
  */
-function projectTrail(href: string): Crumb[] {
+function projectTrail(href: string, crumb?: string): Crumb[] {
   const n = SELECTED_WORK.findIndex((w) => w.href === href);
-  const here = n < 0 ? href.slice(1) : `${String(n + 1).padStart(3, "0")}.${SELECTED_WORK[n].slug}`;
+  const here = crumb ?? (n < 0 ? href.slice(1) : `${String(n + 1).padStart(3, "0")}.${SELECTED_WORK[n].slug}`);
   return [{ label: "home", href: "/" }, { label: "work", href: "/work" }, { label: here }];
 }
 
@@ -128,17 +128,20 @@ function Opening({
 /** A project's opening: home // work // 00n.slug, with its tags at the right. */
 export function ProjectHero({
   href,
+  crumb,
   tags,
   title,
   intro,
 }: {
   /** The project's route, for the breadcrumb. */
   href: string;
+  /** The breadcrumb's last step, for a page outside Selected Work (/draft's "999.draft"). */
+  crumb?: string;
   tags: readonly string[];
   title: readonly string[];
   intro: React.ReactNode;
 }) {
-  return <Opening trail={projectTrail(href)} tags={tags} title={title} intro={intro} />;
+  return <Opening trail={projectTrail(href, crumb)} tags={tags} title={title} intro={intro} />;
 }
 
 /** A section page's opening (Work, Play): home // its name, and no tags. */

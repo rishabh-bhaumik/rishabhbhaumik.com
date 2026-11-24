@@ -18,8 +18,7 @@ const PLATFORM_ICON: Record<SocialLink["platform"], React.FC<{ className?: strin
   ig: IconInstagram,
 };
 
-/** `elsewhereLabel` puts the small "Elsewhere" heading over the links (the /draft page uses it). */
-export default function Footer({ elsewhereLabel = false }: { elsewhereLabel?: boolean }) {
+export default function Footer() {
   const listProps = {
     variants: staggerContainer(0.07),
     initial: "hidden" as const,
@@ -53,9 +52,6 @@ export default function Footer({ elsewhereLabel = false }: { elsewhereLabel?: bo
 
       {/* Elsewhere */}
       <div className="flex flex-col gap-2 px-3 lg:px-0">
-        {elsewhereLabel && (
-          <p className="pb-2 text-12 uppercase leading-4 tracking-[0.6px] text-faint">Elsewhere</p>
-        )}
         <m.ul
           {...listProps}
           className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-12"

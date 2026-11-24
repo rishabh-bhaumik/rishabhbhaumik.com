@@ -98,7 +98,7 @@ export default function DraftRail({
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget)) onOpenChange(false);
       }}
-      className={`fixed bottom-0 left-0 top-16 z-40 hidden w-[320px] transition-[translate,opacity] duration-300 ease-out md:block ${
+      className={`fixed bottom-0 left-0 top-[61px] z-40 hidden w-[320px] transition-[translate,opacity] duration-300 ease-out md:block ${
         open ? "translate-x-0 opacity-100" : "pointer-events-none -translate-x-full opacity-0"
       }`}
     >

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FOOTER, HOME, SITE } from "@/data/site";
 import LocalClock from "../LocalClock";
+import RollLink from "./RollLink";
 import SheetContact from "./SheetContact";
 
 /**
@@ -21,14 +22,11 @@ export default function SheetFooter({ contact = false }: { contact?: boolean }) 
       <ul className="grid grid-cols-2 gap-px border-b border-rule bg-rule sm:grid-cols-4">
         {HOME.links.map((l) => (
           <li key={l.label} className="bg-bg">
-            <a
+            <RollLink
+              label={l.label}
               href={l.href}
-              target="_blank"
-              rel="noreferrer"
               className="block px-4 py-5 text-center text-12 uppercase leading-[17.6px] tracking-[0.13em] text-subtle transition-colors hover:text-ink"
-            >
-              {l.label}
-            </a>
+            />
           </li>
         ))}
       </ul>

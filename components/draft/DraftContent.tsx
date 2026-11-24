@@ -1,4 +1,8 @@
 import Link from "next/link";
+import SheetPin from "@/components/home/SheetPin";
+import TagMarquee from "@/components/home/TagMarquee";
+import { ProjectHero } from "@/components/project/parts";
+import NextProject from "@/components/project/NextProject";
 import "@/components/bk/anek.css";
 import CheckoutFlow from "./CheckoutFlow";
 import { BrandingFrame, CoverFrame, QuotePhoneFrame } from "./frames";
@@ -118,6 +122,33 @@ const DETAILS: { label: string; values: string[] }[][] = [
       ],
     },
   ],
+];
+
+/** The day I joined BimaKavach, for the opening's month count. */
+const JOINED = new Date("2023-03-06T00:00:00+05:30");
+
+/**
+ * Whole months from `from` to today, in Indian time. The page is static, so this is
+ * worked out at build time and moves on with each deploy.
+ */
+function monthsSince(from: Date) {
+  const ist = (d: Date) => new Date(d.getTime() + 5.5 * 3600 * 1000);
+  const a = ist(from);
+  const b = ist(new Date());
+  const months = (b.getUTCFullYear() - a.getUTCFullYear()) * 12 + b.getUTCMonth() - a.getUTCMonth();
+  return b.getUTCDate() < a.getUTCDate() ? months - 1 : months;
+}
+
+/** The opening's marquee: the facts from DETAILS, label then value. */
+const MARQUEE = [
+  "role",
+  "founding designer",
+  "timeline",
+  "2023 - present",
+  "scope",
+  "product, brand, systems",
+  "tools",
+  "figma, claude code, storybook",
 ];
 
 /** Companion pieces to hand over alongside the case study. */
@@ -326,21 +357,27 @@ export default function DraftContent() {
   return (
     // Any media container opens the lightbox at itself (MediaLightbox).
     <MediaLightbox>
-    <main className="flex w-full min-w-0 flex-col gap-20">
-      {/* Cover + intro */}
-      {/* Not in the rail while the title is hidden and the cover waits for the showreel. */}
-      <section id="context" className="flex scroll-mt-16 flex-col items-center gap-6 px-6 py-[60px]">
-        {/* Cover media slot (showreel to come): capped at 1200px, centred. */}
+    {/* SheetMain is the page's <main>; this is its one block. */}
+    <div className="flex w-full min-w-0 flex-col">
+      {/* The opening, as on the projects: breadcrumb, title and summary over the facts'
+          marquee, pinned while the page scrolls up over it. */}
+      <SheetPin>
+        <ProjectHero
+          href="/draft"
+          crumb="999.draft"
+          tags={["2023 - present", "case study"]}
+          title={["For Your Consideration:", "“Show me your Work”"]}
+          intro={`This is an unfinished project under a tentative title. It’s a work in progress that aims to encapsulate all the work I’ve done over the last ${monthsSince(JOINED)} months (I joined on 6 March 2023) at BimaKavach.`}
+        />
+        <TagMarquee items={MARQUEE} />
+      </SheetPin>
+
+      {/* Opaque, and over the opening, so it covers it as it comes up. */}
+      <div className="relative z-10 flex flex-col bg-bg pt-20">
+      <div className="flex flex-col gap-20">
+      {/* Cover media slot (showreel to come): capped at 1200px, centred. Not in the rail. */}
+      <section id="context" className="flex scroll-mt-16 flex-col items-center px-6">
         <CoverFrame className="max-w-[1200px]" />
-        {/* Title and intro hidden for now; the h1 stays for screen readers. */}
-        <div className="sr-only">
-          <h1 className="text-[40px] font-normal leading-[1.3] text-ink">For Your Consideration</h1>
-          <p hidden className={`${BODY} max-w-[700px]`}>
-            As a thespian &amp; film student who’s started his career in video editing &amp;
-            creative direction, I have seen how the power of stories help shape experiences. A
-            Designer based out of Bengaluru, India, Hello World - I’m Rishabh.
-          </p>
-        </div>
       </section>
 
       {/* 001 */}
@@ -554,7 +591,7 @@ export default function DraftContent() {
       <ScrollSlides slides={FLOW_SLIDES} idPrefix="flows" layout="stack" />
 
       {/* Companion links: the same set that goes out with the resume */}
-      <section {...rail("deeper", "Go deeper")} className="flex scroll-mt-16 flex-col gap-6 px-6 pb-20">
+      <section {...rail("deeper", "Go deeper")} className="flex scroll-mt-16 flex-col gap-6 px-6 pb-6">
         <h2 className="px-6 text-[36px] font-normal leading-none text-ink">Go deeper</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {DEEPER.map((d) => {
@@ -575,7 +612,14 @@ export default function DraftContent() {
           })}
         </div>
       </section>
-    </main>
+      </div>
+
+      {/* Draft is project 999, the last of all: its banner wraps round to the first
+          project in Selected Work. The page's last block, above the plain footer; outside the
+          sections' 80px gaps, so it follows them by 24px as on Saathi. */}
+      <NextProject after="draft" />
+      </div>
+    </div>
     </MediaLightbox>
   );
 }

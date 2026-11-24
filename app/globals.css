@@ -346,6 +346,12 @@ html.lenis body {
     transform: translateX(286%) skewX(-18deg);
   }
 }
+/* /netra's quote modal (NetraQuoteModal): the dither in the scan bar's light crawls a step at a time. */
+@keyframes netra-crawl {
+  to {
+    background-position: 4px 2px;
+  }
+}
 /* The 404's marquee (app/not-found.tsx): the track holds two identical runs, so moving
    it half its width loops seamlessly. */
 @keyframes marquee {

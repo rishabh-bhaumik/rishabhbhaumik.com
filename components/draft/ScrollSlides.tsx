@@ -131,7 +131,7 @@ export default function ScrollSlides({
       className={`relative overflow-hidden ${s.src ? "" : "bg-surface light:bg-white"}`}
       style={{
         aspectRatio: ratio,
-        width: `min(100%, 904px, calc((100svh - 4rem - 11rem) * ${w} / ${h}))`,
+        width: `min(100%, 904px, calc((100svh - 61px - 11rem) * ${w} / ${h}))`,
       }}
     >
       {s.src && (
@@ -161,7 +161,7 @@ export default function ScrollSlides({
         />
       ))}
 
-      <div className="sticky top-16 flex h-[calc(100svh-4rem)] items-center justify-center overflow-hidden px-6">
+      <div className="sticky top-[61px] flex h-[calc(100svh-61px)] items-center justify-center overflow-hidden px-6">
         <div className="grid w-full place-items-center">
           <AnimatePresence initial={false} custom={dir}>
             {layout === "stack" ? (
@@ -184,7 +184,7 @@ export default function ScrollSlides({
                 {/* Up to 960 wide, and capped so the frame's height fits the pinned screen. */}
                 <div
                   className="min-w-0 lg:order-2 lg:justify-self-end"
-                  style={{ width: "min(100%, calc((100svh - 4rem - 4rem) * 16 / 9))" }}
+                  style={{ width: "min(100%, calc((100svh - 61px - 4rem) * 16 / 9))" }}
                 >
                   {frame}
                 </div>

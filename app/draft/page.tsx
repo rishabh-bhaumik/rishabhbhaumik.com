@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import SheetNav from "@/components/home/SheetNav";
-import Footer from "@/components/Footer";
-import NextProject from "@/components/project/NextProject";
+import Sheet from "@/components/home/Sheet";
 import DraftContent from "@/components/draft/DraftContent";
 import DraftShell from "@/components/draft/DraftShell";
 
@@ -15,17 +13,14 @@ export const metadata: Metadata = {
 export default function DraftPage() {
   return (
     <>
-      <SheetNav />
-      {/* Rail and page side by side: hovering the left edge opens the rail and the page moves over. */}
-      <DraftShell>
+      {/* The rail drawer sits outside the sheet: the sheet's main column is its own
+          stacking layer, which would put the drawer under the sliding footer. */}
+      <DraftShell />
+      {/* On the ruled sheet like the projects: footer without the contact card, the
+          page ending on its Next Project banner (DraftContent). */}
+      <Sheet>
         <DraftContent />
-      </DraftShell>
-      {/* Draft is project 999, the last of all: its banner wraps round to the first
-          project in Selected Work. On the sheet's 1200px column, as on the projects. */}
-      <div className="mx-auto w-full max-w-[var(--shell-max)] border-rule min-[1201px]:border-x">
-        <NextProject after="draft" />
-      </div>
-      <Footer elsewhereLabel />
+      </Sheet>
     </>
   );
 }

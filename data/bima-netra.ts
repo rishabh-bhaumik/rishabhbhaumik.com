@@ -39,7 +39,11 @@ export const BIMA_NETRA = {
   },
 
   context: {
-    media: { label: "Dither Transition on a Quote Card" } satisfies Media,
+    // The old journey's drop-offs (NetraThesis, Figma 8903:31127).
+    media: {
+      label: "Core Thesis and Vision: Profiling, QUOTE request, and checkout would not scale in a deterministic model",
+      alt: "The old journey: landing page and form, quote page, checkout. 20% of customers left at the form (\"this form is long and complicated\") and 35% at the quote page (\"I dont know what to pick\"). Core thesis: deterministic flows ask every business the same questions; an agentic flow asks only the ones that matter, and does the rest for them. Probabilistic models can also infer from data, behaviour and expectations.",
+    } satisfies Media,
     tag: "context",
     heading: "Context",
     rows: [
@@ -56,7 +60,7 @@ export const BIMA_NETRA = {
   },
 
   brief: {
-    media: { label: "Dither Transition on a Quote Card" } satisfies Media,
+    media: { label: "Some research papers that can reverse engineer decisions taken on BimaNetra’s final outcome" } satisfies Media,
     tag: "context",
     heading: "Project Brief",
     intro:
@@ -69,19 +73,22 @@ export const BIMA_NETRA = {
 
   /** The two frames between the brief and the execution notes. */
   thesis: [
-    { label: "Core Thesis and Vision: Profiling, QUOTE request, and checkout would not scale in a deterministic model" },
-    { label: "Some research papers that can reverse engineer decisions taken on BimaNetra’s final outcome" },
+    { label: "Photos of whiteboarding!!!!!!!!" },
+    // BimaNetra's quote modal filling itself in (NetraQuoteModal).
+    {
+      label: "Dither Transition on a Quote Card",
+      alt: "BimaNetra's quote modal filling itself in: Profile arrives filled and is confirmed, then Business and Risk each load and fill their own answers, ending on Get Instant Quotes",
+    },
   ] satisfies Media[],
 
   execution: {
     tag: "execution",
     heading: "How we shipped it",
     body: [
-      "Placeholder. This section will cover the process: how research shaped the architecture, how the design system was built and versioned, how we partnered with engineering through prototyping and spec, and how we validated each flow before release.",
-      "Placeholder. Details on specific decisions, trade-offs, and iteration loops will go here. Final copy coming soon.",
+      "Research shaped the architecture: one company name routes a business into three cases, verified, guessed or not found. Over 60 days and 139 commits we built a coded prototype on Peetal’s fields, tracing each screen to Figma.",
+      "We cut the questions from twelve to ten, then audited every case against Nielsen’s heuristics before handoff.",
     ],
     media: [
-      { label: "Photos of whiteboarding!!!!!!!!" },
       { label: "Preliminary sketches (gold quote!!!!!)" },
       { label: "Onboarding flow - Mobile Screen of Netra Folder Going up and down!!!!!" },
     ] satisfies Media[],

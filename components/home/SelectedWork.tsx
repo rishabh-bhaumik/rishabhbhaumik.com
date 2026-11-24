@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { LayoutGroup, m } from "framer-motion";
 import { SELECTED_WORK, type SelectedWork as Work } from "@/data/site";
 import { revealMedia, staggerContainer } from "@/lib/motion";
+
+/** BimaNetra's card: NetraBot, live (client only, loaded with the card's script). */
+const NetraCardBot = dynamic(() => import("./NetraCardBot"), { ssr: false });
 
 /**
  * Home's Selected Work (Figma 8785:37079): a heading, the grid/list switch, then one
@@ -63,6 +67,7 @@ function WorkCard({ work, compact }: { work: Work; compact: boolean }) {
           ) : (
             <Image src={work.media} alt="" fill sizes="(min-width: 1200px) 1200px, 100vw" className="object-cover" />
           ))}
+        {work.bot && <NetraCardBot />}
         <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
           {work.href ? (
             <span

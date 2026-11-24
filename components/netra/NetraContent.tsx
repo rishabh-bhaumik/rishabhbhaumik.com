@@ -4,6 +4,8 @@ import SheetPin from "../home/SheetPin";
 import TagMarquee from "../home/TagMarquee";
 import GrowMedia from "../project/GrowMedia";
 import NetraSplash from "./NetraSplash";
+import NetraQuoteModal from "./NetraQuoteModal";
+import NetraThesis from "./NetraThesis";
 import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../project/parts";
 
 /**
@@ -45,7 +47,9 @@ export default function NetraContent() {
 
       {/* Context */}
       <div className="flex flex-col pt-20">
-        <GrowMedia media={P.context.media} />
+        <GrowMedia media={P.context.media}>
+          <NetraThesis label={P.context.media.alt} />
+        </GrowMedia>
         <section
           aria-labelledby="context"
           className="flex flex-col items-start px-4 pb-6 pt-[88px] sm:px-6"
@@ -103,7 +107,14 @@ export default function NetraContent() {
 
       {P.thesis.map((m, i) => (
         <div key={i} className="pt-20">
-          <GrowMedia media={m} />
+          {/* The one with a description is BimaNetra's quote modal filling itself in, live. */}
+          {m.alt ? (
+            <GrowMedia media={m}>
+              <NetraQuoteModal label={m.alt} />
+            </GrowMedia>
+          ) : (
+            <GrowMedia media={m} />
+          )}
         </div>
       ))}
 

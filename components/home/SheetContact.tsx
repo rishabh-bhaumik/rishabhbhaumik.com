@@ -1,6 +1,7 @@
 import { HOME } from "@/data/site";
 import ContactOrbit from "./ContactOrbit";
 import { GreetingRoll } from "./Greeting";
+import RollLink from "./RollLink";
 import "./hello.css";
 
 /**
@@ -23,12 +24,12 @@ export default function SheetContact() {
             </span>
           </h2>
         </div>
-        <a
+        <RollLink
+          label={HOME.email}
           href={`mailto:${HOME.email}`}
+          icon="mail"
           className="flex h-[54px] items-center border-y border-rule px-4 text-12 uppercase leading-[1.2] tracking-[0.08em] text-ink transition-colors hover:text-faint sm:px-6"
-        >
-          {HOME.email}
-        </a>
+        />
       </div>
     </section>
   );
