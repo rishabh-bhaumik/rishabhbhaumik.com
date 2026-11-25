@@ -1,4 +1,5 @@
-import { BIMA_NETRA as P } from "@/data/bima-netra";
+import { Fragment } from "react";
+import { BIMA_NETRA as P, type NetraMedia } from "@/data/bima-netra";
 import NextProject from "../project/NextProject";
 import SheetPin from "../home/SheetPin";
 import TagMarquee from "../home/TagMarquee";
@@ -6,6 +7,7 @@ import GrowMedia from "../project/GrowMedia";
 import NetraSplash from "./NetraSplash";
 import NetraQuoteModal from "./NetraQuoteModal";
 import NetraThesis from "./NetraThesis";
+import NetraWhiteboard from "./NetraWhiteboard";
 import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../project/parts";
 
 /**
@@ -107,14 +109,7 @@ export default function NetraContent() {
 
       {P.thesis.map((m, i) => (
         <div key={i} className="pt-20">
-          {/* The one with a description is BimaNetra's quote modal filling itself in, live. */}
-          {m.alt ? (
-            <GrowMedia media={m}>
-              <NetraQuoteModal label={m.alt} />
-            </GrowMedia>
-          ) : (
-            <GrowMedia media={m} />
-          )}
+          <Frame media={m} />
         </div>
       ))}
 
@@ -128,19 +123,21 @@ export default function NetraContent() {
           <h2 id="execution" className={`pt-3 ${heading}`}>
             {P.execution.heading}
           </h2>
-          {P.execution.body.map((t, i) => (
-            <p
-              key={i}
-              className={`max-w-[760px] ${i ? "pt-4" : "pt-6"} ${body}`}
-            >
-              {t}
-            </p>
-          ))}
+          {/* Wide enough for the first line (829px) to sit on one line; pretty, not the site's
+              balance, which would split it in two. */}
+          <p className={`max-w-[840px] pt-6 [text-wrap:pretty] ${body}`}>
+            {P.execution.body.map((t, i) => (
+              <Fragment key={i}>
+                {i > 0 && <br />}
+                {t}
+              </Fragment>
+            ))}
+          </p>
         </section>
       </div>
       {P.execution.media.map((m, i) => (
         <div key={i} className="pt-20">
-          <GrowMedia media={m} />
+          <Frame media={m} />
         </div>
       ))}
 
@@ -217,4 +214,21 @@ export default function NetraContent() {
       </div>
     </article>
   );
+}
+
+/** A media frame, or one of the live scenes: BimaNetra's quote modal filling itself in, or the whiteboard over its room. */
+function Frame({ media }: { media: NetraMedia }) {
+  if (media.scene === "quote")
+    return (
+      <GrowMedia media={media}>
+        <NetraQuoteModal label={media.alt ?? media.label} />
+      </GrowMedia>
+    );
+  if (media.scene === "whiteboard")
+    return (
+      <GrowMedia media={media}>
+        <NetraWhiteboard label={media.alt ?? media.label} />
+      </GrowMedia>
+    );
+  return <GrowMedia media={media} />;
 }

@@ -41,8 +41,8 @@ const PAGES = [
 
 /** The two drop-offs: big figure, then the reason customers gave. */
 const DROPS = [
-  { value: "35%", quote: "“i dont know what to pick”", left: 855.12, top: 44.83 },
-  { value: "20%", quote: "“this form is long and complicated”", left: 60.11, top: 432 },
+  { value: "20%", quote: "“this form is long and complicated”", left: 855.12, top: 44.83 },
+  { value: "35%", quote: "“i dont know what to pick”", left: 60.11, top: 432 },
 ];
 
 /** The junction dots (centres) where the leaders leave the journey. */

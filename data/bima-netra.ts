@@ -6,8 +6,11 @@
 import type { Media } from "@/components/project/GrowMedia";
 import type { RichText } from "@/components/project/parts";
 
+/** A frame that may hold one of the page's live scenes instead of a file. */
+export type NetraMedia = Media & { readonly scene?: "quote" | "whiteboard" };
+
 export const BIMA_NETRA = {
-  tags: ["2026", "ai saas"],
+  tags: ["2026", "ai saas", "in staging"],
   /** The headline, broken as in Figma on wide screens. */
   title: ["BimaNetra™: India’s first agentic infrastructure solution", "for a 200 year old problem"],
   intro: "BimaNetra™ is how BimaKavach can price risk, underwrite smartly, and surface gaps in their business.",
@@ -73,25 +76,37 @@ export const BIMA_NETRA = {
 
   /** The two frames between the brief and the execution notes. */
   thesis: [
-    { label: "Photos of whiteboarding!!!!!!!!" },
-    // BimaNetra's quote modal filling itself in (NetraQuoteModal).
+    // The whiteboard photo over the room it was taken in (NetraWhiteboard, Figma 8913:30316).
     {
-      label: "Dither Transition on a Quote Card",
-      alt: "BimaNetra's quote modal filling itself in: Profile arrives filled and is confirmed, then Business and Risk each load and fill their own answers, ending on Get Instant Quotes",
+      label: "Photos of whiteboarding!!!!!!!!",
+      scene: "whiteboard",
+      alt: "The whiteboard from our planning sessions: the product page, eleven questions, the quote page, KYC and payment sketched out by hand, held over a photo of the room it was drawn in",
     },
-  ] satisfies Media[],
+    // Figma 8913:30378.
+    {
+      label: "Preliminary sketches (gold quote!!!!!)",
+      src: "/media/netra/sketches.webp",
+      alt: "A whiteboard of six routes from a company name: the agent fails, gets a fuzzy match or passes, then fills or validates, a modal with or without a nudge, and the quote, the last pre-underwritten",
+    },
+  ] satisfies NetraMedia[],
 
   execution: {
     tag: "execution",
     heading: "How we shipped it",
+    /** One paragraph; each entry starts a new line. */
     body: [
-      "Research shaped the architecture: one company name routes a business into three cases, verified, guessed or not found. Over 60 days and 139 commits we built a coded prototype on Peetal’s fields, tracing each screen to Figma.",
-      "We cut the questions from twelve to ten, then audited every case against Nielsen’s heuristics before handoff.",
+      "Research shaped the architecture: one company name routes a business into three cases, verified, guessed or not found.",
+      "Over 60 days and 139 commits we built a coded prototype on Peetal’s fields, tracing each screen to Figma. We cut the questions from twelve to ten, then audited every case against Nielsen’s heuristics before handoff.",
     ],
     media: [
-      { label: "Preliminary sketches (gold quote!!!!!)" },
+      // BimaNetra's quote modal filling itself in (NetraQuoteModal).
+      {
+        label: "Dither Transition on a Quote Card",
+        scene: "quote",
+        alt: "BimaNetra's quote modal filling itself in: Profile arrives filled and is confirmed, then Business and Risk each load and fill their own answers, ending on Get Instant Quotes",
+      },
       { label: "Onboarding flow - Mobile Screen of Netra Folder Going up and down!!!!!" },
-    ] satisfies Media[],
+    ] satisfies NetraMedia[],
   },
 
   /** The frame over the takeaways. */

@@ -197,8 +197,8 @@ export const HOME = {
   /** One string per line on wide screens; they run together and wrap below that. */
   headline: [
     "I’m Rishabh. I design brands and",
-    "products for 0 to 1 startups, with",
-    "instinct and field notes.",
+    "products with instinct and field",
+    "notes for 0 to 1 startups.",
   ],
   intro:
     "Designer with 6+ years across product, brand and film. Previously I’ve worked with Vedantu, 145 East, Nymbl, UNICEF, iterating craft and chasing ideas.",
