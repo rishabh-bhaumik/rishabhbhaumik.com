@@ -1,5 +1,6 @@
 import { Fragment } from "react";
-import { BIMA_NETRA as P, type NetraMedia } from "@/data/bima-netra";
+import { BIMA_NETRA, type NetraCopy } from "@/data/bima-netra";
+import type { Media } from "../project/GrowMedia";
 import NextProject from "../project/NextProject";
 import SheetPin from "../home/SheetPin";
 import TagMarquee from "../home/TagMarquee";
@@ -8,20 +9,34 @@ import NetraSplash from "./NetraSplash";
 import NetraQuoteModal from "./NetraQuoteModal";
 import NetraThesis from "./NetraThesis";
 import NetraWhiteboard from "./NetraWhiteboard";
+import NetraRoutes from "./NetraRoutes";
+import NetraResearch from "./NetraResearch";
+import NetraMobileFlow from "./NetraMobileFlow";
 import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../project/parts";
 
 /**
  * The BimaNetra project (Figma 8818:32660), on the ruled sheet: the opening, the band
  * of facts, then media frames (GrowMedia) between the overview, context, brief,
  * execution, takeaways and impact, and the banner to the next project. Copy in
- * data/bima-netra.ts.
+ * data/bima-netra.ts; /netra2 passes its own rewrite (data/bima-netra-2.ts) as `copy`.
  */
-export default function NetraContent() {
+export default function NetraContent({ copy: P = BIMA_NETRA }: { copy?: NetraCopy }) {
   return (
     <article className="flex flex-col">
       {/* The opening and its marquee stay put while the page scrolls up over them. */}
       <SheetPin>
-      <ProjectHero href="/netra" tags={P.tags} title={P.title} intro={P.intro} />
+      <ProjectHero
+        href="/netra"
+        tags={P.tags}
+        title={P.title}
+        // A "\n" in the intro starts a new line.
+        intro={P.intro.split("\n").map((line, i) => (
+          <Fragment key={i}>
+            {i > 0 && <br />}
+            {line}
+          </Fragment>
+        ))}
+      />
       <TagMarquee items={P.marquee} />
       </SheetPin>
       <div className="relative z-10 flex flex-col bg-bg">
@@ -29,7 +44,7 @@ export default function NetraContent() {
       {/* Overview */}
       <div className="flex flex-col pt-20">
         <GrowMedia media={P.splash}>
-          <NetraSplash label={P.splash.alt} />
+          <NetraSplash label={P.splash.alt ?? P.splash.label} />
         </GrowMedia>
         <section
           aria-label="Overview"
@@ -50,7 +65,8 @@ export default function NetraContent() {
       {/* Context */}
       <div className="flex flex-col pt-20">
         <GrowMedia media={P.context.media}>
-          <NetraThesis label={P.context.media.alt} />
+          {/* With a caption under the frame, the caption carries the thesis and the frame drops its own lines. */}
+          <NetraThesis label={P.context.media.alt ?? P.context.media.label} thesis={!P.context.media.caption} />
         </GrowMedia>
         <section
           aria-labelledby="context"
@@ -80,7 +96,7 @@ export default function NetraContent() {
 
       {/* Project brief */}
       <div className="flex flex-col pt-20">
-        <GrowMedia media={P.brief.media} />
+        <Frame media={P.brief.media} />
         <section
           aria-labelledby="brief"
           className="flex flex-col px-4 pb-6 pt-[88px] sm:px-6"
@@ -207,6 +223,11 @@ export default function NetraContent() {
               </li>
             ))}
           </ul>
+          {P.closing && (
+            <div className="border-t border-rule px-4 py-10 sm:px-6">
+              <p className="max-w-[760px] text-18 leading-[1.8] tracking-[-0.015em] text-ink">{P.closing}</p>
+            </div>
+          )}
         </section>
       </div>
 
@@ -216,12 +237,30 @@ export default function NetraContent() {
   );
 }
 
-/** A media frame, or one of the live scenes: BimaNetra's quote modal filling itself in, or the whiteboard over its room. */
-function Frame({ media }: { media: NetraMedia }) {
+/** A media frame, or one of the live scenes: the quote modal filling itself in, the whiteboard over its room, the six routes as a flowchart, or the research carousel. */
+function Frame({ media }: { media: Media & { readonly scene?: string } }) {
   if (media.scene === "quote")
     return (
       <GrowMedia media={media}>
         <NetraQuoteModal label={media.alt ?? media.label} />
+      </GrowMedia>
+    );
+  if (media.scene === "mobile")
+    return (
+      <GrowMedia media={media}>
+        <NetraMobileFlow label={media.alt ?? media.label} />
+      </GrowMedia>
+    );
+  if (media.scene === "research")
+    return (
+      <GrowMedia media={media}>
+        <NetraResearch label={media.alt ?? media.label} />
+      </GrowMedia>
+    );
+  if (media.scene === "routes")
+    return (
+      <GrowMedia media={media}>
+        <NetraRoutes label={media.alt ?? media.label} />
       </GrowMedia>
     );
   if (media.scene === "whiteboard")

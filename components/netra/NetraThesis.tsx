@@ -63,7 +63,14 @@ const LEADERS = [
   "M602.26 486.16H359.34C357.6 486.16 355.88 486.6 354.34 487.5L324.88 504.51",
 ];
 
-export default function NetraThesis({ label }: { label: string }) {
+export default function NetraThesis({
+  label,
+  thesis = true,
+}: {
+  label: string;
+  /** The core-thesis lines in the bottom right; off where the frame's caption carries the thesis (/netra2). */
+  thesis?: boolean;
+}) {
   const root = useRef<HTMLDivElement>(null);
   const [k, setK] = useState<number | null>(null);
 
@@ -147,14 +154,16 @@ export default function NetraThesis({ label }: { label: string }) {
 
         {/* Three lines, left-aligned with each other; the block's right edge (its longest line)
             sits where Figma's caption ends (x 1173.74) and its foot on that caption's baseline. */}
-        <div
-          className="absolute flex flex-col items-start gap-[6px] whitespace-nowrap text-left text-[12px] leading-none"
-          style={{ right: 26.26, bottom: 23.14, color: MUTED }}
-        >
-          <p>Core thesis:</p>
-          <p>deterministic flows ask every business the same questions. An agentic flow asks only the ones that matter, and does the rest for them.</p>
-          <p>Additionally, probabilistic models can infer from data, behaviour, and expectations</p>
-        </div>
+        {thesis && (
+          <div
+            className="absolute flex flex-col items-start gap-[6px] whitespace-nowrap text-left text-[12px] leading-none"
+            style={{ right: 26.26, bottom: 23.14, color: MUTED }}
+          >
+            <p>Core thesis:</p>
+            <p>deterministic flows ask every business the same questions. An agentic flow asks only the ones that matter, and does the rest for them.</p>
+            <p>Additionally, probabilistic models can infer from data, behaviour, and expectations</p>
+          </div>
+        )}
       </div>
     </div>
   );

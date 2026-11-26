@@ -7,7 +7,27 @@ import type { Media } from "@/components/project/GrowMedia";
 import type { RichText } from "@/components/project/parts";
 
 /** A frame that may hold one of the page's live scenes instead of a file. */
-export type NetraMedia = Media & { readonly scene?: "quote" | "whiteboard" };
+export type NetraMedia = Media & { readonly scene?: "quote" | "whiteboard" | "routes" | "research" | "mobile" };
+
+/** The page's copy with its literal strings loosened to `string`, so another version (/netra2) can share the shape. */
+type Widen<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends readonly (infer U)[]
+      ? readonly Widen<U>[]
+      : T extends { readonly label: string; readonly text: string }
+        ? { readonly [K in keyof T]: Widen<T[K]> }
+        : // A media frame: any of Media's fields (a caption, say), whichever this page set.
+          T extends { readonly label: string }
+          ? Media & { readonly scene?: string }
+          : T extends object
+            ? { readonly [K in keyof T]: Widen<T[K]> }
+            : T;
+export type NetraCopy = Widen<typeof BIMA_NETRA> & {
+  /** A closing paragraph under Impact (used by /netra2). */
+  readonly closing?: string;
+};
 
 export const BIMA_NETRA = {
   tags: ["2026", "ai saas", "in staging"],
@@ -63,7 +83,12 @@ export const BIMA_NETRA = {
   },
 
   brief: {
-    media: { label: "Some research papers that can reverse engineer decisions taken on BimaNetra’s final outcome" } satisfies Media,
+    // Five papers, one at a time (NetraResearch, Figma 8927:30390); copy in RESEARCH_PAPERS below.
+    media: {
+      label: "Some research papers that can reverse engineer decisions taken on BimaNetra’s final outcome",
+      scene: "research",
+      alt: "The research behind Netra: five papers, one at a time, each with its first page, what it shaped in Netra and three findings",
+    } satisfies NetraMedia,
     tag: "context",
     heading: "Project Brief",
     intro:
@@ -105,7 +130,12 @@ export const BIMA_NETRA = {
         scene: "quote",
         alt: "BimaNetra's quote modal filling itself in: Profile arrives filled and is confirmed, then Business and Risk each load and fill their own answers, ending on Get Instant Quotes",
       },
-      { label: "Onboarding flow - Mobile Screen of Netra Folder Going up and down!!!!!" },
+      // Case B on a phone (NetraMobileFlow): Sabyasachi, from one name to quotes.
+      {
+        label: "Onboarding flow - Mobile Screen of Netra Folder Going up and down!!!!!",
+        scene: "mobile",
+        alt: "Netra on a phone. A founder types Sabyasachi, picks Sabyasachi Calcutta from the MCA records and taps Get My Quote. The quote sheet rises: Netra introduces itself, the founder types their name, phone and email, then Netra reads up on the business and guesses two answers, the founder sets the business type to Retail & Wholesale and picks a turnover, Netra suggests ₹10 Cr of cover, and the founder answers two questions and gets quotes.",
+      },
     ] satisfies NetraMedia[],
   },
 
@@ -152,3 +182,71 @@ export const BIMA_NETRA = {
   },
 
 } as const;
+
+/**
+ * The research carousel (NetraResearch, Figma 8927:30390): five papers in the order a founder
+ * meets their ideas, from Netra searching to the rules over the whole flow. Each finding was
+ * checked against the paper's own text; first pages are in public/media/netra/papers/<key>.webp.
+ */
+export const RESEARCH_PAPERS = [
+  {
+    key: "buell",
+    title: "Creating Reciprocal Value Through Operational Transparency",
+    authors: "Ryan W. Buell, Tami Kim, Chia-Jung Tsay. Management Science 2017",
+    why: "People value work they can see, so Netra fills each field while the founder watches.",
+    insights: [
+      "Watching the work raised its value",
+      "Seeing the cook idle added no value",
+      "Diners felt a longer wait and valued it more",
+    ],
+    href: "https://dash.harvard.edu/server/api/core/bitstreams/7312037d-8844-6bd4-e053-0100007fdf3b/content",
+  },
+  {
+    key: "horvitz",
+    title: "Principles of Mixed-Initiative User Interfaces",
+    authors: "Eric Horvitz. CHI 1999",
+    why: "Act when sure, ask when unsure. Netra’s three cases come from that rule.",
+    insights: [
+      "Act when sure, ask when unsure, else wait",
+      "Show its guesses and let people edit them",
+      "When unsure, do less and get it right",
+    ],
+    href: "https://erichorvitz.com/chi99horvitz.pdf",
+  },
+  {
+    key: "dietvorst",
+    title: "Overcoming Algorithm Aversion",
+    authors: "Berkeley J. Dietvorst, Joseph P. Simmons, Cade Massey. Management Science 2018",
+    why: "People use models they can edit, so every value Netra fills stays editable.",
+    insights: [
+      "More people chose a model they could edit",
+      "People edited less than they were allowed",
+      "Editing made people more tolerant of errors",
+    ],
+    href: "https://marketing.wharton.upenn.edu/wp-content/uploads/2020/07/Dietvorst-Overcoming-Algorithm-Aversion.pdf",
+  },
+  {
+    key: "mckenzie",
+    title: "Recommendations Implicit in Policy Defaults",
+    authors: "Craig R. M. McKenzie, Michael J. Liersch, Stacey R. Finkelstein. Psychological Science 2006",
+    why: "People read a default as advice, so Netra’s ₹10 Cr pick comes with its reason.",
+    insights: [
+      "People read a default as advice",
+      "Unsure people likely lean more on defaults",
+      "Trust in the source likely adds weight",
+    ],
+    href: "https://pages.ucsd.edu/~mckenzie/McKenzieetal2006PsychSci.pdf",
+  },
+  {
+    key: "amershi",
+    title: "Guidelines for Human-AI Interaction",
+    authors: "Saleema Amershi et al. CHI 2019",
+    why: "AI should say how sure it is and be easy to correct. Netra does both.",
+    insights: [
+      "Few products said how often they err",
+      "Testers often couldn't see why the AI acted",
+      "Ask when unsure and make fixing easy",
+    ],
+    href: "https://www.microsoft.com/en-us/research/uploads/prod/2019/01/Guidelines-for-Human-AI-Interaction-camera-ready.pdf",
+  },
+] as const;

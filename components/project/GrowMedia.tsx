@@ -20,6 +20,8 @@ export type Media = {
   readonly aspect?: number;
   /** "contain" for cut-outs on transparent backgrounds; otherwise the media fills the frame. */
   readonly fit?: "cover" | "contain";
+  /** A short line centred under the frame, naming what it shows. */
+  readonly caption?: string;
 };
 
 /** The frame at its smallest (Figma 8818:33296): 1000×526 inside the 1200×675 container. */
@@ -60,6 +62,7 @@ export function useGrowFrame(ref: RefObject<HTMLElement | null>, radius = 0) {
  * - Until a file is added it shows its label on the empty frame.
  * - `children` take the media's place (a scene of their own, like Netra's splash) and
  *   can read the growth with `useGrow()`.
+ * - `caption`, if given, sits centred under the frame.
  */
 export default function GrowMedia({
   media,
@@ -74,6 +77,7 @@ export default function GrowMedia({
   const { grow, clipPath, scale } = useGrowFrame(ref);
 
   return (
+    <>
     <div ref={ref} style={{ aspectRatio: media.aspect ?? 1200 / 675 }} className="relative w-full overflow-hidden">
       {/* The surface fill backs placeholders and contained images; a scene paints its own
           (a fill under it would blend into its edges where they fall on a fractional pixel). */}
@@ -105,5 +109,9 @@ export default function GrowMedia({
         )}
       </m.div>
     </div>
+    {media.caption && (
+      <p className="px-4 pt-5 text-center text-14 leading-[1.5] tracking-[-0.01em] text-subtle sm:px-6">{media.caption}</p>
+    )}
+    </>
   );
 }

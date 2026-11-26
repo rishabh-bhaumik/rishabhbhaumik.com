@@ -9,12 +9,12 @@ import { BAYER } from "@/lib/netrabot/bayer";
 import { useGrow } from "../project/GrowMedia";
 import { Glyph } from "./NetraSplash";
 
-const serif = Instrument_Serif({ weight: "400", style: "italic", subsets: ["latin"], display: "swap" });
+export const serif = Instrument_Serif({ weight: "400", style: "italic", subsets: ["latin"], display: "swap" });
 
 /*
  * BimaNetra's quote modal, rebuilt from the BimaNetra app (QuoteModal, ResearchScan,
  * InteractiveInput, SegmentedField; Figma 503:14898) at its own size, on the home
- * cards' surface-to-bg gradient (light in either theme), no page behind it. The point
+ * cards' surface-to-bg gradient (following the theme; the modal light in either), no page behind it. The point
  * it makes: nobody fills a form. It comes in through a diagonal Bayer dither (#ff7700
  * front, top left first) with Profile already filled; the pointer confirms it; Business
  * loads (the page scan on the left, "Fetching…" in the fields) and fills itself; the
@@ -34,19 +34,19 @@ const FH = 675;
 const SCALE = 0.85;
 const TOP = (FH - H * SCALE) / 2;
 
-const VIOLET = "#4100cf";
-const ORANGE = "#ff7700";
-const INK = "#1c1d1f";
-const BASIC = "#1c1c1c";
-const SECOND = "#6f7378";
-const TERT = "#a9acb1";
-const STROKE = "rgba(169,172,177,0.56)";
-const PLACEHOLDER = "rgba(169,172,177,0.48)";
-const TINT = "rgba(65,0,207,0.02)";
-const GREEN = "#00b200";
-const TIGHT = "-0.0117em";
-const EASE_OUT = [0.16, 1, 0.3, 1] as const;
-const POP = [0.34, 1.4, 0.64, 1] as const;
+export const VIOLET = "#4100cf";
+export const ORANGE = "#ff7700";
+export const INK = "#1c1d1f";
+export const BASIC = "#1c1c1c";
+export const SECOND = "#6f7378";
+export const TERT = "#a9acb1";
+export const STROKE = "rgba(169,172,177,0.56)";
+export const PLACEHOLDER = "rgba(169,172,177,0.48)";
+export const TINT = "rgba(65,0,207,0.02)";
+export const GREEN = "#00b200";
+export const TIGHT = "-0.0117em";
+export const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+export const POP = [0.34, 1.4, 0.64, 1] as const;
 
 const COMPANY = "Pepe Jeans Innerfashion Private Limited";
 
@@ -88,7 +88,7 @@ const EASE_FLIP = cubicBezier(0.33, 0, 0.67, 1);
 const clamp = (v: number, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
 
 /** What each step's scan says, one line per sweep. */
-const SCAN_TITLES = [
+export const SCAN_TITLES = [
   [],
   ["Probing MCA Data", "Reading Director History", "Studying Company Financials"],
   ["Assessing Business", "Understanding Risk", "Calculating Sum Insured"],
@@ -369,16 +369,17 @@ export default function NetraQuoteModal({ label }: { label: string }) {
   };
 
   return (
-    // Light in either theme (the light tokens apply inside), on the home cards' gradient.
+    // The home cards' gradient, following the theme; the modal itself stays light in either
+    // (the light tokens apply inside the stage).
     <div
       ref={root}
-      data-theme="light"
       role="img"
       aria-label={label}
       className="absolute inset-0 overflow-hidden bg-gradient-to-br from-surface to-bg"
     >
       <div
         aria-hidden
+        data-theme="light"
         className="absolute left-0 top-0 origin-top-left select-none"
         style={{ width: FW, height: FH, transform: stage, visibility: box ? undefined : "hidden" }}
       >
@@ -414,7 +415,7 @@ export default function NetraQuoteModal({ label }: { label: string }) {
 // ---- Icons ----------------------------------------------------------------------
 
 /** A filled roundel with a white tick. */
-function Roundel({ color, size = 14 }: { color: string; size?: number }) {
+export function Roundel({ color, size = 14 }: { color: string; size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" aria-hidden className="shrink-0">
       <circle cx="8" cy="8" r="8" fill={color} />
@@ -423,7 +424,7 @@ function Roundel({ color, size = 14 }: { color: string; size?: number }) {
   );
 }
 
-function StrokeCheck() {
+export function StrokeCheck() {
   return (
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden className="shrink-0">
       <circle cx="8" cy="8" r="7.25" stroke={VIOLET} strokeWidth="1.5" />
@@ -432,7 +433,7 @@ function StrokeCheck() {
   );
 }
 
-function Chevron({ color = TERT }: { color?: string }) {
+export function Chevron({ color = TERT }: { color?: string }) {
   return (
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden className="shrink-0">
       <path d="m4 6 4 4 4-4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -440,7 +441,7 @@ function Chevron({ color = TERT }: { color?: string }) {
   );
 }
 
-function Spinner() {
+export function Spinner() {
   return (
     <m.svg
       width="14"
@@ -458,7 +459,7 @@ function Spinner() {
   );
 }
 
-function Info() {
+export function Info() {
   return (
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden className="shrink-0">
       <circle cx="8" cy="8" r="7" stroke="#1458d2" strokeWidth="1.3" />
@@ -468,7 +469,7 @@ function Info() {
   );
 }
 
-function Clear() {
+export function Clear() {
   return (
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden className="shrink-0">
       <path d="m4.5 4.5 7 7m0-7-7 7" stroke={BASIC} strokeWidth="1.4" strokeLinecap="round" />
@@ -477,7 +478,7 @@ function Clear() {
 }
 
 /** Text that shimmers while BimaNetra works (AITextLoading). */
-function Shimmer({ children }: { children: React.ReactNode }) {
+export function Shimmer({ children }: { children: React.ReactNode }) {
   return (
     <m.span
       className="flex-1 bg-clip-text text-[14px] font-medium leading-[1.2] text-transparent"
@@ -495,12 +496,12 @@ function Shimmer({ children }: { children: React.ReactNode }) {
 
 // ---- The engine panel (left) -----------------------------------------------------
 
-const TASKS = [
+export const TASKS = [
   { key: "profile", pending: "Enter your Profile Details", done: "Profile Confirmed" },
   { key: "business", pending: "Assessing Business", done: "Business Secured", ready: "Business Assessed. Waiting for Confirmation" },
   { key: "risk", pending: "Assessing Risk", done: "Risk Secured", ready: "Risk Assessed. Waiting for Confirmation" },
 ];
-const METER = ["Getting Started", "Assessing Business", "Assessing Risk"];
+export const METER = ["Getting Started", "Assessing Business", "Assessing Risk"];
 
 function Engine({
   frame,
@@ -598,7 +599,7 @@ function Engine({
 }
 
 /** The ring that spins while a task runs (RingSweep). */
-function Ring() {
+export function Ring() {
   return (
     <m.span
       className="size-[14px] shrink-0 rounded-full border-2 border-[#e6e8ea]"
@@ -610,7 +611,7 @@ function Ring() {
 }
 
 /** The 3×3 pulsing grid by the meter's label (AgentProgress). */
-function Meter() {
+export function Meter() {
   return (
     <span className="grid size-[13px] grid-cols-3 gap-[1.5px]">
       {Array.from({ length: 9 }, (_, i) => (
@@ -682,7 +683,7 @@ function Sheet({ back = false, glint, done }: { back?: boolean; glint: MotionVal
  * The ResearchScan: a page tipped back under a violet bar that sweeps it, turning over
  * between sweeps, one line of copy per sweep; done, it faces you with a tick at its corner.
  */
-function Scan({ step, line, done, rot, bar }: { step: number; line: number; done: boolean; rot: MotionValue<number>; bar: MotionValue<number> }) {
+export function Scan({ step, line, done, rot, bar }: { step: number; line: number; done: boolean; rot: MotionValue<number>; bar: MotionValue<number> }) {
   const barY = useTransform(bar, (b) => b * 230 - 5);
   // The light, 96px tall, centred on the bar.
   const glintY = useTransform(bar, (b) => b * 230 - 48);
@@ -747,7 +748,7 @@ function Scan({ step, line, done, rot, bar }: { step: number; line: number; done
 
 // ---- The form (right) -------------------------------------------------------------
 
-const STEPS = ["Profile", "Business", "Risk"] as const;
+export const STEPS = ["Profile", "Business", "Risk"] as const;
 /** The fields' swap between steps (custom: the step coming in; 0 is the loop wrapping). */
 const SWAP = {
   enter: (to: number) => (to === 0 ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 8, filter: "blur(4px)" }),
@@ -877,7 +878,7 @@ function RiskFields({ resolved }: { resolved: number }) {
 }
 
 /** Lucide's shopping bag: ₹10 Cr is in the Immediate Purchase group. */
-function Bag() {
+export function Bag() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="shrink-0">
       <path d="M16 10a4 4 0 0 1-8 0" />
@@ -893,7 +894,7 @@ const IKKAT_A =
 const IKKAT_B =
   "M1004.72 1146.23C1168.84 1146.23 1301.89 1013.18 1301.89 849.057C1301.89 684.934 1434.93 551.887 1599.06 551.887H2016.51C2168.91 551.887 2292.45 428.343 2292.45 275.943C2292.45 123.544 2416 0 2568.4 0H3431.6C3584 0 3707.55 123.544 3707.55 275.943C3707.55 428.343 3831.09 551.887 3983.49 551.887L4514.15 551.887C4678.27 551.887 4811.32 684.934 4811.32 849.057C4811.32 1013.18 4944.37 1146.23 5108.49 1146.23H5646.23C5841.61 1146.23 6000 1304.62 6000 1500C6000 1695.38 5841.61 1853.77 5646.23 1853.77H5108.49C4944.37 1853.77 4811.32 1986.82 4811.32 2150.94C4811.32 2315.07 4678.27 2448.11 4514.15 2448.11H3983.49C3831.09 2448.11 3707.55 2571.66 3707.55 2724.06C3707.55 2876.46 3584 3000 3431.6 3000H2568.4C2416 3000 2292.45 2876.46 2292.45 2724.06C2292.45 2571.66 2168.91 2448.11 2016.51 2448.11L1599.06 2448.11C1434.93 2448.11 1301.89 2315.07 1301.89 2150.94C1301.89 1986.82 1168.84 1853.77 1004.72 1853.77L353.774 1853.77C158.39 1853.77 0 1695.38 0 1500C0 1304.62 158.39 1146.23 353.774 1146.23L1004.72 1146.23Z";
 
-function IkkatDivider() {
+export function IkkatDivider() {
   return (
     <div className="mb-5 flex items-center justify-between px-2">
       {Array.from({ length: 26 }, (_, i) => (
@@ -906,7 +907,7 @@ function IkkatDivider() {
 }
 
 /** A Yes/No question (SegmentedField): two options side by side, the picked one lit. */
-function YesNo({ label, picked }: { label: string; picked: "Yes" | "No" | null }) {
+export function YesNo({ label, picked }: { label: string; picked: "Yes" | "No" | null }) {
   return (
     <div className="flex flex-col">
       <div className="flex items-center p-2 text-[14px] font-medium leading-none" style={{ color: BASIC }}>
@@ -939,7 +940,7 @@ function YesNo({ label, picked }: { label: string; picked: "Yes" | "No" | null }
   );
 }
 
-function Pill({ label, state }: { label: string; state: "done" | "now" | "next" }) {
+export function Pill({ label, state }: { label: string; state: "done" | "now" | "next" }) {
   const look = {
     done: { border: "#a9eaa2", bg: "linear-gradient(to bottom, #ffffff, #ecfbea)", ink: SECOND, size: "text-[14px]" },
     now: { border: "#d1c6ff", bg: "linear-gradient(to bottom, #ffffff, #f4f1ff)", ink: INK, size: "text-[14px]" },
@@ -980,7 +981,7 @@ function Pill({ label, state }: { label: string; state: "done" | "now" | "next" 
 }
 
 /** One InteractiveInput (md, underline): label row 36, box 43, help row 28. */
-function Field({
+export function Field({
   label,
   value,
   status,
@@ -1057,7 +1058,7 @@ function Field({
   );
 }
 
-function Cta({ last, enabled, hover, press }: { last: boolean; enabled: boolean; hover: boolean; press: boolean }) {
+export function Cta({ last, enabled, hover, press }: { last: boolean; enabled: boolean; hover: boolean; press: boolean }) {
   // Violet on Profile and Business; on Risk, orange "Get Instant Quotes".
   const tone = last ? ORANGE : VIOLET;
   const glow = last ? "rgba(255,119,0,0.48)" : "rgba(65,0,207,0.48)";
