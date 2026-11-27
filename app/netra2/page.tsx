@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 import Sheet from "@/components/home/Sheet";
 import NetraContent from "@/components/netra/NetraContent";
-import { BIMA_NETRA_2 } from "@/data/bima-netra-2";
+import { BIMA_NETRA } from "@/data/bima-netra";
 
-// A rewrite of /netra's copy to compare against it; never indexed.
+// The BimaNetra page's original copy, kept to compare against /netra; never indexed.
 export const metadata: Metadata = {
-  title: "BimaNetra (v2)",
-  description: BIMA_NETRA_2.intro,
+  title: "BimaNetra (original)",
+  description: BIMA_NETRA.intro,
   robots: { index: false, follow: false },
 };
 
-/** /netra with its copy rewritten (data/bima-netra-2.ts); everything else is /netra's. */
+/** /netra with its original copy (data/bima-netra.ts); the media and layout are the same. */
 export default function Netra2Page() {
   return (
     <Sheet>
-      <NetraContent copy={BIMA_NETRA_2} />
+      <NetraContent />
     </Sheet>
   );
 }

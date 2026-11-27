@@ -7,6 +7,7 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
 
 - Next.js 16 (App Router) + TypeScript
 - Tailwind CSS v4 — **CSS-first `@theme` in `app/globals.css`** (no `tailwind.config`)
+- three.js only for /netra's paper crumple (`components/PaperCrumple.tsx`, loaded on demand)
 - Framer Motion via `LazyMotion` + `m` (reveals, hover, layout transitions; engine loads as its own chunk, see `components/MotionProvider.tsx`) + Lenis (smooth scroll, on Framer's frame loop)
 - Body/UI font is **Arial** — not a custom typeface. Anek Variable is
   self-hosted as per-script WOFF2 files subset to the showcase lines
@@ -57,8 +58,10 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   no footer (`<Sheet footer={false}>`).
 - `/enter` — retired: the splash is no longer reached (the `ENTER_SCRIPT` redirect is gone from the
   root layout); its files (`components/enter/`, `lib/enter.ts`) are kept but unused.
-- `/netra` — the BimaNetra project (Figma 8818:32660) on the ruled sheet (`components/netra/`, copy in
-  `data/bima-netra.ts`). Built from `components/project/`, shared by project pages to come: `GrowMedia` (a
+- `/netra` — the BimaNetra project (Figma 8818:32660) on the ruled sheet (`components/netra/`), with the
+  plain-language copy in `data/bima-netra-2.ts` (written by `docs/writing.md`; captions under every frame, the
+  thesis as a caption), built on `data/bima-netra.ts`, which holds the media, scenes and the original copy; that
+  original is at `/netra2` (not indexed), and keeps the sketches photo where /netra has `NetraRoutes`. Built from `components/project/`, shared by project pages to come: `GrowMedia` (a
   1200×675 media frame whose media starts at 1000×526, grows to full size once the frame is on screen and
   shrinks back as it leaves; clip plus scale in step, so nothing re-lays out; full size under reduced
   motion), `NextProject` (the orbit clip behind the next project's title, played on hover as in the
@@ -75,7 +78,7 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   the curtain rises back to the logo. NetraBot sits beside Know More as the visitor's stand-in, its states,
   reactions and gaze (on the fake pointer, the field, the icon…) scripted per beat. Resets when off screen;
   one still under reduced motion. NetraBot itself is ported from BimaNetra into `components/netrabot/` +
-  `lib/netrabot/` (data, player, renderer; plus a `getGaze` prop so a script can aim its eyes). The second frame after the Project Brief is `NetraQuoteModal` ; the Context frame above it is `NetraThesis` (Figma 8903:31127): the old journey as three pages with the 20%/35% drop-offs, following the theme (Figma's dark composition in dark, the page's own colours in light), its dashed connectors marching page to page as /draft's CheckoutFlow's do; the frame above the Project Brief is `NetraResearch` (Figma 8927:30390): five papers one at a time, first page on the left (`public/media/netra/papers/`, it opens the PDF), title, authors, a line on what it shaped in Netra and three findings checked against the paper, "Next" to move on; copy in `RESEARCH_PAPERS`; follows the theme (Figma's light composition, the thesis frame's palette in dark, the paper itself white in both); straight after the Project Brief come `NetraWhiteboard` (Figma 8913:30316: the whiteboard photo over its room, both Figma renders with their shaders baked in; light in either theme; while the pointer is over the frame the photo is drawn toward it by `components/Magnet.tsx`, React Bits' Magnet typed, springing back when it leaves) and the preliminary sketches photo (Figma 8913:30378; on /netra2 redrawn as `NetraRoutes`, the six routes as a left-to-right flowchart with marching dashes like /draft's CheckoutFlow, following the theme); the quote modal sits under How we shipped it, and after it `NetraMobileFlow` (the onboarding frame: Case B on /draft's iPhone, ~33s loop, built from BimaNetra's source and its build measured at 390px: "Sabyasachi" typed on the D&O page, the MCA drawer, the pick, Get My Quote, then the quote sheet with Netra's card and strip through Profile, Business and Risk, a dotted circle for each tap; reuses NetraQuoteModal's exported parts; Risk answered as one still under reduced motion). The quote modal: BimaNetra's quote modal rebuilt from the app at its own size (1081×660, shown at 85%, centred near the top of the 16:9 frame as 006.1's form sits on /draft) on the home cards' surface-to-bg gradient, which follows the theme (the modal itself light in either). It makes the point that nobody fills a form: a diagonal Bayer dither (#ff7700 front; a mask on the modal plus an orange canvas) brings it in on Profile already filled, the pointer confirms, Business loads (the ResearchScan page turning under its bar on the left, "Fetching…" in the fields) and fills itself, the pointer confirms, Risk does the same (Yes/No answered too, ₹10 Cr) and the pointer clicks the orange Get Instant Quotes before the dither carries it off; ~16s loop, same start/reset rules as the splash, Risk filled in as one still under reduced motion. Not indexed
+  `lib/netrabot/` (data, player, renderer; plus a `getGaze` prop so a script can aim its eyes). The second frame after the Project Brief is `NetraQuoteModal` ; the Context frame above it is `NetraThesis` (Figma 8903:31127): the old journey as three pages with the 20%/35% drop-offs, following the theme (Figma's dark composition in dark, the page's own colours in light), its dashed connectors marching page to page as /draft's CheckoutFlow's do; the frame above the Project Brief is `NetraResearch` (Figma 8927:30390): five papers one at a time, first page on the left (`public/media/netra/papers/`, it opens the PDF), title, authors, a line on what it shaped in Netra and three findings checked against the paper, "Next" to move on; copy in `RESEARCH_PAPERS`; follows the theme (Figma's light composition, the thesis frame's palette in dark, the paper itself white in both); straight after the Project Brief come `NetraWhiteboard` (Figma 8913:30316: the whiteboard photo over its room, both Figma renders with their shaders baked in; light in either theme; while the pointer is over the frame the photo is drawn toward it by `components/Magnet.tsx`, React Bits' Magnet typed, springing back when it leaves; pressing and holding it crumples it like paper, following the pointer while held and smoothing out on release, by `components/PaperCrumple.tsx`, React Bits' Paper Crumple (three.js, the only use of it; mouse or trackpad only, so a finger on the photo still scrolls a phone; loaded once the frame is near the screen, its fold simulation run in slices between frames so loading never stalls scrolling; measures itself in layout px and maps the pointer through the hit button's offsetX/Y, so the scaled stage and the magnet's tilt don't throw it; drawn at its on-screen size; the photo, with its alt, shows whenever the sheet is at rest, and the magnet holds still while it's held; focus ring in the ink colour) and the preliminary sketches photo (Figma 8913:30378; on /netra redrawn as `NetraRoutes`, the six routes as a left-to-right flowchart with marching dashes like /draft's CheckoutFlow, following the theme); the quote modal sits under How we shipped it, and after it `NetraMobileFlow` (the onboarding frame: Case B on /draft's iPhone, ~33s loop, built from BimaNetra's source and its build measured at 390px: "Sabyasachi" typed on the D&O page, the MCA drawer, the pick, Get My Quote, then the quote sheet with Netra's card and strip through Profile, Business and Risk, a dotted circle for each tap; reuses NetraQuoteModal's exported parts; Risk answered as one still under reduced motion). The quote modal: BimaNetra's quote modal rebuilt from the app at its own size (1081×660, shown at 85%, centred near the top of the 16:9 frame as 006.1's form sits on /draft) on the home cards' surface-to-bg gradient, which follows the theme (the modal itself light in either). It makes the point that nobody fills a form: a diagonal Bayer dither (#ff7700 front; a mask on the modal plus an orange canvas) brings it in on Profile already filled, the pointer confirms, Business loads (the ResearchScan page turning under its bar on the left, "Fetching…" in the fields) and fills itself, the pointer confirms, Risk does the same (Yes/No answered too, ₹10 Cr) and the pointer clicks the orange Get Instant Quotes before the dither carries it off; ~16s loop, same start/reset rules as the splash, Risk filled in as one still under reduced motion. Not indexed
   while it has placeholders.
 - `/work` — work gallery (`WorkGallery`) on the ruled sheet, opening like a project (`PageHero` in `components/project/parts.tsx`:
   breadcrumb home // work, title, note; copy and marquee words in `WORK_PAGE`); list view (the default) gives each card a sheet-wide 1200×675 frame that grows like GrowMedia's (`useGrowFrame`, rounded while small), grid view keeps static rounded cards
@@ -113,9 +116,13 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   Each container also takes `media(id)` and gets a slide in `SLIDES`
   (`components/draft/MediaLightbox.tsx`): clicking one opens a lightbox carousel of
   only the media, at that one.
-- Theme: three modes, dark / auto / light (auto = light 06:00-18:00 local, dark otherwise),
-  `DEFAULT_MODE` in `lib/theme-script.ts` (dark for now). The dock's mode control switches
-  dark/light only (auto is built but not offered); the header clock is display only.
+- Theme: auto by default (`DEFAULT_MODE` in `lib/theme-script.ts`): light from local sunrise to
+  sunset, dark otherwise, the times worked out by `sunTimes` from the browser's time zone (a table
+  of rough coordinates for common zones, else the region and standard offset) and the solar
+  formulas; it also runs inline in the no-flash `<head>` script. The dock's mode control switches
+  dark/light, and that pick holds only until the next sunrise or sunset (`theme-until` in
+  localStorage), then auto takes over again; a pick saved without one counts as lapsed. The
+  header clock is display only.
 - Dock (`components/Dock.tsx`): view control, Figma's "supermenu": a round settings button
   (Lucide settings-2; an x while pinned open by a click) whose hover reveals a slim pill of theme, background music (`SITE.bgm`, state shared via
   `lib/bgm.ts`; on by default for visits landing on home: tries to play on load, else at
@@ -161,8 +168,9 @@ and two password-gated case studies (Bima Saathi, BimaKavach Identity).
   clears it after 6s if the app never takes over; no intro under reduced motion.
 - Cursor (`components/PixelCursor.tsx`, in the root layout): from 1024px (lg) up with a mouse, the system
   cursor is hidden (`data-pixel-cursor` on <html>, the rule inlined in the component; text fields keep
-  their caret) and an 8px square pixel (`bg-ink`) stands in for it. Narrower screens, touch and pens
-  keep the system cursor; the square hides over iframes and outside the window.
+  their caret) and a 6px square pixel (`bg-ink`, a 1px `ring-bg` so it shows on surfaces of its own
+  colour) stands in for it; a hovering pen moves it too. Narrower screens, touch, forced colours and
+  `prefers-contrast: more` keep the system cursor; the square hides over iframes and outside the window.
 - Availability/online-status logic is isolated in `lib/availability.ts`
   (`getAvailability()` is the seam for swapping the static schedule for a
   real data source later).

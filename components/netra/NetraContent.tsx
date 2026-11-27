@@ -18,7 +18,8 @@ import { BODY as body, HEADING as heading, ProjectHero, Rich, Tags } from "../pr
  * The BimaNetra project (Figma 8818:32660), on the ruled sheet: the opening, the band
  * of facts, then media frames (GrowMedia) between the overview, context, brief,
  * execution, takeaways and impact, and the banner to the next project. Copy in
- * data/bima-netra.ts; /netra2 passes its own rewrite (data/bima-netra-2.ts) as `copy`.
+ * data/bima-netra.ts (the original, shown at /netra2); /netra passes the plain-language
+ * rewrite (data/bima-netra-2.ts) as `copy`.
  */
 export default function NetraContent({ copy: P = BIMA_NETRA }: { copy?: NetraCopy }) {
   return (
@@ -157,10 +158,7 @@ export default function NetraContent({ copy: P = BIMA_NETRA }: { copy?: NetraCop
         </div>
       ))}
 
-      {/* Showcase, then the takeaways */}
-      <div className="pt-40">
-        <GrowMedia media={P.showcase} />
-      </div>
+      {/* The takeaways */}
       <div className="py-20">
         <section
           aria-labelledby="takeaways"

@@ -1,6 +1,6 @@
 # Writing guide
 
-This guide is for anyone who writes copy for this portfolio: Rishabh, and any AI model asked to draft or edit text for the site. It was written mainly for the BimaNetra case study (/netra, with its plain rewrite at /netra2), where the copy has to explain an AI agent without sounding like an AI wrote it. The voice to aim for is Shaun Tan's essay on designing Hebbia's autonomous agents for finance (link under Sources). That essay is plain and human. It starts from what its users needed, and it moves at a short film's tempo, a line or two and then the next frame. When this guide and a writing habit disagree, follow the guide.
+This guide is for anyone who writes copy for this portfolio: Rishabh, and any AI model asked to draft or edit text for the site. It was written mainly for the BimaNetra case study (/netra, the plain rewrite; the original copy is at /netra2), where the copy has to explain an AI agent without sounding like an AI wrote it. The voice to aim for is Shaun Tan's essay on designing Hebbia's autonomous agents for finance (link under Sources). That essay is plain and human. It starts from what its users needed, and it moves at a short film's tempo, a line or two and then the next frame. When this guide and a writing habit disagree, follow the guide.
 
 Copy lives in the data files (`data/site.ts`, `data/bima-netra.ts`, `data/bima-netra-2.ts`), so most of what follows applies to strings in those files.
 
@@ -133,7 +133,7 @@ To fix it, say Y on its own. "Netra asks only what the public record doesn't sho
 | Tell | Looks like | Fix |
 |---|---|---|
 | Claims with no source | "Founders loved the new flow." "Research shows people abandon long forms." "Experts agree..." "Many founders told us" (when two did). | Say who, how many and in what setting. "Five of the nine founders we interviewed..." If you don't have it, write a "Placeholder." line. |
-| Effort numbers posing as outcomes | "120+ screens designed", "200 hours in Figma", "6 months, 40 interviews, 3 workshops" | Report what changed for someone. Effort figures can stay as texture ("139 commits" is a good human detail on /netra), and the result still has to be an outcome. |
+| Effort numbers posing as outcomes | "120+ screens designed", "200 hours in Figma", "6 months, 40 interviews, 3 workshops" | Report what changed for someone. Effort figures can stay as texture ("139 commits" is a good human detail on /netra2), and the result still has to be an outcome. |
 | Stat piles | "40% faster, 3x conversion, 98% satisfaction" in one line, with no baseline or period. | One or two numbers, each with its baseline, period and how it was measured. Say what probably caused it. |
 | Superlatives and firsts | "India's first agentic infrastructure solution" (Netra copy), "world-class", "..., marking a paradigm shift for the industry." | Delete the adjective and keep the fact. A "first" needs someone outside the project saying so. |
 | Generic stakes | "Insurance is complex. But it doesn't have to be." "A 200 year old problem" (Netra copy). | Stakes specific to this project: who loses what, and when. "20% of customers left at the proposal form." |
@@ -149,8 +149,8 @@ To fix it, say Y on its own. "Netra asks only what the public record doesn't sho
 | Tell | Looks like | Fix |
 |---|---|---|
 | The bootcamp template | Headings that are exactly Overview, Problem, Research, Solution, Impact, Learnings, all the same weight, Impact as three big numbers. | Build the piece around the real turns: the question, the wrong first answer, what changed your mind, what shipped. Take headings from the content. |
-| "I was tasked with" | "I was tasked with redesigning the quote flow to improve conversion." | Open with what you found or decided. The /netra marquee already carries role, timeline, team and tools, so the prose doesn't need to repeat them. |
-| Process theatre | "Leveraging design thinking and a double diamond approach, we empathized, defined, ideated, prototyped and tested." | Show one artefact that changed a decision (the whiteboard frame on /netra is one) and say what it changed. Name a method only when the method itself was unusual. |
+| "I was tasked with" | "I was tasked with redesigning the quote flow to improve conversion." | Open with what you found or decided. The /netra2 marquee already carries role, timeline, team and tools, so the prose doesn't need to repeat them. |
+| Process theatre | "Leveraging design thinking and a double diamond approach, we empathized, defined, ideated, prototyped and tested." | Show one artefact that changed a decision (the whiteboard frame on /netra2 is one) and say what it changed. Name a method only when the method itself was unusual. |
 | Resume voice | "Owned end-to-end product design, from research through handoff, partnering closely with engineering and PM." (Netra copy) "Spearheaded", "Drove a 30% uplift". | Replace each verb with the actual act. "On a whiteboard I drew the six routes a business could take from one company name." |
 | Voice switching | "I ran the interviews. We decided to cut the risk page. The company launched in March. The team believes..." | Use "I" and "we" as rule 15 below sets out, and the company's name for company-level facts. |
 | Stock personas and invented quotes | "Meet Arjun, 38, a busy small-business owner who values efficiency." "I just want it to work!" | Real verbatim quotes, anonymised, with where they came from. Or no persona at all. Use one real quote, messy as it is. |
@@ -258,7 +258,7 @@ The essay: it is about function, and it allows exactly one moment about feeling,
 
 Why it works: naming it shows the designer knows the difference between need and delight, which makes the delight easy to trust, and doing it only once keeps it special.
 
-For Netra: pick one, at a point where something changes. The strongest candidate is the moment Netra hands the founder the quote form, which arrives through Netra's orange Bayer dither with the Profile step already filled in (the quote scene on /netra).
+For Netra: pick one, at a point where something changes. The strongest candidate is the moment Netra hands the founder the quote form, which arrives through Netra's orange Bayer dither with the Profile step already filled in (the quote scene on /netra2).
 
 Example:
 
@@ -373,7 +373,7 @@ The essay: the designer says "I" for questions explored, ideas pitched and thing
 
 Why it works: the reader knows exactly what the designer owns, which makes the claims believable, and the "we" keeps it from turning into a solo hero story.
 
-For Netra: the team was one designer, one PM and three engineers. The copy already says "we" for the 60-day build, the 139 commits, cutting the questions from twelve to ten and the Nielsen audit, and /netra2 says "I" for the research, the flows and screens, and drawing the six routes on the whiteboard. The coded prototype is "we" in both pages' execution copy and "I" in /netra2's My Role row, so settle which is true [verify] and use it everywhere.
+For Netra: the team was one designer, one PM and three engineers. The copy already says "we" for the 60-day build, the 139 commits, cutting the questions from twelve to ten and the Nielsen audit, and /netra says "I" for the research, the flows and screens, and drawing the six routes on the whiteboard. The coded prototype is "we" in both pages' execution copy and "I" in /netra's My Role row, so settle which is true [verify] and use it everywhere.
 
 Example:
 
@@ -400,20 +400,20 @@ Example:
 
 ## Netra copy audit
 
-An audit of `data/bima-netra.ts` (/netra) and `data/bima-netra-2.ts` (/netra2), November 2026. Line numbers will drift, so search for the quoted text. /netra2 inherits the tags, marquee, splash, context alt, thesis alts and execution media from /netra, so fixing those lines in /netra fixes both pages. Placeholder media labels were skipped. The /netra2 title, "Designing an AI Agent for Business Insurance Quotes", is plain and is the title Rishabh chose, so it stays, Title Case included.
+An audit of `data/bima-netra.ts` (/netra2) and `data/bima-netra-2.ts` (/netra), November 2026. Line numbers will drift, so search for the quoted text. /netra inherits the tags, marquee, splash, context alt, thesis alts and execution media from /netra2, so fixing those lines in /netra2 fixes both pages. Placeholder media labels were skipped. The /netra title, "Designing an AI Agent for Business Insurance Quotes", is plain and is the title Rishabh chose, so it stays, Title Case included.
 
-### /netra
+### /netra2
 
 | Where | Now | Rewrite |
 |---|---|---|
-| `title`, line 30 | "BimaNetra™: India's first agentic infrastructure solution / for a 200 year old problem" | Use the /netra2 title. |
+| `title`, line 30 | "BimaNetra™: India's first agentic infrastructure solution / for a 200 year old problem" | Use the /netra title. |
 | `intro`, line 31 | "BimaNetra™ is how BimaKavach can price risk, underwrite smartly, and surface gaps in their business." | "With BimaNetra™, a founder types their company's name. Netra looks the business up in public records and asks only what the records don't show." |
 | `overview.lead`, line 51 | "Smart Underwriting, engineered. profiling, quote generation, and checkout, in a matter of minutes" | "A founder types the company's name and reaches real quotes in minutes." |
 | `overview.body`, lines 53 to 55 | "...generate comprehensive insurance quotes without filling forms. I had two jobs here: revisit the existing checkout flow post rebranding to investigate lead generation and drop-offs, and create the new probabilistic based journey super intuitive for first-time users." | "After the rebrand I had two jobs. I looked at the old checkout to find where and why people left. Then I designed the new flow, where Netra guesses before it asks, so a first-time founder could follow it." |
 | `context.media.alt`, line 63 | Ends "Core thesis: deterministic flows ask every business the same questions; an agentic flow asks only the ones that matter, and does the rest for them. Probabilistic models can also infer..." | Alt text describes, so end it after the drop-offs. Also match the review's casing: "i dont know what to pick". Put any thesis in the body copy. |
 | `context.rows` Overview, line 70 | "...an IRDAI-regulated insurance broker designed to help startups, micro, small, and medium enterprises (MSMEs), and growing businesses understand, compare, purchase, and manage business insurance." | "BimaKavach is an IRDAI-regulated insurance broker. Startups and MSMEs use it to buy and manage business insurance." |
 | `context.rows` My Role, line 74 | "Product Designer. Owned end-to-end product design, from research through handoff, partnering closely with engineering and PM." | "I was the only designer, working with one PM and three engineers from research to handoff." |
-| `brief.challenge`, line 87 (and /netra2 line 48) | "The Challenge: Designing trust into a system that guesses before it asks" | "Netra guesses before it asks, so founders need to see how it got each answer." |
+| `brief.challenge`, line 87 (and /netra line 48) | "The Challenge: Designing trust into a system that guesses before it asks" | "Netra guesses before it asks, so founders need to see how it got each answer." |
 | `brief.constraint`, line 89 | One 44-word sentence with a list of three inside a bracket inside another list of three. | "It had to work whether Netra found the company, made a best guess or found nothing, and show its working while it searched. We built it from Peetal in the new identity so three engineers could ship it in 60 days." |
 | `thesis[0].alt`, line 98 | "...the product page, eleven questions, the quote page..." | Fact check against "twelve to ten". If the board shows eleven, say it was an earlier count. If not, correct it. |
 | `thesis[1].alt`, line 104 | "...the agent fails, gets a fuzzy match or passes, then fills or validates..." | "A whiteboard of six routes from one company name. Netra finds nothing, finds a close match or finds the company, then fills in the answers or validates them, shows a modal with or without a nudge, and reaches the quote. The last route's quote is pre-underwritten." |
@@ -425,7 +425,7 @@ An audit of `data/bima-netra.ts` (/netra) and `data/bima-netra-2.ts` (/netra2), 
 | `takeaways[2].body`, line 143 | "...changed how people thought about their insurance, not just how they viewed it." | "Placeholder. Risk profiling, quotes and policy issuance sit on one timeline. Say what people did differently because of it." |
 | `impact.stats`, lines 162 to 165 | "$ 30M." / "Increase in", "Lead Generation" / "Less Form filing", "during Checkout" | "$30M" with "increase in direct underwriting authority", "50%" with "more leads", "67%" with "less form filling at checkout", sentence case throughout. Fix the stray space, the stray full stop and the typo "filing", and add the period each figure covers. |
 
-### /netra2
+### /netra
 
 | Where | Now | Rewrite |
 |---|---|---|
@@ -436,18 +436,18 @@ An audit of `data/bima-netra.ts` (/netra) and `data/bima-netra-2.ts` (/netra2), 
 | line 57 | "I drew every route a business could take from one company name on a whiteboard. There were six, and they came down to three cases..." | "On a whiteboard I drew every route a business could take from one company name. There were six, and they fell into the three cases above." |
 | line 61 | "We built a coded prototype with Peetal's components and checked every case against Nielsen's heuristics before handoff." | "In 60 days and 139 commits we built a coded prototype with Peetal's components, and checked every case against Nielsen's heuristics before handoff." |
 | lines 71, 75, 79 | Three takeaway bodies in the same shape, each claiming a result with no evidence. | Start each from something that shipped and mark the gap. Line 75: "Netra fills in each field while the founder watches. Placeholder. What testers said or did." |
-| lines 87 and 88 | "$ 30M." / "More", "Leads" | Same fixes as /netra's impact block. |
+| lines 87 and 88 | "$ 30M." / "More", "Leads" | Same fixes as /netra2's impact block. |
 | closing, line 95 | "Most insurance forms ask every business the same questions. Netra asks only the ones that matter and works out the rest..." | A "Most X... Netra..." contrast and the fourth telling of the main idea. "The next question is what Netra could do with more data, such as suggesting the cover a business is likely to need." |
 
 Smaller fixes on both pages: the ™ once per page; "the agent" in prose becomes Netra; consistent casing in the marquee ("1 designer, 1 PM, 3 engineers", "Figma, FigJam, Claude Cowork, Claude Code"); lowercase "60 days" and "on web" in the timeline row.
 
 ### The top patterns
 
-1. Superlatives and buzzwords with no proof. "India's first agentic infrastructure solution", "Smart Underwriting, engineered", "comprehensive", "super intuitive", "underwrite smartly". Replace each with what a founder does, which is type one name and get quotes in minutes. /netra2 has mostly fixed this.
+1. Superlatives and buzzwords with no proof. "India's first agentic infrastructure solution", "Smart Underwriting, engineered", "comprehensive", "super intuitive", "underwrite smartly". Replace each with what a founder does, which is type one name and get quotes in minutes. /netra has mostly fixed this.
 2. Results with no evidence. Every takeaway body claims confidence or trust went up, and the impact stats have no baseline or period. Keep the facts on record (twelve to ten questions, 139 commits, the Nielsen audit, the 20% and 35% drop-offs) and mark everything else "Placeholder.".
 3. Abstract nouns doing the work. "Designing trust into a system", "Research shaped the architecture", "perceived trust", "balance in what we offer", "surface gaps". Make a person or Netra the subject, with a concrete verb. The trust line is still on both pages.
 4. Formula shapes. Triplets everywhere, slogan titles, contrast frames (the line 63 semicolon, "not just how they viewed it", the "Most forms... Netra..." closing) and kicker endings ("I wanted to know why.", "A quote should start with..."). State the point once, plainly, and stop.
-5. Saying the same thing again, mostly on /netra2. "Look it up in public records, ask only what's missing" appears in the intro, the brief and the closing, the three cases appear almost word for word twice, and the review quotes are paraphrased when they could be quoted. Give each section one new fact and use the customers' own words.
+5. Saying the same thing again, mostly on /netra. "Look it up in public records, ask only what's missing" appears in the intro, the brief and the closing, the three cases appear almost word for word twice, and the review quotes are paraphrased when they could be quoted. Give each section one new fact and use the customers' own words.
 
 ---
 

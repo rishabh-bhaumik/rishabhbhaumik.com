@@ -1,7 +1,8 @@
 /**
- * /netra2: the BimaNetra page with its copy rewritten by docs/writing.md (plain sentences,
+ * /netra: the BimaNetra page with its copy rewritten by docs/writing.md (plain sentences,
  * founders first, one quote then the call, Netra as a character, "I" for my calls and "we"
- * for the team's). Media, scenes and layout are /netra's. Story beats only Rishabh can
+ * for the team's). Media, scenes and layout come from data/bima-netra.ts, whose original
+ * copy is at /netra2. Story beats only Rishabh can
  * supply are "Placeholder." lines. The review quotes are the ones in /netra's Context frame.
  */
 import { BIMA_NETRA, type NetraCopy } from "./bima-netra";
@@ -102,7 +103,6 @@ export const BIMA_NETRA_2: NetraCopy = {
     ],
   },
 
-  showcase: { ...BIMA_NETRA.showcase, caption: "Placeholder caption. Onboarding on mobile" },
   gallery: [
     { ...BIMA_NETRA.gallery[0], caption: "Placeholder caption. Netra and its controls" },
     { ...BIMA_NETRA.gallery[1], caption: "Placeholder caption. Onboarding after the profile, in two cases" },

@@ -95,8 +95,15 @@ const NAME = "Sabyasachi Mukherjee";
 const PHONE = "9007296854";
 const EMAIL = "ceo@sabyasachi.in";
 
-/** Hero: the field takes focus and the page scrolls 200 up; "Sabyasachi" is typed 120ms a key. */
+/** Hero: the field takes focus and the page scrolls HERO_SCROLL up; "Sabyasachi" is typed 120ms a key. */
 const FOCUS = 1200;
+/**
+ * The D&O page sits 41px tighter than the app's build (a shorter gavel and four smaller gaps),
+ * so at the start the CTA clears the home bar with the room Confirm and Continue has (about
+ * 38px under it). The scroll is 41 shorter to match, so the field, drawer and CTA land where
+ * the app has them once it has scrolled.
+ */
+const HERO_SCROLL = 159;
 const SCROLL = 1250;
 const TYPE = 1700;
 const PICK = 3600;
@@ -133,7 +140,7 @@ const FADE = [33100, 33500] as const;
 
 /** Every tap, in screen px (status bar included), in order. */
 const TAPS = [
-  { t: FOCUS, x: 195, y: 753 },
+  { t: FOCUS, x: 195, y: 712 },
   { t: PICK, x: 195, y: 696 },
   { t: GO, x: 195, y: 619 },
   { t: NAME_AT[0], x: 195, y: 358 },
@@ -592,7 +599,7 @@ function Page({ shot }: { shot: Shot }) {
       <m.div
         className="absolute inset-x-0"
         style={{ top: SB, height: 1200, background: "linear-gradient(184.35deg, #f4f1ff 3.2%, #fff 39.37%)" }}
-        animate={{ y: shot.scrolled ? -200 : 0 }}
+        animate={{ y: shot.scrolled ? -HERO_SCROLL : 0 }}
         transition={{ duration: shot.scrolled ? 0.45 : 0, ease: OUT }}
       >
         {/* Navbar */}
@@ -632,22 +639,22 @@ function Page({ shot }: { shot: Shot }) {
           <br />
           <span style={{ color: VIOLET }}>₹10,000/Year</span>.
         </p>
-        <p className="absolute left-4 right-4 top-[258.5px] text-[16px] font-medium leading-[1.5]" style={{ color: "#9082b3" }}>
+        <p className="absolute left-4 right-4 top-[250.5px] text-[16px] font-medium leading-[1.5]" style={{ color: "#9082b3" }}>
           Protects executives when business decisions lead to lawsuits
         </p>
         {/* Coverage chip */}
-        <span className="absolute left-4 top-[330.5px] inline-flex h-[31px] items-center gap-2 rounded-full border-[0.5px] border-[#e6e8ea] bg-white px-3 text-[14px] font-medium" style={{ color: BASIC }}>
+        <span className="absolute left-4 top-[322.5px] inline-flex h-[31px] items-center gap-2 rounded-full border-[0.5px] border-[#e6e8ea] bg-white px-3 text-[14px] font-medium" style={{ color: BASIC }}>
           {/* eslint-disable-next-line @next/next/no-img-element -- the coverage check */}
           <img src="/media/netra/coverage-check.svg" alt="" width={14} height={14} />
           Covers legal &amp; defence costs
         </span>
         {/* Media */}
-        <div className="absolute left-4 top-[381.5px] h-[212.1px] w-[358px] overflow-hidden rounded-[12px] border-[0.5px] border-[#e6e8ea] bg-white">
+        <div className="absolute left-4 top-[365.5px] h-[196.1px] w-[358px] overflow-hidden rounded-[12px] border-[0.5px] border-[#e6e8ea] bg-white">
           {/* eslint-disable-next-line @next/next/no-img-element -- the gavel art */}
           <img src="/media/netra/gavel.webp" alt="" className="size-full object-cover" />
         </div>
         {/* Promo banner */}
-        <div className="absolute left-4 top-[601.6px] grid w-[358px] gap-1 rounded-[12px] px-3 py-2" style={{ background: "linear-gradient(to right, #fff6ed, transparent)" }}>
+        <div className="absolute left-4 top-[569.6px] grid w-[358px] gap-1 rounded-[12px] px-3 py-2" style={{ background: "linear-gradient(to right, #fff6ed, transparent)" }}>
           <div className="flex items-center justify-between">
             <span className="inline-flex items-center gap-1 rounded-[6px] border-[0.5px] border-[#ffd2a8] bg-[#fff6ed] px-[6px] py-1 text-[14px] font-medium leading-none" style={{ color: ORANGE }}>
               <span className="size-1 rounded-full" style={{ background: ORANGE }} />
@@ -662,13 +669,13 @@ function Page({ shot }: { shot: Shot }) {
           </span>
         </div>
         {/* The company field */}
-        <div className="absolute left-4 top-[684.8px] w-[358px]">
+        <div className="absolute left-4 top-[643.8px] w-[358px]">
           <HeroField value={value} focus={shot.focus && !shot.sheet} success={shot.chars >= 4} />
         </div>
         <AnimatePresence>{shot.drawer && <Drawer query={COMPANY_TYPED.slice(0, shot.chars)} />}</AnimatePresence>
         {/* CTA */}
         <m.div
-          className="absolute left-4 top-[743.3px] flex h-[58px] w-[358px] items-center justify-between rounded-[16px] border border-[#ff7700] px-4 text-[16px] font-semibold text-white"
+          className="absolute left-4 top-[702.3px] flex h-[58px] w-[358px] items-center justify-between rounded-[16px] border border-[#ff7700] px-4 text-[16px] font-semibold text-white"
           style={{ background: ORANGE, letterSpacing: TIGHT }}
           animate={{ scale: shot.goPress ? 0.98 : 1 }}
           transition={{ duration: 0.1 }}
@@ -679,16 +686,19 @@ function Page({ shot }: { shot: Shot }) {
           </svg>
         </m.div>
         {/* Below the CTA */}
-        <p className="absolute inset-x-0 top-[821.3px] text-center text-[14px] font-medium" style={{ color: SECOND }}>
+        <p className="absolute inset-x-0 top-[780.3px] text-center text-[14px] font-medium" style={{ color: SECOND }}>
           Policy Provided by
         </p>
-        <div className="absolute left-4 right-4 top-[852px] flex items-center justify-between">
+        <div className="absolute left-4 right-4 top-[811px] flex items-center justify-between">
           {["SBI", "Digit", "Chola", "United"].map((n) => (
             // eslint-disable-next-line @next/next/no-img-element -- insurer logos
             <img key={n} src={`/media/netra/insurers/${n}.webp`} alt="" className="h-7 w-auto object-contain" />
           ))}
         </div>
       </m.div>
+      {/* The safe area under the home bar: the page stops above it, as the sheet does, so at the
+          start nothing is cut in half under the bar (the page there is plain white). */}
+      <div className="absolute inset-x-0 bottom-0 bg-white" style={{ height: SAFE }} />
     </div>
   );
 }
@@ -733,7 +743,7 @@ function Caret() {
 function Drawer({ query }: { query: string }) {
   return (
     <m.div
-      className="absolute left-4 top-[731.3px] z-10 w-[358px] rounded-[16px] border-[0.5px] border-[#e6e8ea] bg-white p-2 shadow-[0_0_12px_rgba(169,172,177,0.24)]"
+      className="absolute left-4 top-[690.3px] z-10 w-[358px] rounded-[16px] border-[0.5px] border-[#e6e8ea] bg-white p-2 shadow-[0_0_12px_rgba(169,172,177,0.24)]"
       initial={{ opacity: 0, y: -4 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, transition: { duration: 0.12 } }}

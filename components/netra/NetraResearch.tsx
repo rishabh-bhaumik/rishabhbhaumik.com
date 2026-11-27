@@ -104,7 +104,7 @@ export default function NetraResearch({ label }: { label: string }) {
                 <h3 className="text-[28px] leading-[1.15] text-[var(--rs-title)]">{paper.title}</h3>
                 <p className="text-[12px] uppercase text-[var(--rs-faint)]">{paper.authors}</p>
               </div>
-              <p className="text-[14px] leading-[1.4] text-[var(--rs-body)]">{paper.why}</p>
+              <p className="whitespace-pre-line text-[14px] leading-[1.4] text-[var(--rs-body)]">{paper.why}</p>
               <ul className="flex flex-col gap-4">
                 {paper.insights.map((t) => (
                   <li key={t} className="flex items-center gap-2">

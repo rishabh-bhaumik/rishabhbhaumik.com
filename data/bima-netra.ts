@@ -1,6 +1,7 @@
 /**
- * The BimaNetra project page (/netra, Figma 8818:32660): all of its copy, in page
- * order. Media slots carry a `label` (what goes there, shown as a placeholder until a
+ * The BimaNetra project page (Figma 8818:32660): its media, scenes and original copy, in page
+ * order. /netra2 shows this copy; /netra shows the plain-language rewrite in
+ * data/bima-netra-2.ts, which builds on this file. Media slots carry a `label` (what goes there, shown as a placeholder until a
  * file is added) and, once ready, `src` (an image, or an .mp4 with a `poster`).
  */
 import type { Media } from "@/components/project/GrowMedia";
@@ -9,7 +10,7 @@ import type { RichText } from "@/components/project/parts";
 /** A frame that may hold one of the page's live scenes instead of a file. */
 export type NetraMedia = Media & { readonly scene?: "quote" | "whiteboard" | "routes" | "research" | "mobile" };
 
-/** The page's copy with its literal strings loosened to `string`, so another version (/netra2) can share the shape. */
+/** The page's copy with its literal strings loosened to `string`, so the rewrite (data/bima-netra-2.ts, at /netra) can share the shape. */
 type Widen<T> = T extends string
   ? string
   : T extends number
@@ -25,7 +26,7 @@ type Widen<T> = T extends string
             ? { readonly [K in keyof T]: Widen<T[K]> }
             : T;
 export type NetraCopy = Widen<typeof BIMA_NETRA> & {
-  /** A closing paragraph under Impact (used by /netra2). */
+  /** A closing paragraph under Impact (used by the rewrite at /netra). */
   readonly closing?: string;
 };
 
@@ -139,8 +140,6 @@ export const BIMA_NETRA = {
     ] satisfies NetraMedia[],
   },
 
-  /** The frame over the takeaways. */
-  showcase: { label: "Onboarding flow - Mobile Screen of Netra Folder Going up and down!!!!!" } satisfies Media,
   takeaways: {
     tag: "key takeaways",
     heading: "Key Takeaways",
@@ -185,15 +184,16 @@ export const BIMA_NETRA = {
 
 /**
  * The research carousel (NetraResearch, Figma 8927:30390): five papers in the order a founder
- * meets their ideas, from Netra searching to the rules over the whole flow. Each finding was
- * checked against the paper's own text; first pages are in public/media/netra/papers/<key>.webp.
+ * meets their ideas, from Netra searching to the rules over the whole flow. Each `why` is two
+ * lines, broken at the \n. Each finding was checked against the paper's own text; first pages
+ * are in public/media/netra/papers/<key>.webp.
  */
 export const RESEARCH_PAPERS = [
   {
     key: "buell",
     title: "Creating Reciprocal Value Through Operational Transparency",
     authors: "Ryan W. Buell, Tami Kim, Chia-Jung Tsay. Management Science 2017",
-    why: "People value work they can see, so Netra fills each field while the founder watches.",
+    why: "People value work they can see,\nso Netra fills each field while the founder watches.",
     insights: [
       "Watching the work raised its value",
       "Seeing the cook idle added no value",
@@ -205,7 +205,7 @@ export const RESEARCH_PAPERS = [
     key: "horvitz",
     title: "Principles of Mixed-Initiative User Interfaces",
     authors: "Eric Horvitz. CHI 1999",
-    why: "Act when sure, ask when unsure. Netra’s three cases come from that rule.",
+    why: "Act when sure, ask when unsure.\nNetra’s three cases come from that rule.",
     insights: [
       "Act when sure, ask when unsure, else wait",
       "Show its guesses and let people edit them",
@@ -217,7 +217,7 @@ export const RESEARCH_PAPERS = [
     key: "dietvorst",
     title: "Overcoming Algorithm Aversion",
     authors: "Berkeley J. Dietvorst, Joseph P. Simmons, Cade Massey. Management Science 2018",
-    why: "People use models they can edit, so every value Netra fills stays editable.",
+    why: "People use models they can edit,\nso every value Netra fills stays editable.",
     insights: [
       "More people chose a model they could edit",
       "People edited less than they were allowed",
@@ -229,7 +229,7 @@ export const RESEARCH_PAPERS = [
     key: "mckenzie",
     title: "Recommendations Implicit in Policy Defaults",
     authors: "Craig R. M. McKenzie, Michael J. Liersch, Stacey R. Finkelstein. Psychological Science 2006",
-    why: "People read a default as advice, so Netra’s ₹10 Cr pick comes with its reason.",
+    why: "People read a default as advice,\nso Netra’s ₹10 Cr pick comes with its reason.",
     insights: [
       "People read a default as advice",
       "Unsure people likely lean more on defaults",
@@ -241,7 +241,7 @@ export const RESEARCH_PAPERS = [
     key: "amershi",
     title: "Guidelines for Human-AI Interaction",
     authors: "Saleema Amershi et al. CHI 2019",
-    why: "AI should say how sure it is and be easy to correct. Netra does both.",
+    why: "AI should say how sure it is\nand be easy to correct. Netra does both.",
     insights: [
       "Few products said how often they err",
       "Testers often couldn't see why the AI acted",

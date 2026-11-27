@@ -4,17 +4,22 @@ import { useEffect, useRef, useState } from "react";
 
 /*
  * The site's pointer on wide screens with a mouse (1024px and up, hover + fine pointer):
- * the system cursor is hidden and an 8px square pixel in the ink colour (white in dark,
- * ink in light) stands in for it. Narrower screens, touch and pens keep the system cursor;
- * so does the page until this has mounted. The square hides when the pointer leaves the
- * window or goes into an iframe (Play's embeds). `data-pixel-cursor` on <html> is what hides
- * the system cursor (the rule rides with the component, below), so it's back the moment
- * this unmounts.
+ * the system cursor is hidden and a 6px square pixel in the ink colour stands in for it
+ * (white in dark, ink in light), with a 1px ring in the page colour so it still shows over a
+ * surface of its own colour, such as a white panel in dark mode. Narrower screens and touch
+ * keep the system cursor; so does the page until this has mounted, and so do high-contrast
+ * mode (forced colours), where the square could vanish, and the OS's increased contrast. A
+ * pen hovering on a desktop moves the square too (the system cursor is hidden for it as
+ * well). The square hides when the pointer leaves the window or goes into an iframe (Play's
+ * embeds). `data-pixel-cursor` on <html> is what hides the system cursor (the rule rides
+ * with the component, below), so it's back the moment this unmounts.
  */
 
 const QUERY = "(min-width: 1024px) and (hover: hover) and (pointer: fine)";
+/** High contrast or increased contrast: the system cursor, as the OS draws it. */
+const CONTRAST = ["(forced-colors: active)", "(prefers-contrast: more)"];
 /** The pointer's size. */
-const SIZE = 8;
+const SIZE = 6;
 
 /** Hides the system cursor while this runs; !important beats the cursor utilities; text fields keep their caret. */
 const HIDE =
@@ -27,10 +32,14 @@ export default function PixelCursor() {
 
   useEffect(() => {
     const mq = window.matchMedia(QUERY);
-    const sync = () => setOn(mq.matches);
+    const contrast = CONTRAST.map((q) => window.matchMedia(q));
+    const all = [mq, ...contrast];
+    const sync = () => setOn(mq.matches && !contrast.some((q) => q.matches));
     sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
+    for (const q of all) q.addEventListener("change", sync);
+    return () => {
+      for (const q of all) q.removeEventListener("change", sync);
+    };
   }, []);
 
   useEffect(() => {
@@ -43,7 +52,7 @@ export default function PixelCursor() {
       if (el) el.style.opacity = v ? "1" : "0";
     };
     const onMove = (e: PointerEvent) => {
-      if (e.pointerType !== "mouse") return;
+      if (e.pointerType === "touch") return;
       if (el) el.style.transform = `translate3d(${e.clientX - SIZE / 2}px, ${e.clientY - SIZE / 2}px, 0)`;
       show(true);
     };
@@ -75,7 +84,7 @@ export default function PixelCursor() {
       <div
         ref={dot}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[9999] bg-ink opacity-0"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] bg-ink opacity-0 ring-1 ring-bg"
         style={{ width: SIZE, height: SIZE }}
       />
     </>

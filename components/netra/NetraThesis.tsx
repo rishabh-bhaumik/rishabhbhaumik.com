@@ -68,7 +68,7 @@ export default function NetraThesis({
   thesis = true,
 }: {
   label: string;
-  /** The core-thesis lines in the bottom right; off where the frame's caption carries the thesis (/netra2). */
+  /** The core-thesis lines in the bottom right; off where the frame's caption carries the thesis (/netra). */
   thesis?: boolean;
 }) {
   const root = useRef<HTMLDivElement>(null);

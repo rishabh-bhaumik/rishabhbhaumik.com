@@ -13,6 +13,7 @@ type Spring = { stiffness?: number; damping?: number; mass?: number };
 type Settings = {
   padding: number;
   disabled: boolean;
+  frozen: boolean;
   strength: number;
   maxOffset?: number;
   exclusive: boolean;
@@ -107,6 +108,8 @@ type Props = {
   /** Distance in px around the element where the pointer starts to pull it. */
   padding?: number;
   disabled?: boolean;
+  /** Holds the element where it is (no pull, no settling back) until this goes false again. */
+  frozen?: boolean;
   /** The offset is the pointer's distance divided by this: 1 follows it, higher moves less. */
   magnetStrength?: number;
   /** Caps the offset from rest, in px. */
@@ -128,6 +131,7 @@ export default function Magnet({
   children,
   padding = 100,
   disabled = false,
+  frozen = false,
   magnetStrength = 2,
   maxOffset,
   exclusive = true,
@@ -146,6 +150,7 @@ export default function Magnet({
   const settings: Settings = {
     padding: Math.max(0, padding),
     disabled,
+    frozen,
     strength: Math.max(0.1, magnetStrength),
     maxOffset,
     exclusive,
@@ -230,6 +235,11 @@ export default function Magnet({
 
     const frame = (now: number) => {
       raf = 0;
+      if (settingsRef.current.frozen) {
+        keys.forEach((key) => (velocity[key] = 0));
+        last = 0;
+        return;
+      }
       const dt = last ? Math.min((now - last) / 1000, 1 / 30) : 1 / 60;
       last = now;
       const { target, engaged } = measure();

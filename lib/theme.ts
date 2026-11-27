@@ -5,19 +5,22 @@ import { useSyncExternalStore } from "react";
 import {
   DEFAULT_MODE,
   isDarkOnlyRoute,
+  nextSunChange,
   parseMode,
   resolveMode,
   THEME_KEY as KEY,
+  THEME_UNTIL_KEY as UNTIL,
   type Theme,
   type ThemeMode,
 } from "./theme-script";
 
 /**
- * Light / dark theme. The visitor picks a mode (dark, auto or light; dark until
- * they choose, see DEFAULT_MODE), kept in localStorage; the theme it resolves to is
- * written to <html data-theme>, which the light tokens in globals.css key off. The
- * dock's mode control (components/Dock) switches dark/light (auto isn't offered there
- * for now); ThemeSync keeps a saved auto in step with the clock.
+ * Light / dark theme. The mode is auto by default (light from local sunrise to sunset,
+ * dark otherwise; see sunTimes). The dock's mode control (components/Dock) switches
+ * dark/light, and that pick holds until the next sunrise or sunset, when auto takes over
+ * again; both are kept in localStorage. The theme it resolves to is written to
+ * <html data-theme>, which the light tokens in globals.css key off; ThemeSync keeps it in
+ * step with the sun and with lapsing picks.
  *
  * Some routes are designed only in dark and ignore the choice: the theme there
  * stays dark and the switch is disabled.
@@ -31,7 +34,7 @@ export { isDarkOnlyRoute } from "./theme-script";
 /** The saved mode, read fresh (the hooks lag a click while the cross-fade runs). */
 export function readMode(): ThemeMode {
   try {
-    return parseMode(localStorage.getItem(KEY));
+    return parseMode(localStorage.getItem(KEY), Number(localStorage.getItem(UNTIL)) || 0);
   } catch {
     return DEFAULT_MODE;
   }
@@ -43,7 +46,7 @@ export function applyTheme(pathname: string) {
   document.documentElement.dataset.theme = theme;
 }
 
-/** Re-applies and tells the hooks: for auto crossing sunrise or sunset. */
+/** Re-applies and tells the hooks: for auto crossing sunrise or sunset, or a pick lapsing. */
 export function refreshTheme(pathname: string) {
   applyTheme(pathname);
   window.dispatchEvent(new Event(EVENT));
@@ -53,6 +56,9 @@ export function refreshTheme(pathname: string) {
 export function setTheme(next: ThemeMode, pathname: string) {
   try {
     localStorage.setItem(KEY, next);
+    // A dark or light pick lasts until the next sunrise or sunset; auto needs no end.
+    if (next === "auto") localStorage.removeItem(UNTIL);
+    else localStorage.setItem(UNTIL, String(nextSunChange()));
   } catch {
     // Private mode etc.: the switch still works for this page view.
   }
